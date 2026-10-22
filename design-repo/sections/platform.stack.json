@@ -1,0 +1,313 @@
+{
+  "id": "platform.stack",
+  "kind": "section",
+  "purpose": "Header, then a 1120px three-layer 'stack': a top block (neon dot, title, tag chips), dashed connectors, three capability cards, dashed connectors, and a bottom slab with the chip mark. Builds bottom-up on entering view and reverses on leaving; dashes march while in view.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "requiredOverlays": [],
+    "allowedRoutes": [
+      "/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "eyebrow",
+      "title",
+      "lede",
+      "topBlock",
+      "cards",
+      "slab"
+    ],
+    "properties": {
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 5,
+        "cloneChars": 18,
+        "originalChars": 19,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4031"
+        ]
+      },
+      "title": {
+        "type": "string",
+        "maxWords": 8,
+        "cloneChars": 30,
+        "originalChars": 30,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4054"
+        ]
+      },
+      "lede": {
+        "type": "string",
+        "maxWords": 20,
+        "cloneChars": 83,
+        "originalChars": 83,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4077"
+        ]
+      },
+      "topBlock": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "chips"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxWords": 4,
+            "cloneChars": 17,
+            "originalChars": 19,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:4100"
+            ]
+          },
+          "chips": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxWords": 4,
+              "cloneChars": 22
+            },
+            "minItems": 6,
+            "maxItems": 6
+          }
+        }
+      },
+      "cards": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "description",
+            "accent",
+            "icon"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxWords": 3,
+              "cloneChars": 13
+            },
+            "description": {
+              "type": "string",
+              "maxWords": 9,
+              "cloneChars": 44
+            },
+            "accent": {
+              "type": "string",
+              "enum": [
+                "blink",
+                "neon",
+                "boost"
+              ]
+            },
+            "icon": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assetRole"
+              ],
+              "properties": {
+                "assetRole": {
+                  "type": "string",
+                  "enum": [
+                    "stroke-icon"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "minItems": 3,
+        "maxItems": 3,
+        "description": "Order and accents follow the reference DOM: blink, neon, boost."
+      },
+      "slab": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "mark",
+          "label",
+          "line"
+        ],
+        "properties": {
+          "mark": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "assetRole"
+            ],
+            "properties": {
+              "assetRole": {
+                "type": "string",
+                "enum": [
+                  "brand-chip-mark"
+                ]
+              }
+            }
+          },
+          "label": {
+            "type": "string",
+            "maxWords": 5,
+            "cloneChars": 25,
+            "originalChars": 24,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:4192"
+            ]
+          },
+          "line": {
+            "type": "string",
+            "maxWords": 10,
+            "cloneChars": 41,
+            "originalChars": 41,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:4215"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Eyebrow is composed as '<num> · <label>' with num default '04'",
+      "citations": [
+        "src/components/AgentPlatform.jsx:24",
+        "src/components/AgentPlatform.jsx:38"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "bottom-up-build"
+    ],
+    "primaryTrigger": {
+      "type": "useInView",
+      "inViewAmount": 0.35,
+      "once": false
+    },
+    "triggerNotes": "Whenever >=35% in view (not once); reverses out of view. Order: slab (0.1s) -> cards (0.6+0.22i) -> lower connectors (0.9+0.08i) -> top block (1.4s, snappy) -> upper connectors (1.7+0.08i).",
+    "easing": "motion.spring.heavy",
+    "requiredReducedMotionFallback": "no-offset-opacity-only",
+    "reducedMotionDetail": "Offsets are 0 (blocks fade only); .l9dp-march animation is none.",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.platform.slab",
+      "motion.duration.platform.cards",
+      "motion.duration.platform.top-block",
+      "motion.duration.platform.march",
+      "motion.threshold.platform"
+    ],
+    "measuredFrom": [
+      "src/components/AgentPlatform.jsx:26",
+      "CLONE_SPEC.md:307",
+      "src/components/AgentPlatform.jsx:34",
+      "src/styles/sections.css:203"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.ledes-wrap",
+      "from": "nowrap",
+      "to": "normal",
+      "change": "Lede nowrap -> normal.",
+      "measuredFrom": [
+        "src/styles/sections.css:206"
+      ]
+    },
+    {
+      "breakpoint": "breakpoint.platform-stack",
+      "from": "flex row, gap 12",
+      "to": "column, gap 10",
+      "change": "Card row becomes a column (gap 10); stack margin-top 52 -> 32; top block padding 16, title 17px, chips centred 10.5px; cards padding 14px 16px; slab padding 16, mark 42px, line 15px.",
+      "measuredFrom": [
+        "src/styles/sections.css:209",
+        "src/styles/sections.css:213",
+        "CLONE_SPEC.md:317-319"
+      ]
+    }
+  ],
+  "components": [
+    "section-header",
+    "platform-card",
+    "chip",
+    "dashed-connector-strip"
+  ],
+  "primitives": [
+    "accent-bar",
+    "status-dot",
+    "chip-mark",
+    "stroke-icon",
+    "eyebrow"
+  ],
+  "assetRoles": [
+    "brand-chip-mark",
+    "stroke-icon"
+  ],
+  "example": {
+    "eyebrow": "04 · BUILD ON ACME",
+    "title": "Build your own agents on Acme.",
+    "lede": "Ship custom tools fast with our SDKs, a CLI, and live event streams on every layer.",
+    "topBlock": {
+      "title": "Tools teams built",
+      "chips": [
+        "billing bots",
+        "ONT triage",
+        "fiber splice planners",
+        "churn-risk call sheets",
+        "NOC run-sheets",
+        "your next ideas"
+      ]
+    },
+    "cards": [
+      {
+        "label": "SDK",
+        "description": "Typed clients for every Acme service call.",
+        "accent": "blink",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "CLI",
+        "description": "Script provisioning and audits from a shell.",
+        "accent": "neon",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "EVENT STREAMS",
+        "description": "Network change events, as they land.",
+        "accent": "boost",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      }
+    ],
+    "slab": {
+      "mark": {
+        "assetRole": "brand-chip-mark"
+      },
+      "label": "ACME CORE — MANAGED CLOUD",
+      "line": "Built, run, and kept current by our team."
+    }
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:291",
+    "src/pages/Home.jsx:16",
+    "src/components/AgentPlatform.jsx:24-195",
+    "recon/text-roles-1280.json:4054"
+  ]
+}

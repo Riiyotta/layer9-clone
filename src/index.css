@@ -1,0 +1,37 @@
+/* Free stand-ins for the licensed originals:
+   head → Inter Tight 350 (variable), body → Inter 400/500 */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300..700&family=Inter:wght@400;500;600&display=swap');
+@import './styles/sections.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-head: 'Inter Tight', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: #fff;
+  background: #090909;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-head); margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+/* No UA reset in the reference: buttons keep 13.333px / line-height normal. */
+button { font-family: inherit; font-size: 13.3333px; font-weight: 400; line-height: normal; letter-spacing: normal; color: inherit; }
+
+::selection { background: #2eeb8559; }

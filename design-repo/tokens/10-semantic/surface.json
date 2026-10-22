@@ -1,0 +1,54 @@
+{
+  "$description": "Semantic roles: surface. Each role is a reference into the foundation catalogue (resolved in themes/dark.json).",
+  "surface": {
+    "page": {
+      "ref": "color.surface.page",
+      "usage": "Page background.",
+      "measuredFrom": [
+        "src/index.css:24"
+      ]
+    },
+    "graphite": {
+      "ref": "color.surface.graphite",
+      "usage": "Use-cases app window.",
+      "measuredFrom": [
+        "src/lib/tokens.js:17"
+      ]
+    },
+    "tile": {
+      "ref": "color.surface.tile",
+      "usage": "Active prompt card.",
+      "measuredFrom": [
+        "src/lib/tokens.js:18"
+      ]
+    },
+    "dialog": {
+      "ref": "color.surface.dialog",
+      "usage": "Dialog / consent card surface.",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:73"
+      ]
+    },
+    "well": {
+      "ref": "color.solid.h0b0b0c",
+      "usage": "System / vendor tile well.",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:103"
+      ]
+    },
+    "tint": {
+      "ref": "color.alpha.white.a030",
+      "usage": "Active filter pill / persona button wash.",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:61"
+      ]
+    },
+    "hover-wash": {
+      "ref": "color.alpha.white.a018",
+      "usage": "Security quadrant hover wash.",
+      "measuredFrom": [
+        "src/styles/sections.css:305"
+      ]
+    }
+  }
+}

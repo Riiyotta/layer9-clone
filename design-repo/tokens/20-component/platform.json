@@ -1,0 +1,103 @@
+{
+  "$description": "Component-scoped tokens: platform. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "platform": {
+    "stack.maxWidth": {
+      "value": 1120,
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:44",
+        "CLONE_SPEC.md:296"
+      ]
+    },
+    "top.radius": {
+      "value": 12,
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:54",
+        "CLONE_SPEC.md:297"
+      ]
+    },
+    "top.background": {
+      "value": "#141616",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:56",
+        "CLONE_SPEC.md:297"
+      ]
+    },
+    "card.radius": {
+      "value": 10,
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:112",
+        "CLONE_SPEC.md:301"
+      ]
+    },
+    "card.background": {
+      "value": "#111114",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:114",
+        "CLONE_SPEC.md:301"
+      ]
+    },
+    "slab.radius": {
+      "value": 14,
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:168",
+        "CLONE_SPEC.md:303"
+      ]
+    },
+    "slab.background": {
+      "value": "#101013",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:171",
+        "CLONE_SPEC.md:303"
+      ]
+    },
+    "row.gap": {
+      "value": 12,
+      "measuredFrom": [
+        "src/styles/sections.css:207",
+        "CLONE_SPEC.md:300"
+      ]
+    },
+    "row.gap.phone": {
+      "value": 10,
+      "measuredFrom": [
+        "src/styles/sections.css:209",
+        "CLONE_SPEC.md:319"
+      ]
+    },
+    "accentBar.height": {
+      "value": 2,
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:20",
+        "CLONE_SPEC.md:297"
+      ]
+    },
+    "chip.fontSize": {
+      "value": 11.5,
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:80",
+        "CLONE_SPEC.md:298"
+      ]
+    },
+    "connector.dash": {
+      "value": "4.07 4.07",
+      "measuredFrom": [
+        "src/components/platform/Connectors.jsx:28",
+        "CLONE_SPEC.md:299"
+      ]
+    },
+    "connector.strokeWidth": {
+      "value": 0.814947,
+      "measuredFrom": [
+        "src/components/platform/Connectors.jsx:27",
+        "CLONE_SPEC.md:299"
+      ]
+    },
+    "connector.opacity": {
+      "value": 0.25,
+      "measuredFrom": [
+        "src/components/platform/Connectors.jsx:26",
+        "CLONE_SPEC.md:299"
+      ]
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "$description": "One entry per distinct page SHAPE. routes[] maps every real route to exactly one template (1:1, no gaps, no double assignment; verified by extraction/verify_all.py).",
+  "routeSource": "src/App.jsx PAGES table + src/lib/routes.js; no ia.json exists for this project.",
+  "templates": {
+    "home": {
+      "id": "home",
+      "evidenceLevel": "measured",
+      "routes": [
+        "/"
+      ],
+      "description": "The single measured marketing page: no navbar; hero, use cases, integrations, control center, agent platform, security, closing CTA, then the global footer and the two global overlays (demo dialog, cookie banner).",
+      "nodes": [
+        {
+          "section": "hero.episode",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "usecases.stage",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "integrations.grid",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "csr.loop",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "platform.stack",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "security.matrix",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "closing.cta",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "chrome.footer",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "overlay.demo-dialog",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "overlay.cookie-banner",
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "measuredFrom": [
+        "src/pages/Home.jsx:12",
+        "src/pages/Home.jsx:11-19",
+        "src/App.jsx:15",
+        "src/App.jsx:18-21",
+        "CLONE_SPEC.md:39"
+      ],
+      "notes": "Home is the fallback page: App.jsx renders it for any path that is not one of the two legal paths. Only '/' is a real route; unknown paths are not modelled."
+    },
+    "legal-prose": {
+      "id": "legal-prose",
+      "evidenceLevel": "derived",
+      "routes": [
+        "/privacy-policy/",
+        "/terms-of-service/"
+      ],
+      "description": "DERIVED page shape for the two legal documents: logo link, header block, numbered prose clauses, contact line, then the global footer and overlays. The original serves these two documents as PDFs, so nothing here is measured against an original page.",
+      "nodes": [
+        {
+          "section": "legal.header",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "legal.body",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "chrome.footer",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "overlay.demo-dialog",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "overlay.cookie-banner",
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "measuredFrom": [
+        "src/App.jsx:10",
+        "src/App.jsx:11",
+        "src/pages/LegalPage.jsx:6",
+        "src/lib/routes.js:1",
+        "src/lib/routes.js:2"
+      ],
+      "notes": "Both routes share one component (LegalPage) and differ only in the doc prop (content), so they are one template, not two."
+    }
+  },
+  "routes": [
+    {
+      "path": "/",
+      "template": "home",
+      "evidenceLevel": "measured"
+    },
+    {
+      "path": "/privacy-policy/",
+      "template": "legal-prose",
+      "evidenceLevel": "derived"
+    },
+    {
+      "path": "/terms-of-service/",
+      "template": "legal-prose",
+      "evidenceLevel": "derived"
+    }
+  ],
+  "globalChrome": {
+    "note": "App.jsx renders <Page/>, <Footer/>, <DemoDialog/>, <CookieBanner/> for every route in that order, so chrome.footer and the two overlays are explicit nodes at the end of every template. There is NO navbar and no sticky header.",
+    "measuredFrom": [
+      "src/App.jsx:17-22"
+    ]
+  }
+}

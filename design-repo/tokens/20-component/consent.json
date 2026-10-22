@@ -1,0 +1,68 @@
+{
+  "$description": "Component-scoped tokens: consent. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "consent": {
+    "banner.width": {
+      "value": "min(calc(100vw - 40px), 420px)",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:77",
+        "CLONE_SPEC.md:414"
+      ]
+    },
+    "banner.zIndex": {
+      "value": 60,
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:77",
+        "CLONE_SPEC.md:414"
+      ]
+    },
+    "prefs.width": {
+      "value": "min(92vw, 480px)",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:148",
+        "CLONE_SPEC.md:419"
+      ]
+    },
+    "button.padding": {
+      "value": "10px 22px",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:35",
+        "CLONE_SPEC.md:417"
+      ]
+    },
+    "button.fontSize": {
+      "value": 14,
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:35",
+        "CLONE_SPEC.md:417"
+      ]
+    },
+    "option.padding": {
+      "value": "13px 15px",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:202",
+        "CLONE_SPEC.md:419"
+      ]
+    },
+    "option.radius": {
+      "value": 11,
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:204",
+        "CLONE_SPEC.md:419"
+      ]
+    },
+    "label.fontSize": {
+      "value": 10.5,
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:80",
+        "CLONE_SPEC.md:416"
+      ]
+    },
+    "text.fontSize": {
+      "value": 13.5,
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:81",
+        "CLONE_SPEC.md:416"
+      ]
+    }
+  }
+}

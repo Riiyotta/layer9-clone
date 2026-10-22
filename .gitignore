@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+
+# Build artifact: regenerate from design-repo/ (see its README), never commit
+design-repo.zip
+
+# Saved copy of the original live site (its page, scripts, fonts refs, vendor logos)
+Layer 9*
+# Browser-automation scratch output
+.playwright-mcp/
+# Screenshot of the original site's hero
+recon/*.png

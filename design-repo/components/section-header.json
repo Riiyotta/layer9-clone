@@ -1,0 +1,63 @@
+{
+  "id": "section-header",
+  "kind": "component",
+  "purpose": "Centred eyebrow + H2 + lede block, max width 980.",
+  "evidence": "measured-live",
+  "props": {
+    "eyebrow": {
+      "type": "string",
+      "required": false,
+      "maxWords": 7
+    },
+    "title": {
+      "type": "string",
+      "description": "H2; may be two lines (use-cases) or a crossfading pair (CSR).",
+      "required": true,
+      "maxWords": 10
+    },
+    "lede": {
+      "type": "string",
+      "required": false,
+      "maxWords": 20
+    },
+    "ledeWrap": {
+      "type": "string",
+      "enum": [
+        "nowrap-above-1080",
+        "normal"
+      ],
+      "default": "normal",
+      "required": false
+    }
+  },
+  "uses": [
+    "eyebrow"
+  ],
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.ledes-wrap",
+      "change": "CSR, platform and security ledes: white-space nowrap -> normal at <=1080px",
+      "measuredFrom": [
+        "src/styles/sections.css:229"
+      ]
+    }
+  ],
+  "tokensUsed": [
+    "typography.typeStyle.h2",
+    "typography.typeStyle.lede",
+    "typography.typeStyle.eyebrow",
+    "spacing.header-eyebrow-to-title",
+    "spacing.header-title-to-lede",
+    "layout.maxWidth.section-header"
+  ],
+  "usedBy": [
+    "usecases.stage",
+    "csr.loop",
+    "platform.stack",
+    "security.matrix"
+  ],
+  "measuredFrom": [
+    "src/components/shared/SectionHeader.jsx:3-15",
+    "CLONE_SPEC.md:37"
+  ]
+}

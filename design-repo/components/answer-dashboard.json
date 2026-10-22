@@ -1,0 +1,62 @@
+{
+  "id": "answer-dashboard",
+  "kind": "component",
+  "purpose": "Use-cases answer panel. Remounts on every persona or prompt change. Seven body kinds (tiles, bars, rows, report, kpi, steps, map) share a caption/sources/live header, an INSIGHT strip and an action pill.",
+  "evidence": "measured-live",
+  "props": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "tiles",
+        "bars",
+        "rows",
+        "report",
+        "kpi",
+        "steps",
+        "map"
+      ],
+      "required": true
+    },
+    "caption": {
+      "type": "string",
+      "required": true,
+      "maxWords": 8
+    },
+    "sources": {
+      "type": "string",
+      "required": true,
+      "maxWords": 8
+    },
+    "updated": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "foot": {
+      "type": "string",
+      "required": true,
+      "maxWords": 12
+    },
+    "action": {
+      "type": "string",
+      "required": true,
+      "maxWords": 8
+    }
+  },
+  "assetRole": "map-basemap-tile (map kind only)",
+  "discrepancy": "CLONE_SPEC lists six body kinds (tiles, bars, rows, report, kpi, steps, map is the seventh item in its list but is introduced as 'six'); the clone source implements seven kinds. The source is authoritative here.",
+  "tokensUsed": [
+    "motion.duration.usecases.answer-item",
+    "motion.duration.usecases.answer-querying-fade",
+    "motion.duration.usecases.answer-live-pill",
+    "color.accentAlphaSuffix.s0d"
+  ],
+  "usedBy": [
+    "usecases.stage"
+  ],
+  "measuredFrom": [
+    "src/components/usecases/AnswerDash.jsx:58",
+    "CLONE_SPEC.md:164",
+    "CLONE_SPEC.md:171"
+  ]
+}

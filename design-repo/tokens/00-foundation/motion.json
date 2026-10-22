@@ -1,0 +1,1044 @@
+{
+  "$description": "Foundation tokens: motion. Every leaf has value + evidence + measuredFrom. Values come only from the clone source and CLONE_SPEC.md; nothing is invented.",
+  "$schemaNote": "A leaf is any object with a 'value' key.",
+  "motion": {
+    "easing": {
+      "ease": {
+        "value": {
+          "cubicBezier": [
+            0.4,
+            0,
+            0.2,
+            1
+          ],
+          "css": "cubic-bezier(0.4,0,0.2,1)"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:2",
+          "src/lib/tokens.js:3",
+          "CLONE_SPEC.md:11"
+        ]
+      },
+      "linear": {
+        "value": "linear",
+        "note": "Persona progress bar, platform marching dashes, closing dashed lines.",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:24",
+          "src/styles/sections.css:201"
+        ]
+      },
+      "step-end": {
+        "value": "step-end",
+        "note": "Caret blink (hero + CSR).",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:3"
+        ]
+      },
+      "ease-in-out-framer": {
+        "value": "easeInOut",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Integrations.jsx:92",
+          "src/components/ClosingCTA.jsx:36"
+        ]
+      },
+      "ease-out-framer": {
+        "value": "easeOut",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ClosingCTA.jsx:36"
+        ]
+      }
+    },
+    "spring": {
+      "heavy": {
+        "value": {
+          "type": "spring",
+          "stiffness": 180,
+          "damping": 28
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:4",
+          "CLONE_SPEC.md:12"
+        ]
+      },
+      "snappy": {
+        "value": {
+          "type": "spring",
+          "stiffness": 200,
+          "damping": 24
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:5",
+          "CLONE_SPEC.md:12"
+        ]
+      },
+      "integrations-heading": {
+        "value": {
+          "type": "spring",
+          "damping": 28
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/Integrations.jsx:26",
+          "CLONE_SPEC.md:195"
+        ]
+      },
+      "closing-chip": {
+        "value": {
+          "stiffness": 190,
+          "damping": 14,
+          "mass": 1
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:14",
+          "CLONE_SPEC.md:362"
+        ]
+      },
+      "closing-layer": {
+        "value": {
+          "stiffness": 210,
+          "damping": 16
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:15",
+          "CLONE_SPEC.md:363"
+        ]
+      },
+      "closing-glow": {
+        "value": {
+          "stiffness": 120,
+          "damping": 22
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:16",
+          "CLONE_SPEC.md:367"
+        ]
+      }
+    },
+    "library": {
+      "framer-motion-pin": {
+        "value": {
+          "framer-motion": "12.42.2",
+          "motion-dom": "12.42.2",
+          "pinStyle": "exact version + npm overrides entry"
+        },
+        "note": "LOAD-BEARING: the exact pin makes spring-to-WAAPI linear() durations match the original. motion-dom 12.43+ breaks the match (SVG paths start using WAAPI). Do not float either version. verify_all.py checks package.json when the sibling source tree exists.",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "package.json:12",
+          "package.json:24"
+        ]
+      }
+    },
+    "duration": {
+      "hero": {
+        "char-ms-code": {
+          "value": 26,
+          "note": "Code constant. Animation QA measured ~27ms effective per char (setTimeout granularity); QA value prevails for descriptions.",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:32",
+            "CLONE_SPEC.md:97"
+          ]
+        },
+        "char-ms-measured-qa": {
+          "value": 27,
+          "note": "QA correction: ~27ms/char (spec table says 26).",
+          "evidenceLevel": "qa-correction",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "CLONE_SPEC.md:97"
+          ]
+        },
+        "type-hold": {
+          "value": 350,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:33",
+            "CLONE_SPEC.md:97"
+          ]
+        },
+        "reveal": {
+          "value": 1600,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:31",
+            "CLONE_SPEC.md:98"
+          ]
+        },
+        "dash": {
+          "value": 2400,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:31",
+            "CLONE_SPEC.md:100"
+          ]
+        },
+        "excel": {
+          "value": 2400,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:31",
+            "CLONE_SPEC.md:102"
+          ]
+        },
+        "email": {
+          "value": 2200,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:31",
+            "CLONE_SPEC.md:104"
+          ]
+        },
+        "sched": {
+          "value": 4200,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:31",
+            "CLONE_SPEC.md:106"
+          ]
+        },
+        "reset": {
+          "value": 560,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:31",
+            "CLONE_SPEC.md:107"
+          ]
+        },
+        "prompt-lengths": {
+          "value": [
+            39,
+            64,
+            37,
+            39,
+            48
+          ],
+          "note": "Characters per typed prompt.",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:13",
+            "CLONE_SPEC.md:97"
+          ]
+        },
+        "loop-period-code-ms": {
+          "value": 21012,
+          "note": "Derived: 227 chars x 26ms + 5 x 350ms + (1600+2400+2400+2200+4200+560).",
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/hero/data.js:31",
+            "src/components/hero/data.js:32"
+          ]
+        },
+        "loop-period-measured-qa-ms": {
+          "value": 21300,
+          "note": "QA correction: loop is ~21.3s (spec text says ~21.0s). Cited spec line is the superseded statement.",
+          "evidenceLevel": "qa-correction",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "CLONE_SPEC.md:109"
+          ]
+        },
+        "panel-slide": {
+          "value": 450,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Hero.jsx:180",
+            "CLONE_SPEC.md:84"
+          ]
+        },
+        "panel-content-enter": {
+          "value": {
+            "duration": 450,
+            "delay": 120,
+            "offsetY": 16,
+            "fromScale": 0.965
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "CLONE_SPEC.md:84",
+            "src/components/hero/panels.jsx:13"
+          ]
+        },
+        "caret-blink": {
+          "value": 900,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/styles/sections.css:3",
+            "CLONE_SPEC.md:89"
+          ]
+        },
+        "risk-dot-blink": {
+          "value": 1800,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/styles/sections.css:5",
+            "CLONE_SPEC.md:82"
+          ]
+        },
+        "risk-dot-fade": {
+          "value": 350,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/scene.jsx:81",
+            "CLONE_SPEC.md:82"
+          ]
+        },
+        "risk-dot-stagger": {
+          "value": 45,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/scene.jsx:81",
+            "CLONE_SPEC.md:82"
+          ]
+        },
+        "callout-large-delays": {
+          "value": [
+            700,
+            1000,
+            1150
+          ],
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:88",
+            "CLONE_SPEC.md:83"
+          ]
+        },
+        "callout-small-delays": {
+          "value": [
+            1250,
+            1450,
+            1650
+          ],
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/data.js:93",
+            "CLONE_SPEC.md:83"
+          ]
+        },
+        "send-glow": {
+          "value": 400,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Hero.jsx:135",
+            "CLONE_SPEC.md:89"
+          ]
+        },
+        "attribution-fade": {
+          "value": 300,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/hero/scene.jsx:46",
+            "CLONE_SPEC.md:80"
+          ]
+        },
+        "pill-glimmer-period": {
+          "value": 3400,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/styles/sections.css:18",
+            "CLONE_SPEC.md:130"
+          ]
+        },
+        "pill-glimmer-easing-qa": {
+          "value": "linear",
+          "note": "QA correction: glimmer easing is LINEAR (spec text and recon style block say EASE). NOTE: src/styles/sections.css still contains cubic-bezier(0.4,0,0.2,1) on this animation, i.e. the clone has not been updated to the QA value; this repo follows QA. Cited lines are the superseded statements.",
+          "evidenceLevel": "qa-correction",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/styles/sections.css:18",
+            "CLONE_SPEC.md:130"
+          ]
+        }
+      },
+      "usecases": {
+        "active-delay": {
+          "value": 1150,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:54",
+            "CLONE_SPEC.md:153"
+          ]
+        },
+        "autoplay-interval": {
+          "value": 7000,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:66",
+            "CLONE_SPEC.md:155"
+          ]
+        },
+        "progress-bar": {
+          "value": {
+            "duration": 7000,
+            "easing": "linear"
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/styles/sections.css:24",
+            "CLONE_SPEC.md:157"
+          ]
+        },
+        "tile-entrance": {
+          "value": {
+            "spring": "snappy",
+            "delayPerIndex": 0.05,
+            "fromScale": 0.7
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:155",
+            "CLONE_SPEC.md:151"
+          ]
+        },
+        "connector-draw": {
+          "value": {
+            "duration": 0.55,
+            "delayBase": 0.25,
+            "delayPerIndex": 0.05
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:123",
+            "CLONE_SPEC.md:152"
+          ]
+        },
+        "spine-draw": {
+          "value": {
+            "duration": 0.35,
+            "delay": 0.85
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:134",
+            "CLONE_SPEC.md:152"
+          ]
+        },
+        "data-pins": {
+          "value": {
+            "durationsSec": [
+              2.4,
+              2.9,
+              3.4
+            ],
+            "beginOffsetsSec": [
+              0,
+              -0.8,
+              -1.6
+            ],
+            "spineDurationSec": 1.4,
+            "pinnedTiles": [
+              1,
+              4,
+              7
+            ]
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:140",
+            "CLONE_SPEC.md:154"
+          ]
+        },
+        "chip-glow": {
+          "value": 600,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:174",
+            "CLONE_SPEC.md:141"
+          ]
+        },
+        "window-fade": {
+          "value": 500,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:183",
+            "CLONE_SPEC.md:143"
+          ]
+        },
+        "persona-transitions": {
+          "value": 350,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:198",
+            "CLONE_SPEC.md:160"
+          ]
+        },
+        "card-transitions": {
+          "value": 300,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:237",
+            "CLONE_SPEC.md:161"
+          ]
+        },
+        "card-reenter": {
+          "value": {
+            "duration": 0.28,
+            "delayPerIndex": 0.06,
+            "offsetY": 6
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:232",
+            "CLONE_SPEC.md:162"
+          ]
+        },
+        "answer-item": {
+          "value": {
+            "spring": "heavy",
+            "delayBase": 0.08,
+            "delayPerItem": 0.1,
+            "offsetY": 8
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:63",
+            "CLONE_SPEC.md:169"
+          ]
+        },
+        "answer-querying-fade": {
+          "value": {
+            "duration": 0.25,
+            "delay": 0.85
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:257",
+            "CLONE_SPEC.md:170"
+          ]
+        },
+        "answer-live-pill": {
+          "value": {
+            "duration": 0.3,
+            "delay": 0.9
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:264",
+            "CLONE_SPEC.md:170"
+          ]
+        }
+      },
+      "integrations": {
+        "tile-opacity": {
+          "value": {
+            "duration": 0.9,
+            "easing": "easeInOut"
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Integrations.jsx:92",
+            "CLONE_SPEC.md:220"
+          ]
+        },
+        "wave-stagger": {
+          "value": {
+            "perStepSec": 0.045,
+            "formula": "(col+row) x 0.045"
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Integrations.jsx:75",
+            "CLONE_SPEC.md:222"
+          ]
+        },
+        "header-paragraph": {
+          "value": {
+            "duration": 0.6,
+            "delay": 0.15,
+            "toOpacity": 0.75
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Integrations.jsx:34",
+            "CLONE_SPEC.md:196"
+          ]
+        },
+        "pill-color": {
+          "value": 300,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Integrations.jsx:63",
+            "CLONE_SPEC.md:224"
+          ]
+        },
+        "tile-border": {
+          "value": 350,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Integrations.jsx:109",
+            "CLONE_SPEC.md:226"
+          ]
+        },
+        "tile-overlay": {
+          "value": {
+            "duration": 425,
+            "easing": "EASE",
+            "opacity": 0.22
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Integrations.jsx:123",
+            "CLONE_SPEC.md:226"
+          ]
+        },
+        "dim-opacity": {
+          "value": 0.2,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/Integrations.jsx:88",
+            "CLONE_SPEC.md:225"
+          ]
+        }
+      },
+      "csr": {
+        "char-ms": {
+          "value": 14,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:87",
+            "CLONE_SPEC.md:249"
+          ]
+        },
+        "type-hold": {
+          "value": 200,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:87",
+            "CLONE_SPEC.md:249"
+          ]
+        },
+        "tangle": {
+          "value": 1600,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:88",
+            "CLONE_SPEC.md:250"
+          ]
+        },
+        "rail": {
+          "value": 750,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:89",
+            "CLONE_SPEC.md:251"
+          ]
+        },
+        "check": {
+          "value": 1920,
+          "note": "320 x 5 tiles + 320.",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:43",
+            "CLONE_SPEC.md:252"
+          ]
+        },
+        "answer": {
+          "value": 3000,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:95",
+            "CLONE_SPEC.md:253"
+          ]
+        },
+        "tile-step": {
+          "value": 320,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:42",
+            "CLONE_SPEC.md:277"
+          ]
+        },
+        "tangle-stagger": {
+          "value": 130,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:143",
+            "CLONE_SPEC.md:265"
+          ]
+        },
+        "cycle-measured-ms": {
+          "value": 8000,
+          "note": "Spec table measured 8.0s; sum of code timers is 7960ms (490 typing + 200 + 1600 + 750 + 1920 + 3000).",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "CLONE_SPEC.md:255"
+          ]
+        },
+        "label-changes-per-cycle": {
+          "value": 4,
+          "note": "QA correction: the frame-state label really changes 4 times per ~8.0s cycle (spec lists 5 time stamps 0, 0.81, 2.43, 5.06, 8.09 incl. the wrap).",
+          "evidenceLevel": "qa-correction",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "CLONE_SPEC.md:255"
+          ]
+        },
+        "answer-bubble": {
+          "value": {
+            "duration": 400,
+            "delay": 820,
+            "offsetY": 8
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:461",
+            "CLONE_SPEC.md:281"
+          ]
+        },
+        "return-path": {
+          "value": 0.9,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:191",
+            "CLONE_SPEC.md:279"
+          ]
+        }
+      },
+      "platform": {
+        "slab": {
+          "value": {
+            "spring": "heavy",
+            "delay": 0.1,
+            "offsetY": 22
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:165",
+            "CLONE_SPEC.md:309"
+          ]
+        },
+        "cards": {
+          "value": {
+            "spring": "heavy",
+            "delayBase": 0.6,
+            "delayPerIndex": 0.22,
+            "offsetY": 14
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:107",
+            "CLONE_SPEC.md:310"
+          ]
+        },
+        "lower-connectors": {
+          "value": {
+            "duration": 0.4,
+            "delayBase": 0.9,
+            "delayPerIndex": 0.08
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:158",
+            "CLONE_SPEC.md:311"
+          ]
+        },
+        "top-block": {
+          "value": {
+            "spring": "snappy",
+            "delay": 1.4,
+            "offsetY": -18
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:50",
+            "CLONE_SPEC.md:312"
+          ]
+        },
+        "upper-connectors": {
+          "value": {
+            "duration": 0.4,
+            "delayBase": 1.7,
+            "delayPerIndex": 0.08
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:97",
+            "CLONE_SPEC.md:313"
+          ]
+        },
+        "march": {
+          "value": {
+            "duration": 1.6,
+            "easing": "linear",
+            "dashoffsetTo": -8.14
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/styles/sections.css:201",
+            "CLONE_SPEC.md:315"
+          ]
+        }
+      },
+      "security": {
+        "hover": {
+          "value": {
+            "duration": 220,
+            "easing": "ease"
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/styles/sections.css:252",
+            "CLONE_SPEC.md:336"
+          ]
+        }
+      },
+      "closing": {
+        "progress-in": {
+          "value": {
+            "duration": 2.4,
+            "easing": "easeInOut"
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ClosingCTA.jsx:36",
+            "CLONE_SPEC.md:357"
+          ]
+        },
+        "progress-out": {
+          "value": {
+            "duration": 0.9,
+            "easing": "easeOut"
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ClosingCTA.jsx:36",
+            "CLONE_SPEC.md:357"
+          ]
+        },
+        "seated-threshold": {
+          "value": 0.92,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ClosingCTA.jsx:42",
+            "CLONE_SPEC.md:370"
+          ]
+        },
+        "flash": {
+          "value": {
+            "duration": 2.4,
+            "easing": "easeOut",
+            "times": [
+              0,
+              0.22,
+              1
+            ],
+            "opacity": [
+              0,
+              0.3,
+              0
+            ]
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/ClosingCTA.jsx:67",
+            "CLONE_SPEC.md:371"
+          ]
+        },
+        "rings": {
+          "value": {
+            "duration": 2.4,
+            "easing": "easeOut",
+            "delays": [
+              0.25,
+              0.5,
+              0.75
+            ],
+            "radius": [
+              10,
+              620
+            ],
+            "opacity": [
+              0.45,
+              0
+            ],
+            "plays": "once per seat"
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/closing/Rings.jsx:31",
+            "CLONE_SPEC.md:372"
+          ]
+        },
+        "sweep": {
+          "value": {
+            "duration": 2.1,
+            "easing": "easeInOut",
+            "repeatDelay": 3.4,
+            "layerDelays": [
+              0,
+              0.25,
+              0.31,
+              0.33,
+              0.38
+            ],
+            "x": [
+              -300,
+              300
+            ],
+            "opacity": [
+              0,
+              0.75,
+              0
+            ]
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/closing/StackArt.jsx:44",
+            "CLONE_SPEC.md:373"
+          ]
+        },
+        "dash-march": {
+          "value": {
+            "duration": 0.8,
+            "easing": "linear",
+            "dashoffsetTo": 8.14,
+            "opacity": {
+              "idle": 0.3,
+              "seated": 0.55
+            }
+          },
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/components/closing/StackArt.jsx:110",
+            "CLONE_SPEC.md:369"
+          ]
+        }
+      },
+      "chrome": {
+        "footer-link-color": {
+          "value": 200,
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "src/styles/sections.css:336",
+            "CLONE_SPEC.md:381"
+          ]
+        },
+        "demo-simulated-send": {
+          "value": 900,
+          "note": "Clone only: simulated send then success. The original POSTs to a live endpoint (see asset role form-submit-endpoint).",
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/DemoDialog.jsx:5"
+          ]
+        },
+        "dialog-animation": {
+          "value": 0,
+          "note": "No open/close animation on the demo dialog.",
+          "evidence": "measured-live",
+          "measuredFrom": [
+            "CLONE_SPEC.md:389"
+          ]
+        }
+      }
+    },
+    "threshold": {
+      "hero": {
+        "value": {
+          "amount": 0.3,
+          "once": false
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/Hero.jsx:279",
+          "CLONE_SPEC.md:93"
+        ]
+      },
+      "usecases-entrance": {
+        "value": {
+          "amount": 0.2,
+          "once": true
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:44",
+          "CLONE_SPEC.md:150"
+        ]
+      },
+      "usecases-autoplay": {
+        "value": {
+          "amount": 0.3,
+          "once": false
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:45",
+          "CLONE_SPEC.md:155"
+        ]
+      },
+      "integrations": {
+        "value": {
+          "amount": 0.3,
+          "once": false
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/Integrations.jsx:12",
+          "CLONE_SPEC.md:219"
+        ]
+      },
+      "csr": {
+        "value": {
+          "amount": 0.15,
+          "once": true
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:76",
+          "CLONE_SPEC.md:245"
+        ]
+      },
+      "platform": {
+        "value": {
+          "amount": 0.35,
+          "once": false
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:26",
+          "CLONE_SPEC.md:307"
+        ]
+      },
+      "closing": {
+        "value": {
+          "amount": 0.45,
+          "once": false,
+          "note": "progress value p is driven by useInView, never by scroll position"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/ClosingCTA.jsx:20",
+          "CLONE_SPEC.md:357"
+        ]
+      },
+      "closing-lines": {
+        "value": {
+          "amount": "any intersection",
+          "once": false
+        },
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ClosingCTA.jsx:21"
+        ]
+      }
+    },
+    "noScrollLinkedMotion": {
+      "value": true,
+      "note": "No scroll listeners and no useScroll anywhere in src/. All motion is IntersectionObserver (framer-motion useInView), timers, hover or click.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "CLONE_SPEC.md:41",
+        "src/components/ClosingCTA.jsx:20"
+      ]
+    }
+  }
+}

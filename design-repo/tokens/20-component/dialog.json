@@ -1,0 +1,89 @@
+{
+  "$description": "Component-scoped tokens: dialog. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "dialog": {
+    "maxWidth": {
+      "value": "min(92vw, 460px)",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:69",
+        "CLONE_SPEC.md:391"
+      ]
+    },
+    "backdrop": {
+      "value": "rgba(0,0,0,0.62)",
+      "measuredFrom": [
+        "src/styles/sections.css:344",
+        "CLONE_SPEC.md:392"
+      ]
+    },
+    "card.background": {
+      "ref": "color.surface.dialog",
+      "value": "#101112",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:73"
+      ]
+    },
+    "card.radius": {
+      "value": 16,
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:75",
+        "CLONE_SPEC.md:393"
+      ]
+    },
+    "field.borderBottom": {
+      "value": "1px solid rgba(255,255,255,0.1)",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:12",
+        "CLONE_SPEC.md:396"
+      ]
+    },
+    "field.padding": {
+      "value": "10px 2px 9px",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:14",
+        "CLONE_SPEC.md:396"
+      ]
+    },
+    "field.fontSize": {
+      "value": 15,
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:15",
+        "CLONE_SPEC.md:396"
+      ]
+    },
+    "field.placeholder": {
+      "value": "rgba(255,255,255,0.38)",
+      "measuredFrom": [
+        "src/styles/sections.css:345",
+        "CLONE_SPEC.md:397"
+      ]
+    },
+    "field.focusBorder": {
+      "value": "rgba(255,255,255,0.7)",
+      "measuredFrom": [
+        "src/styles/sections.css:346",
+        "CLONE_SPEC.md:398"
+      ]
+    },
+    "submit.padding": {
+      "value": "13px 30px",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:202",
+        "CLONE_SPEC.md:407"
+      ]
+    },
+    "title.fontSize": {
+      "value": 27,
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:126",
+        "CLONE_SPEC.md:394"
+      ]
+    },
+    "error.color": {
+      "value": "rgba(255,120,96,0.9)",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:222",
+        "CLONE_SPEC.md:408"
+      ]
+    }
+  }
+}

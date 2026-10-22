@@ -1,0 +1,86 @@
+{
+  "$description": "Component-scoped tokens: pill. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "pill": {
+    "padding": {
+      "value": "15px 36px",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:8",
+        "CLONE_SPEC.md:67"
+      ]
+    },
+    "fontSize": {
+      "value": 17,
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:11",
+        "CLONE_SPEC.md:67"
+      ]
+    },
+    "lineHeight": {
+      "value": 1.2,
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:12"
+      ]
+    },
+    "solid.background": {
+      "ref": "color.neutral.white",
+      "value": "#FFFFFF",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:20"
+      ]
+    },
+    "solid.color": {
+      "ref": "color.surface.page",
+      "value": "#090909",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:20"
+      ]
+    },
+    "solid.fontWeight": {
+      "value": 500,
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:20"
+      ]
+    },
+    "ghost.border": {
+      "value": "1px solid rgba(255,255,255,0.25)",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:26"
+      ]
+    },
+    "ghost.color": {
+      "ref": "color.alpha.white.a880",
+      "value": "rgba(255,255,255,0.88)",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:24"
+      ]
+    },
+    "ghost.fontWeight": {
+      "value": 400,
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:25"
+      ]
+    },
+    "glimmer.width": {
+      "value": "46%",
+      "measuredFrom": [
+        "src/styles/sections.css:16",
+        "CLONE_SPEC.md:130"
+      ]
+    },
+    "glimmer.gradient": {
+      "value": "linear-gradient(105deg,transparent,rgba(17,17,17,0.14) 50%,transparent)",
+      "measuredFrom": [
+        "src/styles/sections.css:17",
+        "CLONE_SPEC.md:130"
+      ]
+    },
+    "hover": {
+      "value": "none",
+      "note": "Pills have no hover styles.",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:1",
+        "CLONE_SPEC.md:130"
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "legal-clause",
+  "kind": "component",
+  "purpose": "Numbered legal clause: mono index + 24px head heading, then paragraphs and bullet lists in the lede colour. DERIVED design (not measured against any original).",
+  "evidence": "derived",
+  "props": {
+    "heading": {
+      "type": "string",
+      "required": true,
+      "maxWords": 6
+    },
+    "blocks": {
+      "type": "array",
+      "description": "Paragraph strings and bullet lists.",
+      "required": true
+    }
+  },
+  "tokensUsed": [
+    "typography.typeStyle.legal-clause-heading",
+    "typography.typeStyle.legal-body",
+    "color.alpha.white.a750",
+    "spacing.legal-clause-gap"
+  ],
+  "usedBy": [
+    "legal.body"
+  ],
+  "measuredFrom": [
+    "src/pages/LegalPage.jsx:51",
+    "src/pages/LegalPage.jsx:55"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "system-tile",
+  "kind": "component",
+  "purpose": "Rounded square tile with a 4px #232327 border: use-cases connected-system tile (80px, icon + label) and CSR rail tile (116x62, label + finding).",
+  "evidence": "measured-live",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "finding": {
+      "type": "string",
+      "description": "CSR variant only.",
+      "required": false,
+      "maxWords": 6
+    },
+    "variant": {
+      "type": "string",
+      "enum": [
+        "connected-system",
+        "csr-rail"
+      ],
+      "required": true
+    }
+  },
+  "tokensUsed": [
+    "color.solid.h0b0b0c",
+    "color.solid.h232327",
+    "elevation.system-tile",
+    "component.tile.system.size",
+    "component.tile.system.radius",
+    "component.csr.systemTile.size"
+  ],
+  "usedBy": [
+    "usecases.stage",
+    "csr.loop"
+  ],
+  "measuredFrom": [
+    "src/components/UseCases.jsx:157",
+    "src/components/ControlCenter.jsx:266",
+    "CLONE_SPEC.md:139"
+  ]
+}

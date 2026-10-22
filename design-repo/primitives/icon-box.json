@@ -1,0 +1,39 @@
+{
+  "id": "icon-box",
+  "kind": "primitive",
+  "purpose": "Square icon container with a neon-tinted border and fill; used for the security quadrant icon.",
+  "evidence": "measured-live",
+  "props": {
+    "size": {
+      "type": "number",
+      "default": 36,
+      "required": false
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "stroke-icon"
+      ],
+      "required": true
+    },
+    "hover": {
+      "type": "boolean",
+      "default": true,
+      "description": "Border/fill brighten on hover (hover:hover and pointer:fine only).",
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "color.alpha.neon.a180",
+    "color.alpha.neon.a045",
+    "iconSize.security-icon-box",
+    "component.security.iconBox.radius"
+  ],
+  "usedBy": [
+    "security.matrix"
+  ],
+  "measuredFrom": [
+    "src/styles/sections.css:262-271",
+    "CLONE_SPEC.md:328"
+  ]
+}

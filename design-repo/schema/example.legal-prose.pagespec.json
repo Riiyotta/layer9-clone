@@ -1,0 +1,231 @@
+{
+  "template": "legal-prose",
+  "route": "/privacy-policy/",
+  "documentTitle": "Privacy Policy — Acme OS",
+  "nodes": [
+    {
+      "type": "legal.header",
+      "content": {
+        "logo": {
+          "assetRole": "brand-wordmark"
+        },
+        "eyebrow": "Legal",
+        "title": "Privacy Policy",
+        "updated": "October 2026",
+        "placeholderNotice": "PLACEHOLDER TEXT — REPLACE WITH YOUR COUNSEL-REVIEWED POLICY"
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "not-applicable-static"
+      }
+    },
+    {
+      "type": "legal.body",
+      "content": {
+        "copy": {
+          "assetRole": "legal-copy"
+        },
+        "intro": "This placeholder describes, in plain terms, how a fictional company called Acme might handle information about visitors to its website and the operators who use its platform. Swap it for your own policy before launch.",
+        "sections": [
+          {
+            "heading": "Who this covers",
+            "blocks": [
+              {
+                "kind": "paragraph",
+                "text": "Visitors to this marketing site, people who request a demo, and staff at internet providers who sign in to the Acme platform on behalf of their employer."
+              }
+            ]
+          },
+          {
+            "heading": "What we collect",
+            "blocks": [
+              {
+                "kind": "paragraph",
+                "text": "Only what we need to respond to you and to run the service:"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  "Contact details you type into a form, such as your name, work email and company size.",
+                  "Basic, aggregated site analytics — and only after you accept them in the cookie banner.",
+                  "Operational data an operator connects to the platform, processed on that operator’s instructions."
+                ]
+              }
+            ]
+          },
+          {
+            "heading": "How we use it",
+            "blocks": [
+              {
+                "kind": "paragraph",
+                "text": "To answer demo requests, to keep the site and platform working and secure, and to understand which pages are useful. We do not sell personal information and we do not use subscriber data to train shared models."
+              }
+            ]
+          },
+          {
+            "heading": "Cookies and choices",
+            "blocks": [
+              {
+                "kind": "paragraph",
+                "text": "Strictly necessary storage is always on so the site can remember your consent choice. Analytics stay off until you opt in, and you can change your mind any time from the Cookies link in the footer."
+              }
+            ]
+          },
+          {
+            "heading": "Sharing",
+            "blocks": [
+              {
+                "kind": "paragraph",
+                "text": "We share information with vendors that host or support the service under written agreements, when the law requires it, or as part of a merger with notice to you."
+              }
+            ]
+          },
+          {
+            "heading": "Retention and security",
+            "blocks": [
+              {
+                "kind": "paragraph",
+                "text": "We keep information only as long as it is needed for the purposes above, encrypt it in transit and at rest, and limit access to people who need it to do their job."
+              }
+            ]
+          },
+          {
+            "heading": "Your rights",
+            "blocks": [
+              {
+                "kind": "paragraph",
+                "text": "Depending on where you live, you may ask to see, correct, or delete your information, or object to certain uses. Contact us and we will respond within the time the law allows."
+              }
+            ]
+          }
+        ],
+        "contactEmail": "legal@acme.example",
+        "contactLead": "Questions? Write to"
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "not-applicable-static"
+      }
+    },
+    {
+      "type": "chrome.footer",
+      "content": {
+        "copyright": "© 2026 Acme Inc. Made for ISPs.",
+        "links": [
+          {
+            "label": "Privacy",
+            "href": "/privacy-policy/"
+          },
+          {
+            "label": "Terms",
+            "href": "/terms-of-service/"
+          }
+        ],
+        "cookiesLabel": "Cookies"
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "not-applicable-static"
+      }
+    },
+    {
+      "type": "overlay.demo-dialog",
+      "content": {
+        "label": "REQUEST DEMO",
+        "title": "Let’s talk.",
+        "intro": "Share a little about your network and we’ll line up a walkthrough from there.",
+        "fields": {
+          "fullName": {
+            "placeholder": "Your name"
+          },
+          "email": {
+            "placeholder": "Company email"
+          },
+          "subscribers": {
+            "label": "Subscriber count",
+            "options": [
+              "Under 1,000",
+              "1,000–5,000",
+              "5,000–10,000",
+              "10,000–50,000",
+              "50,000–100,000",
+              "100,000+"
+            ]
+          },
+          "coverage": {
+            "placeholder": "Service regions"
+          },
+          "source": {
+            "placeholder": "Where did you find us?"
+          }
+        },
+        "consentLead": "By sending, I accept Acme’s",
+        "consentLinks": [
+          {
+            "label": "privacy notice",
+            "href": "/privacy-policy/"
+          },
+          {
+            "label": "terms",
+            "href": "/terms-of-service/"
+          }
+        ],
+        "submitLabel": "Book",
+        "sendingLabel": "Sending…",
+        "errorMessage": "That didn’t go through. Please retry.",
+        "success": {
+          "label": "RECEIVED",
+          "message": "Thanks, we’ll reach out soon.",
+          "closeLabel": "Done"
+        },
+        "submit": {
+          "assetRole": "form-submit-endpoint"
+        }
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "not-applicable-static"
+      }
+    },
+    {
+      "type": "overlay.cookie-banner",
+      "content": {
+        "label": "YOUR PRIVACY",
+        "body": "We’d like to measure anonymous site usage. Storage the site needs to run is always on. See our",
+        "privacyLinkLabel": "privacy notice",
+        "acceptLabel": "Accept",
+        "rejectLabel": "Reject optional ones",
+        "customizeLabel": "Customize",
+        "preferences": {
+          "label": "PRIVACY SETTINGS",
+          "title": "Pick what we can store.",
+          "intro": "Essential storage for security and spam protection on our forms is always active. More in our",
+          "options": [
+            {
+              "label": "Essential",
+              "description": "Needed for pages and forms to work at all. This one can’t be turned off.",
+              "required": true
+            },
+            {
+              "label": "Analytics",
+              "description": "Shows us, anonymously, which pages people read and use.",
+              "required": false
+            }
+          ],
+          "saveLabel": "Save choices",
+          "declineLabel": "Decline all",
+          "allowLabel": "Allow all"
+        }
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "not-applicable-static"
+      }
+    }
+  ]
+}

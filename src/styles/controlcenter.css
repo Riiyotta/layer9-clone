@@ -1,0 +1,6 @@
+/* Phase-driven overrides for the CSR section (CLONE_SPEC.md §5).
+   The static .l9ctr-* rules live in sections.css; these only cover the
+   pseudo-element whose colour depends on the phase (can't be inlined). */
+@media (max-width: 720px) {
+  .l9ctr-mobile-flow.is-routed::before { background: rgba(46,235,133,0.32); }
+}

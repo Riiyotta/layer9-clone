@@ -1,0 +1,50 @@
+{
+  "id": "progress-track",
+  "kind": "primitive",
+  "purpose": "2px track under a persona button. The active track fills with the persona's *_LINE gradient over the 7s autoplay interval (linear); when autoplay is paused it shows a solid accent fill.",
+  "evidence": "measured-live",
+  "props": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "autoplay-fill",
+        "static-full",
+        "empty"
+      ],
+      "required": true
+    },
+    "accent": {
+      "type": "string",
+      "enum": [
+        "boost",
+        "neon",
+        "blink"
+      ],
+      "required": true
+    },
+    "durationMs": {
+      "type": "number",
+      "default": 7000,
+      "required": false
+    }
+  },
+  "motion": {
+    "pattern": "css keyframes translateX(-100%)->0, 7000ms linear, forwards",
+    "reducedMotion": "animation none",
+    "phoneVariant": "not rendered on the mobile list (no progress bar)"
+  },
+  "tokensUsed": [
+    "color.gradient.blink-line",
+    "color.gradient.neon-line",
+    "color.gradient.boost-line",
+    "motion.duration.usecases.progress-bar"
+  ],
+  "usedBy": [
+    "usecases.stage"
+  ],
+  "measuredFrom": [
+    "src/components/UseCases.jsx:208",
+    "src/styles/sections.css:24",
+    "CLONE_SPEC.md:157"
+  ]
+}

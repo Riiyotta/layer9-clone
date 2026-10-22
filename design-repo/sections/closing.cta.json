@@ -1,0 +1,193 @@
+{
+  "id": "closing.cta",
+  "kind": "section",
+  "purpose": "Full-viewport (100vh) closing block: eyebrow, H2, lede, an isometric layer-stack illustration whose layers drop and seat, and a single solid pill overlapping the art. Progress p is driven by useInView (NOT scroll position): 0->1 over 2.4s when >=45% in view, back to 0 over 0.9s when it leaves. When seated (p >= 0.92) a flash, three rings and diagonal sweeps fire.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "mustPrecedeFooter": true,
+    "requiredOverlays": [
+      "overlay.demo-dialog"
+    ],
+    "allowedRoutes": [
+      "/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "eyebrow",
+      "title",
+      "lede",
+      "cta",
+      "illustration"
+    ],
+    "properties": {
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 3,
+        "cloneChars": 7,
+        "originalChars": 7,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4468"
+        ]
+      },
+      "title": {
+        "type": "string",
+        "maxWords": 7,
+        "cloneChars": 30,
+        "originalChars": 29,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4491"
+        ]
+      },
+      "lede": {
+        "type": "string",
+        "maxWords": 14,
+        "cloneChars": 67,
+        "originalChars": 67,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4514"
+        ]
+      },
+      "cta": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxWords": 4,
+            "cloneChars": 12,
+            "originalChars": 12,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:4537"
+            ]
+          },
+          "href": {
+            "type": "string",
+            "enum": [
+              "#demo"
+            ]
+          }
+        }
+      },
+      "illustration": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetRole"
+        ],
+        "properties": {
+          "assetRole": {
+            "type": "string",
+            "enum": [
+              "illustration-scene"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Illustration geometry (four slabs at cy 451/411/361/252, chip cy 158, dashed lines at x 147/227/347/427), mask and flash gradient",
+      "citations": [
+        "src/components/closing/StackArt.jsx:19",
+        "src/components/closing/StackArt.jsx:28",
+        "src/components/ClosingCTA.jsx:15"
+      ]
+    },
+    {
+      "item": "The stage is 100vh tall (inner box height 100vh, padding 80 24 10)",
+      "citations": [
+        "src/components/ClosingCTA.jsx:53",
+        "CLONE_SPEC.md:349"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "progress-seat-sequence"
+    ],
+    "primaryTrigger": {
+      "type": "useInView",
+      "inViewAmount": 0.45,
+      "once": false
+    },
+    "triggerNotes": "Progress value p animates 0->1 (2.4s easeInOut) when >=45% in view and returns to 0 (0.9s easeOut) when out. Dashed lines march while any part is in view. This is an IntersectionObserver trigger, not scroll-linked.",
+    "loopPeriodMs": 5500,
+    "loopPeriodNote": "Diagonal sweeps repeat forever after seating: 2.1s duration + 3.4s repeatDelay = 5.5s (derived from the code constants).",
+    "easing": "motion.easing.ease-in-out-framer",
+    "requiredReducedMotionFallback": "final-seated-state",
+    "reducedMotionDetail": "p is jumped to 1 and seated is true; layer springs are bypassed (raw transforms); flash, rings, sweeps and dash march are off.",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.closing.progress-in",
+      "motion.duration.closing.progress-out",
+      "motion.duration.closing.seated-threshold",
+      "motion.duration.closing.flash",
+      "motion.duration.closing.rings",
+      "motion.duration.closing.sweep",
+      "motion.threshold.closing"
+    ],
+    "measuredFrom": [
+      "src/components/ClosingCTA.jsx:20",
+      "src/components/ClosingCTA.jsx:24",
+      "src/components/ClosingCTA.jsx:28-32",
+      "CLONE_SPEC.md:357",
+      "src/components/ClosingCTA.jsx:42"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.phone",
+      "from": "height min(100%, 66vh)",
+      "to": "width 100%, max 420px",
+      "change": ".l9cc-stage switches from height-driven (min(100%, 66vh), aspect 572/687) to width-driven (100% wide, max 420px, height auto) so the art fits a phone viewport.",
+      "measuredFrom": [
+        "src/styles/sections.css:332",
+        "CLONE_SPEC.md:351"
+      ]
+    }
+  ],
+  "components": [
+    "isometric-stack-art"
+  ],
+  "primitives": [
+    "pill",
+    "eyebrow"
+  ],
+  "assetRoles": [
+    "illustration-scene"
+  ],
+  "notes": [
+    "The illustration is an ORIGINAL drawing; the original's SVG artwork is not reproduced in this repo."
+  ],
+  "example": {
+    "eyebrow": "ACME OS",
+    "title": "Put your network on autopilot.",
+    "lede": "Connect each tool, team, and process into one calm, fast operation.",
+    "cta": {
+      "label": "Talk with us",
+      "href": "#demo"
+    },
+    "illustration": {
+      "assetRole": "illustration-scene"
+    }
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:345",
+    "src/pages/Home.jsx:18",
+    "src/components/ClosingCTA.jsx:18-133",
+    "recon/text-roles-1280.json:4491"
+  ]
+}

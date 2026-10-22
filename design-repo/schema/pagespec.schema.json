@@ -1,0 +1,3041 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PageSpec",
+  "description": "Machine contract for one generated page. Closed template, route, node type and assetRole enums; additionalProperties false everywhere; motion is a closed object whose values are locked per section type to the evidence in sections/*.json. There is deliberately NO per-instance style or token-override field. x-maxWords / x-cloneChars / x-originalChars are documentation-and-validator keywords (JSON Schema ignores them); semantic_validate.py enforces x-maxWords/maxWords from sections/*.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "template",
+    "route",
+    "documentTitle",
+    "nodes"
+  ],
+  "properties": {
+    "template": {
+      "type": "string",
+      "enum": [
+        "home",
+        "legal-prose"
+      ]
+    },
+    "route": {
+      "type": "string",
+      "enum": [
+        "/",
+        "/privacy-policy/",
+        "/terms-of-service/"
+      ]
+    },
+    "documentTitle": {
+      "type": "string",
+      "x-maxWords": 10,
+      "x-cloneChars": 46
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/node"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "route": {
+            "const": "/"
+          }
+        },
+        "required": [
+          "route"
+        ]
+      },
+      "then": {
+        "properties": {
+          "template": {
+            "const": "home"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "route": {
+            "enum": [
+              "/privacy-policy/",
+              "/terms-of-service/"
+            ]
+          }
+        },
+        "required": [
+          "route"
+        ]
+      },
+      "then": {
+        "properties": {
+          "template": {
+            "const": "legal-prose"
+          }
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "assetRole": {
+      "type": "string",
+      "enum": [
+        "brand-wordmark",
+        "brand-chip-mark",
+        "vendor-logo-tile",
+        "map-basemap-tile",
+        "stroke-icon",
+        "illustration-scene",
+        "decorative-frame",
+        "form-submit-endpoint",
+        "legal-copy"
+      ]
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern",
+        "trigger",
+        "reducedMotionFallback"
+      ],
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "enum": [
+            "typing-episode-loop",
+            "persona-autoplay-stage",
+            "diagonal-wave-reveal",
+            "phase-loop",
+            "bottom-up-build",
+            "hover-wash-only",
+            "progress-seat-sequence",
+            "none"
+          ]
+        },
+        "trigger": {
+          "type": "string",
+          "enum": [
+            "useInView",
+            "none"
+          ]
+        },
+        "inViewAmount": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "once": {
+          "type": "boolean"
+        },
+        "loopPeriodMs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reducedMotionFallback": {
+          "type": "string",
+          "enum": [
+            "final-state-no-timers",
+            "zero-delay-instant-reveal",
+            "no-offset-opacity-only",
+            "final-seated-state",
+            "transitions-none",
+            "not-applicable-static"
+          ]
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "content",
+        "motion"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hero.episode",
+            "usecases.stage",
+            "integrations.grid",
+            "csr.loop",
+            "platform.stack",
+            "security.matrix",
+            "closing.cta",
+            "chrome.footer",
+            "overlay.cookie-banner",
+            "overlay.demo-dialog",
+            "legal.header",
+            "legal.body"
+          ]
+        },
+        "content": {
+          "type": "object"
+        },
+        "motion": {
+          "$ref": "#/definitions/motion"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "hero.episode"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "logo",
+                  "eyebrow",
+                  "headline",
+                  "primaryCta",
+                  "secondaryCta",
+                  "episode"
+                ],
+                "properties": {
+                  "logo": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "allOf": [
+                          {
+                            "$ref": "#/definitions/assetRole"
+                          },
+                          {
+                            "enum": [
+                              "brand-wordmark"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "eyebrow": {
+                    "type": "string",
+                    "x-maxWords": 5,
+                    "x-cloneChars": 19,
+                    "x-originalChars": 19
+                  },
+                  "headline": {
+                    "type": "string",
+                    "x-maxWords": 8,
+                    "x-cloneChars": 37,
+                    "x-originalChars": 37
+                  },
+                  "primaryCta": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "href"
+                    ],
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "x-maxWords": 4,
+                        "x-cloneChars": 10,
+                        "x-originalChars": 10
+                      },
+                      "href": {
+                        "type": "string",
+                        "enum": [
+                          "#demo"
+                        ]
+                      }
+                    }
+                  },
+                  "secondaryCta": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "href"
+                    ],
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "x-maxWords": 4,
+                        "x-cloneChars": 12,
+                        "x-originalChars": 12
+                      },
+                      "href": {
+                        "type": "string",
+                        "enum": [
+                          "#use-cases"
+                        ]
+                      }
+                    }
+                  },
+                  "episode": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "promptPlaceholder",
+                      "prompts",
+                      "mapBasemap",
+                      "scene",
+                      "callouts",
+                      "smallCallouts",
+                      "dashboard",
+                      "schedules"
+                    ],
+                    "properties": {
+                      "promptPlaceholder": {
+                        "type": "string",
+                        "x-maxWords": 8,
+                        "x-cloneChars": 34,
+                        "x-originalChars": 32
+                      },
+                      "prompts": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "x-maxWords": 15,
+                          "x-cloneChars": 64
+                        },
+                        "minItems": 5,
+                        "maxItems": 5,
+                        "description": "Exactly five typed prompts in order: churn, dashboard, spreadsheet, email, schedule (spec lengths c39, c64, c37, c39, c48)."
+                      },
+                      "mapBasemap": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "allOf": [
+                              {
+                                "$ref": "#/definitions/assetRole"
+                              },
+                              {
+                                "enum": [
+                                  "map-basemap-tile"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "scene": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "allOf": [
+                              {
+                                "$ref": "#/definitions/assetRole"
+                              },
+                              {
+                                "enum": [
+                                  "illustration-scene"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "callouts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "text",
+                            "tone"
+                          ],
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "x-maxWords": 9,
+                              "x-cloneChars": 50
+                            },
+                            "tone": {
+                              "type": "string",
+                              "enum": [
+                                "elevated",
+                                "critical"
+                              ]
+                            }
+                          }
+                        },
+                        "minItems": 3,
+                        "maxItems": 3
+                      },
+                      "smallCallouts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "text"
+                          ],
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "x-maxWords": 5,
+                              "x-cloneChars": 19
+                            }
+                          }
+                        },
+                        "minItems": 3,
+                        "maxItems": 3
+                      },
+                      "dashboard": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "title",
+                          "kpis",
+                          "townBars",
+                          "driverBars"
+                        ],
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "x-maxWords": 5,
+                            "x-cloneChars": 25
+                          },
+                          "kpis": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "label",
+                                "value",
+                                "sub",
+                                "tone"
+                              ],
+                              "properties": {
+                                "label": {
+                                  "type": "string",
+                                  "x-maxWords": 3,
+                                  "x-cloneChars": 12
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "x-maxWords": 2,
+                                  "x-cloneChars": 2
+                                },
+                                "sub": {
+                                  "type": "string",
+                                  "x-maxWords": 5,
+                                  "x-cloneChars": 14
+                                },
+                                "tone": {
+                                  "type": "string",
+                                  "enum": [
+                                    "default",
+                                    "critical"
+                                  ]
+                                }
+                              }
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                          },
+                          "townBars": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "label",
+                                "count"
+                              ],
+                              "properties": {
+                                "label": {
+                                  "type": "string",
+                                  "x-maxWords": 3,
+                                  "x-cloneChars": 11
+                                },
+                                "count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                          },
+                          "driverBars": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "label",
+                                "count"
+                              ],
+                              "properties": {
+                                "label": {
+                                  "type": "string",
+                                  "x-maxWords": 3,
+                                  "x-cloneChars": 14
+                                },
+                                "count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "minItems": 4,
+                            "maxItems": 4
+                          }
+                        }
+                      },
+                      "schedules": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "name",
+                            "to",
+                            "cadence"
+                          ],
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "x-maxWords": 4,
+                              "x-cloneChars": 20
+                            },
+                            "to": {
+                              "type": "string",
+                              "x-maxWords": 3,
+                              "x-cloneChars": 13
+                            },
+                            "cadence": {
+                              "type": "string",
+                              "x-maxWords": 4,
+                              "x-cloneChars": 15
+                            },
+                            "isNew": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "minItems": 5,
+                        "maxItems": 5
+                      }
+                    }
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback",
+                  "inViewAmount",
+                  "once"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "typing-episode-loop"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "useInView"
+                  },
+                  "inViewAmount": {
+                    "const": 0.3
+                  },
+                  "once": {
+                    "const": false
+                  },
+                  "loopPeriodMs": {
+                    "const": 21300
+                  },
+                  "reducedMotionFallback": {
+                    "const": "final-state-no-timers"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "usecases.stage"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "eyebrow",
+                  "titleLines",
+                  "lede",
+                  "hubMark",
+                  "systems",
+                  "personas"
+                ],
+                "properties": {
+                  "eyebrow": {
+                    "type": "string",
+                    "x-maxWords": 5,
+                    "x-cloneChars": 19,
+                    "x-originalChars": 17
+                  },
+                  "titleLines": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "x-maxWords": 7,
+                      "x-cloneChars": 25
+                    },
+                    "minItems": 1,
+                    "maxItems": 2,
+                    "description": "H2 rendered on up to two lines joined by a <br>; original H2 is c44 over 2 lines."
+                  },
+                  "lede": {
+                    "type": "string",
+                    "x-maxWords": 22,
+                    "x-cloneChars": 80,
+                    "x-originalChars": 73
+                  },
+                  "hubMark": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "allOf": [
+                          {
+                            "$ref": "#/definitions/assetRole"
+                          },
+                          {
+                            "enum": [
+                              "brand-chip-mark"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "systems": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "label",
+                        "icon"
+                      ],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "x-maxWords": 3,
+                          "x-cloneChars": 9
+                        },
+                        "icon": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "assetRole"
+                          ],
+                          "properties": {
+                            "assetRole": {
+                              "allOf": [
+                                {
+                                  "$ref": "#/definitions/assetRole"
+                                },
+                                {
+                                  "enum": [
+                                    "stroke-icon"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "minItems": 9,
+                    "maxItems": 9
+                  },
+                  "personas": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "name",
+                        "persona",
+                        "accent",
+                        "prompts"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "x-maxWords": 3,
+                          "x-cloneChars": 9
+                        },
+                        "persona": {
+                          "type": "string",
+                          "x-maxWords": 4,
+                          "x-cloneChars": 21
+                        },
+                        "accent": {
+                          "type": "string",
+                          "enum": [
+                            "boost",
+                            "neon",
+                            "blink"
+                          ]
+                        },
+                        "prompts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "tag",
+                              "question",
+                              "action",
+                              "dash"
+                            ],
+                            "properties": {
+                              "tag": {
+                                "type": "string",
+                                "x-maxWords": 4,
+                                "x-cloneChars": 18
+                              },
+                              "question": {
+                                "type": "string",
+                                "x-maxWords": 10,
+                                "x-cloneChars": 48
+                              },
+                              "action": {
+                                "type": "string",
+                                "x-maxWords": 9,
+                                "x-cloneChars": 33
+                              },
+                              "dash": {
+                                "oneOf": [
+                                  {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "kind",
+                                      "caption",
+                                      "sources",
+                                      "updated",
+                                      "stats",
+                                      "split",
+                                      "foot"
+                                    ],
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "kpi"
+                                      },
+                                      "caption": {
+                                        "type": "string",
+                                        "x-maxWords": 5,
+                                        "x-cloneChars": 29
+                                      },
+                                      "sources": {
+                                        "type": "string",
+                                        "x-maxWords": 5,
+                                        "x-cloneChars": 32
+                                      },
+                                      "updated": {
+                                        "type": "string",
+                                        "x-maxWords": 3,
+                                        "x-cloneChars": 8
+                                      },
+                                      "stats": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "required": [
+                                            "v",
+                                            "l",
+                                            "delta"
+                                          ],
+                                          "properties": {
+                                            "v": {
+                                              "type": "string",
+                                              "x-maxWords": 2,
+                                              "x-cloneChars": 6
+                                            },
+                                            "l": {
+                                              "type": "string",
+                                              "x-maxWords": 3,
+                                              "x-cloneChars": 11
+                                            },
+                                            "delta": {
+                                              "type": "string",
+                                              "x-maxWords": 4,
+                                              "x-cloneChars": 14
+                                            },
+                                            "hot": {
+                                              "type": "boolean"
+                                            }
+                                          }
+                                        },
+                                        "minItems": 3,
+                                        "maxItems": 3
+                                      },
+                                      "split": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "title",
+                                          "note",
+                                          "rows"
+                                        ],
+                                        "properties": {
+                                          "title": {
+                                            "type": "string",
+                                            "x-maxWords": 5,
+                                            "x-cloneChars": 21
+                                          },
+                                          "note": {
+                                            "type": "string",
+                                            "x-maxWords": 3,
+                                            "x-cloneChars": 14
+                                          },
+                                          "rows": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "additionalProperties": false,
+                                              "required": [
+                                                "label",
+                                                "v",
+                                                "pct"
+                                              ],
+                                              "properties": {
+                                                "label": {
+                                                  "type": "string",
+                                                  "x-maxWords": 2,
+                                                  "x-cloneChars": 7
+                                                },
+                                                "v": {
+                                                  "type": "string",
+                                                  "x-maxWords": 2,
+                                                  "x-cloneChars": 6
+                                                },
+                                                "pct": {
+                                                  "type": "integer"
+                                                },
+                                                "hot": {
+                                                  "type": "boolean"
+                                                }
+                                              }
+                                            },
+                                            "minItems": 2,
+                                            "maxItems": 2
+                                          }
+                                        }
+                                      },
+                                      "foot": {
+                                        "type": "string",
+                                        "x-maxWords": 9,
+                                        "x-cloneChars": 38
+                                      }
+                                    },
+                                    "title": "personas[].prompts[].dash kind=kpi"
+                                  },
+                                  {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "kind",
+                                      "caption",
+                                      "sources",
+                                      "updated",
+                                      "tiles",
+                                      "foot"
+                                    ],
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "tiles"
+                                      },
+                                      "caption": {
+                                        "type": "string",
+                                        "x-maxWords": 7,
+                                        "x-cloneChars": 25
+                                      },
+                                      "sources": {
+                                        "type": "string",
+                                        "x-maxWords": 4,
+                                        "x-cloneChars": 22
+                                      },
+                                      "updated": {
+                                        "type": "string",
+                                        "x-maxWords": 3,
+                                        "x-cloneChars": 6
+                                      },
+                                      "tiles": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "required": [
+                                            "l",
+                                            "v",
+                                            "delta",
+                                            "spark",
+                                            "detail"
+                                          ],
+                                          "properties": {
+                                            "l": {
+                                              "type": "string",
+                                              "x-maxWords": 3,
+                                              "x-cloneChars": 14
+                                            },
+                                            "v": {
+                                              "type": "string",
+                                              "x-maxWords": 2,
+                                              "x-cloneChars": 6
+                                            },
+                                            "delta": {
+                                              "type": "string",
+                                              "x-maxWords": 4,
+                                              "x-cloneChars": 12
+                                            },
+                                            "spark": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "integer"
+                                              },
+                                              "minItems": 7,
+                                              "maxItems": 7
+                                            },
+                                            "detail": {
+                                              "type": "string",
+                                              "x-maxWords": 7,
+                                              "x-cloneChars": 26
+                                            },
+                                            "hot": {
+                                              "type": "boolean"
+                                            }
+                                          }
+                                        },
+                                        "minItems": 4,
+                                        "maxItems": 4
+                                      },
+                                      "foot": {
+                                        "type": "string",
+                                        "x-maxWords": 8,
+                                        "x-cloneChars": 39
+                                      }
+                                    },
+                                    "title": "personas[].prompts[].dash kind=tiles"
+                                  },
+                                  {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "kind",
+                                      "caption",
+                                      "sources",
+                                      "updated",
+                                      "marker",
+                                      "bars",
+                                      "foot"
+                                    ],
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "bars"
+                                      },
+                                      "caption": {
+                                        "type": "string",
+                                        "x-maxWords": 5,
+                                        "x-cloneChars": 27
+                                      },
+                                      "sources": {
+                                        "type": "string",
+                                        "x-maxWords": 4,
+                                        "x-cloneChars": 27
+                                      },
+                                      "updated": {
+                                        "type": "string",
+                                        "x-maxWords": 3,
+                                        "x-cloneChars": 6
+                                      },
+                                      "marker": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "at",
+                                          "label"
+                                        ],
+                                        "properties": {
+                                          "at": {
+                                            "type": "integer"
+                                          },
+                                          "label": {
+                                            "type": "string",
+                                            "x-maxWords": 3,
+                                            "x-cloneChars": 10
+                                          }
+                                        }
+                                      },
+                                      "bars": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "required": [
+                                            "label",
+                                            "value",
+                                            "h"
+                                          ],
+                                          "properties": {
+                                            "label": {
+                                              "type": "string",
+                                              "x-maxWords": 3,
+                                              "x-cloneChars": 7
+                                            },
+                                            "value": {
+                                              "type": "string",
+                                              "x-maxWords": 2,
+                                              "x-cloneChars": 3
+                                            },
+                                            "h": {
+                                              "type": "integer"
+                                            },
+                                            "hot": {
+                                              "type": "boolean"
+                                            }
+                                          }
+                                        },
+                                        "minItems": 4,
+                                        "maxItems": 4
+                                      },
+                                      "foot": {
+                                        "type": "string",
+                                        "x-maxWords": 10,
+                                        "x-cloneChars": 40
+                                      }
+                                    },
+                                    "title": "personas[].prompts[].dash kind=bars"
+                                  },
+                                  {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "kind",
+                                      "caption",
+                                      "sources",
+                                      "updated",
+                                      "steps",
+                                      "foot"
+                                    ],
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "steps"
+                                      },
+                                      "caption": {
+                                        "type": "string",
+                                        "x-maxWords": 4,
+                                        "x-cloneChars": 27
+                                      },
+                                      "sources": {
+                                        "type": "string",
+                                        "x-maxWords": 5,
+                                        "x-cloneChars": 27
+                                      },
+                                      "updated": {
+                                        "type": "string",
+                                        "x-maxWords": 3,
+                                        "x-cloneChars": 6
+                                      },
+                                      "steps": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "required": [
+                                            "text",
+                                            "stat"
+                                          ],
+                                          "properties": {
+                                            "text": {
+                                              "type": "string",
+                                              "x-maxWords": 10,
+                                              "x-cloneChars": 46
+                                            },
+                                            "stat": {
+                                              "type": "string",
+                                              "x-maxWords": 3,
+                                              "x-cloneChars": 8
+                                            },
+                                            "hot": {
+                                              "type": "boolean"
+                                            }
+                                          }
+                                        },
+                                        "minItems": 4,
+                                        "maxItems": 4
+                                      },
+                                      "foot": {
+                                        "type": "string",
+                                        "x-maxWords": 10,
+                                        "x-cloneChars": 44
+                                      }
+                                    },
+                                    "title": "personas[].prompts[].dash kind=steps"
+                                  },
+                                  {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "kind",
+                                      "geometryPreset",
+                                      "caption",
+                                      "sources",
+                                      "updated",
+                                      "foot",
+                                      "ringLabel",
+                                      "legend"
+                                    ],
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "map"
+                                      },
+                                      "geometryPreset": {
+                                        "type": "string",
+                                        "enum": [
+                                          "outage-fiber-break",
+                                          "repeat-visit-heat"
+                                        ]
+                                      },
+                                      "caption": {
+                                        "type": "string",
+                                        "x-maxWords": 7,
+                                        "x-cloneChars": 30
+                                      },
+                                      "sources": {
+                                        "type": "string",
+                                        "x-maxWords": 7,
+                                        "x-cloneChars": 28
+                                      },
+                                      "updated": {
+                                        "type": "string",
+                                        "x-maxWords": 3,
+                                        "x-cloneChars": 7
+                                      },
+                                      "foot": {
+                                        "type": "string",
+                                        "x-maxWords": 10,
+                                        "x-cloneChars": 41
+                                      },
+                                      "ringLabel": {
+                                        "type": "string",
+                                        "x-maxWords": 4,
+                                        "x-cloneChars": 14
+                                      },
+                                      "legend": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "required": [
+                                            "label",
+                                            "tone"
+                                          ],
+                                          "properties": {
+                                            "label": {
+                                              "type": "string",
+                                              "x-maxWords": 5,
+                                              "x-cloneChars": 27
+                                            },
+                                            "tone": {
+                                              "type": "string",
+                                              "enum": [
+                                                "hot",
+                                                "dim"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "minItems": 2,
+                                        "maxItems": 2
+                                      },
+                                      "siteLabel": {
+                                        "type": "string",
+                                        "x-maxWords": 2,
+                                        "x-cloneChars": 5
+                                      },
+                                      "breakLabel": {
+                                        "type": "string",
+                                        "x-maxWords": 2,
+                                        "x-cloneChars": 5
+                                      },
+                                      "hubLabel": {
+                                        "type": "string",
+                                        "x-maxWords": 2,
+                                        "x-cloneChars": 5
+                                      }
+                                    },
+                                    "title": "personas[].prompts[].dash kind=map"
+                                  },
+                                  {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "kind",
+                                      "caption",
+                                      "sources",
+                                      "updated",
+                                      "rows",
+                                      "foot"
+                                    ],
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "rows"
+                                      },
+                                      "caption": {
+                                        "type": "string",
+                                        "x-maxWords": 5,
+                                        "x-cloneChars": 27
+                                      },
+                                      "sources": {
+                                        "type": "string",
+                                        "x-maxWords": 5,
+                                        "x-cloneChars": 26
+                                      },
+                                      "updated": {
+                                        "type": "string",
+                                        "x-maxWords": 3,
+                                        "x-cloneChars": 7
+                                      },
+                                      "rows": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "required": [
+                                            "left",
+                                            "sub",
+                                            "right",
+                                            "meta"
+                                          ],
+                                          "properties": {
+                                            "left": {
+                                              "type": "string",
+                                              "x-maxWords": 9,
+                                              "x-cloneChars": 32
+                                            },
+                                            "sub": {
+                                              "type": "string",
+                                              "x-maxWords": 7,
+                                              "x-cloneChars": 32
+                                            },
+                                            "right": {
+                                              "type": "string",
+                                              "x-maxWords": 4,
+                                              "x-cloneChars": 13
+                                            },
+                                            "meta": {
+                                              "type": "string",
+                                              "x-maxWords": 4,
+                                              "x-cloneChars": 10
+                                            },
+                                            "hot": {
+                                              "type": "boolean"
+                                            }
+                                          }
+                                        },
+                                        "minItems": 3,
+                                        "maxItems": 3
+                                      },
+                                      "foot": {
+                                        "type": "string",
+                                        "x-maxWords": 10,
+                                        "x-cloneChars": 39
+                                      }
+                                    },
+                                    "title": "personas[].prompts[].dash kind=rows"
+                                  },
+                                  {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "kind",
+                                      "caption",
+                                      "sources",
+                                      "updated",
+                                      "lines",
+                                      "foot"
+                                    ],
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "report"
+                                      },
+                                      "caption": {
+                                        "type": "string",
+                                        "x-maxWords": 5,
+                                        "x-cloneChars": 25
+                                      },
+                                      "sources": {
+                                        "type": "string",
+                                        "x-maxWords": 5,
+                                        "x-cloneChars": 29
+                                      },
+                                      "updated": {
+                                        "type": "string",
+                                        "x-maxWords": 3,
+                                        "x-cloneChars": 9
+                                      },
+                                      "lines": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "additionalProperties": false,
+                                          "required": [
+                                            "text",
+                                            "stat"
+                                          ],
+                                          "properties": {
+                                            "text": {
+                                              "type": "string",
+                                              "x-maxWords": 12,
+                                              "x-cloneChars": 41
+                                            },
+                                            "stat": {
+                                              "type": "string",
+                                              "x-maxWords": 3,
+                                              "x-cloneChars": 7
+                                            },
+                                            "hot": {
+                                              "type": "boolean"
+                                            }
+                                          }
+                                        },
+                                        "minItems": 5,
+                                        "maxItems": 5
+                                      },
+                                      "foot": {
+                                        "type": "string",
+                                        "x-maxWords": 12,
+                                        "x-cloneChars": 44
+                                      }
+                                    },
+                                    "title": "personas[].prompts[].dash kind=report"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "minItems": 3,
+                          "maxItems": 3
+                        }
+                      }
+                    },
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "description": "Order and accents are fixed: boost, neon, blink."
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback",
+                  "inViewAmount",
+                  "once"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "persona-autoplay-stage"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "useInView"
+                  },
+                  "inViewAmount": {
+                    "const": 0.2
+                  },
+                  "once": {
+                    "const": true
+                  },
+                  "loopPeriodMs": {
+                    "const": 7000
+                  },
+                  "reducedMotionFallback": {
+                    "const": "final-state-no-timers"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "integrations.grid"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "eyebrow",
+                  "heading",
+                  "lede",
+                  "categories",
+                  "vendors",
+                  "cellFrame",
+                  "footnote"
+                ],
+                "properties": {
+                  "eyebrow": {
+                    "type": "string",
+                    "x-maxWords": 3,
+                    "x-cloneChars": 15,
+                    "x-originalChars": 17
+                  },
+                  "heading": {
+                    "type": "string",
+                    "x-maxWords": 9,
+                    "x-cloneChars": 33,
+                    "x-originalChars": 33
+                  },
+                  "lede": {
+                    "type": "string",
+                    "x-maxWords": 14,
+                    "x-cloneChars": 73,
+                    "x-originalChars": 74
+                  },
+                  "categories": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "key",
+                        "label",
+                        "accent"
+                      ],
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "enum": [
+                            "fiber",
+                            "fixed-wireless",
+                            "wi-fi",
+                            "core",
+                            "oss",
+                            "nms",
+                            "channels",
+                            "other"
+                          ]
+                        },
+                        "label": {
+                          "type": "string",
+                          "x-maxWords": 3,
+                          "x-cloneChars": 14
+                        },
+                        "accent": {
+                          "type": "string",
+                          "enum": [
+                            "blink",
+                            "boost",
+                            "neon",
+                            "neutral-light"
+                          ]
+                        }
+                      }
+                    },
+                    "minItems": 8,
+                    "maxItems": 8
+                  },
+                  "vendors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "name",
+                        "monogram",
+                        "category",
+                        "tile"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "x-maxWords": 3,
+                          "x-cloneChars": 15,
+                          "description": "A FICTIONAL vendor name. Never a real vendor or customer name."
+                        },
+                        "monogram": {
+                          "type": "string",
+                          "pattern": "^[A-Z]{2}$"
+                        },
+                        "category": {
+                          "type": "string",
+                          "enum": [
+                            "fiber",
+                            "fixed-wireless",
+                            "wi-fi",
+                            "core",
+                            "oss",
+                            "nms",
+                            "channels",
+                            "other"
+                          ]
+                        },
+                        "tile": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "assetRole"
+                          ],
+                          "properties": {
+                            "assetRole": {
+                              "allOf": [
+                                {
+                                  "$ref": "#/definitions/assetRole"
+                                },
+                                {
+                                  "enum": [
+                                    "vendor-logo-tile"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "minItems": 45,
+                    "maxItems": 45,
+                    "description": "45 cells, row-major on the 9x5 desktop grid."
+                  },
+                  "cellFrame": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "allOf": [
+                          {
+                            "$ref": "#/definitions/assetRole"
+                          },
+                          {
+                            "enum": [
+                              "decorative-frame"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "footnote": {
+                    "type": "string",
+                    "x-maxWords": 23,
+                    "x-cloneChars": 110,
+                    "x-originalChars": 111
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback",
+                  "inViewAmount",
+                  "once"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "diagonal-wave-reveal"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "useInView"
+                  },
+                  "inViewAmount": {
+                    "const": 0.3
+                  },
+                  "once": {
+                    "const": false
+                  },
+                  "reducedMotionFallback": {
+                    "const": "zero-delay-instant-reveal"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "csr.loop"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "eyebrow",
+                  "titleProblem",
+                  "titleSolved",
+                  "lede",
+                  "frame",
+                  "stateLabels",
+                  "question",
+                  "answer",
+                  "systems",
+                  "metrics",
+                  "auditNote"
+                ],
+                "properties": {
+                  "eyebrow": {
+                    "type": "string",
+                    "x-maxWords": 8,
+                    "x-cloneChars": 31,
+                    "x-originalChars": 30
+                  },
+                  "titleProblem": {
+                    "type": "string",
+                    "x-maxWords": 5,
+                    "x-cloneChars": 23,
+                    "x-originalChars": 23
+                  },
+                  "titleSolved": {
+                    "type": "string",
+                    "x-maxWords": 5,
+                    "x-cloneChars": 19
+                  },
+                  "lede": {
+                    "type": "string",
+                    "x-maxWords": 17,
+                    "x-cloneChars": 80,
+                    "x-originalChars": 83
+                  },
+                  "frame": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "appName",
+                      "caseLabel",
+                      "ticketLabel"
+                    ],
+                    "properties": {
+                      "appName": {
+                        "type": "string",
+                        "x-maxWords": 4,
+                        "x-cloneChars": 22,
+                        "x-originalChars": 22
+                      },
+                      "caseLabel": {
+                        "type": "string",
+                        "x-maxWords": 7,
+                        "x-cloneChars": 25,
+                        "x-originalChars": 25
+                      },
+                      "ticketLabel": {
+                        "type": "string",
+                        "x-maxWords": 5,
+                        "x-cloneChars": 32,
+                        "x-originalChars": 33
+                      }
+                    }
+                  },
+                  "stateLabels": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "request",
+                      "manual",
+                      "routing",
+                      "answered"
+                    ],
+                    "properties": {
+                      "request": {
+                        "type": "string",
+                        "x-maxWords": 3,
+                        "x-cloneChars": 11
+                      },
+                      "manual": {
+                        "type": "string",
+                        "x-maxWords": 4,
+                        "x-cloneChars": 15
+                      },
+                      "routing": {
+                        "type": "string",
+                        "x-maxWords": 4,
+                        "x-cloneChars": 15
+                      },
+                      "answered": {
+                        "type": "string",
+                        "x-maxWords": 2,
+                        "x-cloneChars": 8
+                      }
+                    }
+                  },
+                  "question": {
+                    "type": "string",
+                    "x-maxWords": 9,
+                    "x-cloneChars": 35,
+                    "description": "Typed at 14ms per char; original question is c35."
+                  },
+                  "answer": {
+                    "type": "string",
+                    "x-maxWords": 28,
+                    "x-cloneChars": 117
+                  },
+                  "systems": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "label",
+                        "stallTag",
+                        "finding"
+                      ],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "x-maxWords": 3,
+                          "x-cloneChars": 13
+                        },
+                        "stallTag": {
+                          "type": "string",
+                          "x-maxWords": 4,
+                          "x-cloneChars": 15
+                        },
+                        "finding": {
+                          "type": "string",
+                          "x-maxWords": 5,
+                          "x-cloneChars": 20
+                        }
+                      }
+                    },
+                    "minItems": 5,
+                    "maxItems": 5
+                  },
+                  "metrics": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "value",
+                        "label"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "pattern": "^[0-9]+$"
+                        },
+                        "label": {
+                          "type": "string",
+                          "x-maxWords": 3,
+                          "x-cloneChars": 18
+                        }
+                      }
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "auditNote": {
+                    "type": "string",
+                    "x-maxWords": 8,
+                    "x-cloneChars": 36,
+                    "x-originalChars": 36
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback",
+                  "inViewAmount",
+                  "once"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "phase-loop"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "useInView"
+                  },
+                  "inViewAmount": {
+                    "const": 0.15
+                  },
+                  "once": {
+                    "const": true
+                  },
+                  "loopPeriodMs": {
+                    "const": 8000
+                  },
+                  "reducedMotionFallback": {
+                    "const": "final-state-no-timers"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "platform.stack"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "eyebrow",
+                  "title",
+                  "lede",
+                  "topBlock",
+                  "cards",
+                  "slab"
+                ],
+                "properties": {
+                  "eyebrow": {
+                    "type": "string",
+                    "x-maxWords": 5,
+                    "x-cloneChars": 18,
+                    "x-originalChars": 19
+                  },
+                  "title": {
+                    "type": "string",
+                    "x-maxWords": 8,
+                    "x-cloneChars": 30,
+                    "x-originalChars": 30
+                  },
+                  "lede": {
+                    "type": "string",
+                    "x-maxWords": 20,
+                    "x-cloneChars": 83,
+                    "x-originalChars": 83
+                  },
+                  "topBlock": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "title",
+                      "chips"
+                    ],
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "x-maxWords": 4,
+                        "x-cloneChars": 17,
+                        "x-originalChars": 19
+                      },
+                      "chips": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "x-maxWords": 4,
+                          "x-cloneChars": 22
+                        },
+                        "minItems": 6,
+                        "maxItems": 6
+                      }
+                    }
+                  },
+                  "cards": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "label",
+                        "description",
+                        "accent",
+                        "icon"
+                      ],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "x-maxWords": 3,
+                          "x-cloneChars": 13
+                        },
+                        "description": {
+                          "type": "string",
+                          "x-maxWords": 9,
+                          "x-cloneChars": 44
+                        },
+                        "accent": {
+                          "type": "string",
+                          "enum": [
+                            "blink",
+                            "neon",
+                            "boost"
+                          ]
+                        },
+                        "icon": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "assetRole"
+                          ],
+                          "properties": {
+                            "assetRole": {
+                              "allOf": [
+                                {
+                                  "$ref": "#/definitions/assetRole"
+                                },
+                                {
+                                  "enum": [
+                                    "stroke-icon"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "description": "Order and accents follow the reference DOM: blink, neon, boost."
+                  },
+                  "slab": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "mark",
+                      "label",
+                      "line"
+                    ],
+                    "properties": {
+                      "mark": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "allOf": [
+                              {
+                                "$ref": "#/definitions/assetRole"
+                              },
+                              {
+                                "enum": [
+                                  "brand-chip-mark"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "label": {
+                        "type": "string",
+                        "x-maxWords": 5,
+                        "x-cloneChars": 25,
+                        "x-originalChars": 24
+                      },
+                      "line": {
+                        "type": "string",
+                        "x-maxWords": 10,
+                        "x-cloneChars": 41,
+                        "x-originalChars": 41
+                      }
+                    }
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback",
+                  "inViewAmount",
+                  "once"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "bottom-up-build"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "useInView"
+                  },
+                  "inViewAmount": {
+                    "const": 0.35
+                  },
+                  "once": {
+                    "const": false
+                  },
+                  "reducedMotionFallback": {
+                    "const": "no-offset-opacity-only"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "security.matrix"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "eyebrow",
+                  "title",
+                  "lede",
+                  "quadrants"
+                ],
+                "properties": {
+                  "eyebrow": {
+                    "type": "string",
+                    "x-maxWords": 3,
+                    "x-cloneChars": 11,
+                    "x-originalChars": 13
+                  },
+                  "title": {
+                    "type": "string",
+                    "x-maxWords": 7,
+                    "x-cloneChars": 26,
+                    "x-originalChars": 26
+                  },
+                  "lede": {
+                    "type": "string",
+                    "x-maxWords": 19,
+                    "x-cloneChars": 81,
+                    "x-originalChars": 82
+                  },
+                  "quadrants": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "title",
+                        "body",
+                        "proof",
+                        "icon"
+                      ],
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "x-maxWords": 5,
+                          "x-cloneChars": 20
+                        },
+                        "body": {
+                          "type": "string",
+                          "x-maxWords": 22,
+                          "x-cloneChars": 103,
+                          "x-originalChars": 106
+                        },
+                        "proof": {
+                          "type": "string",
+                          "x-maxWords": 12,
+                          "x-cloneChars": 51,
+                          "x-originalChars": 48
+                        },
+                        "icon": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "assetRole"
+                          ],
+                          "properties": {
+                            "assetRole": {
+                              "allOf": [
+                                {
+                                  "$ref": "#/definitions/assetRole"
+                                },
+                                {
+                                  "enum": [
+                                    "stroke-icon"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "hover-wash-only"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "none"
+                  },
+                  "reducedMotionFallback": {
+                    "const": "transitions-none"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "closing.cta"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "eyebrow",
+                  "title",
+                  "lede",
+                  "cta",
+                  "illustration"
+                ],
+                "properties": {
+                  "eyebrow": {
+                    "type": "string",
+                    "x-maxWords": 3,
+                    "x-cloneChars": 7,
+                    "x-originalChars": 7
+                  },
+                  "title": {
+                    "type": "string",
+                    "x-maxWords": 7,
+                    "x-cloneChars": 30,
+                    "x-originalChars": 29
+                  },
+                  "lede": {
+                    "type": "string",
+                    "x-maxWords": 14,
+                    "x-cloneChars": 67,
+                    "x-originalChars": 67
+                  },
+                  "cta": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "href"
+                    ],
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "x-maxWords": 4,
+                        "x-cloneChars": 12,
+                        "x-originalChars": 12
+                      },
+                      "href": {
+                        "type": "string",
+                        "enum": [
+                          "#demo"
+                        ]
+                      }
+                    }
+                  },
+                  "illustration": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "allOf": [
+                          {
+                            "$ref": "#/definitions/assetRole"
+                          },
+                          {
+                            "enum": [
+                              "illustration-scene"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback",
+                  "inViewAmount",
+                  "once"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "progress-seat-sequence"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "useInView"
+                  },
+                  "inViewAmount": {
+                    "const": 0.45
+                  },
+                  "once": {
+                    "const": false
+                  },
+                  "loopPeriodMs": {
+                    "const": 5500
+                  },
+                  "reducedMotionFallback": {
+                    "const": "final-seated-state"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "chrome.footer"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "copyright",
+                  "links",
+                  "cookiesLabel"
+                ],
+                "properties": {
+                  "copyright": {
+                    "type": "string",
+                    "x-maxWords": 8,
+                    "x-cloneChars": 31,
+                    "x-originalChars": 31
+                  },
+                  "links": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "label",
+                        "href"
+                      ],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "x-maxWords": 2,
+                          "x-cloneChars": 7
+                        },
+                        "href": {
+                          "type": "string",
+                          "enum": [
+                            "/privacy-policy/",
+                            "/terms-of-service/"
+                          ]
+                        }
+                      }
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "cookiesLabel": {
+                    "type": "string",
+                    "x-maxWords": 2,
+                    "x-cloneChars": 7
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "none"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "none"
+                  },
+                  "reducedMotionFallback": {
+                    "const": "not-applicable-static"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "overlay.cookie-banner"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "label",
+                  "body",
+                  "privacyLinkLabel",
+                  "acceptLabel",
+                  "rejectLabel",
+                  "customizeLabel",
+                  "preferences"
+                ],
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "x-maxWords": 3,
+                    "x-cloneChars": 12
+                  },
+                  "body": {
+                    "type": "string",
+                    "x-maxWords": 23,
+                    "x-cloneChars": 94
+                  },
+                  "privacyLinkLabel": {
+                    "type": "string",
+                    "x-maxWords": 3,
+                    "x-cloneChars": 14
+                  },
+                  "acceptLabel": {
+                    "type": "string",
+                    "x-maxWords": 2,
+                    "x-cloneChars": 6
+                  },
+                  "rejectLabel": {
+                    "type": "string",
+                    "x-maxWords": 4,
+                    "x-cloneChars": 20
+                  },
+                  "customizeLabel": {
+                    "type": "string",
+                    "x-maxWords": 2,
+                    "x-cloneChars": 9
+                  },
+                  "preferences": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "title",
+                      "intro",
+                      "options",
+                      "saveLabel",
+                      "declineLabel",
+                      "allowLabel"
+                    ],
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "x-maxWords": 3,
+                        "x-cloneChars": 16
+                      },
+                      "title": {
+                        "type": "string",
+                        "x-maxWords": 7,
+                        "x-cloneChars": 23
+                      },
+                      "intro": {
+                        "type": "string",
+                        "x-maxWords": 20,
+                        "x-cloneChars": 93
+                      },
+                      "options": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "label",
+                            "description",
+                            "required"
+                          ],
+                          "properties": {
+                            "label": {
+                              "type": "string",
+                              "x-maxWords": 2,
+                              "x-cloneChars": 9
+                            },
+                            "description": {
+                              "type": "string",
+                              "x-maxWords": 19,
+                              "x-cloneChars": 72
+                            },
+                            "required": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                      },
+                      "saveLabel": {
+                        "type": "string",
+                        "x-maxWords": 3,
+                        "x-cloneChars": 12
+                      },
+                      "declineLabel": {
+                        "type": "string",
+                        "x-maxWords": 3,
+                        "x-cloneChars": 11
+                      },
+                      "allowLabel": {
+                        "type": "string",
+                        "x-maxWords": 3,
+                        "x-cloneChars": 9
+                      }
+                    }
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "none"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "none"
+                  },
+                  "reducedMotionFallback": {
+                    "const": "not-applicable-static"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "overlay.demo-dialog"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "label",
+                  "title",
+                  "intro",
+                  "fields",
+                  "consentLead",
+                  "consentLinks",
+                  "submitLabel",
+                  "sendingLabel",
+                  "errorMessage",
+                  "success",
+                  "submit"
+                ],
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "x-maxWords": 3,
+                    "x-cloneChars": 12
+                  },
+                  "title": {
+                    "type": "string",
+                    "x-maxWords": 3,
+                    "x-cloneChars": 11
+                  },
+                  "intro": {
+                    "type": "string",
+                    "x-maxWords": 18,
+                    "x-cloneChars": 77
+                  },
+                  "fields": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "fullName",
+                      "email",
+                      "subscribers",
+                      "coverage",
+                      "source"
+                    ],
+                    "properties": {
+                      "fullName": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "placeholder"
+                        ],
+                        "properties": {
+                          "placeholder": {
+                            "type": "string",
+                            "x-maxWords": 3,
+                            "x-cloneChars": 9
+                          }
+                        }
+                      },
+                      "email": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "placeholder"
+                        ],
+                        "properties": {
+                          "placeholder": {
+                            "type": "string",
+                            "x-maxWords": 3,
+                            "x-cloneChars": 13
+                          }
+                        }
+                      },
+                      "subscribers": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "label",
+                          "options"
+                        ],
+                        "properties": {
+                          "label": {
+                            "type": "string",
+                            "x-maxWords": 3,
+                            "x-cloneChars": 16
+                          },
+                          "options": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "x-maxWords": 3,
+                              "x-cloneChars": 14
+                            },
+                            "minItems": 6,
+                            "maxItems": 6
+                          }
+                        }
+                      },
+                      "coverage": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "placeholder"
+                        ],
+                        "properties": {
+                          "placeholder": {
+                            "type": "string",
+                            "x-maxWords": 3,
+                            "x-cloneChars": 15
+                          }
+                        }
+                      },
+                      "source": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "placeholder"
+                        ],
+                        "properties": {
+                          "placeholder": {
+                            "type": "string",
+                            "x-maxWords": 7,
+                            "x-cloneChars": 22
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "consentLead": {
+                    "type": "string",
+                    "x-maxWords": 7,
+                    "x-cloneChars": 27
+                  },
+                  "consentLinks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "label",
+                        "href"
+                      ],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "x-maxWords": 3,
+                          "x-cloneChars": 14
+                        },
+                        "href": {
+                          "type": "string",
+                          "enum": [
+                            "/privacy-policy/",
+                            "/terms-of-service/"
+                          ]
+                        }
+                      }
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "submitLabel": {
+                    "type": "string",
+                    "x-maxWords": 2,
+                    "x-cloneChars": 4
+                  },
+                  "sendingLabel": {
+                    "type": "string",
+                    "x-maxWords": 2,
+                    "x-cloneChars": 8
+                  },
+                  "errorMessage": {
+                    "type": "string",
+                    "x-maxWords": 8,
+                    "x-cloneChars": 37
+                  },
+                  "success": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "message",
+                      "closeLabel"
+                    ],
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "x-maxWords": 2,
+                        "x-cloneChars": 8
+                      },
+                      "message": {
+                        "type": "string",
+                        "x-maxWords": 7,
+                        "x-cloneChars": 29
+                      },
+                      "closeLabel": {
+                        "type": "string",
+                        "x-maxWords": 2,
+                        "x-cloneChars": 4
+                      }
+                    }
+                  },
+                  "submit": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "allOf": [
+                          {
+                            "$ref": "#/definitions/assetRole"
+                          },
+                          {
+                            "enum": [
+                              "form-submit-endpoint"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "none"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "none"
+                  },
+                  "reducedMotionFallback": {
+                    "const": "not-applicable-static"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "legal.header"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "logo",
+                  "eyebrow",
+                  "title",
+                  "updated",
+                  "placeholderNotice"
+                ],
+                "properties": {
+                  "logo": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "allOf": [
+                          {
+                            "$ref": "#/definitions/assetRole"
+                          },
+                          {
+                            "enum": [
+                              "brand-wordmark"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "eyebrow": {
+                    "type": "string",
+                    "x-maxWords": 2,
+                    "x-cloneChars": 5
+                  },
+                  "title": {
+                    "type": "string",
+                    "x-maxWords": 4,
+                    "x-cloneChars": 14
+                  },
+                  "updated": {
+                    "type": "string",
+                    "x-maxWords": 3,
+                    "x-cloneChars": 12
+                  },
+                  "placeholderNotice": {
+                    "type": "string",
+                    "x-maxWords": 9,
+                    "x-cloneChars": 60
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "none"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "none"
+                  },
+                  "reducedMotionFallback": {
+                    "const": "not-applicable-static"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "legal.body"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "copy",
+                  "intro",
+                  "sections",
+                  "contactEmail",
+                  "contactLead"
+                ],
+                "properties": {
+                  "copy": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "allOf": [
+                          {
+                            "$ref": "#/definitions/assetRole"
+                          },
+                          {
+                            "enum": [
+                              "legal-copy"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "intro": {
+                    "type": "string",
+                    "x-maxWords": 70,
+                    "x-cloneChars": 217
+                  },
+                  "sections": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "heading",
+                        "blocks"
+                      ],
+                      "properties": {
+                        "heading": {
+                          "type": "string",
+                          "x-maxWords": 6,
+                          "x-cloneChars": 22
+                        },
+                        "blocks": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "kind",
+                                  "text"
+                                ],
+                                "properties": {
+                                  "kind": {
+                                    "type": "string",
+                                    "const": "paragraph"
+                                  },
+                                  "text": {
+                                    "type": "string",
+                                    "x-maxWords": 50,
+                                    "x-cloneChars": 210
+                                  }
+                                },
+                                "title": "sections[].blocks[] kind=paragraph"
+                              },
+                              {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "kind",
+                                  "items"
+                                ],
+                                "properties": {
+                                  "kind": {
+                                    "type": "string",
+                                    "const": "list"
+                                  },
+                                  "items": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "x-maxWords": 28,
+                                      "x-cloneChars": 97
+                                    },
+                                    "minItems": 1,
+                                    "maxItems": 6
+                                  }
+                                },
+                                "title": "sections[].blocks[] kind=list"
+                              }
+                            ]
+                          },
+                          "minItems": 1,
+                          "maxItems": 4
+                        }
+                      }
+                    },
+                    "minItems": 1,
+                    "maxItems": 10,
+                    "description": "Derived design: observed 7 clauses in each placeholder doc; ceiling relaxed to 10 (not measured)."
+                  },
+                  "contactEmail": {
+                    "type": "string",
+                    "pattern": "^[^@\\s]+@acme\\.example$",
+                    "description": "Placeholder mailbox on the reserved .example domain only."
+                  },
+                  "contactLead": {
+                    "type": "string",
+                    "x-maxWords": 4,
+                    "x-cloneChars": 19
+                  }
+                }
+              },
+              "motion": {
+                "required": [
+                  "pattern",
+                  "trigger",
+                  "reducedMotionFallback"
+                ],
+                "properties": {
+                  "pattern": {
+                    "enum": [
+                      "none"
+                    ]
+                  },
+                  "trigger": {
+                    "const": "none"
+                  },
+                  "reducedMotionFallback": {
+                    "const": "not-applicable-static"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

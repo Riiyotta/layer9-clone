@@ -1,0 +1,30 @@
+{
+  "id": "isometric-stack-art",
+  "kind": "component",
+  "purpose": "Closing illustration: four dashed vertical lines behind four isometric slabs with a chip on top, 572x687 viewBox, masked top/bottom. Original drawing; springs drop each layer by its travel as progress p goes 0->1.",
+  "evidence": "measured-live",
+  "props": {
+    "seated": {
+      "type": "boolean",
+      "default": false,
+      "description": "True once progress p >= 0.92.",
+      "required": false
+    }
+  },
+  "assetRole": "illustration-scene",
+  "tokensUsed": [
+    "motion.spring.closing-chip",
+    "motion.spring.closing-layer",
+    "motion.spring.closing-glow",
+    "layout.canvas.closing-stack",
+    "motion.duration.closing.sweep"
+  ],
+  "usedBy": [
+    "closing.cta"
+  ],
+  "measuredFrom": [
+    "src/components/closing/StackArt.jsx:74",
+    "src/components/closing/geometry.js:7",
+    "CLONE_SPEC.md:358"
+  ]
+}

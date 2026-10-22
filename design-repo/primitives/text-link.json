@@ -1,0 +1,42 @@
+{
+  "id": "text-link",
+  "kind": "primitive",
+  "purpose": "Plain or underlined link. Footer links inherit colour and brighten to white 85% on hover (200ms); inline links are underlined at white 85%.",
+  "evidence": "measured-live",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "footer",
+        "inline"
+      ],
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "pattern": "^(/[a-z-]+/|#[a-z-]+|mailto:[^@\\s]+@acme\\.example)$"
+    }
+  },
+  "tokensUsed": [
+    "color.alpha.white.a500",
+    "color.alpha.white.a850",
+    "motion.duration.chrome.footer-link-color"
+  ],
+  "usedBy": [
+    "chrome.footer",
+    "overlay.demo-dialog",
+    "overlay.cookie-banner",
+    "legal.body"
+  ],
+  "measuredFrom": [
+    "src/styles/sections.css:337",
+    "src/components/DemoDialog.jsx:21",
+    "CLONE_SPEC.md:381"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "mobile-flow-row",
+  "kind": "component",
+  "purpose": "CSR mobile row (40px): status dot, mono system label, and a stall tag that becomes a green check + finding when routed.",
+  "evidence": "measured-live",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "tag": {
+      "type": "string",
+      "required": true,
+      "maxWords": 4
+    },
+    "finding": {
+      "type": "string",
+      "required": true,
+      "maxWords": 6
+    }
+  },
+  "tokensUsed": [
+    "color.accent.stop-orange",
+    "color.alpha.neon.a180"
+  ],
+  "usedBy": [
+    "csr.loop"
+  ],
+  "measuredFrom": [
+    "src/styles/sections.css:185",
+    "CLONE_SPEC.md:286"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$description": "Semantic roles: accent. Each role is a reference into the foundation catalogue (resolved in themes/dark.json).",
+  "accent": {
+    "neon": {
+      "ref": "color.accent.neon",
+      "usage": "NEON accent (persona 2, positive).",
+      "measuredFrom": [
+        "src/lib/tokens.js:7"
+      ]
+    },
+    "blink": {
+      "ref": "color.accent.blink",
+      "usage": "BLINK accent (persona 3, risk).",
+      "measuredFrom": [
+        "src/lib/tokens.js:8"
+      ]
+    },
+    "boost": {
+      "ref": "color.accent.boost",
+      "usage": "BOOST accent (persona 1).",
+      "measuredFrom": [
+        "src/lib/tokens.js:9"
+      ]
+    },
+    "alert": {
+      "ref": "color.accent.stop-orange",
+      "usage": "Stall / alert orange.",
+      "measuredFrom": [
+        "src/lib/tokens.js:10"
+      ]
+    },
+    "neon-border": {
+      "ref": "color.alpha.neon.a180",
+      "usage": "Security icon box border; CSR control shell border.",
+      "measuredFrom": [
+        "src/styles/sections.css:267"
+      ]
+    },
+    "neon-fill": {
+      "ref": "color.alpha.neon.a045",
+      "usage": "Security icon box fill.",
+      "measuredFrom": [
+        "src/styles/sections.css:269"
+      ]
+    }
+  }
+}

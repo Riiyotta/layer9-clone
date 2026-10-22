@@ -1,0 +1,74 @@
+{
+  "id": "pill",
+  "kind": "primitive",
+  "purpose": "Pill-shaped call-to-action link. Solid (white) or ghost (outline). The solid variant can carry the sweeping glimmer. Pills have no hover styles in the original or the clone.",
+  "evidence": "measured-live",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "solid",
+        "ghost"
+      ],
+      "default": "solid",
+      "required": false
+    },
+    "glimmer": {
+      "type": "boolean",
+      "default": false,
+      "description": "Sweeping highlight span (.l9pill-glim); used on the solid hero pill only.",
+      "required": false
+    },
+    "label": {
+      "type": "string",
+      "description": "Visible label.",
+      "required": true,
+      "maxWords": 4,
+      "cloneChars": 12
+    },
+    "href": {
+      "type": "string",
+      "default": "#demo",
+      "description": "Link target; '#demo' opens the demo dialog.",
+      "required": false
+    }
+  },
+  "states": [
+    "default",
+    "no-hover (by design)"
+  ],
+  "motion": {
+    "glimmer": {
+      "periodMs": 3400,
+      "sweepMs": 1870,
+      "restMs": 1530,
+      "easing": "linear (QA correction; spec text says EASE)",
+      "reducedMotion": "animation none"
+    }
+  },
+  "responsive": {
+    "fontSize": "17px at all widths; wraps in a flex row (hero CTA row has flex-wrap)"
+  },
+  "tokensUsed": [
+    "color.neutral.white",
+    "color.surface.page",
+    "color.alpha.white.a880",
+    "color.alpha.white.a250",
+    "radius.r999",
+    "typography.fontSize.px17",
+    "typography.fontWeight.w500",
+    "typography.fontWeight.w400",
+    "component.pill.padding",
+    "component.pill.glimmer.gradient",
+    "motion.duration.hero.pill-glimmer-period"
+  ],
+  "usedBy": [
+    "hero.episode",
+    "closing.cta"
+  ],
+  "measuredFrom": [
+    "src/components/shared/Pill.jsx:17",
+    "CLONE_SPEC.md:67",
+    "src/styles/sections.css:16"
+  ]
+}

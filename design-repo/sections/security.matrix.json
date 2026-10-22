@@ -1,0 +1,228 @@
+{
+  "id": "security.matrix",
+  "kind": "section",
+  "purpose": "Anchor #security. Server-rendered static section: header and a 940px bordered 2x2 matrix of four quadrants (icon box, index, title, body, mono proof line). Only motion is a hover wash (pointer:fine devices). Single column at <=720px.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "anchorId": "security",
+    "requiredOverlays": [],
+    "allowedRoutes": [
+      "/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "eyebrow",
+      "title",
+      "lede",
+      "quadrants"
+    ],
+    "properties": {
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 3,
+        "cloneChars": 11,
+        "originalChars": 13,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4238"
+        ]
+      },
+      "title": {
+        "type": "string",
+        "maxWords": 7,
+        "cloneChars": 26,
+        "originalChars": 26,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4261"
+        ]
+      },
+      "lede": {
+        "type": "string",
+        "maxWords": 19,
+        "cloneChars": 81,
+        "originalChars": 82,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4284"
+        ]
+      },
+      "quadrants": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "body",
+            "proof",
+            "icon"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "maxWords": 5,
+              "cloneChars": 20
+            },
+            "body": {
+              "type": "string",
+              "maxWords": 22,
+              "cloneChars": 103,
+              "originalChars": 106,
+              "measuredFrom": [
+                "recon/text-roles-1280.json:4353"
+              ]
+            },
+            "proof": {
+              "type": "string",
+              "maxWords": 12,
+              "cloneChars": 51,
+              "originalChars": 48,
+              "measuredFrom": [
+                "recon/text-roles-1280.json:4376"
+              ]
+            },
+            "icon": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assetRole"
+              ],
+              "properties": {
+                "assetRole": {
+                  "type": "string",
+                  "enum": [
+                    "stroke-icon"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "minItems": 4,
+        "maxItems": 4
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Quadrant index is auto-generated 01-04 (String(i+1).padStart(2,'0'))",
+      "citations": [
+        "src/components/Security.jsx:85"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "hover-wash-only"
+    ],
+    "primaryTrigger": {
+      "type": "none"
+    },
+    "triggerNotes": "No JS motion and no entrance. Hover (hover:hover and pointer:fine only): quadrant bg white 1.8%, icon border/fill brighten, 220ms ease.",
+    "easing": "ease (220ms)",
+    "requiredReducedMotionFallback": "transitions-none",
+    "reducedMotionDetail": "prefers-reduced-motion sets transition none on the quadrant and icon box.",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.security.hover"
+    ],
+    "measuredFrom": [
+      "CLONE_SPEC.md:321",
+      "src/styles/sections.css:304",
+      "src/styles/sections.css:322-324",
+      "CLONE_SPEC.md:336"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.ledes-wrap",
+      "from": "nowrap",
+      "to": "normal",
+      "change": "Lede nowrap -> normal.",
+      "measuredFrom": [
+        "src/styles/sections.css:230"
+      ]
+    },
+    {
+      "breakpoint": "breakpoint.phone",
+      "from": "2 columns",
+      "to": "1 column",
+      "change": "2x2 grid becomes one column; matrix radius 16 -> 14; quadrant padding clamp(28px,3vw,36px) -> 26px 24px, min-height auto; right border removed, last bottom border removed.",
+      "measuredFrom": [
+        "src/styles/sections.css:312",
+        "src/styles/sections.css:315",
+        "CLONE_SPEC.md:181"
+      ]
+    },
+    {
+      "breakpoint": "breakpoint.hover-fine",
+      "change": "Hover wash only on fine-pointer hover devices.",
+      "measuredFrom": [
+        "src/styles/sections.css:304"
+      ]
+    }
+  ],
+  "components": [
+    "section-header",
+    "security-quadrant"
+  ],
+  "primitives": [
+    "icon-box",
+    "stroke-icon",
+    "eyebrow"
+  ],
+  "assetRoles": [
+    "stroke-icon"
+  ],
+  "example": {
+    "eyebrow": "05 · SAFETY",
+    "title": "AI your network can trust.",
+    "lede": "Guardrails for real production work, so your team can hand tasks to AI with calm.",
+    "quadrants": [
+      {
+        "title": "Policy-bound AI",
+        "body": "Each action an agent takes is checked against your policies, and pauses for sign-off wherever you ask.",
+        "proof": "maintenance windows · sign-off flows · scoped edits",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "title": "Encrypted end to end",
+        "body": "Traffic and stored records are encrypted with modern, audited ciphers. Nothing ever sits in plain text.",
+        "proof": "TLS 1.2+ on the edge · mTLS inside · AES-256 disks",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "title": "Your data only",
+        "body": "Model vendors keep none of your subscriber records and never train on them. Ownership stays with you.",
+        "proof": "no retention · never used for model training",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "title": "Tenant separation",
+        "body": "Each customer runs in its own sealed environment with minimal access, and every action is logged.",
+        "proof": "sealed tenants · SSO and SCIM · append-only log",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      }
+    ]
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:321",
+    "src/pages/Home.jsx:17",
+    "src/components/Security.jsx:65-96",
+    "src/components/Security.jsx:67"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "monogram-tile",
+  "kind": "primitive",
+  "purpose": "Neutral white two-letter monogram standing in for a vendor logo inside a bordered tile. Never a real vendor mark.",
+  "evidence": "measured-live",
+  "props": {
+    "letters": {
+      "type": "string",
+      "description": "Two uppercase letters.",
+      "required": true,
+      "pattern": "^[A-Z]{2}$"
+    },
+    "assetRole": {
+      "type": "string",
+      "enum": [
+        "vendor-logo-tile"
+      ],
+      "required": true
+    }
+  },
+  "assetRole": "vendor-logo-tile",
+  "tokensUsed": [
+    "typography.fontFamily.head",
+    "typography.fontSize.px17",
+    "color.neutral.white",
+    "component.tile.vendor.monogramFontSize",
+    "component.tile.border"
+  ],
+  "usedBy": [
+    "integrations.grid"
+  ],
+  "measuredFrom": [
+    "src/components/integrations/Monogram.jsx:5",
+    "src/components/integrations/Monogram.jsx:3"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$description": "Component-scoped tokens: filter-pill. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "filter-pill": {
+    "fontSize": {
+      "value": 12,
+      "measuredFrom": [
+        "src/components/Integrations.jsx:55",
+        "CLONE_SPEC.md:198"
+      ]
+    },
+    "letterSpacing": {
+      "value": "0.12em",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:57",
+        "CLONE_SPEC.md:198"
+      ]
+    },
+    "padding": {
+      "value": "9px 18px",
+      "measuredFrom": [
+        "src/styles/sections.css:50",
+        "CLONE_SPEC.md:198"
+      ]
+    },
+    "padding.phone": {
+      "value": "12px 16px",
+      "measuredFrom": [
+        "src/styles/sections.css:55",
+        "CLONE_SPEC.md:198"
+      ]
+    },
+    "border": {
+      "value": "1px solid rgba(255,255,255,0.14)",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:59",
+        "CLONE_SPEC.md:198"
+      ]
+    },
+    "color": {
+      "value": "rgba(255,255,255,0.6)",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:60",
+        "CLONE_SPEC.md:198"
+      ]
+    },
+    "gap": {
+      "value": 10,
+      "measuredFrom": [
+        "src/components/Integrations.jsx:41",
+        "CLONE_SPEC.md:197"
+      ]
+    }
+  }
+}

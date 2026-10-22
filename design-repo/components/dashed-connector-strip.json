@@ -1,0 +1,33 @@
+{
+  "id": "dashed-connector-strip",
+  "kind": "component",
+  "purpose": "1120x26 SVG strip with one vertical dashed line centred over each card; lines fade in staggered and march while in view.",
+  "evidence": "measured-live",
+  "props": {
+    "count": {
+      "type": "number",
+      "enum": [
+        3
+      ],
+      "required": true
+    },
+    "march": {
+      "type": "boolean",
+      "default": true,
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "component.platform.connector.dash",
+    "component.platform.connector.strokeWidth",
+    "component.platform.connector.opacity",
+    "motion.duration.platform.march"
+  ],
+  "usedBy": [
+    "platform.stack"
+  ],
+  "measuredFrom": [
+    "src/components/platform/Connectors.jsx:5-38",
+    "CLONE_SPEC.md:299"
+  ]
+}

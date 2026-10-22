@@ -1,0 +1,347 @@
+/* Scoped section styles (layout/motion rules measured from the reference). */
+
+				.l9h2-caret{animation:l9h2Caret 0.9s step-end infinite;}
+				@keyframes l9h2Caret{0%,100%{opacity:1}50%{opacity:0}}
+				.l9h2-bad{animation:l9h2Bad 1.8s cubic-bezier(0.4,0,0.2,1) infinite;}
+				@keyframes l9h2Bad{0%,100%{opacity:1}50%{opacity:0.45}}
+				/* phones: the laptop composition lands at ~0.3× — unreadable
+				   texture. Swap the device: the same episode runs in a phone
+				   frame, recomposed portrait at natural scale. */
+				.l9h2-phone{display:none}
+				@media (max-width: 720px){.l9h2-laptop{display:none}.l9h2-phone{display:flex;justify-content:center}}
+				@media (prefers-reduced-motion: reduce){.l9h2-caret,.l9h2-bad{animation:none!important;}}
+			
+/* ---------- */
+
+				.l9pill-glim{position:absolute;top:0;bottom:0;width:46%;pointer-events:none;
+					background:linear-gradient(105deg,transparent,rgba(17,17,17,0.14) 50%,transparent);
+					animation:l9PillGlim 3.4s cubic-bezier(0.4,0,0.2,1) infinite;}
+				@keyframes l9PillGlim{0%{left:-50%}55%,100%{left:105%}}
+				@media (prefers-reduced-motion: reduce){.l9pill-glim{animation:none!important;}}
+			
+/* ---------- */
+
+				.l9uc-count{transform:translateX(-100%);animation:l9ucCount 7000ms linear forwards}
+				@keyframes l9ucCount{to{transform:translateX(0)}}
+				.l9uc-card:hover{border-color:rgba(255,255,255,0.26)!important}
+				.l9uc-mobile{display:none}
+				@media (max-width: 720px){
+					.l9uc-stage{display:none}
+					.l9uc-mobile{display:block;margin-top:28px}
+					.l9uc-m-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+					.l9uc-m-pillar{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 6px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.02);cursor:pointer;transition:border-color 350ms, background 350ms}
+					/* minmax(0,1fr): the rows hold nowrap text, and a plain grid
+					   column's min-content floor would widen it past the viewport */
+					.l9uc-m-prompts{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;margin-top:10px}
+					/* one-line rows; only the ACTIVE prompt expands to its full
+					   question — the whole rail + prompts + answer has to land
+					   inside one phone screen */
+					.l9uc-m-prompt{display:flex;flex-direction:column;gap:4px;min-width:0;max-width:100%;text-align:left;padding:10px 12px;border-radius:11px;cursor:pointer;transition:border-color 300ms ease, background 300ms ease}
+					.l9uc-m-dash{margin-top:10px;height:400px;display:flex;flex-direction:column}
+					/* taps shouldn't leave the browser's focus ring behind — keep
+					   the outline for keyboard focus only */
+					.l9uc-m-pillar:focus:not(:focus-visible),.l9uc-m-prompt:focus:not(:focus-visible){outline:none}
+				}
+				@media (prefers-reduced-motion: reduce){.l9uc-count{animation:none!important}}
+			
+/* ---------- */
+
+				.l9int-grid{display:grid;grid-template-columns:repeat(9,1fr);position:relative}
+				.l9int-pill{padding:9px 18px}
+				/* phones: 9 abreast leaves ~24px logos — reflow the same 45 chips
+				   five abreast, and give the pills a real touch target */
+				@media (max-width: 720px){
+					.l9int-grid{grid-template-columns:repeat(5,1fr)}
+					.l9int-pill{padding:12px 16px}
+				}
+			
+/* ---------- */
+
+				.l9ctr-section {
+					position: relative;
+					width: 100%;
+					padding: clamp(84px, 8.5vw, 148px) 24px;
+					overflow: hidden;
+				}
+				.l9ctr-section::before {
+					content: "";
+					position: absolute;
+					left: 50%;
+					top: 44%;
+					width: min(900px, 76vw);
+					height: 520px;
+					transform: translate(-50%, -30%);
+					background: radial-gradient(ellipse, rgba(190,108,243,0.055), rgba(46,235,133,0.025) 42%, transparent 72%);
+					filter: blur(42px);
+					pointer-events: none;
+				}
+				.l9ctr-intro { position: relative; z-index: 1; }
+				/* the lede reads as ONE line on desktop; wraps again below 1080 */
+				.l9ctr-lede { white-space: nowrap; }
+				@media (max-width: 1080px) { .l9ctr-lede { white-space: normal; } }
+				.l9ctr-frame {
+					position: relative;
+					z-index: 1;
+					width: 100%;
+					max-width: 1216px;
+					margin: clamp(42px, 5vw, 64px) auto 0;
+					border: 1px solid rgba(255,255,255,0.13);
+					border-radius: 18px;
+					background: linear-gradient(145deg, rgba(22,22,24,0.97), rgba(12,13,14,0.98));
+					box-shadow: 0 36px 100px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.025);
+					overflow: hidden;
+				}
+				.l9ctr-frame::before {
+					content: "";
+					position: absolute;
+					inset: 58px 0 54px;
+					background-image: linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+					background-size: 48px 48px;
+					mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+					pointer-events: none;
+				}
+				.l9ctr-frame-head {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					gap: 20px;
+					min-height: 60px;
+					padding: 0 22px;
+					border-bottom: 1px solid rgba(255,255,255,0.1);
+					background: rgba(255,255,255,0.018);
+				}
+				.l9ctr-frame-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+				.l9ctr-frame-brand strong { font-size: 12.5px; font-weight: 550; color: rgba(255,255,255,0.88); }
+				.l9ctr-frame-brand span:last-child { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); text-transform: uppercase; white-space: nowrap; }
+				.l9ctr-mark { width: 27px; height: 27px; display: grid; place-items: center; flex: none; border-radius: 7px; background: #f6f7f6; color: #090909; font-family: var(--font-head); font-size: 17px; font-weight: 650; }
+				.l9ctr-frame-state { display: flex; align-items: center; gap: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); text-transform: uppercase; white-space: nowrap; transition: color 320ms; }
+				.l9ctr-frame-state i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 10%, transparent); }
+				.l9ctr-stage { position: relative; width: calc(100% - 48px); max-width: 1080px; margin: 0 auto; aspect-ratio: 1080 / 542; }
+				.l9ctr-mode-label { position: absolute; left: 8px; top: 44px; display: grid; gap: 5px; }
+				.l9ctr-mode-label strong { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; color: rgba(255,255,255,0.6); transition: color 320ms; }
+				.l9ctr-mode-label span { font-size: 11px; color: rgba(255,255,255,0.36); }
+				.l9ctr-case-label { position: absolute; right: 8px; top: 46px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; letter-spacing: 0.11em; color: rgba(255,255,255,0.32); text-transform: uppercase; }
+				.l9ctr-system-tile { overflow: hidden; }
+				.l9ctr-system-result { position: relative; width: 100%; min-width: 0; text-align: center; }
+				.l9ctr-system-result .l9ctr-system-check { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: #2EEB85; font-size: 8.5px; line-height: 1; }
+				.l9ctr-system-result .l9ctr-system-finding { display: block; max-width: 100%; overflow: hidden; font-size: 8.25px; letter-spacing: 0.025em; white-space: nowrap; }
+				.l9ctr-control-shell {
+					position: absolute;
+					pointer-events: none;
+					box-sizing: border-box;
+					border: 1px solid rgba(46,235,133,0.18);
+					border-radius: 15px;
+					background: linear-gradient(90deg, rgba(46,235,133,0.035), rgba(46,235,133,0.012) 34%, rgba(255,255,255,0.008));
+					box-shadow: inset 22px 0 42px rgba(46,235,133,0.025), 0 12px 34px rgba(0,0,0,0.12);
+				}
+				.l9ctr-control-label {
+					position: absolute;
+					left: 24px;
+					top: -7px;
+					display: flex;
+					align-items: center;
+					gap: 7px;
+					padding: 0 8px;
+					background: #101112;
+					font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+					font-size: 8px;
+					line-height: 13px;
+					letter-spacing: 0.12em;
+					color: rgba(46,235,133,0.78);
+					text-transform: uppercase;
+					white-space: nowrap;
+				}
+				.l9ctr-control-label i { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.55); box-shadow: none; }
+				.l9ctr-frame-foot {
+					position: relative;
+					display: grid;
+					grid-template-columns: repeat(3, auto) 1fr;
+					align-items: center;
+					gap: clamp(18px, 3vw, 42px);
+					min-height: 56px;
+					padding: 0 22px;
+					border-top: 1px solid rgba(255,255,255,0.1);
+					background: rgba(255,255,255,0.014);
+				}
+				.l9ctr-metric { display: flex; align-items: baseline; gap: 7px; white-space: nowrap; }
+				.l9ctr-metric strong { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.9); }
+				.l9ctr-metric span { font-size: 9.5px; color: rgba(255,255,255,0.42); }
+				.l9ctr-audit { justify-self: end; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.5px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.28); }
+				.l9ctr-mobile { display: none; position: relative; padding: 20px 16px 24px; }
+				.l9ctr-caret{animation:l9ctrCaret 0.9s step-end infinite;}
+				@keyframes l9ctrCaret{0%,100%{opacity:1}50%{opacity:0}}
+				@media (max-width: 720px) {
+					.l9ctr-frame { border-radius: 14px; }
+					/* compact chrome + rows: the head, five checks, answer, and
+					   metrics foot have to land inside one phone screen */
+					.l9ctr-frame-head { align-items: flex-start; flex-direction: column; gap: 7px; min-height: 0; padding: 11px 14px; }
+					.l9ctr-frame-brand span:last-child { white-space: normal; }
+					.l9ctr-stage { display: none; }
+					.l9ctr-mobile { display: block; padding: 14px 14px 16px; }
+					.l9ctr-mobile-question { padding: 11px 12px; border: 1px solid rgba(255,255,255,0.14); border-radius: 11px; background: #0A0B0C; font-size: 13.5px; line-height: 1.45; }
+					.l9ctr-mobile-flow { position: relative; display: grid; gap: 6px; margin-top: 10px; }
+					.l9ctr-mobile-flow::before { content: ""; position: absolute; left: 14px; top: 14px; bottom: 14px; width: 1px; background: rgba(255,96,46,0.25); transition: background 320ms; }
+					.l9ctr-mobile-row { position: relative; display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px; min-height: 40px; padding: 5px 10px; border: 1px solid rgba(255,255,255,0.1); border-radius: 9px; background: #111214; transition: border-color 320ms; }
+					.l9ctr-mobile-row i { position: relative; z-index: 1; width: 9px; height: 9px; margin-left: 4px; border-radius: 50%; border: 1px solid #FF5722; background: #111214; }
+					.l9ctr-mobile-row strong { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.8); }
+					.l9ctr-mobile-row span { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.5px; letter-spacing: 0.05em; color: #FF5722; text-align: right; }
+					.l9ctr-mobile-answer { margin-top: 10px; padding: 12px 13px; border: 1px solid rgba(46,235,133,0.3); border-radius: 11px; background: rgba(46,235,133,0.06); font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.88); opacity: 0; transform: translateY(6px); transition: opacity 350ms, transform 350ms; }
+					/* one row of three metrics — number over label reads fine at
+					   this width, and the stacked list cost ~60px */
+					.l9ctr-frame-foot { grid-template-columns: repeat(3, 1fr); gap: 10px; min-height: 0; padding: 10px 14px; }
+					.l9ctr-metric { display: grid; gap: 2px; white-space: normal; }
+					.l9ctr-metric span { font-size: 9px; }
+					.l9ctr-audit { display: none; }
+				}
+				@media (prefers-reduced-motion: reduce){.l9ctr-caret{animation:none!important;}}
+			
+/* ---------- */
+
+				.l9dp-march{animation:l9dpMarch 1.6s linear infinite;}
+				@keyframes l9dpMarch{from{stroke-dashoffset:0}to{stroke-dashoffset:-8.14}}
+				@media (prefers-reduced-motion: reduce){.l9dp-march{animation:none!important;}}
+				/* the lede reads as ONE line on desktop; wraps again below 1080 */
+				.l9dp-lede{white-space:nowrap;}
+				@media (max-width: 1080px){.l9dp-lede{white-space:normal;}}
+				.l9dp-row{display:flex;gap:12px;align-items:stretch;}
+				@media (max-width: 760px){
+					.l9dp-row{flex-direction:column;gap:10px;}
+					/* phones: the stack keeps its three layers but sheds the
+					   desktop-scale padding (!important outranks the inline
+					   styles that carry the desktop values) */
+					.l9dp-stack{margin-top:32px!important;}
+					.l9dp-top{padding:16px!important;gap:10px!important;min-height:0!important;}
+					.l9dp-top-title{font-size:17px!important;}
+					/* centered rows — the ragged left wrap left single chips
+					   stranded and read as an accident */
+					.l9dp-chips{gap:6px!important;justify-content:center;}
+					.l9dp-chip{padding:5px 10px!important;font-size:10.5px!important;}
+					.l9dp-card{padding:14px 16px!important;}
+					.l9dp-slab{padding:16px!important;gap:14px!important;}
+					.l9dp-mark,.l9dp-mark svg{width:42px!important;height:42px!important;}
+					.l9dp-slab-line{font-size:15px!important;margin-top:4px!important;}
+				}
+			
+/* ---------- */
+
+				/* the lede reads as ONE line on desktop; wraps again below 1080 */
+				.l9sec-lede{white-space:nowrap;}
+				@media (max-width: 1080px){.l9sec-lede{white-space:normal;}}
+			
+/* ---------- */
+
+					.l9-security-matrix {
+						display: grid;
+						grid-template-columns: repeat(2, minmax(0, 1fr));
+						max-width: 940px;
+						margin: clamp(44px, 5vw, 64px) auto 0;
+						overflow: hidden;
+						border: 1px solid;
+						border-radius: 16px;
+						background: rgba(255, 255, 255, 0.014);
+						box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 28px 90px rgba(0, 0, 0, 0.16);
+					}
+					.l9-security-quadrant {
+						min-width: 0;
+						min-height: 236px;
+						padding: clamp(28px, 3vw, 36px);
+						display: flex;
+						flex-direction: column;
+						background: transparent;
+						transition: background-color 220ms ease;
+					}
+					.l9-security-quadrant:nth-child(odd) { border-right: 1px solid rgba(255, 255, 255, 0.085); }
+					.l9-security-quadrant:nth-child(-n + 2) { border-bottom: 1px solid rgba(255, 255, 255, 0.085); }
+					.l9-security-topline {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						margin-bottom: 20px;
+					}
+					.l9-security-icon {
+						width: 36px;
+						height: 36px;
+						display: grid;
+						place-items: center;
+						border: 1px solid rgba(46, 235, 133, 0.18);
+						border-radius: 9px;
+						background: rgba(46, 235, 133, 0.045);
+						transition: border-color 220ms ease, background-color 220ms ease;
+					}
+					.l9-security-icon svg { display: block; }
+					.l9-security-index {
+						font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+						font-size: 10px;
+						line-height: 1;
+						letter-spacing: 0.14em;
+						color: rgba(255, 255, 255, 0.28);
+					}
+					.l9-security-quadrant h3 {
+						margin: 0;
+						font-size: 18px;
+						font-weight: 500;
+						line-height: 1.25;
+						color: #fff;
+					}
+					.l9-security-quadrant p {
+						max-width: 46ch;
+						margin: 12px 0 24px;
+						font-size: 15px;
+						line-height: 1.55;
+						color: rgba(255,255,255,0.75);
+					}
+					.l9-security-proof {
+						margin-top: auto;
+						padding-top: 15px;
+						border-top: 1px solid rgba(255, 255, 255, 0.07);
+						font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+						font-size: 10.5px;
+						line-height: 1.45;
+						letter-spacing: 0.1em;
+						color: rgba(255,255,255,0.55);
+					}
+					@media (hover: hover) and (pointer: fine) {
+						.l9-security-quadrant:hover { background: rgba(255, 255, 255, 0.018); }
+						.l9-security-quadrant:hover .l9-security-icon {
+							border-color: rgba(46, 235, 133, 0.28);
+							background: rgba(46, 235, 133, 0.065);
+						}
+					}
+					@media (max-width: 720px) {
+						.l9-security-matrix { grid-template-columns: 1fr; border-radius: 14px; }
+						.l9-security-quadrant {
+							min-height: auto;
+							padding: 26px 24px;
+							border-right: 0 !important;
+							border-bottom: 1px solid rgba(255, 255, 255, 0.085);
+						}
+						.l9-security-quadrant:last-child { border-bottom: 0; }
+						.l9-security-quadrant p { margin-bottom: 22px; }
+					}
+					@media (prefers-reduced-motion: reduce) {
+						.l9-security-quadrant, .l9-security-icon { transition: none !important; }
+					}
+				
+/* ---------- */
+
+				.l9cc-stage{position:relative;height:min(100%, 66vh);aspect-ratio:572/687}
+				/* phones: the height-driven box (66vh ≈ 446px wide) overflows a
+				   375px viewport and crops the stack at both edges — drive the
+				   size from the width instead so the art fits and centers */
+				@media (max-width: 720px){.l9cc-stage{height:auto;width:100%;max-width:420px}}
+			
+/* ---------- */
+
+				.l9-footer-links a { color: inherit; text-decoration: none; transition: color 200ms; }
+				.l9-footer-links a:hover { color: rgba(255,255,255,0.85); }
+				/* inflate the link hit areas to ~44px without moving the text —
+				   the padding is clawed back by the negative margin */
+				.l9-footer-links a, .l9-footer-links button { padding: 13px 4px; margin: -13px -4px; }
+			
+/* ---------- */
+
+				dialog::backdrop { background: rgba(0,0,0,0.62); }
+				.l9demo-field::placeholder { color: rgba(255,255,255,0.38); }
+				.l9demo-field:focus { border-bottom-color: rgba(255,255,255,0.7) !important; }
+			

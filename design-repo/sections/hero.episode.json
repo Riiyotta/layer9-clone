@@ -1,0 +1,652 @@
+{
+  "id": "hero.episode",
+  "kind": "section",
+  "purpose": "First section of the home page: centred logo, eyebrow, H1, two CTA pills, then a laptop (phone at <=720px) whose screen replays a looping five-prompt typing episode (prompt -> map reveal -> dashboard -> spreadsheet -> email -> schedule). No navbar: the logo is the only chrome and scrolls away.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "mustBeFirst": true,
+    "requiredOverlays": [
+      "overlay.demo-dialog"
+    ],
+    "allowedRoutes": [
+      "/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "logo",
+      "eyebrow",
+      "headline",
+      "primaryCta",
+      "secondaryCta",
+      "episode"
+    ],
+    "properties": {
+      "logo": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetRole"
+        ],
+        "properties": {
+          "assetRole": {
+            "type": "string",
+            "enum": [
+              "brand-wordmark"
+            ]
+          }
+        }
+      },
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 5,
+        "cloneChars": 19,
+        "originalChars": 19,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:6"
+        ]
+      },
+      "headline": {
+        "type": "string",
+        "maxWords": 8,
+        "cloneChars": 37,
+        "originalChars": 37,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:29"
+        ]
+      },
+      "primaryCta": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxWords": 4,
+            "cloneChars": 10,
+            "originalChars": 10,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:52"
+            ]
+          },
+          "href": {
+            "type": "string",
+            "enum": [
+              "#demo"
+            ]
+          }
+        }
+      },
+      "secondaryCta": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxWords": 4,
+            "cloneChars": 12,
+            "originalChars": 12,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:75"
+            ]
+          },
+          "href": {
+            "type": "string",
+            "enum": [
+              "#use-cases"
+            ]
+          }
+        }
+      },
+      "episode": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "promptPlaceholder",
+          "prompts",
+          "mapBasemap",
+          "scene",
+          "callouts",
+          "smallCallouts",
+          "dashboard",
+          "schedules"
+        ],
+        "properties": {
+          "promptPlaceholder": {
+            "type": "string",
+            "maxWords": 8,
+            "cloneChars": 34,
+            "originalChars": 32,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:1018"
+            ]
+          },
+          "prompts": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxWords": 15,
+              "cloneChars": 64
+            },
+            "minItems": 5,
+            "maxItems": 5,
+            "description": "Exactly five typed prompts in order: churn, dashboard, spreadsheet, email, schedule (spec lengths c39, c64, c37, c39, c48)."
+          },
+          "mapBasemap": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "assetRole"
+            ],
+            "properties": {
+              "assetRole": {
+                "type": "string",
+                "enum": [
+                  "map-basemap-tile"
+                ]
+              }
+            }
+          },
+          "scene": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "assetRole"
+            ],
+            "properties": {
+              "assetRole": {
+                "type": "string",
+                "enum": [
+                  "illustration-scene"
+                ]
+              }
+            }
+          },
+          "callouts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "text",
+                "tone"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "maxWords": 9,
+                  "cloneChars": 50
+                },
+                "tone": {
+                  "type": "string",
+                  "enum": [
+                    "elevated",
+                    "critical"
+                  ]
+                }
+              }
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "smallCallouts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "text"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "maxWords": 5,
+                  "cloneChars": 19
+                }
+              }
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "dashboard": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "kpis",
+              "townBars",
+              "driverBars"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "maxWords": 5,
+                "cloneChars": 25
+              },
+              "kpis": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "value",
+                    "sub",
+                    "tone"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "maxWords": 3,
+                      "cloneChars": 12
+                    },
+                    "value": {
+                      "type": "string",
+                      "maxWords": 2,
+                      "cloneChars": 2
+                    },
+                    "sub": {
+                      "type": "string",
+                      "maxWords": 5,
+                      "cloneChars": 14
+                    },
+                    "tone": {
+                      "type": "string",
+                      "enum": [
+                        "default",
+                        "critical"
+                      ]
+                    }
+                  }
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "townBars": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "count"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "maxWords": 3,
+                      "cloneChars": 11
+                    },
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "driverBars": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "count"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "maxWords": 3,
+                      "cloneChars": 14
+                    },
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "minItems": 4,
+                "maxItems": 4
+              }
+            }
+          },
+          "schedules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "to",
+                "cadence"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "maxWords": 4,
+                  "cloneChars": 20
+                },
+                "to": {
+                  "type": "string",
+                  "maxWords": 3,
+                  "cloneChars": 13
+                },
+                "cadence": {
+                  "type": "string",
+                  "maxWords": 4,
+                  "cloneChars": 15
+                },
+                "isNew": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "minItems": 5,
+            "maxItems": 5
+          }
+        }
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Spreadsheet, email-client and schedule panel body copy (fictional names, subjects, row values)",
+      "citations": [
+        "src/components/hero/data.js:107",
+        "src/components/hero/panels.jsx:234"
+      ]
+    },
+    {
+      "item": "Phone composition has its own callout copy (2 large, 2 small) and ambient/risk dot sets",
+      "citations": [
+        "src/components/hero/data.js:97",
+        "src/components/hero/data.js:63"
+      ]
+    },
+    {
+      "item": "Ambient dots: seeded LCG (seed 41, 16807 mod 2^31-1), 8 clusters; risk dots: 16 BLINK + 2 critical; dots inside x 470-700, y 330-400 dropped",
+      "citations": [
+        "src/components/hero/data.js:49",
+        "src/components/hero/data.js:78",
+        "CLONE_SPEC.md:81"
+      ]
+    },
+    {
+      "item": "Map: zoom 12, centre lat 30.0035, x-fraction 0.24494805555555554, 7x5 tiles (3x4 on phone)",
+      "citations": [
+        "src/components/hero/data.js:36",
+        "CLONE_SPEC.md:80"
+      ]
+    },
+    {
+      "item": "Panel chrome strings such as RISK BY TOWN, TOP 4 DRIVERS, KEY INSIGHT, SOURCES line, GENERATING/LIVE badges, status-bar time",
+      "citations": [
+        "src/components/hero/panels.jsx:136",
+        "src/components/Hero.jsx:265"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "typing-episode-loop"
+    ],
+    "primaryTrigger": {
+      "type": "useInView",
+      "inViewAmount": 0.3,
+      "once": false
+    },
+    "triggerNotes": "Loops while >=30% in view (not once). Out of view the episode pauses where it is and resumes on return.",
+    "loopPeriodMs": 21300,
+    "loopPeriodCodeMs": 21012,
+    "loopPeriodNote": "QA-corrected period ~21.3s (spec text says ~21.0s); the code constants sum to 21012ms (227 chars x 26ms + 5 x 350ms + 13360ms of holds).",
+    "phases": [
+      "type",
+      "reveal",
+      "type2",
+      "dash",
+      "type3",
+      "excel",
+      "type4",
+      "email",
+      "type5",
+      "sched",
+      "reset"
+    ],
+    "holdMs": {
+      "reveal": 1600,
+      "dash": 2400,
+      "excel": 2400,
+      "email": 2200,
+      "sched": 4200,
+      "reset": 560,
+      "typeHold": 350
+    },
+    "typingMsPerChar": {
+      "code": 26,
+      "measuredQa": 27
+    },
+    "easing": "motion.easing.ease",
+    "requiredReducedMotionFallback": "final-state-no-timers",
+    "reducedMotionDetail": "Prompt bar shows the 5th prompt; dashboard, spreadsheet, email and schedule panels are all shown in final position; callouts hidden; no timers. CSS caret and risk-dot blink animations are set to none.",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.hero.reveal",
+      "motion.duration.hero.dash",
+      "motion.duration.hero.panel-slide",
+      "motion.threshold.hero"
+    ],
+    "measuredFrom": [
+      "CLONE_SPEC.md:93",
+      "src/components/Hero.jsx:51-102",
+      "src/components/Hero.jsx:279",
+      "src/components/Hero.jsx:82",
+      "CLONE_SPEC.md:109",
+      "src/styles/sections.css:12"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.phone",
+      "from": "laptop 1160x725 canvas scaled to min(1260px, 90vw)",
+      "to": "phone 360x760 canvas, width min(340px, 100vw-40px)",
+      "change": "Laptop composition is hidden and a portrait phone frame is shown; the same episode runs with bottom-sheet panels, a pinned prompt bar and phone-specific callouts.",
+      "measuredFrom": [
+        "src/styles/sections.css:11",
+        "src/components/Hero.jsx:40",
+        "CLONE_SPEC.md:73"
+      ]
+    },
+    {
+      "breakpoint": "fluid",
+      "change": "H1 uses clamp(46px, 5.2vw, 92px); logo height clamp(32px, 2.3vw, 40px); no other breakpoint.",
+      "measuredFrom": [
+        "src/lib/tokens.js:35",
+        "src/styles/hero.css:2"
+      ]
+    }
+  ],
+  "components": [
+    "device-frame",
+    "prompt-bar",
+    "map-basemap",
+    "map-callout",
+    "hero-panel",
+    "kpi-card",
+    "bar-row"
+  ],
+  "primitives": [
+    "wordmark",
+    "eyebrow",
+    "pill",
+    "caret",
+    "send-button",
+    "badge",
+    "status-dot",
+    "mono-label"
+  ],
+  "assetRoles": [
+    "brand-wordmark",
+    "map-basemap-tile",
+    "illustration-scene"
+  ],
+  "example": {
+    "logo": {
+      "assetRole": "brand-wordmark"
+    },
+    "eyebrow": "THE ISP AI PLATFORM",
+    "headline": "The Autonomous Brain for Modern ISPs.",
+    "primaryCta": {
+      "label": "Get a demo",
+      "href": "#demo"
+    },
+    "secondaryCta": {
+      "label": "How it works",
+      "href": "#use-cases"
+    },
+    "episode": {
+      "promptPlaceholder": "Ask a question about your network…",
+      "prompts": [
+        "Which subscribers look likely to leave?",
+        "Turn this into a dashboard grouped by risk tier and root causes.",
+        "Export these results to a spreadsheet",
+        "Send this summary to the support leads.",
+        "Set this report to go out every Monday at 7 a.m."
+      ],
+      "mapBasemap": {
+        "assetRole": "map-basemap-tile"
+      },
+      "scene": {
+        "assetRole": "illustration-scene"
+      },
+      "callouts": [
+        {
+          "text": "39 ELEVATED RISK · PINE HOLLOW / MARLOWE / ASHFORD",
+          "tone": "elevated"
+        },
+        {
+          "text": "3 CRITICAL",
+          "tone": "critical"
+        },
+        {
+          "text": "7 RECENT OUTAGES",
+          "tone": "elevated"
+        }
+      ],
+      "smallCallouts": [
+        {
+          "text": "WEAK RX · −27.0 dBm"
+        },
+        {
+          "text": "WEAK RX · −25.0 dBm"
+        },
+        {
+          "text": "LINK FLAPPED"
+        }
+      ],
+      "dashboard": {
+        "title": "RETENTION RISK · PAST 30D",
+        "kpis": [
+          {
+            "label": "AT RISK",
+            "value": "42",
+            "sub": "of 52,180 subs",
+            "tone": "default"
+          },
+          {
+            "label": "ESCALATED",
+            "value": "3",
+            "sub": "score ≥ 80",
+            "tone": "critical"
+          },
+          {
+            "label": "PROMO ENDING",
+            "value": "11",
+            "sub": "of 42 at risk",
+            "tone": "default"
+          }
+        ],
+        "townBars": [
+          {
+            "label": "Pine Hollow",
+            "count": 17
+          },
+          {
+            "label": "Marlowe",
+            "count": 15
+          },
+          {
+            "label": "Ashford",
+            "count": 10
+          }
+        ],
+        "driverBars": [
+          {
+            "label": "Promo expiring",
+            "count": 19
+          },
+          {
+            "label": "Slow speeds",
+            "count": 12
+          },
+          {
+            "label": "Repeat outages",
+            "count": 7
+          },
+          {
+            "label": "Other",
+            "count": 4
+          }
+        ]
+      },
+      "schedules": [
+        {
+          "name": "Retention watch",
+          "to": "Support leads",
+          "cadence": "MON · 7:00 AM",
+          "isNew": true
+        },
+        {
+          "name": "Network health",
+          "to": "NOC",
+          "cadence": "DAILY · 5:30 AM"
+        },
+        {
+          "name": "Exec scorecard",
+          "to": "Leadership",
+          "cadence": "FRI · 3:00 PM"
+        },
+        {
+          "name": "Upsell candidates",
+          "to": "Sales",
+          "cadence": "1ST OF MONTH"
+        },
+        {
+          "name": "Capex payback review",
+          "to": "Finance",
+          "cadence": "QUARTERLY"
+        }
+      ]
+    }
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:59",
+    "src/pages/Home.jsx:12",
+    "src/components/Hero.jsx:277-308",
+    "CLONE_SPEC.md:41",
+    "recon/text-roles-1280.json:29"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$description": "Semantic roles: text. Each role is a reference into the foundation catalogue (resolved in themes/dark.json).",
+  "text": {
+    "primary": {
+      "ref": "color.neutral.white",
+      "usage": "Default body and heading colour.",
+      "measuredFrom": [
+        "src/index.css:23"
+      ]
+    },
+    "dim": {
+      "ref": "color.alpha.white.a550",
+      "usage": "Eyebrows, mono labels, footnotes (DIM).",
+      "measuredFrom": [
+        "src/lib/tokens.js:14"
+      ]
+    },
+    "lede": {
+      "ref": "color.alpha.white.a750",
+      "usage": "Ledes and long-form paragraph colour (LEDE).",
+      "measuredFrom": [
+        "src/lib/tokens.js:15"
+      ]
+    },
+    "inverse": {
+      "ref": "color.surface.page",
+      "usage": "Label colour on solid white pills and buttons.",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:20"
+      ]
+    },
+    "ghost-label": {
+      "ref": "color.alpha.white.a880",
+      "usage": "Ghost pill / ghost consent button label.",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:24"
+      ]
+    },
+    "accent-neon": {
+      "ref": "color.accent.neon",
+      "usage": "Positive / answered / live status text.",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:446"
+      ]
+    },
+    "accent-alert": {
+      "ref": "color.accent.stop-orange",
+      "usage": "Manual-path / stall tags in the CSR tangle.",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:108"
+      ]
+    }
+  }
+}

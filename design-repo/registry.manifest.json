@@ -1,0 +1,84 @@
+{
+  "repositoryId": "acme-landing-design-repo",
+  "repositoryVersion": "1.0.0",
+  "pageSpecVersion": "1.0.0",
+  "status": "design-review-pending",
+  "productionApproved": false,
+  "allowlistVersion": "1.0.0",
+  "defaultTheme": "dark",
+  "schemaValidatedThemes": [
+    "dark"
+  ],
+  "versionFieldNote": "allowlistVersion is MACHINE-CHECKED: extraction/verify_all.py fails if it differs from tokens/llm/component-allowlist.json's own allowlistVersion. repositoryVersion and pageSpecVersion are DOCUMENTATION-ONLY, hand-maintained markers that nothing checks. counts is machine-checked (recomputed from the files). catalogVersion, policyVersion, assetRoleVersion and ledgerVersion inside their own files are documentation-only.",
+  "counts": {
+    "foundationTokens": 433,
+    "layoutTokens": 36,
+    "semanticRoles": 30,
+    "componentTokens": 111,
+    "tokens": 610,
+    "tokenCategories": 14,
+    "primitives": 19,
+    "components": 26,
+    "sections": 12,
+    "templates": 2,
+    "routes": 3,
+    "assetRoles": 9,
+    "allowlistEntries": 57,
+    "graphRules": 12,
+    "themes": 1
+  },
+  "entryPoints": [
+    "README.md",
+    "CHANGELOG.md",
+    "registry.manifest.json",
+    "docs/EXTRACTION-NOTES.md",
+    "templates/templates.json",
+    "compatibility/graph.json",
+    "schema/pagespec.schema.json",
+    "schema/example.pagespec.json",
+    "schema/example.legal-prose.pagespec.json",
+    "schema/semantic_validate.py",
+    "schema/tests/adversarial_test.py",
+    "tokens/llm/token-catalog.json",
+    "tokens/llm/token-policy.json",
+    "tokens/llm/component-allowlist.json",
+    "assets/asset-roles.json",
+    "extraction/measured-values.json",
+    "extraction/verify_all.py",
+    "extraction/prove_drift.py"
+  ],
+  "sourceProject": {
+    "description": "A Vite + React 18 + Tailwind v3 + framer-motion landing-page CLONE of a real, live commercial marketing site (an AI operations platform for ISPs), built as a deliberate PLACEHOLDER clone under a fictional 'Acme' brand.",
+    "location": "sibling folder of design-repo/ in the delivery (not included in this package; nothing here depends on it)",
+    "isGitRepo": false,
+    "stack": {
+      "react": "^18.3.1",
+      "framer-motion": "12.42.2",
+      "motion-dom (override)": "12.42.2",
+      "tailwindcss": "^3.4.14",
+      "vite": "^5.4.10"
+    },
+    "routes": [
+      "/",
+      "/privacy-policy/",
+      "/terms-of-service/"
+    ]
+  },
+  "evidence": {
+    "measured": [
+      "template home and its seven sections, footer, demo dialog, cookie banner, all tokens"
+    ],
+    "derived": [
+      "template legal-prose, sections legal.header and legal.body"
+    ],
+    "excluded": [
+      "'From the field' testimonial carousel (deliberate scope exclusion)"
+    ]
+  },
+  "licensing": {
+    "sourceIsRealCommercialSite": true,
+    "doNotPublishWithoutClearance": true,
+    "note": "This design-repo describes a clone of a real, live, commercial website. Do not make it or the clone public without legal clearance. Do not use it to reintroduce the original's content, logos, fonts, vendor marks or artwork."
+  },
+  "delivery": "Ship source plus package-lock.json and run `npm ci` on the receiving side; do not ship node_modules. The zip is a build artifact: gitignore it if the project is ever put under git."
+}

@@ -1,0 +1,53 @@
+{
+  "id": "stroke-icon",
+  "kind": "primitive",
+  "purpose": "24-unit viewBox stroke icon: no fill, 1.6 stroke, round caps and joins; drawn at 18 or 26px. Original drawings only (see asset role stroke-icon).",
+  "evidence": "measured-live",
+  "props": {
+    "sizePx": {
+      "type": "number",
+      "enum": [
+        18,
+        26
+      ],
+      "required": true
+    },
+    "strokeWidth": {
+      "type": "number",
+      "default": 1.6,
+      "required": false
+    },
+    "stroke": {
+      "type": "string",
+      "enum": [
+        "white-92",
+        "white-95",
+        "neon"
+      ],
+      "required": true
+    },
+    "assetRole": {
+      "type": "string",
+      "enum": [
+        "stroke-icon"
+      ],
+      "required": true
+    }
+  },
+  "assetRole": "stroke-icon",
+  "tokensUsed": [
+    "iconSize.system-tile-icon",
+    "iconSize.security-icon",
+    "color.accent.neon"
+  ],
+  "usedBy": [
+    "usecases.stage",
+    "platform.stack",
+    "security.matrix"
+  ],
+  "measuredFrom": [
+    "src/components/UseCases.jsx:162",
+    "src/components/Security.jsx:11",
+    "CLONE_SPEC.md:139"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "dialog-card",
+  "kind": "component",
+  "purpose": "Raised card surface used by the demo dialog, the cookie banner and the preferences modal: #101112, 1px white 14% border, radius 16.",
+  "evidence": "measured-live",
+  "props": {
+    "padding": {
+      "type": "string",
+      "enum": [
+        "34px 34px 30px",
+        "20px 22px",
+        "30px 30px 26px"
+      ],
+      "required": true
+    }
+  },
+  "tokensUsed": [
+    "color.surface.dialog",
+    "color.alpha.white.a140",
+    "component.dialog.card.radius",
+    "elevation.cookie-card"
+  ],
+  "usedBy": [
+    "overlay.demo-dialog",
+    "overlay.cookie-banner"
+  ],
+  "measuredFrom": [
+    "src/components/DemoDialog.jsx:73",
+    "src/components/CookieBanner.jsx:38",
+    "CLONE_SPEC.md:393"
+  ]
+}

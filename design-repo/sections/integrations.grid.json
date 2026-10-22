@@ -1,0 +1,672 @@
+{
+  "id": "integrations.grid",
+  "kind": "section",
+  "purpose": "Eyebrow + H2 + lede, eight category filter pills and a 9x5 grid (5x9 on phone) of 45 monogram tiles with corner-bracket cell frames; hover or click on a pill or tile highlights its category. Tiles appear in a diagonal wave. Logos are NEUTRAL MONOGRAMS standing in for real vendor logos.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "requiredOverlays": [],
+    "allowedRoutes": [
+      "/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "eyebrow",
+      "heading",
+      "lede",
+      "categories",
+      "vendors",
+      "cellFrame",
+      "footnote"
+    ],
+    "properties": {
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 3,
+        "cloneChars": 15,
+        "originalChars": 17,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:2168"
+        ]
+      },
+      "heading": {
+        "type": "string",
+        "maxWords": 9,
+        "cloneChars": 33,
+        "originalChars": 33,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:2191"
+        ]
+      },
+      "lede": {
+        "type": "string",
+        "maxWords": 14,
+        "cloneChars": 73,
+        "originalChars": 74,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:2214"
+        ]
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "key",
+            "label",
+            "accent"
+          ],
+          "properties": {
+            "key": {
+              "type": "string",
+              "enum": [
+                "fiber",
+                "fixed-wireless",
+                "wi-fi",
+                "core",
+                "oss",
+                "nms",
+                "channels",
+                "other"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "maxWords": 3,
+              "cloneChars": 14
+            },
+            "accent": {
+              "type": "string",
+              "enum": [
+                "blink",
+                "boost",
+                "neon",
+                "neutral-light"
+              ]
+            }
+          }
+        },
+        "minItems": 8,
+        "maxItems": 8
+      },
+      "vendors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "monogram",
+            "category",
+            "tile"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxWords": 3,
+              "cloneChars": 15,
+              "description": "A FICTIONAL vendor name. Never a real vendor or customer name."
+            },
+            "monogram": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "fiber",
+                "fixed-wireless",
+                "wi-fi",
+                "core",
+                "oss",
+                "nms",
+                "channels",
+                "other"
+              ]
+            },
+            "tile": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assetRole"
+              ],
+              "properties": {
+                "assetRole": {
+                  "type": "string",
+                  "enum": [
+                    "vendor-logo-tile"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "minItems": 45,
+        "maxItems": 45,
+        "description": "45 cells, row-major on the 9x5 desktop grid."
+      },
+      "cellFrame": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetRole"
+        ],
+        "properties": {
+          "assetRole": {
+            "type": "string",
+            "enum": [
+              "decorative-frame"
+            ]
+          }
+        }
+      },
+      "footnote": {
+        "type": "string",
+        "maxWords": 23,
+        "cloneChars": 110,
+        "originalChars": 111,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:3456"
+        ]
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Category accent map: fiber BLINK, fixed-wireless BOOST, wi-fi NEON, core NEON, oss BLINK, nms #E8E8E8, channels BOOST, other #E8E8E8",
+      "citations": [
+        "src/components/integrations/vendors.js:4",
+        "CLONE_SPEC.md:199"
+      ]
+    },
+    {
+      "item": "Grid positions are row-major (col+row drive the wave delay)",
+      "citations": [
+        "src/components/integrations/vendors.js:77"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "diagonal-wave-reveal"
+    ],
+    "primaryTrigger": {
+      "type": "useInView",
+      "inViewAmount": 0.3,
+      "once": false
+    },
+    "triggerNotes": "Entrance repeats every time the grid is >=30% in view. Heading springs (damping 28) and reverses out of view. Hover takes priority over sticky click selection.",
+    "easing": "motion.easing.ease-in-out-framer",
+    "requiredReducedMotionFallback": "zero-delay-instant-reveal",
+    "reducedMotionDetail": "Delay 0 and opacity duration 0 (tiles still follow the in-view flag); hover dimming is unchanged.",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.integrations.wave-stagger",
+      "motion.duration.integrations.tile-opacity",
+      "motion.spring.snappy",
+      "motion.threshold.integrations"
+    ],
+    "measuredFrom": [
+      "src/components/Integrations.jsx:12",
+      "src/components/Integrations.jsx:75",
+      "CLONE_SPEC.md:219",
+      "src/components/Integrations.jsx:92"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.phone",
+      "from": "repeat(9,1fr), pill padding 9px 18px",
+      "to": "repeat(5,1fr), pill padding 12px 16px",
+      "change": "Grid reflows 9 -> 5 columns (45 cells, 9 rows) and filter pills get a 12px 16px touch padding.",
+      "measuredFrom": [
+        "src/styles/sections.css:54",
+        "src/styles/sections.css:55",
+        "CLONE_SPEC.md:427"
+      ]
+    }
+  ],
+  "components": [
+    "cell-frame"
+  ],
+  "primitives": [
+    "monogram-tile",
+    "filter-pill",
+    "eyebrow"
+  ],
+  "assetRoles": [
+    "vendor-logo-tile",
+    "decorative-frame"
+  ],
+  "notes": [
+    "Eyebrow numbering: the clone gives Integrations the default num '03' and CSR a hard-coded '03', so two sections both read 03 (see rule EYEBROW_NUMBER_UNIQUE, severity warn).",
+    "The original's 45 cells use real third-party vendor logos from /logos/*. They are NOT reproduced here; vendor names in the clone are fictional."
+  ],
+  "example": {
+    "eyebrow": "03 · CONNECTORS",
+    "heading": "Plugs into the tools you run now.",
+    "lede": "Routers, radios, monitoring and billing: Acme already speaks all of them.",
+    "categories": [
+      {
+        "key": "fiber",
+        "label": "FIBER",
+        "accent": "blink"
+      },
+      {
+        "key": "fixed-wireless",
+        "label": "FIXED WIRELESS",
+        "accent": "boost"
+      },
+      {
+        "key": "wi-fi",
+        "label": "WI-FI",
+        "accent": "neon"
+      },
+      {
+        "key": "core",
+        "label": "CORE",
+        "accent": "neon"
+      },
+      {
+        "key": "oss",
+        "label": "OSS/BSS",
+        "accent": "blink"
+      },
+      {
+        "key": "nms",
+        "label": "NMS",
+        "accent": "neutral-light"
+      },
+      {
+        "key": "channels",
+        "label": "CHANNELS",
+        "accent": "boost"
+      },
+      {
+        "key": "other",
+        "label": "OTHER",
+        "accent": "neutral-light"
+      }
+    ],
+    "vendors": [
+      {
+        "name": "Quarrel Optics",
+        "monogram": "QO",
+        "category": "fiber",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Skyvane",
+        "monogram": "SV",
+        "category": "fixed-wireless",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Chattern",
+        "monogram": "CT",
+        "category": "channels",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Ledgerline",
+        "monogram": "LL",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Tallyhouse",
+        "monogram": "TH",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Airloft",
+        "monogram": "AL",
+        "category": "fixed-wireless",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Lumenvale",
+        "monogram": "LV",
+        "category": "fiber",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Ringlet",
+        "monogram": "RG",
+        "category": "channels",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Invoya",
+        "monogram": "IV",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Strandmere",
+        "monogram": "SM",
+        "category": "fiber",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Meshling",
+        "monogram": "ML",
+        "category": "wi-fi",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Beamwick",
+        "monogram": "BW",
+        "category": "fixed-wireless",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Watchtide",
+        "monogram": "WT",
+        "category": "nms",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Corvane",
+        "monogram": "CV",
+        "category": "core",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Subscribly",
+        "monogram": "SB",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Backbone Forge",
+        "monogram": "BF",
+        "category": "core",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Provisio",
+        "monogram": "PV",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Roomwave",
+        "monogram": "RW",
+        "category": "wi-fi",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Ironhop",
+        "monogram": "IH",
+        "category": "core",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Glintpath",
+        "monogram": "GP",
+        "category": "fiber",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Mapsmith",
+        "monogram": "MS",
+        "category": "other",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Ridgecast",
+        "monogram": "RC",
+        "category": "fixed-wireless",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Pulsewell",
+        "monogram": "PW",
+        "category": "nms",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Inboxa",
+        "monogram": "IX",
+        "category": "channels",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Hearthnet",
+        "monogram": "HN",
+        "category": "wi-fi",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Quotient Grid",
+        "monogram": "QG",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Ferrovine",
+        "monogram": "FV",
+        "category": "fiber",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Helpwharf",
+        "monogram": "HW",
+        "category": "channels",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Packetmill",
+        "monogram": "PM",
+        "category": "core",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Ratebook",
+        "monogram": "RB",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Switchyard Labs",
+        "monogram": "SY",
+        "category": "core",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Opalrun",
+        "monogram": "OR",
+        "category": "fiber",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Addrly",
+        "monogram": "AD",
+        "category": "other",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Routewell",
+        "monogram": "RO",
+        "category": "fiber",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Hollowmast",
+        "monogram": "HM",
+        "category": "fixed-wireless",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Cozyband",
+        "monogram": "CB",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Pillowlink",
+        "monogram": "PL",
+        "category": "wi-fi",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Signalgrove",
+        "monogram": "SG",
+        "category": "nms",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Zephra Radio",
+        "monogram": "ZR",
+        "category": "fixed-wireless",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Truckwise",
+        "monogram": "TW",
+        "category": "fiber",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Callbright",
+        "monogram": "CL",
+        "category": "channels",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Fieldnote",
+        "monogram": "FN",
+        "category": "other",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Probewick",
+        "monogram": "PK",
+        "category": "fixed-wireless",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Uptimber",
+        "monogram": "UT",
+        "category": "nms",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      },
+      {
+        "name": "Ticketfox",
+        "monogram": "TF",
+        "category": "oss",
+        "tile": {
+          "assetRole": "vendor-logo-tile"
+        }
+      }
+    ],
+    "cellFrame": {
+      "assetRole": "decorative-frame"
+    },
+    "footnote": "45 systems connected out of the box · nothing to build, nothing to migrate · fresh connectors ship every month"
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:190",
+    "src/pages/Home.jsx:14",
+    "src/components/Integrations.jsx:10-140",
+    "recon/text-roles-1280.json:2191"
+  ]
+}

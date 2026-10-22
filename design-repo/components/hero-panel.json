@@ -1,0 +1,35 @@
+{
+  "id": "hero-panel",
+  "kind": "component",
+  "purpose": "Hero laptop slide-in panel. Four kinds: dashboard (right, 580), spreadsheet (right, 584, green title bar), email client (left, 580), scheduled-reports list (right, 580). On phone they become bottom sheets with a 108px bottom fade.",
+  "evidence": "measured-live",
+  "props": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "dashboard",
+        "spreadsheet",
+        "email",
+        "schedule"
+      ],
+      "required": true
+    }
+  },
+  "assetRole": "illustration-scene",
+  "licensing": "Spreadsheet and mail panels imitate generic third-party app chrome with colours only. They carry NO vendor logos; generators must not add Excel, Gmail or any other real product logo.",
+  "tokensUsed": [
+    "color.status.panel-border",
+    "motion.duration.hero.panel-slide",
+    "motion.duration.hero.panel-content-enter"
+  ],
+  "usedBy": [
+    "hero.episode"
+  ],
+  "measuredFrom": [
+    "src/components/hero/panels.jsx:184",
+    "src/components/hero/panels.jsx:218",
+    "src/components/hero/panels.jsx:284",
+    "src/components/hero/panels.jsx:371",
+    "CLONE_SPEC.md:84"
+  ]
+}

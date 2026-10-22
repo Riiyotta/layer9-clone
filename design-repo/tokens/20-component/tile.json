@@ -1,0 +1,66 @@
+{
+  "$description": "Component-scoped tokens: tile. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "tile": {
+    "system.size": {
+      "value": 80,
+      "measuredFrom": [
+        "src/components/UseCases.jsx:157",
+        "CLONE_SPEC.md:139"
+      ]
+    },
+    "system.radius": {
+      "value": "12%",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:157",
+        "CLONE_SPEC.md:139"
+      ]
+    },
+    "border": {
+      "value": "4px solid",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:158",
+        "CLONE_SPEC.md:139"
+      ]
+    },
+    "vendor.widthPct": {
+      "value": "66%",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:99",
+        "CLONE_SPEC.md:202"
+      ]
+    },
+    "vendor.padding": {
+      "value": 6,
+      "measuredFrom": [
+        "src/components/Integrations.jsx:110",
+        "CLONE_SPEC.md:202"
+      ]
+    },
+    "vendor.cellAspect": {
+      "value": "1 / 1",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:79",
+        "CLONE_SPEC.md:200"
+      ]
+    },
+    "vendor.monogramFontSize": {
+      "value": 17,
+      "measuredFrom": [
+        "src/components/integrations/Monogram.jsx:19"
+      ]
+    },
+    "vendor.monogramScale": {
+      "value": "66%",
+      "measuredFrom": [
+        "src/components/integrations/Monogram.jsx:10"
+      ]
+    },
+    "vendor.matchOverlay": {
+      "value": "linear-gradient(to top, accent, transparent) at 0.22 opacity",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:121",
+        "CLONE_SPEC.md:226"
+      ]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "platform-card",
+  "kind": "component",
+  "purpose": "Agent-platform capability card: 2px accent bar, 26px icon, mono label and 13px description.",
+  "evidence": "measured-live",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "maxWords": 9
+    },
+    "accent": {
+      "type": "string",
+      "enum": [
+        "blink",
+        "neon",
+        "boost"
+      ],
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "stroke-icon"
+      ],
+      "required": true
+    }
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.platform-stack",
+      "change": "cards stack in a column (gap 10), padding 14px 16px",
+      "measuredFrom": [
+        "src/styles/sections.css:220"
+      ]
+    }
+  ],
+  "tokensUsed": [
+    "component.platform.card.radius",
+    "component.platform.card.background",
+    "color.alpha.white.a550",
+    "iconSize.platform-card-icon"
+  ],
+  "usedBy": [
+    "platform.stack"
+  ],
+  "measuredFrom": [
+    "src/components/AgentPlatform.jsx:104",
+    "CLONE_SPEC.md:301"
+  ]
+}

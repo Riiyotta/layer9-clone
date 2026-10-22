@@ -1,0 +1,88 @@
+{
+  "$description": "Component-scoped tokens: security. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "security": {
+    "iconBox.size": {
+      "value": 36,
+      "measuredFrom": [
+        "src/styles/sections.css:262-271",
+        "CLONE_SPEC.md:328"
+      ]
+    },
+    "iconBox.radius": {
+      "value": 9,
+      "measuredFrom": [
+        "src/styles/sections.css:185",
+        "CLONE_SPEC.md:328"
+      ]
+    },
+    "matrix.maxWidth": {
+      "value": 940,
+      "measuredFrom": [
+        "src/styles/sections.css:237",
+        "CLONE_SPEC.md:326"
+      ]
+    },
+    "matrix.radius": {
+      "value": 16,
+      "measuredFrom": [
+        "src/styles/sections.css:241",
+        "CLONE_SPEC.md:326"
+      ]
+    },
+    "matrix.radius.phone": {
+      "value": 14,
+      "measuredFrom": [
+        "src/styles/sections.css:312",
+        "CLONE_SPEC.md:343"
+      ]
+    },
+    "quadrant.minHeight": {
+      "value": 236,
+      "measuredFrom": [
+        "src/styles/sections.css:247",
+        "CLONE_SPEC.md:327"
+      ]
+    },
+    "quadrant.divider": {
+      "value": "rgba(255,255,255,0.085)",
+      "measuredFrom": [
+        "src/styles/sections.css:254"
+      ]
+    },
+    "h3.fontSize": {
+      "value": 18,
+      "measuredFrom": [
+        "src/styles/sections.css:282",
+        "CLONE_SPEC.md:330"
+      ]
+    },
+    "body.fontSize": {
+      "value": 15,
+      "measuredFrom": [
+        "src/styles/sections.css:290",
+        "CLONE_SPEC.md:331"
+      ]
+    },
+    "body.maxWidth": {
+      "value": "46ch",
+      "measuredFrom": [
+        "src/styles/sections.css:288",
+        "CLONE_SPEC.md:331"
+      ]
+    },
+    "proof.fontSize": {
+      "value": 10.5,
+      "measuredFrom": [
+        "src/styles/sections.css:299",
+        "CLONE_SPEC.md:332"
+      ]
+    },
+    "index.fontSize": {
+      "value": 10,
+      "measuredFrom": [
+        "src/styles/sections.css:273-279",
+        "CLONE_SPEC.md:329"
+      ]
+    }
+  }
+}

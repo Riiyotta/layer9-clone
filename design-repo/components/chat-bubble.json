@@ -1,0 +1,45 @@
+{
+  "id": "chat-bubble",
+  "kind": "component",
+  "purpose": "Rounded message bubble with one squared corner: the CSR agent question (bottom-left squared, #0A0B0C) and the Acme answer (bottom-right squared, neon-tinted).",
+  "evidence": "measured-live",
+  "props": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "question",
+        "answer"
+      ],
+      "required": true
+    },
+    "text": {
+      "type": "string",
+      "required": true,
+      "maxWords": 26
+    },
+    "senderLabel": {
+      "type": "string",
+      "required": false,
+      "maxWords": 6
+    }
+  },
+  "motion": {
+    "question": "types at 14ms/char with caret",
+    "answer": "fade + rise 8px over 400ms after 820ms of the answer phase"
+  },
+  "tokensUsed": [
+    "component.csr.bubble.question.radius",
+    "component.csr.bubble.answer.radius",
+    "component.csr.bubble.question.background",
+    "color.alpha.neon.a060",
+    "color.alpha.neon.a300"
+  ],
+  "usedBy": [
+    "csr.loop"
+  ],
+  "measuredFrom": [
+    "src/components/ControlCenter.jsx:428",
+    "src/components/ControlCenter.jsx:502",
+    "CLONE_SPEC.md:261"
+  ]
+}

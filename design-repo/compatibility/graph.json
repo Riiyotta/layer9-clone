@@ -1,0 +1,158 @@
+{
+  "$description": "Rhythm / position rules JSON Schema cannot express. Each rule has severity error|warn and named exceptions. Every rule id is implemented in schema/semantic_validate.py (RULES); verify_all.py fails if the two lists diverge. Each rule was checked against the real node sequences in templates/templates.json when it was written.",
+  "rules": [
+    {
+      "id": "HERO_FIRST_ON_HOME",
+      "severity": "error",
+      "appliesTo": "all",
+      "description": "The first node must be hero.episode: there is no navbar before it (the only element above the headline is the logo inside the hero).",
+      "exceptions": [
+        {
+          "template": "legal-prose",
+          "reason": "Legal pages are hero-less; legal.header is first."
+        }
+      ],
+      "checkedAgainst": "templates.home.nodes[0] == hero.episode",
+      "measuredFrom": [
+        "src/pages/Home.jsx:12",
+        "CLONE_SPEC.md:41"
+      ]
+    },
+    {
+      "id": "NO_HERO_ON_LEGAL",
+      "severity": "error",
+      "appliesTo": [
+        "legal-prose"
+      ],
+      "exceptions": [],
+      "description": "hero.episode must not appear on a legal page.",
+      "checkedAgainst": "templates.legal-prose.nodes has no hero.episode",
+      "measuredFrom": [
+        "src/pages/LegalPage.jsx:8-83"
+      ]
+    },
+    {
+      "id": "CLOSING_CTA_LAST_BEFORE_FOOTER",
+      "severity": "error",
+      "appliesTo": "all",
+      "description": "closing.cta is the last content section and sits immediately before chrome.footer.",
+      "exceptions": [
+        {
+          "template": "legal-prose",
+          "reason": "Legal pages have no closing CTA."
+        }
+      ],
+      "checkedAgainst": "templates.home.nodes: closing.cta index + 1 == chrome.footer",
+      "measuredFrom": [
+        "src/pages/Home.jsx:18",
+        "CLONE_SPEC.md:52"
+      ]
+    },
+    {
+      "id": "ONE_PER_PAGE",
+      "severity": "error",
+      "appliesTo": "all",
+      "exceptions": [],
+      "description": "Every section contract declares onePerPage; no section repeats on a page.",
+      "checkedAgainst": "every node list in templates.json has unique section ids; every sections/*.json has constraints.onePerPage true",
+      "measuredFrom": [
+        "src/pages/Home.jsx:11-19"
+      ]
+    },
+    {
+      "id": "FOOTER_AFTER_CONTENT",
+      "severity": "error",
+      "appliesTo": "all",
+      "exceptions": [],
+      "description": "chrome.footer comes after every content section; only overlays may follow it.",
+      "checkedAgainst": "both templates end with chrome.footer then overlays",
+      "measuredFrom": [
+        "src/App.jsx:18-21"
+      ]
+    },
+    {
+      "id": "OVERLAYS_AFTER_FOOTER",
+      "severity": "error",
+      "appliesTo": "all",
+      "exceptions": [],
+      "description": "overlay.* nodes come after chrome.footer (App.jsx renders Page, Footer, DemoDialog, CookieBanner).",
+      "checkedAgainst": "both templates list overlay nodes after chrome.footer",
+      "measuredFrom": [
+        "src/App.jsx:18-21"
+      ]
+    },
+    {
+      "id": "OVERLAY_ORDER",
+      "severity": "warn",
+      "appliesTo": "all",
+      "exceptions": [],
+      "description": "overlay.demo-dialog is listed before overlay.cookie-banner (App.jsx order). Visual stacking is unaffected (both are fixed/top-layer), so a different order is a notice only.",
+      "checkedAgainst": "both templates list demo-dialog then cookie-banner",
+      "measuredFrom": [
+        "src/App.jsx:20",
+        "src/App.jsx:21"
+      ]
+    },
+    {
+      "id": "LEGAL_HEADER_THEN_BODY",
+      "severity": "error",
+      "appliesTo": [
+        "legal-prose"
+      ],
+      "exceptions": [],
+      "description": "legal.header is the first node and legal.body immediately follows it.",
+      "checkedAgainst": "templates.legal-prose.nodes[0..1]",
+      "measuredFrom": [
+        "src/pages/LegalPage.jsx:25",
+        "src/pages/LegalPage.jsx:51"
+      ]
+    },
+    {
+      "id": "DEMO_CTA_REQUIRES_DIALOG",
+      "severity": "error",
+      "appliesTo": "all",
+      "exceptions": [],
+      "description": "Any CTA whose href is #demo needs overlay.demo-dialog on the page (a document-level click handler on a[href=\"#demo\"] opens it).",
+      "checkedAgainst": "both templates include overlay.demo-dialog",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:30",
+        "CLONE_SPEC.md:386"
+      ]
+    },
+    {
+      "id": "COOKIES_LINK_REQUIRES_BANNER",
+      "severity": "error",
+      "appliesTo": "all",
+      "exceptions": [],
+      "description": "chrome.footer's Cookies button opens the preferences modal, which lives in overlay.cookie-banner; the footer therefore needs that overlay on the page.",
+      "checkedAgainst": "both templates include overlay.cookie-banner",
+      "measuredFrom": [
+        "src/components/Footer.jsx:27",
+        "src/components/CookieBanner.jsx:59"
+      ]
+    },
+    {
+      "id": "EYEBROW_NUMBER_UNIQUE",
+      "severity": "warn",
+      "appliesTo": "all",
+      "exceptions": [],
+      "description": "Eyebrows that start with a two-digit section numeral ('NN · ') should not repeat a numeral. The clone's own copy trips this: Integrations (default num 03) and CSR (hard-coded 03) both read 03, so the bundled home example emits one WARN by design.",
+      "checkedAgainst": "bundled home example produces exactly this one warning",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:10",
+        "src/components/ControlCenter.jsx:359"
+      ]
+    },
+    {
+      "id": "SECTION_ROUTE_ALLOWED",
+      "severity": "error",
+      "appliesTo": "all",
+      "exceptions": [],
+      "description": "A node's section must list the page route in constraints.allowedRoutes (home-only sections cannot appear on legal routes and vice versa).",
+      "checkedAgainst": "templates + sections allowedRoutes agree",
+      "measuredFrom": [
+        "src/App.jsx:9-12"
+      ]
+    }
+  ]
+}

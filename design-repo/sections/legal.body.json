@@ -1,0 +1,267 @@
+{
+  "id": "legal.body",
+  "kind": "section",
+  "purpose": "DERIVED. 760px article: intro paragraph, then numbered clauses (mono 01.. index + 24px head heading + paragraphs/bullet lists in the lede colour) and a closing hairline contact line with a mailto link. All text is placeholder legal copy for a fictional company and must be replaced with counsel-reviewed text.",
+  "evidence": "derived",
+  "constraints": {
+    "onePerPage": true,
+    "requiredOverlays": [],
+    "allowedRoutes": [
+      "/privacy-policy/",
+      "/terms-of-service/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "copy",
+      "intro",
+      "sections",
+      "contactEmail",
+      "contactLead"
+    ],
+    "properties": {
+      "copy": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetRole"
+        ],
+        "properties": {
+          "assetRole": {
+            "type": "string",
+            "enum": [
+              "legal-copy"
+            ]
+          }
+        }
+      },
+      "intro": {
+        "type": "string",
+        "maxWords": 70,
+        "cloneChars": 217
+      },
+      "sections": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "heading",
+            "blocks"
+          ],
+          "properties": {
+            "heading": {
+              "type": "string",
+              "maxWords": 6,
+              "cloneChars": 22
+            },
+            "blocks": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "text"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "const": "paragraph"
+                      },
+                      "text": {
+                        "type": "string",
+                        "maxWords": 50,
+                        "cloneChars": 210
+                      }
+                    },
+                    "title": "sections[].blocks[] kind=paragraph"
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "kind",
+                      "items"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "const": "list"
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "maxWords": 28,
+                          "cloneChars": 97
+                        },
+                        "minItems": 1,
+                        "maxItems": 6
+                      }
+                    },
+                    "title": "sections[].blocks[] kind=list"
+                  }
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 4
+            }
+          }
+        },
+        "minItems": 1,
+        "maxItems": 10,
+        "description": "Derived design: observed 7 clauses in each placeholder doc; ceiling relaxed to 10 (not measured)."
+      },
+      "contactEmail": {
+        "type": "string",
+        "pattern": "^[^@\\s]+@acme\\.example$",
+        "description": "Placeholder mailbox on the reserved .example domain only."
+      },
+      "contactLead": {
+        "type": "string",
+        "maxWords": 4,
+        "cloneChars": 19
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Contact line prefix 'Questions? Write to' and the mailto link styling",
+      "citations": [
+        "src/pages/LegalPage.jsx:78"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "primaryTrigger": {
+      "type": "none"
+    },
+    "triggerNotes": "Static.",
+    "requiredReducedMotionFallback": "not-applicable-static",
+    "scrollLinked": false,
+    "tokens": [],
+    "measuredFrom": [
+      "src/pages/LegalPage.jsx:24-80",
+      "src/pages/LegalPage.jsx:51",
+      "src/content/legal.js:4"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "fluid",
+      "change": "No breakpoint CSS; article max-width 760, paragraph sizes fixed (17/15px).",
+      "measuredFrom": [
+        "src/pages/LegalPage.jsx:24"
+      ]
+    }
+  ],
+  "components": [
+    "legal-clause"
+  ],
+  "primitives": [
+    "text-link"
+  ],
+  "assetRoles": [
+    "legal-copy"
+  ],
+  "notes": [
+    "DERIVED, NOT MEASURED. maxWords here come from the two placeholder documents (privacy, terms) with the standard 25% allowance, relaxed to round numbers; they are not measured against any original."
+  ],
+  "example": {
+    "copy": {
+      "assetRole": "legal-copy"
+    },
+    "intro": "This placeholder describes, in plain terms, how a fictional company called Acme might handle information about visitors to its website and the operators who use its platform. Swap it for your own policy before launch.",
+    "sections": [
+      {
+        "heading": "Who this covers",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Visitors to this marketing site, people who request a demo, and staff at internet providers who sign in to the Acme platform on behalf of their employer."
+          }
+        ]
+      },
+      {
+        "heading": "What we collect",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Only what we need to respond to you and to run the service:"
+          },
+          {
+            "kind": "list",
+            "items": [
+              "Contact details you type into a form, such as your name, work email and company size.",
+              "Basic, aggregated site analytics — and only after you accept them in the cookie banner.",
+              "Operational data an operator connects to the platform, processed on that operator’s instructions."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "How we use it",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "To answer demo requests, to keep the site and platform working and secure, and to understand which pages are useful. We do not sell personal information and we do not use subscriber data to train shared models."
+          }
+        ]
+      },
+      {
+        "heading": "Cookies and choices",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Strictly necessary storage is always on so the site can remember your consent choice. Analytics stay off until you opt in, and you can change your mind any time from the Cookies link in the footer."
+          }
+        ]
+      },
+      {
+        "heading": "Sharing",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "We share information with vendors that host or support the service under written agreements, when the law requires it, or as part of a merger with notice to you."
+          }
+        ]
+      },
+      {
+        "heading": "Retention and security",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "We keep information only as long as it is needed for the purposes above, encrypt it in transit and at rest, and limit access to people who need it to do their job."
+          }
+        ]
+      },
+      {
+        "heading": "Your rights",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Depending on where you live, you may ask to see, correct, or delete your information, or object to certain uses. Contact us and we will respond within the time the law allows."
+          }
+        ]
+      }
+    ],
+    "contactEmail": "legal@acme.example",
+    "contactLead": "Questions? Write to"
+  },
+  "measuredFrom": [
+    "src/pages/LegalPage.jsx:24-80",
+    "src/content/legal.js:60"
+  ]
+}

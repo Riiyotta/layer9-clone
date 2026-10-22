@@ -1,0 +1,130 @@
+{
+  "$comment": "Information architecture of the Acme clone (a placeholder-content rebuild of a live ISP-software marketing site). Routes and section order come from src/App.jsx, src/lib/routes.js, src/pages/Home.jsx and src/pages/LegalPage.jsx; home-page geometry was measured against the live original (see CLONE_SPEC.md). The two legal pages are a derived design, not measured, because the original serves them as PDFs.",
+  "meta": {
+    "source": "Acme: a local Vite + React rebuild of an ISP-software marketing site, with placeholder copy for a fictional brand",
+    "status": "measured-from-clone",
+    "productionApproved": false,
+    "totalRoutes": 3,
+    "totalTemplates": 2,
+    "generatedBy": "ia-builder, derived from the current src/ tree"
+  },
+  "categories": {
+    "HERO": "Page-opening block: logo, headline, calls to action and the first product demo.",
+    "PRODUCT": "Scroll-through product storytelling: each block is a self-running, animated explanation of one capability.",
+    "TRUST": "Reassurance blocks that answer a buyer's risk questions rather than demonstrate a feature.",
+    "CTA": "Closing conversion block that sends the visitor to the demo request.",
+    "CONTENT": "Long-form reading content on plain text pages.",
+    "SHELL": "Chrome shared across every route: footer and the global overlays. There is no navbar."
+  },
+  "sections": {
+    "hero.agentic-episode": {
+      "category": "HERO",
+      "description": "Top of the home page: centred wordmark, eyebrow, one-line headline, a solid and a ghost call-to-action, then a looping laptop (phone below the mobile breakpoint) that types five prompts and brings in a map, dashboard, spreadsheet, email and schedule panels in turn.",
+      "scope": "Home page only.",
+      "implementedBy": "src/components/Hero.jsx"
+    },
+    "product.use-cases-stage": {
+      "category": "PRODUCT",
+      "description": "Nine system tiles feeding a central hub chip, above an app window where three personas each answer three prompts; the persona autoplays on a timer and any click restarts it. Becomes a stacked list on mobile.",
+      "scope": "Home page only. Carries the id use-cases.",
+      "implementedBy": "src/components/UseCases.jsx"
+    },
+    "product.integrations-grid": {
+      "category": "PRODUCT",
+      "description": "Header, eight category filter pills and a nine-by-five grid of vendor tiles that enter in a diagonal wave and dim or highlight by category on hover or click. Five columns on mobile.",
+      "scope": "Home page only.",
+      "implementedBy": "src/components/Integrations.jsx"
+    },
+    "product.control-center-loop": {
+      "category": "PRODUCT",
+      "description": "Framed canvas where one typed question fans out to five systems, the tangle resolves onto a single rail, each system reports a finding and an answer returns. Loops on a fixed cycle; a mobile row layout replaces the canvas.",
+      "scope": "Home page only. Carries the id csr.",
+      "implementedBy": "src/components/ControlCenter.jsx"
+    },
+    "product.agent-platform-stack": {
+      "category": "PRODUCT",
+      "description": "Three-layer stack of an intelligence block, three capability cards and a platform slab, joined by dashed connectors that march while in view. Builds bottom-up on entry; the card row becomes a column on narrow screens.",
+      "scope": "Home page only.",
+      "implementedBy": "src/components/AgentPlatform.jsx"
+    },
+    "trust.security-matrix": {
+      "category": "TRUST",
+      "description": "Header over a two-by-two matrix of security and data-handling quadrants, each with an icon, index, heading, paragraph and a proof line. No scripted motion, only a hover tint; single column on mobile.",
+      "scope": "Home page only. Carries the id security.",
+      "implementedBy": "src/components/Security.jsx"
+    },
+    "cta.closing-stack": {
+      "category": "CTA",
+      "description": "Full-viewport closing block: eyebrow, title and lede above an isometric layer stack whose chip drops into place on a scroll-triggered spring, followed by a flash, rings and sweeps, with a single demo button beneath.",
+      "scope": "Home page only.",
+      "implementedBy": "src/components/ClosingCTA.jsx"
+    },
+    "content.legal-header": {
+      "category": "CONTENT",
+      "description": "Top of a legal page: centred wordmark linking home, a Legal eyebrow, the document title, a last-updated line and a badge marking the text as placeholder.",
+      "scope": "Both legal pages.",
+      "implementedBy": "src/pages/LegalPage.jsx"
+    },
+    "content.legal-body": {
+      "category": "CONTENT",
+      "description": "Single narrow reading column: an intro paragraph, then numbered headed sections of paragraphs and bullet lists, ending with a contact line. Text lives in src/content/legal.js.",
+      "scope": "Both legal pages.",
+      "implementedBy": "src/pages/LegalPage.jsx"
+    },
+    "shell.footer": {
+      "category": "SHELL",
+      "description": "Single-line page footer: copyright text on the left and Privacy, Terms and a Cookies button on the right.",
+      "scope": "Present on all 3 routes.",
+      "implementedBy": "src/components/Footer.jsx"
+    },
+    "shell.cookie-banner": {
+      "category": "SHELL",
+      "description": "Fixed consent card at bottom left with accept, reject and customise actions, plus the preferences modal it opens. The modal also opens from the footer Cookies button and from the cookies hash.",
+      "scope": "Present on all 3 routes until a consent choice is stored.",
+      "implementedBy": "src/components/CookieBanner.jsx"
+    },
+    "shell.demo-dialog": {
+      "category": "SHELL",
+      "description": "Modal form for requesting a demo, opened by any link to the demo hash or by loading the page with that hash. The send is simulated and posts nowhere.",
+      "scope": "Mounted on all 3 routes; hidden until opened.",
+      "implementedBy": "src/components/DemoDialog.jsx"
+    }
+  },
+  "templates": [
+    {
+      "id": "template.home",
+      "name": "Home",
+      "routeCount": 1,
+      "routes": ["/"],
+      "routePattern": null,
+      "chrome": "footer-and-overlays",
+      "sections": [
+        "hero.agentic-episode",
+        "product.use-cases-stage",
+        "product.integrations-grid",
+        "product.control-center-loop",
+        "product.agent-platform-stack",
+        "trust.security-matrix",
+        "cta.closing-stack",
+        "shell.footer",
+        "shell.cookie-banner",
+        "shell.demo-dialog"
+      ]
+    },
+    {
+      "id": "template.legal-prose",
+      "name": "Legal prose",
+      "routeCount": 2,
+      "routes": ["/privacy-policy/", "/terms-of-service/"],
+      "routePattern": null,
+      "chrome": "footer-and-overlays",
+      "sections": [
+        "content.legal-header",
+        "content.legal-body",
+        "shell.footer",
+        "shell.cookie-banner",
+        "shell.demo-dialog"
+      ]
+    }
+  ]
+}

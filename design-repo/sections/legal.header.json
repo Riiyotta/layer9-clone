@@ -1,0 +1,128 @@
+{
+  "id": "legal.header",
+  "kind": "section",
+  "purpose": "DERIVED. Top of a legal page: centred logo link home, mono eyebrow, an H2-scale document title, a mono 'Last updated' line and an orange-tinted placeholder-notice pill, closed by a hairline. Built in the home page's own system because the original serves its legal documents as PDFs.",
+  "evidence": "derived",
+  "constraints": {
+    "onePerPage": true,
+    "mustBeFirst": true,
+    "requiredOverlays": [],
+    "allowedRoutes": [
+      "/privacy-policy/",
+      "/terms-of-service/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "logo",
+      "eyebrow",
+      "title",
+      "updated",
+      "placeholderNotice"
+    ],
+    "properties": {
+      "logo": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetRole"
+        ],
+        "properties": {
+          "assetRole": {
+            "type": "string",
+            "enum": [
+              "brand-wordmark"
+            ]
+          }
+        }
+      },
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 2,
+        "cloneChars": 5
+      },
+      "title": {
+        "type": "string",
+        "maxWords": 4,
+        "cloneChars": 14
+      },
+      "updated": {
+        "type": "string",
+        "maxWords": 3,
+        "cloneChars": 12
+      },
+      "placeholderNotice": {
+        "type": "string",
+        "maxWords": 9,
+        "cloneChars": 60
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Placeholder-notice pill text and tint (rgba(255,96,46,0.06) bg, 0.35 border)",
+      "citations": [
+        "src/pages/LegalPage.jsx:45",
+        "src/pages/LegalPage.jsx:36"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "primaryTrigger": {
+      "type": "none"
+    },
+    "triggerNotes": "Static. On mount sets document.title and scrolls to top.",
+    "requiredReducedMotionFallback": "not-applicable-static",
+    "scrollLinked": false,
+    "tokens": [],
+    "measuredFrom": [
+      "src/pages/LegalPage.jsx:25-47",
+      "src/pages/LegalPage.jsx:10",
+      "src/pages/LegalPage.jsx:6"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "fluid",
+      "change": "No breakpoint CSS; the logo and article padding use clamp() only.",
+      "measuredFrom": [
+        "src/pages/LegalPage.jsx:24"
+      ]
+    }
+  ],
+  "components": [],
+  "primitives": [
+    "wordmark",
+    "eyebrow",
+    "mono-label"
+  ],
+  "assetRoles": [
+    "brand-wordmark"
+  ],
+  "notes": [
+    "DERIVED, NOT MEASURED: no live legal HTML page exists to measure; the layout is composed from home-page tokens."
+  ],
+  "example": {
+    "logo": {
+      "assetRole": "brand-wordmark"
+    },
+    "eyebrow": "Legal",
+    "title": "Privacy Policy",
+    "updated": "October 2026",
+    "placeholderNotice": "PLACEHOLDER TEXT — REPLACE WITH YOUR COUNSEL-REVIEWED POLICY"
+  },
+  "measuredFrom": [
+    "src/pages/LegalPage.jsx:25-47",
+    "src/lib/routes.js:1",
+    "src/App.jsx:10"
+  ]
+}

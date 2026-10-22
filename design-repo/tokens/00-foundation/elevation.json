@@ -1,0 +1,143 @@
+{
+  "$description": "Foundation tokens: elevation. Every leaf has value + evidence + measuredFrom. Values come only from the clone source and CLONE_SPEC.md; nothing is invented.",
+  "$schemaNote": "A leaf is any object with a 'value' key.",
+  "elevation": {
+    "laptop-bezel": {
+      "value": "0 40px 120px rgba(0,0,0,0.7)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:156",
+        "CLONE_SPEC.md:70"
+      ]
+    },
+    "laptop-base": {
+      "value": "0 24px 60px rgba(0,0,0,0.6)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:206",
+        "CLONE_SPEC.md:72"
+      ]
+    },
+    "prompt-bar": {
+      "value": "0 0 0 1px rgba(255,255,255,0.05), 0 0 36px rgba(255,255,255,0.09), 0 0 90px rgba(255,255,255,0.04), 0 18px 50px rgba(0,0,0,0.55)",
+      "note": "Hero prompt bar glow (laptop). The phone variant drops the 90px layer.",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:19",
+        "src/components/Hero.jsx:20"
+      ]
+    },
+    "prompt-bar-phone": {
+      "value": "0 0 0 1px rgba(255,255,255,0.05), 0 0 36px rgba(255,255,255,0.09), 0 18px 50px rgba(0,0,0,0.55)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:21"
+      ]
+    },
+    "send-glow": {
+      "value": "0 0 20px rgba(255,255,255,0.45)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:135",
+        "CLONE_SPEC.md:89"
+      ]
+    },
+    "system-tile": {
+      "value": "0 10px 26px rgba(0,0,0,0.5)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:158",
+        "CLONE_SPEC.md:139"
+      ]
+    },
+    "vendor-tile": {
+      "value": "0 10px 26px rgba(0,0,0,0.55)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:104",
+        "CLONE_SPEC.md:202"
+      ]
+    },
+    "hub-chip-idle": {
+      "value": "drop-shadow(0 8px 20px rgba(0,0,0,0.6))",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:173",
+        "CLONE_SPEC.md:141"
+      ]
+    },
+    "hub-chip-active": {
+      "value": "drop-shadow(0 0 16px rgba(46,235,133,0.4))",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:173",
+        "CLONE_SPEC.md:141"
+      ]
+    },
+    "csr-frame": {
+      "value": "0 36px 100px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.025)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:91"
+      ]
+    },
+    "csr-control-shell": {
+      "value": "inset 22px 0 42px rgba(46,235,133,0.025), 0 12px 34px rgba(0,0,0,0.12)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:136"
+      ]
+    },
+    "platform-top": {
+      "value": "0 16px 36px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.035)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:57",
+        "CLONE_SPEC.md:297"
+      ]
+    },
+    "security-matrix": {
+      "value": "inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 28px 90px rgba(0, 0, 0, 0.16)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:243"
+      ]
+    },
+    "cookie-card": {
+      "value": "0 24px 60px rgba(0,0,0,0.5)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:79",
+        "CLONE_SPEC.md:415"
+      ]
+    },
+    "csr-badge-idle": {
+      "value": "0 6px 16px rgba(0,0,0,0.5)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:345"
+      ]
+    },
+    "csr-badge-answered": {
+      "value": "0 0 22px rgba(255,255,255,0.16)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:345"
+      ]
+    },
+    "csr-answer-glow": {
+      "value": "0 0 26px rgba(46,235,133,0.07)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:505"
+      ]
+    },
+    "csr-state-halo": {
+      "value": "0 0 0 4px color-mix(in srgb, currentColor 10%, transparent)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:119"
+      ]
+    }
+  }
+}

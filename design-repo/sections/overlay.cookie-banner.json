@@ -1,0 +1,231 @@
+{
+  "id": "overlay.cookie-banner",
+  "kind": "section",
+  "purpose": "The only fixed element on the site. A 420px card (bottom-left, z 60) shown when no stored consent exists, plus a preferences modal (backdrop, essential + analytics rows, three buttons) opened by Customize, the footer Cookies button, or the #cookies hash. A Global Privacy Control signal auto-rejects and stores the rejection.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "requiredOverlays": [],
+    "mustFollowFooter": true,
+    "allowedRoutes": [
+      "/",
+      "/privacy-policy/",
+      "/terms-of-service/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "label",
+      "body",
+      "privacyLinkLabel",
+      "acceptLabel",
+      "rejectLabel",
+      "customizeLabel",
+      "preferences"
+    ],
+    "properties": {
+      "label": {
+        "type": "string",
+        "maxWords": 3,
+        "cloneChars": 12
+      },
+      "body": {
+        "type": "string",
+        "maxWords": 23,
+        "cloneChars": 94
+      },
+      "privacyLinkLabel": {
+        "type": "string",
+        "maxWords": 3,
+        "cloneChars": 14
+      },
+      "acceptLabel": {
+        "type": "string",
+        "maxWords": 2,
+        "cloneChars": 6
+      },
+      "rejectLabel": {
+        "type": "string",
+        "maxWords": 4,
+        "cloneChars": 20
+      },
+      "customizeLabel": {
+        "type": "string",
+        "maxWords": 2,
+        "cloneChars": 9
+      },
+      "preferences": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "title",
+          "intro",
+          "options",
+          "saveLabel",
+          "declineLabel",
+          "allowLabel"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxWords": 3,
+            "cloneChars": 16
+          },
+          "title": {
+            "type": "string",
+            "maxWords": 7,
+            "cloneChars": 23
+          },
+          "intro": {
+            "type": "string",
+            "maxWords": 20,
+            "cloneChars": 93
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "description",
+                "required"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "maxWords": 2,
+                  "cloneChars": 9
+                },
+                "description": {
+                  "type": "string",
+                  "maxWords": 19,
+                  "cloneChars": 72
+                },
+                "required": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "saveLabel": {
+            "type": "string",
+            "maxWords": 3,
+            "cloneChars": 12
+          },
+          "declineLabel": {
+            "type": "string",
+            "maxWords": 3,
+            "cloneChars": 11
+          },
+          "allowLabel": {
+            "type": "string",
+            "maxWords": 3,
+            "cloneChars": 9
+          }
+        }
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Storage key 'acme.consent-v1' (the original uses its own key plus a legacy key; not reproduced); consent shape {analytics:boolean, marketing:boolean}; ACCEPT = analytics true, REJECT = both false",
+      "citations": [
+        "src/components/CookieBanner.jsx:5",
+        "src/components/CookieBanner.jsx:7",
+        "CLONE_SPEC.md:413"
+      ]
+    },
+    {
+      "item": "#cookies hash opens preferences then strips the hash; GPC auto-rejects",
+      "citations": [
+        "src/components/CookieBanner.jsx:54",
+        "src/components/CookieBanner.jsx:49"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "primaryTrigger": {
+      "type": "none"
+    },
+    "triggerNotes": "No animation. Appears after hydration when consent is null and the preferences modal is closed.",
+    "requiredReducedMotionFallback": "not-applicable-static",
+    "scrollLinked": false,
+    "tokens": [],
+    "measuredFrom": [
+      "CLONE_SPEC.md:411",
+      "src/components/CookieBanner.jsx:69",
+      "src/components/CookieBanner.jsx:48"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "fluid",
+      "change": "Banner width min(calc(100vw - 40px), 420px); preferences card min(92vw, 480px); no breakpoint CSS. Measured 420x162 at 1280 and 350x225 at 390.",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:77",
+        "CLONE_SPEC.md:418"
+      ]
+    }
+  ],
+  "components": [
+    "dialog-card",
+    "consent-actions",
+    "consent-option-row"
+  ],
+  "primitives": [
+    "consent-button",
+    "checkbox",
+    "mono-label",
+    "text-link"
+  ],
+  "assetRoles": [],
+  "notes": [
+    "COMPLIANCE: do not make Reject less reachable than Accept; do not pre-tick Analytics; do not drop the GPC auto-reject."
+  ],
+  "example": {
+    "label": "YOUR PRIVACY",
+    "body": "We’d like to measure anonymous site usage. Storage the site needs to run is always on. See our",
+    "privacyLinkLabel": "privacy notice",
+    "acceptLabel": "Accept",
+    "rejectLabel": "Reject optional ones",
+    "customizeLabel": "Customize",
+    "preferences": {
+      "label": "PRIVACY SETTINGS",
+      "title": "Pick what we can store.",
+      "intro": "Essential storage for security and spam protection on our forms is always active. More in our",
+      "options": [
+        {
+          "label": "Essential",
+          "description": "Needed for pages and forms to work at all. This one can’t be turned off.",
+          "required": true
+        },
+        {
+          "label": "Analytics",
+          "description": "Shows us, anonymously, which pages people read and use.",
+          "required": false
+        }
+      ],
+      "saveLabel": "Save choices",
+      "declineLabel": "Decline all",
+      "allowLabel": "Allow all"
+    }
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:411",
+    "src/App.jsx:21",
+    "src/components/CookieBanner.jsx:41-118"
+  ]
+}

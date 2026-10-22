@@ -1,0 +1,30 @@
+{
+  "id": "footer-links",
+  "kind": "component",
+  "purpose": "Right-aligned footer link group: two links and a 'Cookies' button joined by ' · ', hit areas inflated to ~44px with negative margins.",
+  "evidence": "measured-live",
+  "props": {
+    "links": {
+      "type": "array",
+      "description": "Exactly two route links.",
+      "required": true
+    },
+    "cookiesLabel": {
+      "type": "string",
+      "required": true,
+      "maxWords": 2
+    }
+  },
+  "tokensUsed": [
+    "color.alpha.white.a500",
+    "color.alpha.white.a850",
+    "spacing.footer-hit-area"
+  ],
+  "usedBy": [
+    "chrome.footer"
+  ],
+  "measuredFrom": [
+    "src/components/Footer.jsx:23-39",
+    "src/styles/sections.css:340"
+  ]
+}

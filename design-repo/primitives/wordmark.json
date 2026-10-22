@@ -1,0 +1,36 @@
+{
+  "id": "wordmark",
+  "kind": "primitive",
+  "purpose": "Brand wordmark: the placeholder 'Acme' + inverted 'OS' box, drawn as an inline SVG that follows its wrapper height. Stands in for the original's licensed lockup.",
+  "evidence": "measured-live",
+  "props": {
+    "height": {
+      "type": "number",
+      "default": 30,
+      "description": "SVG height in px; the hero logo wrapper drives it with clamp(32px, 2.3vw, 40px).",
+      "required": false
+    },
+    "assetRole": {
+      "type": "string",
+      "enum": [
+        "brand-wordmark"
+      ],
+      "required": true
+    }
+  },
+  "assetRole": "brand-wordmark",
+  "tokensUsed": [
+    "color.neutral.white",
+    "color.surface.page",
+    "typography.fontFamily.head"
+  ],
+  "usedBy": [
+    "hero.episode",
+    "legal.header"
+  ],
+  "measuredFrom": [
+    "src/components/shared/Brand.jsx:4",
+    "src/styles/hero.css:2",
+    "CLONE_SPEC.md:41"
+  ]
+}

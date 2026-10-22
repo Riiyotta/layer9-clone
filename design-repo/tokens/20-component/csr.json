@@ -1,0 +1,89 @@
+{
+  "$description": "Component-scoped tokens: csr. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "csr": {
+    "frame.maxWidth": {
+      "value": 1216,
+      "measuredFrom": [
+        "src/styles/sections.css:86",
+        "CLONE_SPEC.md:238"
+      ]
+    },
+    "frame.radius": {
+      "value": 18,
+      "measuredFrom": [
+        "src/styles/sections.css:89",
+        "CLONE_SPEC.md:238"
+      ]
+    },
+    "frame.radius.phone": {
+      "value": 14,
+      "measuredFrom": [
+        "src/styles/sections.css:175",
+        "CLONE_SPEC.md:285"
+      ]
+    },
+    "head.minHeight": {
+      "value": 60,
+      "measuredFrom": [
+        "src/styles/sections.css:109",
+        "CLONE_SPEC.md:239"
+      ]
+    },
+    "foot.minHeight": {
+      "value": 56,
+      "measuredFrom": [
+        "src/styles/sections.css:162",
+        "CLONE_SPEC.md:241"
+      ]
+    },
+    "stage.canvas": {
+      "value": "1080x542",
+      "measuredFrom": [
+        "src/styles/sections.css:120",
+        "CLONE_SPEC.md:240"
+      ]
+    },
+    "systemTile.size": {
+      "value": "116x62",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:271",
+        "CLONE_SPEC.md:272"
+      ]
+    },
+    "systemTile.background": {
+      "value": "#101112",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:280",
+        "CLONE_SPEC.md:272"
+      ]
+    },
+    "bubble.question.radius": {
+      "value": "14px 14px 14px 4px",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:428",
+        "CLONE_SPEC.md:261"
+      ]
+    },
+    "bubble.answer.radius": {
+      "value": "14px 14px 4px 14px",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:502",
+        "CLONE_SPEC.md:281"
+      ]
+    },
+    "bubble.question.background": {
+      "value": "#0A0B0C",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:429",
+        "CLONE_SPEC.md:261"
+      ]
+    },
+    "badge.size": {
+      "value": "44x44, radius 10",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:327",
+        "CLONE_SPEC.md:275"
+      ]
+    }
+  }
+}

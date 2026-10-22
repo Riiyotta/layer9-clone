@@ -1,0 +1,53 @@
+{
+  "id": "map-basemap",
+  "kind": "component",
+  "purpose": "Grid of third-party dark basemap tiles (256px, zoom 12) centred on a fixed lat/lon, with a mandatory credit label. 7x5 tiles in the hero laptop, 3x4 in the phone, 3x3 inside the use-cases map answer.",
+  "evidence": "measured-live",
+  "props": {
+    "cols": {
+      "type": "number",
+      "enum": [
+        3,
+        7
+      ],
+      "required": false
+    },
+    "rows": {
+      "type": "number",
+      "enum": [
+        3,
+        4,
+        5
+      ],
+      "required": false
+    },
+    "attribution": {
+      "type": "boolean",
+      "default": true,
+      "description": "Credit label visible; fades out (300ms) once the dashboard phase starts.",
+      "required": false
+    },
+    "assetRole": {
+      "type": "string",
+      "enum": [
+        "map-basemap-tile"
+      ],
+      "required": true
+    }
+  },
+  "assetRole": "map-basemap-tile",
+  "licensing": "Tiles are third-party CARTO/OpenStreetMap data. Credit '© CARTO © OpenStreetMap' must stay visible. CARTO's free basemap tier is non-commercial; see assets/asset-roles.json.",
+  "tokensUsed": [
+    "color.alpha.white.a350",
+    "motion.duration.hero.attribution-fade"
+  ],
+  "usedBy": [
+    "hero.episode",
+    "usecases.stage"
+  ],
+  "measuredFrom": [
+    "src/components/hero/scene.jsx:6-53",
+    "src/components/usecases/AnswerDash.jsx:23",
+    "CLONE_SPEC.md:80"
+  ]
+}

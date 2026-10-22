@@ -1,0 +1,364 @@
+{
+  "id": "overlay.demo-dialog",
+  "kind": "section",
+  "purpose": "Native <dialog> opened by any a[href=\"#demo\"] click or a #demo hash on load. Card with mono label, title, intro and an underline-only form (name, email, subscriber-count select, coverage, source, hidden honeypot, required privacy checkbox, submit). The clone simulates a 900ms send then shows a success state; it does NOT submit anywhere. The original POSTs to a live endpoint, which must never be reused.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "requiredOverlays": [],
+    "mustFollowFooter": true,
+    "allowedRoutes": [
+      "/",
+      "/privacy-policy/",
+      "/terms-of-service/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "label",
+      "title",
+      "intro",
+      "fields",
+      "consentLead",
+      "consentLinks",
+      "submitLabel",
+      "sendingLabel",
+      "errorMessage",
+      "success",
+      "submit"
+    ],
+    "properties": {
+      "label": {
+        "type": "string",
+        "maxWords": 3,
+        "cloneChars": 12
+      },
+      "title": {
+        "type": "string",
+        "maxWords": 3,
+        "cloneChars": 11
+      },
+      "intro": {
+        "type": "string",
+        "maxWords": 18,
+        "cloneChars": 77
+      },
+      "fields": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fullName",
+          "email",
+          "subscribers",
+          "coverage",
+          "source"
+        ],
+        "properties": {
+          "fullName": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "placeholder"
+            ],
+            "properties": {
+              "placeholder": {
+                "type": "string",
+                "maxWords": 3,
+                "cloneChars": 9
+              }
+            }
+          },
+          "email": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "placeholder"
+            ],
+            "properties": {
+              "placeholder": {
+                "type": "string",
+                "maxWords": 3,
+                "cloneChars": 13
+              }
+            }
+          },
+          "subscribers": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "options"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxWords": 3,
+                "cloneChars": 16
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxWords": 3,
+                  "cloneChars": 14
+                },
+                "minItems": 6,
+                "maxItems": 6
+              }
+            }
+          },
+          "coverage": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "placeholder"
+            ],
+            "properties": {
+              "placeholder": {
+                "type": "string",
+                "maxWords": 3,
+                "cloneChars": 15
+              }
+            }
+          },
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "placeholder"
+            ],
+            "properties": {
+              "placeholder": {
+                "type": "string",
+                "maxWords": 7,
+                "cloneChars": 22
+              }
+            }
+          }
+        }
+      },
+      "consentLead": {
+        "type": "string",
+        "maxWords": 7,
+        "cloneChars": 27
+      },
+      "consentLinks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "href"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxWords": 3,
+              "cloneChars": 14
+            },
+            "href": {
+              "type": "string",
+              "enum": [
+                "/privacy-policy/",
+                "/terms-of-service/"
+              ]
+            }
+          }
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "submitLabel": {
+        "type": "string",
+        "maxWords": 2,
+        "cloneChars": 4
+      },
+      "sendingLabel": {
+        "type": "string",
+        "maxWords": 2,
+        "cloneChars": 8
+      },
+      "errorMessage": {
+        "type": "string",
+        "maxWords": 8,
+        "cloneChars": 37
+      },
+      "success": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "message",
+          "closeLabel"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxWords": 2,
+            "cloneChars": 8
+          },
+          "message": {
+            "type": "string",
+            "maxWords": 7,
+            "cloneChars": 29
+          },
+          "closeLabel": {
+            "type": "string",
+            "maxWords": 2,
+            "cloneChars": 4
+          }
+        }
+      },
+      "submit": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetRole"
+        ],
+        "properties": {
+          "assetRole": {
+            "type": "string",
+            "enum": [
+              "form-submit-endpoint"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Form field names (full_name, email, number_of_subscribers, coverage_areas, how_did_you_hear_about_us, honeypot 'website', checkbox privacyPolicy) mirror the original's payload names",
+      "citations": [
+        "src/components/DemoDialog.jsx:133",
+        "src/components/DemoDialog.jsx:146",
+        "src/components/DemoDialog.jsx:184",
+        "CLONE_SPEC.md:405"
+      ]
+    },
+    {
+      "item": "Subscriber option VALUES (N/A, under-1000, 1000-5000, 5000-10000, 10000-50000, 50000-100000, 100000+) are fixed",
+      "citations": [
+        "src/components/DemoDialog.jsx:151"
+      ]
+    },
+    {
+      "item": "Original: POST /api/submit-form/ with a JSON body and an x-l9-submission-id uuid header. NOT reproduced; the clone sends nothing.",
+      "citations": [
+        "CLONE_SPEC.md:409",
+        "src/components/DemoDialog.jsx:4"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "primaryTrigger": {
+      "type": "none"
+    },
+    "triggerNotes": "No open or close animation (native dialog). Closes on backdrop click, the x button or Esc.",
+    "requiredReducedMotionFallback": "not-applicable-static",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.chrome.demo-simulated-send",
+      "motion.duration.chrome.dialog-animation"
+    ],
+    "measuredFrom": [
+      "CLONE_SPEC.md:384",
+      "src/components/DemoDialog.jsx:5",
+      "src/components/DemoDialog.jsx:30",
+      "CLONE_SPEC.md:389"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "fluid",
+      "change": "dialog max-width min(92vw, 460px), width 100%; no breakpoint CSS.",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:69",
+        "CLONE_SPEC.md:391"
+      ]
+    }
+  ],
+  "components": [
+    "dialog-card"
+  ],
+  "primitives": [
+    "text-field",
+    "checkbox",
+    "mono-label",
+    "text-link",
+    "pill"
+  ],
+  "assetRoles": [
+    "form-submit-endpoint"
+  ],
+  "notes": [
+    "COMPLIANCE: the submit role is pinned to must-not-reuse-live-endpoint. A generated page must point at its own endpoint or keep the simulation; it must never POST to the original's endpoint."
+  ],
+  "example": {
+    "label": "REQUEST DEMO",
+    "title": "Let’s talk.",
+    "intro": "Share a little about your network and we’ll line up a walkthrough from there.",
+    "fields": {
+      "fullName": {
+        "placeholder": "Your name"
+      },
+      "email": {
+        "placeholder": "Company email"
+      },
+      "subscribers": {
+        "label": "Subscriber count",
+        "options": [
+          "Under 1,000",
+          "1,000–5,000",
+          "5,000–10,000",
+          "10,000–50,000",
+          "50,000–100,000",
+          "100,000+"
+        ]
+      },
+      "coverage": {
+        "placeholder": "Service regions"
+      },
+      "source": {
+        "placeholder": "Where did you find us?"
+      }
+    },
+    "consentLead": "By sending, I accept Acme’s",
+    "consentLinks": [
+      {
+        "label": "privacy notice",
+        "href": "/privacy-policy/"
+      },
+      {
+        "label": "terms",
+        "href": "/terms-of-service/"
+      }
+    ],
+    "submitLabel": "Book",
+    "sendingLabel": "Sending…",
+    "errorMessage": "That didn’t go through. Please retry.",
+    "success": {
+      "label": "RECEIVED",
+      "message": "Thanks, we’ll reach out soon.",
+      "closeLabel": "Done"
+    },
+    "submit": {
+      "assetRole": "form-submit-endpoint"
+    }
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:384",
+    "src/App.jsx:20",
+    "src/components/DemoDialog.jsx:23-235"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "chip-mark",
+  "kind": "primitive",
+  "purpose": "Square notched 'chip' glyph with a neon-to-purple gradient edge and a centred letter. Placeholder for the original's licensed mark.",
+  "evidence": "measured-live",
+  "props": {
+    "size": {
+      "type": "number",
+      "default": 88,
+      "required": false
+    },
+    "glyph": {
+      "type": "string",
+      "default": "A",
+      "required": false,
+      "maxWords": 1
+    },
+    "active": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "assetRole": {
+      "type": "string",
+      "enum": [
+        "brand-chip-mark"
+      ],
+      "required": true
+    }
+  },
+  "assetRole": "brand-chip-mark",
+  "tokensUsed": [
+    "color.accent.neon"
+  ],
+  "usedBy": [
+    "usecases.stage",
+    "platform.stack"
+  ],
+  "measuredFrom": [
+    "src/components/shared/Brand.jsx:19",
+    "src/components/UseCases.jsx:177",
+    "src/components/AgentPlatform.jsx:180"
+  ]
+}

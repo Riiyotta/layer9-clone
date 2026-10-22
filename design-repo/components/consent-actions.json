@@ -1,0 +1,34 @@
+{
+  "id": "consent-actions",
+  "kind": "component",
+  "purpose": "Row of three consent controls (solid accept, ghost reject, underlined customise) in the banner; the preferences modal uses solid save + two ghost buttons.",
+  "evidence": "measured-live",
+  "props": {
+    "primaryLabel": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "secondaryLabel": {
+      "type": "string",
+      "required": true,
+      "maxWords": 4
+    },
+    "tertiaryLabel": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    }
+  },
+  "compliance": "Accept/Reject/Customise must stay equally reachable; Reject must not be hidden or restyled to be less prominent than Accept.",
+  "tokensUsed": [
+    "component.consent.button.padding"
+  ],
+  "usedBy": [
+    "overlay.cookie-banner"
+  ],
+  "measuredFrom": [
+    "src/components/CookieBanner.jsx:88-111",
+    "src/components/CookieBanner.jsx:179-189"
+  ]
+}

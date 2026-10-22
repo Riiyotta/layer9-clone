@@ -1,0 +1,41 @@
+{
+  "id": "caret",
+  "kind": "primitive",
+  "purpose": "Blinking typing caret. 6x15 in the hero prompt bar (5x13 on the phone), 6x14 in the CSR question bubble; blinks 0.9s step-end; only visible mid-typing.",
+  "evidence": "measured-live",
+  "props": {
+    "widthPx": {
+      "type": "number",
+      "enum": [
+        5,
+        6
+      ],
+      "required": true
+    },
+    "heightPx": {
+      "type": "number",
+      "enum": [
+        13,
+        14,
+        15
+      ],
+      "required": true
+    }
+  },
+  "motion": {
+    "reducedMotion": "animation none"
+  },
+  "tokensUsed": [
+    "motion.duration.hero.caret-blink",
+    "motion.easing.step-end"
+  ],
+  "usedBy": [
+    "hero.episode",
+    "csr.loop"
+  ],
+  "measuredFrom": [
+    "src/styles/sections.css:3",
+    "src/styles/sections.css:172",
+    "CLONE_SPEC.md:89"
+  ]
+}

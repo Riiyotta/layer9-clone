@@ -1,0 +1,131 @@
+{
+  "$description": "The site has ONE theme (dark, color-scheme: dark, body #090909). There is no light theme and no theme switcher; this file resolves every semantic role to a foundation value.",
+  "theme": "dark",
+  "colorScheme": "dark",
+  "measuredFrom": [
+    "src/index.css:14",
+    "CLONE_SPEC.md:30"
+  ],
+  "resolved": {
+    "text.primary": {
+      "ref": "color.neutral.white",
+      "value": "#FFFFFF"
+    },
+    "text.dim": {
+      "ref": "color.alpha.white.a550",
+      "value": "rgba(255,255,255,0.55)"
+    },
+    "text.lede": {
+      "ref": "color.alpha.white.a750",
+      "value": "rgba(255,255,255,0.75)"
+    },
+    "text.inverse": {
+      "ref": "color.surface.page",
+      "value": "#090909"
+    },
+    "text.ghost-label": {
+      "ref": "color.alpha.white.a880",
+      "value": "rgba(255,255,255,0.88)"
+    },
+    "text.accent-neon": {
+      "ref": "color.accent.neon",
+      "value": "#2EEB85"
+    },
+    "text.accent-alert": {
+      "ref": "color.accent.stop-orange",
+      "value": "#FF5722"
+    },
+    "surface.page": {
+      "ref": "color.surface.page",
+      "value": "#090909"
+    },
+    "surface.graphite": {
+      "ref": "color.surface.graphite",
+      "value": "#191919"
+    },
+    "surface.tile": {
+      "ref": "color.surface.tile",
+      "value": "#1E1E1E"
+    },
+    "surface.dialog": {
+      "ref": "color.surface.dialog",
+      "value": "#101112"
+    },
+    "surface.well": {
+      "ref": "color.solid.h0b0b0c",
+      "value": "#0B0B0C"
+    },
+    "surface.tint": {
+      "ref": "color.alpha.white.a030",
+      "value": "rgba(255,255,255,0.03)"
+    },
+    "surface.hover-wash": {
+      "ref": "color.alpha.white.a018",
+      "value": "rgba(255,255,255,0.018)"
+    },
+    "border.hairline": {
+      "ref": "color.alpha.white.a100",
+      "value": "rgba(255,255,255,0.1)"
+    },
+    "border.ghost": {
+      "ref": "color.alpha.white.a250",
+      "value": "rgba(255,255,255,0.25)"
+    },
+    "border.dialog": {
+      "ref": "color.alpha.white.a140",
+      "value": "rgba(255,255,255,0.14)"
+    },
+    "border.tile": {
+      "ref": "color.solid.h232327",
+      "value": "#232327"
+    },
+    "border.tile-match": {
+      "ref": "color.solid.h3a3a3e",
+      "value": "#3A3A3E"
+    },
+    "border.panel": {
+      "ref": "color.status.panel-border",
+      "value": "#2A2B2E"
+    },
+    "accent.neon": {
+      "ref": "color.accent.neon",
+      "value": "#2EEB85"
+    },
+    "accent.blink": {
+      "ref": "color.accent.blink",
+      "value": "#FF602E"
+    },
+    "accent.boost": {
+      "ref": "color.accent.boost",
+      "value": "#BE6CF3"
+    },
+    "accent.alert": {
+      "ref": "color.accent.stop-orange",
+      "value": "#FF5722"
+    },
+    "accent.neon-border": {
+      "ref": "color.alpha.neon.a180",
+      "value": "rgba(46,235,133,0.18)"
+    },
+    "accent.neon-fill": {
+      "ref": "color.alpha.neon.a045",
+      "value": "rgba(46,235,133,0.045)"
+    },
+    "state.critical": {
+      "ref": "color.status.critical",
+      "value": "#D52B3A"
+    },
+    "state.critical-text": {
+      "ref": "color.status.critical-text",
+      "value": "#FF8089"
+    },
+    "state.outage": {
+      "ref": "color.status.outage",
+      "value": "#FF453A"
+    },
+    "state.selection": {
+      "ref": "color.misc.selection",
+      "value": "#2EEB8559"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$description": "Foundation tokens: breakpoint. Every leaf has value + evidence + measuredFrom. Values come only from the clone source and CLONE_SPEC.md; nothing is invented.",
+  "$schemaNote": "A leaf is any object with a 'value' key.",
+  "breakpoint": {
+    "ledes-wrap": {
+      "value": {
+        "query": "(max-width: 1080px)",
+        "px": 1080
+      },
+      "note": "CSR, platform and security ledes go from nowrap to normal wrapping.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:81",
+        "CLONE_SPEC.md:425"
+      ]
+    },
+    "platform-stack": {
+      "value": {
+        "query": "(max-width: 760px)",
+        "px": 760
+      },
+      "note": "Platform row becomes a column; padding and type shrink.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:208",
+        "CLONE_SPEC.md:426"
+      ]
+    },
+    "phone": {
+      "value": {
+        "query": "(max-width: 720px)",
+        "px": 720
+      },
+      "note": "Hero laptop->phone, use-cases stage->mobile list, integrations 9->5 columns, CSR stage->mobile rows, security 2x2->1 column, closing stage width-driven.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:11",
+        "CLONE_SPEC.md:427"
+      ]
+    },
+    "hover-fine": {
+      "value": {
+        "query": "(hover: hover) and (pointer: fine)"
+      },
+      "note": "Security quadrant hover only.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:304",
+        "CLONE_SPEC.md:336"
+      ]
+    },
+    "reduced-motion": {
+      "value": {
+        "query": "(prefers-reduced-motion: reduce)"
+      },
+      "note": "CSS animations off; JS episodes render the final state with no timers (useReducedMotion).",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:12",
+        "CLONE_SPEC.md:429"
+      ]
+    },
+    "hero-js-match": {
+      "value": {
+        "query": "(max-width: 720px)",
+        "px": 720
+      },
+      "note": "The phone variant is also mounted from JS (usePhone) at the same 720px breakpoint.",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:40"
+      ]
+    }
+  }
+}

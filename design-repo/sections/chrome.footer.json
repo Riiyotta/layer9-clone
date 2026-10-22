@@ -1,0 +1,137 @@
+{
+  "id": "chrome.footer",
+  "kind": "section",
+  "purpose": "Global footer rendered after every page's main content: copyright text on the left, two route links and a 'Cookies' button on the right (separated by ' · '). Not part of the page body; rendered once by App.jsx for every route.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "requiredOverlays": [
+      "overlay.cookie-banner"
+    ],
+    "mustFollowContent": true,
+    "allowedRoutes": [
+      "/",
+      "/privacy-policy/",
+      "/terms-of-service/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "copyright",
+      "links",
+      "cookiesLabel"
+    ],
+    "properties": {
+      "copyright": {
+        "type": "string",
+        "maxWords": 8,
+        "cloneChars": 31,
+        "originalChars": 31,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4560"
+        ]
+      },
+      "links": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "href"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxWords": 2,
+              "cloneChars": 7
+            },
+            "href": {
+              "type": "string",
+              "enum": [
+                "/privacy-policy/",
+                "/terms-of-service/"
+              ]
+            }
+          }
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "cookiesLabel": {
+        "type": "string",
+        "maxWords": 2,
+        "cloneChars": 7
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "The Cookies button calls openCookiePreferences (dispatches an event the banner listens for)",
+      "citations": [
+        "src/components/Footer.jsx:27",
+        "src/components/CookieBanner.jsx:11"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "primaryTrigger": {
+      "type": "none"
+    },
+    "triggerNotes": "Static. Link hover colour change (200ms) only.",
+    "requiredReducedMotionFallback": "not-applicable-static",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.chrome.footer-link-color"
+    ],
+    "measuredFrom": [
+      "CLONE_SPEC.md:375",
+      "src/styles/sections.css:336"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "fluid",
+      "change": "flex row with wrap and gap 6px 24px; wraps below the width where both groups no longer fit; no breakpoint-specific CSS.",
+      "measuredFrom": [
+        "src/components/Footer.jsx:12",
+        "src/components/Footer.jsx:13"
+      ]
+    }
+  ],
+  "components": [
+    "footer-links"
+  ],
+  "primitives": [
+    "text-link"
+  ],
+  "assetRoles": [],
+  "example": {
+    "copyright": "© 2026 Acme Inc. Made for ISPs.",
+    "links": [
+      {
+        "label": "Privacy",
+        "href": "/privacy-policy/"
+      },
+      {
+        "label": "Terms",
+        "href": "/terms-of-service/"
+      }
+    ],
+    "cookiesLabel": "Cookies"
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:375",
+    "src/App.jsx:19",
+    "src/components/Footer.jsx:6-42"
+  ]
+}

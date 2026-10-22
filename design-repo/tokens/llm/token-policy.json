@@ -1,0 +1,46 @@
+{
+  "policyVersion": "1.0.0",
+  "$description": "Rules for how a generator may use token values. rawValueRestrictions keys are category names that must exist in token-catalog.json categories (checked by verify_all.py).",
+  "rawValueRestrictions": {
+    "color": {
+      "rule": "Use a catalogue colour path or a semantic role. Do not introduce a hex or rgba value that is not in the catalogue.",
+      "severity": "error"
+    },
+    "fontFamily": {
+      "rule": "Only the head, body and mono stacks. The licensed original typefaces are not included and must not be added.",
+      "severity": "error"
+    },
+    "fontSize": {
+      "rule": "Use a typeStyle (h1, h2, lede, eyebrow) for page-level text; small mono sizes (<=11px) only inside scaled canvases.",
+      "severity": "warn"
+    },
+    "fontWeight": {
+      "rule": "Head text is weight 350; other weights only from the catalogue.",
+      "severity": "warn"
+    },
+    "radius": {
+      "rule": "Use catalogue radii; 999 for pills, 12% for system/vendor tiles.",
+      "severity": "warn"
+    },
+    "elevation": {
+      "rule": "Use catalogue shadows; do not invent new box-shadow values.",
+      "severity": "error"
+    },
+    "spacing": {
+      "rule": "Section padding is the section-pad clamp; do not substitute fixed values.",
+      "severity": "warn"
+    },
+    "motion": {
+      "rule": "Use the catalogued springs, easings and durations. framer-motion and motion-dom stay pinned to 12.42.2.",
+      "severity": "error"
+    },
+    "breakpoint": {
+      "rule": "Only 1080, 760 and 720 plus the hover/pointer and reduced-motion queries.",
+      "severity": "error"
+    }
+  },
+  "overrides": {
+    "status": "not-applicable",
+    "reason": "The PageSpec schema has no per-instance style or token-override field (styling is owned by the section and component contracts), so there is nothing to validate or mutate at the PageSpec layer. Drift is checked at the catalogue/policy layer by verify_all.py (category names resolve against catalogue keys; catalogue is recomputed from the token files)."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "metric-foot",
+  "kind": "component",
+  "purpose": "CSR frame footer: three number+label metrics and a right-aligned audit note (note hidden on phone, metrics become 3 equal columns).",
+  "evidence": "measured-live",
+  "props": {
+    "metrics": {
+      "type": "array",
+      "description": "Exactly three {value,label}.",
+      "required": true
+    },
+    "auditNote": {
+      "type": "string",
+      "required": false,
+      "maxWords": 8
+    }
+  },
+  "tokensUsed": [
+    "typography.fontFamily.mono",
+    "color.alpha.white.a420"
+  ],
+  "usedBy": [
+    "csr.loop"
+  ],
+  "measuredFrom": [
+    "src/components/ControlCenter.jsx:539-552",
+    "src/styles/sections.css:192"
+  ]
+}

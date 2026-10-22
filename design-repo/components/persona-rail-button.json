@@ -1,0 +1,60 @@
+{
+  "id": "persona-rail-button",
+  "kind": "component",
+  "purpose": "Left-rail persona selector in the use-cases app window: mono persona label, accent dot, name, and a progress track. Active state brightens name and dot.",
+  "evidence": "measured-live",
+  "props": {
+    "persona": {
+      "type": "string",
+      "description": "Mono label, e.g. 'FOR FINANCE TEAM'.",
+      "required": true,
+      "maxWords": 5
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "accent": {
+      "type": "string",
+      "enum": [
+        "boost",
+        "neon",
+        "blink"
+      ],
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  },
+  "variants": [
+    "desktop-rail (full height buttons)",
+    "mobile-pillar (3 columns, min-height 44)"
+  ],
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.phone",
+      "change": "stacked rail buttons -> 3-column pillar row (name + dot only)",
+      "measuredFrom": [
+        "src/styles/sections.css:31"
+      ]
+    }
+  ],
+  "tokensUsed": [
+    "color.accent.boost",
+    "color.accent.neon",
+    "color.accent.blink",
+    "color.alpha.white.a030",
+    "component.usecases.rail.width"
+  ],
+  "usedBy": [
+    "usecases.stage"
+  ],
+  "measuredFrom": [
+    "src/components/UseCases.jsx:193",
+    "CLONE_SPEC.md:160"
+  ]
+}

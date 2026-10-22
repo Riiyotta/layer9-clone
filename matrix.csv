@@ -1,0 +1,14 @@
+section,category,templates,routes,Home,Legal prose
+shell.footer,SHELL,2,3,x,x
+shell.cookie-banner,SHELL,2,3,x,x
+shell.demo-dialog,SHELL,2,3,x,x
+content.legal-header,CONTENT,1,2,,x
+content.legal-body,CONTENT,1,2,,x
+hero.agentic-episode,HERO,1,1,x,
+product.use-cases-stage,PRODUCT,1,1,x,
+product.integrations-grid,PRODUCT,1,1,x,
+product.control-center-loop,PRODUCT,1,1,x,
+product.agent-platform-stack,PRODUCT,1,1,x,
+trust.security-matrix,TRUST,1,1,x,
+cta.closing-stack,CTA,1,1,x,
+ROUTE COUNT,,,3,1,2

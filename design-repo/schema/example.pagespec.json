@@ -1,0 +1,1344 @@
+{
+  "template": "home",
+  "route": "/",
+  "documentTitle": "Acme OS — The Autonomous Brain for Modern ISPs",
+  "nodes": [
+    {
+      "type": "hero.episode",
+      "content": {
+        "logo": {
+          "assetRole": "brand-wordmark"
+        },
+        "eyebrow": "THE ISP AI PLATFORM",
+        "headline": "The Autonomous Brain for Modern ISPs.",
+        "primaryCta": {
+          "label": "Get a demo",
+          "href": "#demo"
+        },
+        "secondaryCta": {
+          "label": "How it works",
+          "href": "#use-cases"
+        },
+        "episode": {
+          "promptPlaceholder": "Ask a question about your network…",
+          "prompts": [
+            "Which subscribers look likely to leave?",
+            "Turn this into a dashboard grouped by risk tier and root causes.",
+            "Export these results to a spreadsheet",
+            "Send this summary to the support leads.",
+            "Set this report to go out every Monday at 7 a.m."
+          ],
+          "mapBasemap": {
+            "assetRole": "map-basemap-tile"
+          },
+          "scene": {
+            "assetRole": "illustration-scene"
+          },
+          "callouts": [
+            {
+              "text": "39 ELEVATED RISK · PINE HOLLOW / MARLOWE / ASHFORD",
+              "tone": "elevated"
+            },
+            {
+              "text": "3 CRITICAL",
+              "tone": "critical"
+            },
+            {
+              "text": "7 RECENT OUTAGES",
+              "tone": "elevated"
+            }
+          ],
+          "smallCallouts": [
+            {
+              "text": "WEAK RX · −27.0 dBm"
+            },
+            {
+              "text": "WEAK RX · −25.0 dBm"
+            },
+            {
+              "text": "LINK FLAPPED"
+            }
+          ],
+          "dashboard": {
+            "title": "RETENTION RISK · PAST 30D",
+            "kpis": [
+              {
+                "label": "AT RISK",
+                "value": "42",
+                "sub": "of 52,180 subs",
+                "tone": "default"
+              },
+              {
+                "label": "ESCALATED",
+                "value": "3",
+                "sub": "score ≥ 80",
+                "tone": "critical"
+              },
+              {
+                "label": "PROMO ENDING",
+                "value": "11",
+                "sub": "of 42 at risk",
+                "tone": "default"
+              }
+            ],
+            "townBars": [
+              {
+                "label": "Pine Hollow",
+                "count": 17
+              },
+              {
+                "label": "Marlowe",
+                "count": 15
+              },
+              {
+                "label": "Ashford",
+                "count": 10
+              }
+            ],
+            "driverBars": [
+              {
+                "label": "Promo expiring",
+                "count": 19
+              },
+              {
+                "label": "Slow speeds",
+                "count": 12
+              },
+              {
+                "label": "Repeat outages",
+                "count": 7
+              },
+              {
+                "label": "Other",
+                "count": 4
+              }
+            ]
+          },
+          "schedules": [
+            {
+              "name": "Retention watch",
+              "to": "Support leads",
+              "cadence": "MON · 7:00 AM",
+              "isNew": true
+            },
+            {
+              "name": "Network health",
+              "to": "NOC",
+              "cadence": "DAILY · 5:30 AM"
+            },
+            {
+              "name": "Exec scorecard",
+              "to": "Leadership",
+              "cadence": "FRI · 3:00 PM"
+            },
+            {
+              "name": "Upsell candidates",
+              "to": "Sales",
+              "cadence": "1ST OF MONTH"
+            },
+            {
+              "name": "Capex payback review",
+              "to": "Finance",
+              "cadence": "QUARTERLY"
+            }
+          ]
+        }
+      },
+      "motion": {
+        "pattern": "typing-episode-loop",
+        "trigger": "useInView",
+        "inViewAmount": 0.3,
+        "once": false,
+        "loopPeriodMs": 21300,
+        "reducedMotionFallback": "final-state-no-timers"
+      }
+    },
+    {
+      "type": "usecases.stage",
+      "content": {
+        "eyebrow": "02 · HOW ACME WORKS",
+        "titleLines": [
+          "Link Every Tool You Run.",
+          "Then Act On Every Answer."
+        ],
+        "lede": "Ask in plain words and get the answer, the proof behind it, and what to do next.",
+        "hubMark": {
+          "assetRole": "brand-chip-mark"
+        },
+        "systems": [
+          {
+            "label": "Billing",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "CRM",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "Network",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "Plant map",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "Ticketing",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "Ops",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "Messaging",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "Docs",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "Bank",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          }
+        ],
+        "personas": [
+          {
+            "name": "Finance",
+            "persona": "FOR FINANCE TEAM",
+            "accent": "boost",
+            "prompts": [
+              {
+                "tag": "TRACK THE MONEY",
+                "question": "Summarize this month’s revenue.",
+                "action": "View the revenue report →",
+                "dash": {
+                  "kind": "kpi",
+                  "caption": "REVENUE SNAPSHOT · THIS MONTH",
+                  "sources": "BILLING / LEDGER / CRM / TICKETS",
+                  "updated": "07:52 AM",
+                  "stats": [
+                    {
+                      "v": "36,905",
+                      "l": "PAYING SUBS",
+                      "delta": "+418 net · 30d"
+                    },
+                    {
+                      "v": "$2.64M",
+                      "l": "RECURRING",
+                      "delta": "+2.4% MoM"
+                    },
+                    {
+                      "v": "$71.55",
+                      "l": "AVG REVENUE",
+                      "delta": "+$0.95 · 30d",
+                      "hot": true
+                    }
+                  ],
+                  "split": {
+                    "title": "REVENUE PER PLAN TIER",
+                    "note": "BLENDED $71.55",
+                    "rows": [
+                      {
+                        "label": "GIGABIT",
+                        "v": "$92.10",
+                        "pct": 92,
+                        "hot": true
+                      },
+                      {
+                        "label": "BASIC",
+                        "v": "$54.80",
+                        "pct": 55
+                      }
+                    ]
+                  },
+                  "foot": "Gigabit plans now drive 61% of revenue"
+                }
+              },
+              {
+                "tag": "SPOT THE LEAKS",
+                "question": "Which promos are costing us the most?",
+                "action": "Review promo expirations →",
+                "dash": {
+                  "kind": "tiles",
+                  "caption": "PROMO COST · LAST 90 DAYS",
+                  "sources": "BILLING / PROMOS / CRM",
+                  "updated": "3M AGO",
+                  "tiles": [
+                    {
+                      "l": "SPRING BUNDLE",
+                      "v": "$41.2K",
+                      "delta": "+12% vs plan",
+                      "spark": [
+                        4,
+                        6,
+                        5,
+                        8,
+                        9,
+                        12,
+                        14
+                      ],
+                      "detail": "2,140 accts still on promo",
+                      "hot": true
+                    },
+                    {
+                      "l": "FREE INSTALL",
+                      "v": "$18.7K",
+                      "delta": "flat",
+                      "spark": [
+                        7,
+                        6,
+                        7,
+                        7,
+                        6,
+                        7,
+                        7
+                      ],
+                      "detail": "offset by 9% lower churn"
+                    },
+                    {
+                      "l": "LOYALTY CREDIT",
+                      "v": "$9.3K",
+                      "delta": "-3%",
+                      "spark": [
+                        5,
+                        5,
+                        4,
+                        4,
+                        3,
+                        3,
+                        2
+                      ],
+                      "detail": "auto-expires in 21 days"
+                    },
+                    {
+                      "l": "STAFF PLANS",
+                      "v": "$3.1K",
+                      "delta": "flat",
+                      "spark": [
+                        3,
+                        3,
+                        3,
+                        4,
+                        3,
+                        3,
+                        3
+                      ],
+                      "detail": "64 employee lines"
+                    }
+                  ],
+                  "foot": "Spring bundle runs $4.9K/mo over budget"
+                }
+              },
+              {
+                "tag": "PLAN THE QUARTER",
+                "question": "How did collections trend this quarter?",
+                "action": "Open the aging report →",
+                "dash": {
+                  "kind": "bars",
+                  "caption": "COLLECTIONS RATE · BY MONTH",
+                  "sources": "BILLING / PAYMENTS / LEDGER",
+                  "updated": "1H AGO",
+                  "marker": {
+                    "at": 90,
+                    "label": "TARGET 90%"
+                  },
+                  "bars": [
+                    {
+                      "label": "JUN",
+                      "value": "84%",
+                      "h": 74
+                    },
+                    {
+                      "label": "JUL",
+                      "value": "86%",
+                      "h": 75
+                    },
+                    {
+                      "label": "AUG",
+                      "value": "93%",
+                      "h": 81,
+                      "hot": true
+                    },
+                    {
+                      "label": "SEP MTD",
+                      "value": "61%",
+                      "h": 55
+                    }
+                  ],
+                  "foot": "August beat target as autopay rose 6 pts"
+                }
+              }
+            ]
+          },
+          {
+            "name": "NetOps",
+            "persona": "FOR NETWORK OPERATORS",
+            "accent": "neon",
+            "prompts": [
+              {
+                "tag": "FIND ROOT CAUSE",
+                "question": "Why is this subscriber dropping at night?",
+                "action": "Ship a replacement router →",
+                "dash": {
+                  "kind": "steps",
+                  "caption": "SUBSCRIBER DIAGNOSIS · LIVE",
+                  "sources": "OPTICS / CPE MGMT / TICKETS",
+                  "updated": "7S AGO",
+                  "steps": [
+                    {
+                      "text": "Light levels sit within range on every reading",
+                      "stat": "OK"
+                    },
+                    {
+                      "text": "Router resets nightly near 01:10 and 03:40",
+                      "stat": "2 RESETS",
+                      "hot": true
+                    },
+                    {
+                      "text": "An escalated ticket has waited for 4 days",
+                      "stat": "AGING"
+                    },
+                    {
+                      "text": "Likely the router power supply, not the fiber",
+                      "stat": "VERDICT"
+                    }
+                  ],
+                  "foot": "Root cause isolated in 7 seconds, any vendor"
+                }
+              },
+              {
+                "tag": "SHRINK OUTAGES",
+                "question": "Show me where this outage begins.",
+                "action": "Send a splice crew to the break →",
+                "dash": {
+                  "kind": "map",
+                  "geometryPreset": "outage-fiber-break",
+                  "caption": "OUTAGE PATH · LIVE",
+                  "sources": "NMS / FIBER PLANT / ALARMS",
+                  "updated": "5S AGO",
+                  "foot": "One broken span · 58 modems sit behind it",
+                  "ringLabel": "58 MODEMS DOWN",
+                  "legend": [
+                    {
+                      "label": "MODEM DOWN",
+                      "tone": "hot"
+                    },
+                    {
+                      "label": "MODEM UP",
+                      "tone": "dim"
+                    }
+                  ],
+                  "siteLabel": "OLT-2",
+                  "breakLabel": "BREAK",
+                  "hubLabel": "CAB-7"
+                }
+              },
+              {
+                "tag": "UPGRADE SAFELY",
+                "question": "Schedule firmware 4.1 for all routers on Sunday.",
+                "action": "Approve the staged plan →",
+                "dash": {
+                  "kind": "rows",
+                  "caption": "STAGED UPDATE · 512 ROUTERS",
+                  "sources": "CPE MGMT / INVENTORY / CRM",
+                  "updated": "12S AGO",
+                  "rows": [
+                    {
+                      "left": "Wave 1 · quietest nodes go first",
+                      "sub": "no business accounts · 3 nodes",
+                      "right": "180 CPES",
+                      "meta": "SUN 01:00",
+                      "hot": true
+                    },
+                    {
+                      "left": "Wave 2 · waits on wave 1 health",
+                      "sub": "auto-revert above 1.5% errors",
+                      "right": "170 CPES",
+                      "meta": "SUN 01:50"
+                    },
+                    {
+                      "left": "Wave 3 · remaining fleet",
+                      "sub": "finishes the rollout · 4 nodes",
+                      "right": "162 CPES",
+                      "meta": "SUN 02:40"
+                    }
+                  ],
+                  "foot": "512 routers over 9 nodes · about 2h 30m"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Care Desk",
+            "persona": "FOR SUPPORT LEADS",
+            "accent": "blink",
+            "prompts": [
+              {
+                "tag": "KEEP SLAS GREEN",
+                "question": "Rank today’s open tickets by customer impact.",
+                "action": "Open the ranked ticket queue →",
+                "dash": {
+                  "kind": "rows",
+                  "caption": "OPEN TICKETS · IMPACT × SLA",
+                  "sources": "TICKETS / NMS / CRM / SLA",
+                  "updated": "10S AGO",
+                  "rows": [
+                    {
+                      "left": "TKT-7713 · Maple Ridge",
+                      "sub": "node 4 · intermittent loss",
+                      "right": "74 SUBS · 26M",
+                      "meta": "SLA IN 19M",
+                      "hot": true
+                    },
+                    {
+                      "left": "TKT-7709 · Lakeview",
+                      "sub": "business line · tech en route",
+                      "right": "33 SUBS · 14M",
+                      "meta": "ETA 9M"
+                    },
+                    {
+                      "left": "TKT-7716 · Pine Hollow",
+                      "sub": "Wi-Fi channel clash · fix queued",
+                      "right": "9 SUBS",
+                      "meta": "REMOTE"
+                    }
+                  ],
+                  "foot": "Maple Ridge raised to P1 · crew alerted"
+                }
+              },
+              {
+                "tag": "STOP REPEAT VISITS",
+                "question": "Where do our techs keep going back?",
+                "action": "Open the callback list →",
+                "dash": {
+                  "kind": "map",
+                  "geometryPreset": "repeat-visit-heat",
+                  "caption": "REPEAT VISITS · LAST 12 MONTHS",
+                  "sources": "WORK ORDERS / CPE DATA / GIS",
+                  "updated": "40S AGO",
+                  "foot": "$86K in repeats · $8.1K avoidable now",
+                  "ringLabel": "SHARED CABINET",
+                  "legend": [
+                    {
+                      "label": "REPEAT SITE · SIZE = VISITS",
+                      "tone": "hot"
+                    },
+                    {
+                      "label": "ONE VISIT",
+                      "tone": "dim"
+                    }
+                  ]
+                }
+              },
+              {
+                "tag": "LEARN EACH WEEK",
+                "question": "Recap last week’s field tickets.",
+                "action": "Open the weekly summary →",
+                "dash": {
+                  "kind": "report",
+                  "caption": "FIELD TICKETS · LAST WEEK",
+                  "sources": "TICKETS / DISPATCH / CPE MGMT",
+                  "updated": "MON 06:30",
+                  "lines": [
+                    {
+                      "text": "187 tickets closed across 6 crews",
+                      "stat": "WEEK"
+                    },
+                    {
+                      "text": "91% fixed on the very first visit",
+                      "stat": "+3 PTS",
+                      "hot": true
+                    },
+                    {
+                      "text": "15 repeats, 9 of them tied to one cabinet",
+                      "stat": "REPEATS"
+                    },
+                    {
+                      "text": "27 solved remotely with no truck sent",
+                      "stat": "SAVED"
+                    },
+                    {
+                      "text": "4 installs queued for quality review",
+                      "stat": "QA"
+                    }
+                  ],
+                  "foot": "Repeat visits fell 3 pts from the prior week"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "motion": {
+        "pattern": "persona-autoplay-stage",
+        "trigger": "useInView",
+        "inViewAmount": 0.2,
+        "once": true,
+        "loopPeriodMs": 7000,
+        "reducedMotionFallback": "final-state-no-timers"
+      }
+    },
+    {
+      "type": "integrations.grid",
+      "content": {
+        "eyebrow": "03 · CONNECTORS",
+        "heading": "Plugs into the tools you run now.",
+        "lede": "Routers, radios, monitoring and billing: Acme already speaks all of them.",
+        "categories": [
+          {
+            "key": "fiber",
+            "label": "FIBER",
+            "accent": "blink"
+          },
+          {
+            "key": "fixed-wireless",
+            "label": "FIXED WIRELESS",
+            "accent": "boost"
+          },
+          {
+            "key": "wi-fi",
+            "label": "WI-FI",
+            "accent": "neon"
+          },
+          {
+            "key": "core",
+            "label": "CORE",
+            "accent": "neon"
+          },
+          {
+            "key": "oss",
+            "label": "OSS/BSS",
+            "accent": "blink"
+          },
+          {
+            "key": "nms",
+            "label": "NMS",
+            "accent": "neutral-light"
+          },
+          {
+            "key": "channels",
+            "label": "CHANNELS",
+            "accent": "boost"
+          },
+          {
+            "key": "other",
+            "label": "OTHER",
+            "accent": "neutral-light"
+          }
+        ],
+        "vendors": [
+          {
+            "name": "Quarrel Optics",
+            "monogram": "QO",
+            "category": "fiber",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Skyvane",
+            "monogram": "SV",
+            "category": "fixed-wireless",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Chattern",
+            "monogram": "CT",
+            "category": "channels",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Ledgerline",
+            "monogram": "LL",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Tallyhouse",
+            "monogram": "TH",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Airloft",
+            "monogram": "AL",
+            "category": "fixed-wireless",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Lumenvale",
+            "monogram": "LV",
+            "category": "fiber",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Ringlet",
+            "monogram": "RG",
+            "category": "channels",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Invoya",
+            "monogram": "IV",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Strandmere",
+            "monogram": "SM",
+            "category": "fiber",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Meshling",
+            "monogram": "ML",
+            "category": "wi-fi",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Beamwick",
+            "monogram": "BW",
+            "category": "fixed-wireless",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Watchtide",
+            "monogram": "WT",
+            "category": "nms",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Corvane",
+            "monogram": "CV",
+            "category": "core",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Subscribly",
+            "monogram": "SB",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Backbone Forge",
+            "monogram": "BF",
+            "category": "core",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Provisio",
+            "monogram": "PV",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Roomwave",
+            "monogram": "RW",
+            "category": "wi-fi",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Ironhop",
+            "monogram": "IH",
+            "category": "core",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Glintpath",
+            "monogram": "GP",
+            "category": "fiber",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Mapsmith",
+            "monogram": "MS",
+            "category": "other",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Ridgecast",
+            "monogram": "RC",
+            "category": "fixed-wireless",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Pulsewell",
+            "monogram": "PW",
+            "category": "nms",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Inboxa",
+            "monogram": "IX",
+            "category": "channels",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Hearthnet",
+            "monogram": "HN",
+            "category": "wi-fi",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Quotient Grid",
+            "monogram": "QG",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Ferrovine",
+            "monogram": "FV",
+            "category": "fiber",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Helpwharf",
+            "monogram": "HW",
+            "category": "channels",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Packetmill",
+            "monogram": "PM",
+            "category": "core",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Ratebook",
+            "monogram": "RB",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Switchyard Labs",
+            "monogram": "SY",
+            "category": "core",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Opalrun",
+            "monogram": "OR",
+            "category": "fiber",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Addrly",
+            "monogram": "AD",
+            "category": "other",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Routewell",
+            "monogram": "RO",
+            "category": "fiber",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Hollowmast",
+            "monogram": "HM",
+            "category": "fixed-wireless",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Cozyband",
+            "monogram": "CB",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Pillowlink",
+            "monogram": "PL",
+            "category": "wi-fi",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Signalgrove",
+            "monogram": "SG",
+            "category": "nms",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Zephra Radio",
+            "monogram": "ZR",
+            "category": "fixed-wireless",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Truckwise",
+            "monogram": "TW",
+            "category": "fiber",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Callbright",
+            "monogram": "CL",
+            "category": "channels",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Fieldnote",
+            "monogram": "FN",
+            "category": "other",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Probewick",
+            "monogram": "PK",
+            "category": "fixed-wireless",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Uptimber",
+            "monogram": "UT",
+            "category": "nms",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          },
+          {
+            "name": "Ticketfox",
+            "monogram": "TF",
+            "category": "oss",
+            "tile": {
+              "assetRole": "vendor-logo-tile"
+            }
+          }
+        ],
+        "cellFrame": {
+          "assetRole": "decorative-frame"
+        },
+        "footnote": "45 systems connected out of the box · nothing to build, nothing to migrate · fresh connectors ship every month"
+      },
+      "motion": {
+        "pattern": "diagonal-wave-reveal",
+        "trigger": "useInView",
+        "inViewAmount": 0.3,
+        "once": false,
+        "reducedMotionFallback": "zero-delay-instant-reveal"
+      }
+    },
+    {
+      "type": "csr.loop",
+      "content": {
+        "eyebrow": "03 · MEET ACME · THE CARE AGENT",
+        "titleProblem": "The queue keeps growing",
+        "titleSolved": "Solved on first ask",
+        "lede": "Five back-office systems queried at once, so every agent gives one clear answer.",
+        "frame": {
+          "appName": "Support desk workspace",
+          "caseLabel": "Open case · 88 Birch Road",
+          "ticketLabel": "Ticket AC-55210 · Home broadband"
+        },
+        "stateLabels": {
+          "request": "New request",
+          "manual": "Working by hand",
+          "routing": "Acme is routing",
+          "answered": "Answered"
+        },
+        "question": "Why does 88 Birch Rd keep dropping?",
+        "answer": "Light levels on the fiber drop are failing, so the line keeps resetting. A tech visits Thu 1–3pm; we will text ahead.",
+        "systems": [
+          {
+            "label": "BILLING",
+            "stallTag": "SESSION TIMEOUT",
+            "finding": "BALANCE $0"
+          },
+          {
+            "label": "OPTICAL LEVEL",
+            "stallTag": "ASK NOC",
+            "finding": "RX POWER · −27.4 dBm"
+          },
+          {
+            "label": "NMS",
+            "stallTag": "VPN REQUIRED",
+            "finding": "ALL GREEN"
+          },
+          {
+            "label": "SERVICE AREA",
+            "stallTag": "QUEUE: 9 MIN",
+            "finding": "ZONE QUIET"
+          },
+          {
+            "label": "CRM",
+            "stallTag": "COPY + PASTE",
+            "finding": "3 RECENT CALLS"
+          }
+        ],
+        "metrics": [
+          {
+            "value": "5",
+            "label": "sources queried"
+          },
+          {
+            "value": "1",
+            "label": "fault isolated"
+          },
+          {
+            "value": "0",
+            "label": "escalations needed"
+          }
+        ],
+        "auditNote": "Every lookup logged for later review"
+      },
+      "motion": {
+        "pattern": "phase-loop",
+        "trigger": "useInView",
+        "inViewAmount": 0.15,
+        "once": true,
+        "loopPeriodMs": 8000,
+        "reducedMotionFallback": "final-state-no-timers"
+      }
+    },
+    {
+      "type": "platform.stack",
+      "content": {
+        "eyebrow": "04 · BUILD ON ACME",
+        "title": "Build your own agents on Acme.",
+        "lede": "Ship custom tools fast with our SDKs, a CLI, and live event streams on every layer.",
+        "topBlock": {
+          "title": "Tools teams built",
+          "chips": [
+            "billing bots",
+            "ONT triage",
+            "fiber splice planners",
+            "churn-risk call sheets",
+            "NOC run-sheets",
+            "your next ideas"
+          ]
+        },
+        "cards": [
+          {
+            "label": "SDK",
+            "description": "Typed clients for every Acme service call.",
+            "accent": "blink",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "CLI",
+            "description": "Script provisioning and audits from a shell.",
+            "accent": "neon",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "label": "EVENT STREAMS",
+            "description": "Network change events, as they land.",
+            "accent": "boost",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          }
+        ],
+        "slab": {
+          "mark": {
+            "assetRole": "brand-chip-mark"
+          },
+          "label": "ACME CORE — MANAGED CLOUD",
+          "line": "Built, run, and kept current by our team."
+        }
+      },
+      "motion": {
+        "pattern": "bottom-up-build",
+        "trigger": "useInView",
+        "inViewAmount": 0.35,
+        "once": false,
+        "reducedMotionFallback": "no-offset-opacity-only"
+      }
+    },
+    {
+      "type": "security.matrix",
+      "content": {
+        "eyebrow": "05 · SAFETY",
+        "title": "AI your network can trust.",
+        "lede": "Guardrails for real production work, so your team can hand tasks to AI with calm.",
+        "quadrants": [
+          {
+            "title": "Policy-bound AI",
+            "body": "Each action an agent takes is checked against your policies, and pauses for sign-off wherever you ask.",
+            "proof": "maintenance windows · sign-off flows · scoped edits",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "title": "Encrypted end to end",
+            "body": "Traffic and stored records are encrypted with modern, audited ciphers. Nothing ever sits in plain text.",
+            "proof": "TLS 1.2+ on the edge · mTLS inside · AES-256 disks",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "title": "Your data only",
+            "body": "Model vendors keep none of your subscriber records and never train on them. Ownership stays with you.",
+            "proof": "no retention · never used for model training",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          },
+          {
+            "title": "Tenant separation",
+            "body": "Each customer runs in its own sealed environment with minimal access, and every action is logged.",
+            "proof": "sealed tenants · SSO and SCIM · append-only log",
+            "icon": {
+              "assetRole": "stroke-icon"
+            }
+          }
+        ]
+      },
+      "motion": {
+        "pattern": "hover-wash-only",
+        "trigger": "none",
+        "reducedMotionFallback": "transitions-none"
+      }
+    },
+    {
+      "type": "closing.cta",
+      "content": {
+        "eyebrow": "ACME OS",
+        "title": "Put your network on autopilot.",
+        "lede": "Connect each tool, team, and process into one calm, fast operation.",
+        "cta": {
+          "label": "Talk with us",
+          "href": "#demo"
+        },
+        "illustration": {
+          "assetRole": "illustration-scene"
+        }
+      },
+      "motion": {
+        "pattern": "progress-seat-sequence",
+        "trigger": "useInView",
+        "inViewAmount": 0.45,
+        "once": false,
+        "loopPeriodMs": 5500,
+        "reducedMotionFallback": "final-seated-state"
+      }
+    },
+    {
+      "type": "chrome.footer",
+      "content": {
+        "copyright": "© 2026 Acme Inc. Made for ISPs.",
+        "links": [
+          {
+            "label": "Privacy",
+            "href": "/privacy-policy/"
+          },
+          {
+            "label": "Terms",
+            "href": "/terms-of-service/"
+          }
+        ],
+        "cookiesLabel": "Cookies"
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "not-applicable-static"
+      }
+    },
+    {
+      "type": "overlay.demo-dialog",
+      "content": {
+        "label": "REQUEST DEMO",
+        "title": "Let’s talk.",
+        "intro": "Share a little about your network and we’ll line up a walkthrough from there.",
+        "fields": {
+          "fullName": {
+            "placeholder": "Your name"
+          },
+          "email": {
+            "placeholder": "Company email"
+          },
+          "subscribers": {
+            "label": "Subscriber count",
+            "options": [
+              "Under 1,000",
+              "1,000–5,000",
+              "5,000–10,000",
+              "10,000–50,000",
+              "50,000–100,000",
+              "100,000+"
+            ]
+          },
+          "coverage": {
+            "placeholder": "Service regions"
+          },
+          "source": {
+            "placeholder": "Where did you find us?"
+          }
+        },
+        "consentLead": "By sending, I accept Acme’s",
+        "consentLinks": [
+          {
+            "label": "privacy notice",
+            "href": "/privacy-policy/"
+          },
+          {
+            "label": "terms",
+            "href": "/terms-of-service/"
+          }
+        ],
+        "submitLabel": "Book",
+        "sendingLabel": "Sending…",
+        "errorMessage": "That didn’t go through. Please retry.",
+        "success": {
+          "label": "RECEIVED",
+          "message": "Thanks, we’ll reach out soon.",
+          "closeLabel": "Done"
+        },
+        "submit": {
+          "assetRole": "form-submit-endpoint"
+        }
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "not-applicable-static"
+      }
+    },
+    {
+      "type": "overlay.cookie-banner",
+      "content": {
+        "label": "YOUR PRIVACY",
+        "body": "We’d like to measure anonymous site usage. Storage the site needs to run is always on. See our",
+        "privacyLinkLabel": "privacy notice",
+        "acceptLabel": "Accept",
+        "rejectLabel": "Reject optional ones",
+        "customizeLabel": "Customize",
+        "preferences": {
+          "label": "PRIVACY SETTINGS",
+          "title": "Pick what we can store.",
+          "intro": "Essential storage for security and spam protection on our forms is always active. More in our",
+          "options": [
+            {
+              "label": "Essential",
+              "description": "Needed for pages and forms to work at all. This one can’t be turned off.",
+              "required": true
+            },
+            {
+              "label": "Analytics",
+              "description": "Shows us, anonymously, which pages people read and use.",
+              "required": false
+            }
+          ],
+          "saveLabel": "Save choices",
+          "declineLabel": "Decline all",
+          "allowLabel": "Allow all"
+        }
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "not-applicable-static"
+      }
+    }
+  ]
+}

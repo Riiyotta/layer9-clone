@@ -1,0 +1,49 @@
+{
+  "id": "kpi-card",
+  "kind": "component",
+  "purpose": "Compact stat card: mono label, large value, mono sub-label. Used in the hero dashboard (3 cards) and the use-cases KPI answer (3 stats).",
+  "evidence": "measured-live",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "value": {
+      "type": "string",
+      "required": true,
+      "maxWords": 2
+    },
+    "sub": {
+      "type": "string",
+      "required": false,
+      "maxWords": 5
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "default",
+        "critical",
+        "accent"
+      ],
+      "default": "default",
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "radius.r9",
+    "color.alpha.white.a100",
+    "color.alpha.white.a030",
+    "color.status.critical-text",
+    "motion.duration.hero.callout-large-delays"
+  ],
+  "usedBy": [
+    "hero.episode",
+    "usecases.stage"
+  ],
+  "measuredFrom": [
+    "src/components/hero/panels.jsx:123",
+    "src/components/usecases/AnswerDash.jsx:192",
+    "CLONE_SPEC.md:115"
+  ]
+}

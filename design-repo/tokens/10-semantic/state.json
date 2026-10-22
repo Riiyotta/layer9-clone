@@ -1,0 +1,33 @@
+{
+  "$description": "Semantic roles: state. Each role is a reference into the foundation catalogue (resolved in themes/dark.json).",
+  "state": {
+    "critical": {
+      "ref": "color.status.critical",
+      "usage": "Critical risk dot / callout border.",
+      "measuredFrom": [
+        "src/components/hero/data.js:5"
+      ]
+    },
+    "critical-text": {
+      "ref": "color.status.critical-text",
+      "usage": "Critical callout text; escalated KPI value.",
+      "measuredFrom": [
+        "src/components/hero/data.js:6"
+      ]
+    },
+    "outage": {
+      "ref": "color.status.outage",
+      "usage": "Outage colour in the NetOps map answer.",
+      "measuredFrom": [
+        "src/components/usecases/personas.js:111"
+      ]
+    },
+    "selection": {
+      "ref": "color.misc.selection",
+      "usage": "::selection background.",
+      "measuredFrom": [
+        "src/index.css:37"
+      ]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "prompt-card",
+  "kind": "component",
+  "purpose": "Clickable question card in the use-cases prompt column: mono tag in the persona accent over a head-font question. Active card gets an accent-tinted border and the tile surface.",
+  "evidence": "measured-live",
+  "props": {
+    "tag": {
+      "type": "string",
+      "required": true,
+      "maxWords": 4
+    },
+    "question": {
+      "type": "string",
+      "required": true,
+      "maxWords": 10
+    },
+    "accent": {
+      "type": "string",
+      "enum": [
+        "boost",
+        "neon",
+        "blink"
+      ],
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  },
+  "states": [
+    "default",
+    "hover: border white 26%",
+    "active: border accent 40% alpha, bg tile"
+  ],
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.phone",
+      "change": "inactive questions clamp to one ellipsis line, active wraps; font 15.5px",
+      "measuredFrom": [
+        "src/styles/sections.css:39"
+      ]
+    }
+  ],
+  "tokensUsed": [
+    "color.surface.tile",
+    "color.alpha.white.a100",
+    "component.usecases.card.radius",
+    "component.usecases.card.hoverBorder",
+    "motion.duration.usecases.card-reenter"
+  ],
+  "usedBy": [
+    "usecases.stage"
+  ],
+  "measuredFrom": [
+    "src/components/UseCases.jsx:229",
+    "CLONE_SPEC.md:161"
+  ]
+}

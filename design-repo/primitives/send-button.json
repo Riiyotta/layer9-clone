@@ -1,0 +1,33 @@
+{
+  "id": "send-button",
+  "kind": "primitive",
+  "purpose": "White circular send button in the hero prompt bar; gains a white glow once typing has started.",
+  "evidence": "measured-live",
+  "props": {
+    "sizePx": {
+      "type": "number",
+      "enum": [
+        27,
+        30
+      ],
+      "required": true
+    },
+    "glow": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "elevation.send-glow",
+    "color.neutral.white",
+    "motion.duration.hero.send-glow"
+  ],
+  "usedBy": [
+    "hero.episode"
+  ],
+  "measuredFrom": [
+    "src/components/Hero.jsx:130-141",
+    "CLONE_SPEC.md:89"
+  ]
+}

@@ -1,0 +1,1330 @@
+{
+  "id": "usecases.stage",
+  "kind": "section",
+  "purpose": "Anchor #use-cases. Nine connected-system tiles feed a central chip over bezier connectors; below, a 1000x408 app window pairs a persona rail (3), a prompt column (3 cards) and a live answer dashboard. Autoplay advances the persona every 7s; click selects. At <=720px the stage becomes a mobile list.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "anchorId": "use-cases",
+    "requiredOverlays": [],
+    "allowedRoutes": [
+      "/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "eyebrow",
+      "titleLines",
+      "lede",
+      "hubMark",
+      "systems",
+      "personas"
+    ],
+    "properties": {
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 5,
+        "cloneChars": 19,
+        "originalChars": 17,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:1363"
+        ]
+      },
+      "titleLines": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "maxWords": 7,
+          "cloneChars": 25
+        },
+        "minItems": 1,
+        "maxItems": 2,
+        "description": "H2 rendered on up to two lines joined by a <br>; original H2 is c44 over 2 lines."
+      },
+      "lede": {
+        "type": "string",
+        "maxWords": 22,
+        "cloneChars": 80,
+        "originalChars": 73,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:1409"
+        ]
+      },
+      "hubMark": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetRole"
+        ],
+        "properties": {
+          "assetRole": {
+            "type": "string",
+            "enum": [
+              "brand-chip-mark"
+            ]
+          }
+        }
+      },
+      "systems": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "icon"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxWords": 3,
+              "cloneChars": 9
+            },
+            "icon": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assetRole"
+              ],
+              "properties": {
+                "assetRole": {
+                  "type": "string",
+                  "enum": [
+                    "stroke-icon"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "minItems": 9,
+        "maxItems": 9
+      },
+      "personas": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "persona",
+            "accent",
+            "prompts"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxWords": 3,
+              "cloneChars": 9
+            },
+            "persona": {
+              "type": "string",
+              "maxWords": 4,
+              "cloneChars": 21
+            },
+            "accent": {
+              "type": "string",
+              "enum": [
+                "boost",
+                "neon",
+                "blink"
+              ]
+            },
+            "prompts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "tag",
+                  "question",
+                  "action",
+                  "dash"
+                ],
+                "properties": {
+                  "tag": {
+                    "type": "string",
+                    "maxWords": 4,
+                    "cloneChars": 18
+                  },
+                  "question": {
+                    "type": "string",
+                    "maxWords": 10,
+                    "cloneChars": 48
+                  },
+                  "action": {
+                    "type": "string",
+                    "maxWords": 9,
+                    "cloneChars": 33
+                  },
+                  "dash": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "caption",
+                          "sources",
+                          "updated",
+                          "stats",
+                          "split",
+                          "foot"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "const": "kpi"
+                          },
+                          "caption": {
+                            "type": "string",
+                            "maxWords": 5,
+                            "cloneChars": 29
+                          },
+                          "sources": {
+                            "type": "string",
+                            "maxWords": 5,
+                            "cloneChars": 32
+                          },
+                          "updated": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "cloneChars": 8
+                          },
+                          "stats": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "v",
+                                "l",
+                                "delta"
+                              ],
+                              "properties": {
+                                "v": {
+                                  "type": "string",
+                                  "maxWords": 2,
+                                  "cloneChars": 6
+                                },
+                                "l": {
+                                  "type": "string",
+                                  "maxWords": 3,
+                                  "cloneChars": 11
+                                },
+                                "delta": {
+                                  "type": "string",
+                                  "maxWords": 4,
+                                  "cloneChars": 14
+                                },
+                                "hot": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                          },
+                          "split": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "title",
+                              "note",
+                              "rows"
+                            ],
+                            "properties": {
+                              "title": {
+                                "type": "string",
+                                "maxWords": 5,
+                                "cloneChars": 21
+                              },
+                              "note": {
+                                "type": "string",
+                                "maxWords": 3,
+                                "cloneChars": 14
+                              },
+                              "rows": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "label",
+                                    "v",
+                                    "pct"
+                                  ],
+                                  "properties": {
+                                    "label": {
+                                      "type": "string",
+                                      "maxWords": 2,
+                                      "cloneChars": 7
+                                    },
+                                    "v": {
+                                      "type": "string",
+                                      "maxWords": 2,
+                                      "cloneChars": 6
+                                    },
+                                    "pct": {
+                                      "type": "integer"
+                                    },
+                                    "hot": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                },
+                                "minItems": 2,
+                                "maxItems": 2
+                              }
+                            }
+                          },
+                          "foot": {
+                            "type": "string",
+                            "maxWords": 9,
+                            "cloneChars": 38
+                          }
+                        },
+                        "title": "personas[].prompts[].dash kind=kpi"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "caption",
+                          "sources",
+                          "updated",
+                          "tiles",
+                          "foot"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "const": "tiles"
+                          },
+                          "caption": {
+                            "type": "string",
+                            "maxWords": 7,
+                            "cloneChars": 25
+                          },
+                          "sources": {
+                            "type": "string",
+                            "maxWords": 4,
+                            "cloneChars": 22
+                          },
+                          "updated": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "cloneChars": 6
+                          },
+                          "tiles": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "l",
+                                "v",
+                                "delta",
+                                "spark",
+                                "detail"
+                              ],
+                              "properties": {
+                                "l": {
+                                  "type": "string",
+                                  "maxWords": 3,
+                                  "cloneChars": 14
+                                },
+                                "v": {
+                                  "type": "string",
+                                  "maxWords": 2,
+                                  "cloneChars": 6
+                                },
+                                "delta": {
+                                  "type": "string",
+                                  "maxWords": 4,
+                                  "cloneChars": 12
+                                },
+                                "spark": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "integer"
+                                  },
+                                  "minItems": 7,
+                                  "maxItems": 7
+                                },
+                                "detail": {
+                                  "type": "string",
+                                  "maxWords": 7,
+                                  "cloneChars": 26
+                                },
+                                "hot": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "minItems": 4,
+                            "maxItems": 4
+                          },
+                          "foot": {
+                            "type": "string",
+                            "maxWords": 8,
+                            "cloneChars": 39
+                          }
+                        },
+                        "title": "personas[].prompts[].dash kind=tiles"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "caption",
+                          "sources",
+                          "updated",
+                          "marker",
+                          "bars",
+                          "foot"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "const": "bars"
+                          },
+                          "caption": {
+                            "type": "string",
+                            "maxWords": 5,
+                            "cloneChars": 27
+                          },
+                          "sources": {
+                            "type": "string",
+                            "maxWords": 4,
+                            "cloneChars": 27
+                          },
+                          "updated": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "cloneChars": 6
+                          },
+                          "marker": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "at",
+                              "label"
+                            ],
+                            "properties": {
+                              "at": {
+                                "type": "integer"
+                              },
+                              "label": {
+                                "type": "string",
+                                "maxWords": 3,
+                                "cloneChars": 10
+                              }
+                            }
+                          },
+                          "bars": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "label",
+                                "value",
+                                "h"
+                              ],
+                              "properties": {
+                                "label": {
+                                  "type": "string",
+                                  "maxWords": 3,
+                                  "cloneChars": 7
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "maxWords": 2,
+                                  "cloneChars": 3
+                                },
+                                "h": {
+                                  "type": "integer"
+                                },
+                                "hot": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "minItems": 4,
+                            "maxItems": 4
+                          },
+                          "foot": {
+                            "type": "string",
+                            "maxWords": 10,
+                            "cloneChars": 40
+                          }
+                        },
+                        "title": "personas[].prompts[].dash kind=bars"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "caption",
+                          "sources",
+                          "updated",
+                          "steps",
+                          "foot"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "const": "steps"
+                          },
+                          "caption": {
+                            "type": "string",
+                            "maxWords": 4,
+                            "cloneChars": 27
+                          },
+                          "sources": {
+                            "type": "string",
+                            "maxWords": 5,
+                            "cloneChars": 27
+                          },
+                          "updated": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "cloneChars": 6
+                          },
+                          "steps": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "text",
+                                "stat"
+                              ],
+                              "properties": {
+                                "text": {
+                                  "type": "string",
+                                  "maxWords": 10,
+                                  "cloneChars": 46
+                                },
+                                "stat": {
+                                  "type": "string",
+                                  "maxWords": 3,
+                                  "cloneChars": 8
+                                },
+                                "hot": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "minItems": 4,
+                            "maxItems": 4
+                          },
+                          "foot": {
+                            "type": "string",
+                            "maxWords": 10,
+                            "cloneChars": 44
+                          }
+                        },
+                        "title": "personas[].prompts[].dash kind=steps"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "geometryPreset",
+                          "caption",
+                          "sources",
+                          "updated",
+                          "foot",
+                          "ringLabel",
+                          "legend"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "const": "map"
+                          },
+                          "geometryPreset": {
+                            "type": "string",
+                            "enum": [
+                              "outage-fiber-break",
+                              "repeat-visit-heat"
+                            ]
+                          },
+                          "caption": {
+                            "type": "string",
+                            "maxWords": 7,
+                            "cloneChars": 30
+                          },
+                          "sources": {
+                            "type": "string",
+                            "maxWords": 7,
+                            "cloneChars": 28
+                          },
+                          "updated": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "cloneChars": 7
+                          },
+                          "foot": {
+                            "type": "string",
+                            "maxWords": 10,
+                            "cloneChars": 41
+                          },
+                          "ringLabel": {
+                            "type": "string",
+                            "maxWords": 4,
+                            "cloneChars": 14
+                          },
+                          "legend": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "label",
+                                "tone"
+                              ],
+                              "properties": {
+                                "label": {
+                                  "type": "string",
+                                  "maxWords": 5,
+                                  "cloneChars": 27
+                                },
+                                "tone": {
+                                  "type": "string",
+                                  "enum": [
+                                    "hot",
+                                    "dim"
+                                  ]
+                                }
+                              }
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
+                          },
+                          "siteLabel": {
+                            "type": "string",
+                            "maxWords": 2,
+                            "cloneChars": 5
+                          },
+                          "breakLabel": {
+                            "type": "string",
+                            "maxWords": 2,
+                            "cloneChars": 5
+                          },
+                          "hubLabel": {
+                            "type": "string",
+                            "maxWords": 2,
+                            "cloneChars": 5
+                          }
+                        },
+                        "title": "personas[].prompts[].dash kind=map"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "caption",
+                          "sources",
+                          "updated",
+                          "rows",
+                          "foot"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "const": "rows"
+                          },
+                          "caption": {
+                            "type": "string",
+                            "maxWords": 5,
+                            "cloneChars": 27
+                          },
+                          "sources": {
+                            "type": "string",
+                            "maxWords": 5,
+                            "cloneChars": 26
+                          },
+                          "updated": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "cloneChars": 7
+                          },
+                          "rows": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "left",
+                                "sub",
+                                "right",
+                                "meta"
+                              ],
+                              "properties": {
+                                "left": {
+                                  "type": "string",
+                                  "maxWords": 9,
+                                  "cloneChars": 32
+                                },
+                                "sub": {
+                                  "type": "string",
+                                  "maxWords": 7,
+                                  "cloneChars": 32
+                                },
+                                "right": {
+                                  "type": "string",
+                                  "maxWords": 4,
+                                  "cloneChars": 13
+                                },
+                                "meta": {
+                                  "type": "string",
+                                  "maxWords": 4,
+                                  "cloneChars": 10
+                                },
+                                "hot": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                          },
+                          "foot": {
+                            "type": "string",
+                            "maxWords": 10,
+                            "cloneChars": 39
+                          }
+                        },
+                        "title": "personas[].prompts[].dash kind=rows"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "kind",
+                          "caption",
+                          "sources",
+                          "updated",
+                          "lines",
+                          "foot"
+                        ],
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "const": "report"
+                          },
+                          "caption": {
+                            "type": "string",
+                            "maxWords": 5,
+                            "cloneChars": 25
+                          },
+                          "sources": {
+                            "type": "string",
+                            "maxWords": 5,
+                            "cloneChars": 29
+                          },
+                          "updated": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "cloneChars": 9
+                          },
+                          "lines": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "text",
+                                "stat"
+                              ],
+                              "properties": {
+                                "text": {
+                                  "type": "string",
+                                  "maxWords": 12,
+                                  "cloneChars": 41
+                                },
+                                "stat": {
+                                  "type": "string",
+                                  "maxWords": 3,
+                                  "cloneChars": 7
+                                },
+                                "hot": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "minItems": 5,
+                            "maxItems": 5
+                          },
+                          "foot": {
+                            "type": "string",
+                            "maxWords": 12,
+                            "cloneChars": 44
+                          }
+                        },
+                        "title": "personas[].prompts[].dash kind=report"
+                      }
+                    ]
+                  }
+                }
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          }
+        },
+        "minItems": 3,
+        "maxItems": 3,
+        "description": "Order and accents are fixed: boost, neon, blink."
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Map answer geometry (dim/hot dot coordinates, fibre path, heat spots) is fixed per geometryPreset; only labels are content",
+      "citations": [
+        "src/components/usecases/personas.js:107",
+        "src/components/usecases/AnswerDash.jsx:289"
+      ]
+    },
+    {
+      "item": "Tile order and connectors: tile i at x = c + 120i + 40 (c = (1080-(80*9+8*40))/2); connector M x 90 C x 128, 540 102, 540 146; spine M540 234 L540 250",
+      "citations": [
+        "src/components/UseCases.jsx:13",
+        "src/components/UseCases.jsx:17",
+        "CLONE_SPEC.md:140"
+      ]
+    },
+    {
+      "item": "Fixed literals 'FETCHING…', 'INSIGHT', '● LIVE · ' in the answer header/strip",
+      "citations": [
+        "src/components/usecases/AnswerDash.jsx:258",
+        "src/components/usecases/AnswerDash.jsx:277"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "persona-autoplay-stage"
+    ],
+    "primaryTrigger": {
+      "type": "useInView",
+      "inViewAmount": 0.2,
+      "once": true
+    },
+    "triggerNotes": "Entrance (tiles, connectors, spine) plays once at >=20% in view. 1150ms later the stage becomes active. Autoplay and data pins run only while active and >=30% in view (not once).",
+    "loopPeriodMs": 7000,
+    "loopPeriodNote": "Persona autoplay interval; three personas cycle, so one full round is 21000ms. First switch measured 8.0s after scroll (1150 + 7000).",
+    "easing": "motion.easing.ease",
+    "requiredReducedMotionFallback": "final-state-no-timers",
+    "reducedMotionDetail": "Stage shown and active immediately, no autoplay interval, no data pins, no progress bar, all transitions duration 0.",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.usecases.autoplay-interval",
+      "motion.duration.usecases.active-delay",
+      "motion.spring.snappy",
+      "motion.spring.heavy"
+    ],
+    "measuredFrom": [
+      "CLONE_SPEC.md:150",
+      "src/components/UseCases.jsx:44",
+      "src/components/UseCases.jsx:54",
+      "src/components/UseCases.jsx:63-66",
+      "CLONE_SPEC.md:155",
+      "src/components/UseCases.jsx:49"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.phone",
+      "from": "1080x678 canvas scaled by min(w/1080,h/678), max width 1380",
+      "to": "mobile list, margin-top 28",
+      "change": ".l9uc-stage is hidden and .l9uc-mobile shown: 3-column persona pillars (min-height 44), a prompts list (inactive questions single-line ellipsis, active wraps), a 400px answer dashboard; same 7s autoplay but no progress bar.",
+      "measuredFrom": [
+        "src/styles/sections.css:29",
+        "src/styles/sections.css:40",
+        "CLONE_SPEC.md:181-188"
+      ]
+    }
+  ],
+  "components": [
+    "section-header",
+    "system-tile",
+    "persona-rail-button",
+    "prompt-card",
+    "answer-dashboard",
+    "map-basemap"
+  ],
+  "primitives": [
+    "chip-mark",
+    "stroke-icon",
+    "progress-track",
+    "status-dot",
+    "badge",
+    "mono-label",
+    "accent-bar"
+  ],
+  "assetRoles": [
+    "brand-chip-mark",
+    "stroke-icon",
+    "map-basemap-tile"
+  ],
+  "notes": [
+    "Answer kinds: the clone implements seven (tiles, bars, rows, report, kpi, steps, map); CLONE_SPEC section 3 says 'Six body kinds' above a seven-item list."
+  ],
+  "example": {
+    "eyebrow": "02 · HOW ACME WORKS",
+    "titleLines": [
+      "Link Every Tool You Run.",
+      "Then Act On Every Answer."
+    ],
+    "lede": "Ask in plain words and get the answer, the proof behind it, and what to do next.",
+    "hubMark": {
+      "assetRole": "brand-chip-mark"
+    },
+    "systems": [
+      {
+        "label": "Billing",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "CRM",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "Network",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "Plant map",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "Ticketing",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "Ops",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "Messaging",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "Docs",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      },
+      {
+        "label": "Bank",
+        "icon": {
+          "assetRole": "stroke-icon"
+        }
+      }
+    ],
+    "personas": [
+      {
+        "name": "Finance",
+        "persona": "FOR FINANCE TEAM",
+        "accent": "boost",
+        "prompts": [
+          {
+            "tag": "TRACK THE MONEY",
+            "question": "Summarize this month’s revenue.",
+            "action": "View the revenue report →",
+            "dash": {
+              "kind": "kpi",
+              "caption": "REVENUE SNAPSHOT · THIS MONTH",
+              "sources": "BILLING / LEDGER / CRM / TICKETS",
+              "updated": "07:52 AM",
+              "stats": [
+                {
+                  "v": "36,905",
+                  "l": "PAYING SUBS",
+                  "delta": "+418 net · 30d"
+                },
+                {
+                  "v": "$2.64M",
+                  "l": "RECURRING",
+                  "delta": "+2.4% MoM"
+                },
+                {
+                  "v": "$71.55",
+                  "l": "AVG REVENUE",
+                  "delta": "+$0.95 · 30d",
+                  "hot": true
+                }
+              ],
+              "split": {
+                "title": "REVENUE PER PLAN TIER",
+                "note": "BLENDED $71.55",
+                "rows": [
+                  {
+                    "label": "GIGABIT",
+                    "v": "$92.10",
+                    "pct": 92,
+                    "hot": true
+                  },
+                  {
+                    "label": "BASIC",
+                    "v": "$54.80",
+                    "pct": 55
+                  }
+                ]
+              },
+              "foot": "Gigabit plans now drive 61% of revenue"
+            }
+          },
+          {
+            "tag": "SPOT THE LEAKS",
+            "question": "Which promos are costing us the most?",
+            "action": "Review promo expirations →",
+            "dash": {
+              "kind": "tiles",
+              "caption": "PROMO COST · LAST 90 DAYS",
+              "sources": "BILLING / PROMOS / CRM",
+              "updated": "3M AGO",
+              "tiles": [
+                {
+                  "l": "SPRING BUNDLE",
+                  "v": "$41.2K",
+                  "delta": "+12% vs plan",
+                  "spark": [
+                    4,
+                    6,
+                    5,
+                    8,
+                    9,
+                    12,
+                    14
+                  ],
+                  "detail": "2,140 accts still on promo",
+                  "hot": true
+                },
+                {
+                  "l": "FREE INSTALL",
+                  "v": "$18.7K",
+                  "delta": "flat",
+                  "spark": [
+                    7,
+                    6,
+                    7,
+                    7,
+                    6,
+                    7,
+                    7
+                  ],
+                  "detail": "offset by 9% lower churn"
+                },
+                {
+                  "l": "LOYALTY CREDIT",
+                  "v": "$9.3K",
+                  "delta": "-3%",
+                  "spark": [
+                    5,
+                    5,
+                    4,
+                    4,
+                    3,
+                    3,
+                    2
+                  ],
+                  "detail": "auto-expires in 21 days"
+                },
+                {
+                  "l": "STAFF PLANS",
+                  "v": "$3.1K",
+                  "delta": "flat",
+                  "spark": [
+                    3,
+                    3,
+                    3,
+                    4,
+                    3,
+                    3,
+                    3
+                  ],
+                  "detail": "64 employee lines"
+                }
+              ],
+              "foot": "Spring bundle runs $4.9K/mo over budget"
+            }
+          },
+          {
+            "tag": "PLAN THE QUARTER",
+            "question": "How did collections trend this quarter?",
+            "action": "Open the aging report →",
+            "dash": {
+              "kind": "bars",
+              "caption": "COLLECTIONS RATE · BY MONTH",
+              "sources": "BILLING / PAYMENTS / LEDGER",
+              "updated": "1H AGO",
+              "marker": {
+                "at": 90,
+                "label": "TARGET 90%"
+              },
+              "bars": [
+                {
+                  "label": "JUN",
+                  "value": "84%",
+                  "h": 74
+                },
+                {
+                  "label": "JUL",
+                  "value": "86%",
+                  "h": 75
+                },
+                {
+                  "label": "AUG",
+                  "value": "93%",
+                  "h": 81,
+                  "hot": true
+                },
+                {
+                  "label": "SEP MTD",
+                  "value": "61%",
+                  "h": 55
+                }
+              ],
+              "foot": "August beat target as autopay rose 6 pts"
+            }
+          }
+        ]
+      },
+      {
+        "name": "NetOps",
+        "persona": "FOR NETWORK OPERATORS",
+        "accent": "neon",
+        "prompts": [
+          {
+            "tag": "FIND ROOT CAUSE",
+            "question": "Why is this subscriber dropping at night?",
+            "action": "Ship a replacement router →",
+            "dash": {
+              "kind": "steps",
+              "caption": "SUBSCRIBER DIAGNOSIS · LIVE",
+              "sources": "OPTICS / CPE MGMT / TICKETS",
+              "updated": "7S AGO",
+              "steps": [
+                {
+                  "text": "Light levels sit within range on every reading",
+                  "stat": "OK"
+                },
+                {
+                  "text": "Router resets nightly near 01:10 and 03:40",
+                  "stat": "2 RESETS",
+                  "hot": true
+                },
+                {
+                  "text": "An escalated ticket has waited for 4 days",
+                  "stat": "AGING"
+                },
+                {
+                  "text": "Likely the router power supply, not the fiber",
+                  "stat": "VERDICT"
+                }
+              ],
+              "foot": "Root cause isolated in 7 seconds, any vendor"
+            }
+          },
+          {
+            "tag": "SHRINK OUTAGES",
+            "question": "Show me where this outage begins.",
+            "action": "Send a splice crew to the break →",
+            "dash": {
+              "kind": "map",
+              "geometryPreset": "outage-fiber-break",
+              "caption": "OUTAGE PATH · LIVE",
+              "sources": "NMS / FIBER PLANT / ALARMS",
+              "updated": "5S AGO",
+              "foot": "One broken span · 58 modems sit behind it",
+              "ringLabel": "58 MODEMS DOWN",
+              "legend": [
+                {
+                  "label": "MODEM DOWN",
+                  "tone": "hot"
+                },
+                {
+                  "label": "MODEM UP",
+                  "tone": "dim"
+                }
+              ],
+              "siteLabel": "OLT-2",
+              "breakLabel": "BREAK",
+              "hubLabel": "CAB-7"
+            }
+          },
+          {
+            "tag": "UPGRADE SAFELY",
+            "question": "Schedule firmware 4.1 for all routers on Sunday.",
+            "action": "Approve the staged plan →",
+            "dash": {
+              "kind": "rows",
+              "caption": "STAGED UPDATE · 512 ROUTERS",
+              "sources": "CPE MGMT / INVENTORY / CRM",
+              "updated": "12S AGO",
+              "rows": [
+                {
+                  "left": "Wave 1 · quietest nodes go first",
+                  "sub": "no business accounts · 3 nodes",
+                  "right": "180 CPES",
+                  "meta": "SUN 01:00",
+                  "hot": true
+                },
+                {
+                  "left": "Wave 2 · waits on wave 1 health",
+                  "sub": "auto-revert above 1.5% errors",
+                  "right": "170 CPES",
+                  "meta": "SUN 01:50"
+                },
+                {
+                  "left": "Wave 3 · remaining fleet",
+                  "sub": "finishes the rollout · 4 nodes",
+                  "right": "162 CPES",
+                  "meta": "SUN 02:40"
+                }
+              ],
+              "foot": "512 routers over 9 nodes · about 2h 30m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Care Desk",
+        "persona": "FOR SUPPORT LEADS",
+        "accent": "blink",
+        "prompts": [
+          {
+            "tag": "KEEP SLAS GREEN",
+            "question": "Rank today’s open tickets by customer impact.",
+            "action": "Open the ranked ticket queue →",
+            "dash": {
+              "kind": "rows",
+              "caption": "OPEN TICKETS · IMPACT × SLA",
+              "sources": "TICKETS / NMS / CRM / SLA",
+              "updated": "10S AGO",
+              "rows": [
+                {
+                  "left": "TKT-7713 · Maple Ridge",
+                  "sub": "node 4 · intermittent loss",
+                  "right": "74 SUBS · 26M",
+                  "meta": "SLA IN 19M",
+                  "hot": true
+                },
+                {
+                  "left": "TKT-7709 · Lakeview",
+                  "sub": "business line · tech en route",
+                  "right": "33 SUBS · 14M",
+                  "meta": "ETA 9M"
+                },
+                {
+                  "left": "TKT-7716 · Pine Hollow",
+                  "sub": "Wi-Fi channel clash · fix queued",
+                  "right": "9 SUBS",
+                  "meta": "REMOTE"
+                }
+              ],
+              "foot": "Maple Ridge raised to P1 · crew alerted"
+            }
+          },
+          {
+            "tag": "STOP REPEAT VISITS",
+            "question": "Where do our techs keep going back?",
+            "action": "Open the callback list →",
+            "dash": {
+              "kind": "map",
+              "geometryPreset": "repeat-visit-heat",
+              "caption": "REPEAT VISITS · LAST 12 MONTHS",
+              "sources": "WORK ORDERS / CPE DATA / GIS",
+              "updated": "40S AGO",
+              "foot": "$86K in repeats · $8.1K avoidable now",
+              "ringLabel": "SHARED CABINET",
+              "legend": [
+                {
+                  "label": "REPEAT SITE · SIZE = VISITS",
+                  "tone": "hot"
+                },
+                {
+                  "label": "ONE VISIT",
+                  "tone": "dim"
+                }
+              ]
+            }
+          },
+          {
+            "tag": "LEARN EACH WEEK",
+            "question": "Recap last week’s field tickets.",
+            "action": "Open the weekly summary →",
+            "dash": {
+              "kind": "report",
+              "caption": "FIELD TICKETS · LAST WEEK",
+              "sources": "TICKETS / DISPATCH / CPE MGMT",
+              "updated": "MON 06:30",
+              "lines": [
+                {
+                  "text": "187 tickets closed across 6 crews",
+                  "stat": "WEEK"
+                },
+                {
+                  "text": "91% fixed on the very first visit",
+                  "stat": "+3 PTS",
+                  "hot": true
+                },
+                {
+                  "text": "15 repeats, 9 of them tied to one cabinet",
+                  "stat": "REPEATS"
+                },
+                {
+                  "text": "27 solved remotely with no truck sent",
+                  "stat": "SAVED"
+                },
+                {
+                  "text": "4 installs queued for quality review",
+                  "stat": "QA"
+                }
+              ],
+              "foot": "Repeat visits fell 3 pts from the prior week"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:132",
+    "src/pages/Home.jsx:13",
+    "src/components/UseCases.jsx:41-309",
+    "src/components/UseCases.jsx:89",
+    "recon/text-roles-1280.json:1386"
+  ]
+}

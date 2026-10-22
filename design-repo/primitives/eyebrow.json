@@ -1,0 +1,42 @@
+{
+  "id": "eyebrow",
+  "kind": "primitive",
+  "purpose": "Small mono uppercase section label with wide tracking.",
+  "evidence": "measured-live",
+  "props": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "maxWords": 7
+    },
+    "textTransform": {
+      "type": "string",
+      "enum": [
+        "uppercase",
+        "none"
+      ],
+      "default": "uppercase",
+      "required": false,
+      "description": "The closing CTA eyebrow overrides to none."
+    }
+  },
+  "tokensUsed": [
+    "typography.typeStyle.eyebrow",
+    "color.alpha.white.a550"
+  ],
+  "usedBy": [
+    "usecases.stage",
+    "integrations.grid",
+    "csr.loop",
+    "platform.stack",
+    "security.matrix",
+    "closing.cta",
+    "hero.episode",
+    "legal.header"
+  ],
+  "measuredFrom": [
+    "src/lib/tokens.js:56-64",
+    "CLONE_SPEC.md:21",
+    "src/components/ClosingCTA.jsx:72"
+  ]
+}

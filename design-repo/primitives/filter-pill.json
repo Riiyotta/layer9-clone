@@ -1,0 +1,47 @@
+{
+  "id": "filter-pill",
+  "kind": "primitive",
+  "purpose": "Mono uppercase category pill used as the integrations filter. Highlights in its category accent on hover or sticky selection.",
+  "evidence": "measured-live",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "accent": {
+      "type": "string",
+      "enum": [
+        "blink",
+        "boost",
+        "neon",
+        "neutral-light"
+      ],
+      "required": true
+    },
+    "pressed": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  },
+  "states": [
+    "default",
+    "hover/selected: color and border become the category accent, bg white 3%, 300ms"
+  ],
+  "tokensUsed": [
+    "component.filter-pill.padding",
+    "component.filter-pill.fontSize",
+    "component.filter-pill.letterSpacing",
+    "radius.r999",
+    "color.alpha.white.a030"
+  ],
+  "usedBy": [
+    "integrations.grid"
+  ],
+  "measuredFrom": [
+    "src/components/Integrations.jsx:48",
+    "CLONE_SPEC.md:198",
+    "CLONE_SPEC.md:224"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "badge",
+  "kind": "primitive",
+  "purpose": "Tiny mono status badge: outlined live pill, 'NEW' tag or a generating/live pair with a dot.",
+  "evidence": "measured-live",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "live-pill",
+        "new-tag",
+        "generating",
+        "live"
+      ],
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 4
+    }
+  },
+  "tokensUsed": [
+    "color.accent.neon",
+    "color.accent.blink",
+    "color.accentAlphaSuffix.s44",
+    "color.accentAlphaSuffix.s55"
+  ],
+  "usedBy": [
+    "hero.episode",
+    "usecases.stage"
+  ],
+  "measuredFrom": [
+    "src/components/hero/panels.jsx:114",
+    "src/components/hero/panels.jsx:401",
+    "src/components/usecases/AnswerDash.jsx:267",
+    "CLONE_SPEC.md:170"
+  ]
+}

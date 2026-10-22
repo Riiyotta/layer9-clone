@@ -1,0 +1,111 @@
+{
+  "$description": "Component-scoped tokens: device. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "device": {
+    "laptop.width": {
+      "value": "min(1260px, 90vw)",
+      "measuredFrom": [
+        "src/components/Hero.jsx:155",
+        "CLONE_SPEC.md:69"
+      ]
+    },
+    "laptop.bezel.background": {
+      "value": "#1a1a1c",
+      "measuredFrom": [
+        "src/components/Hero.jsx:156",
+        "CLONE_SPEC.md:70"
+      ]
+    },
+    "laptop.screen.background": {
+      "value": "#0d0d0f",
+      "measuredFrom": [
+        "src/components/Hero.jsx:157",
+        "CLONE_SPEC.md:71"
+      ]
+    },
+    "laptop.canvas": {
+      "value": "1160x725",
+      "measuredFrom": [
+        "src/components/Hero.jsx:158",
+        "CLONE_SPEC.md:71"
+      ]
+    },
+    "phone.width": {
+      "value": "min(340px, calc(100vw - 40px))",
+      "measuredFrom": [
+        "src/components/Hero.jsx:216",
+        "CLONE_SPEC.md:74"
+      ]
+    },
+    "phone.radius": {
+      "value": 54,
+      "measuredFrom": [
+        "src/components/Hero.jsx:216",
+        "CLONE_SPEC.md:74"
+      ]
+    },
+    "phone.screen.radius": {
+      "value": 44,
+      "measuredFrom": [
+        "src/components/Hero.jsx:217",
+        "CLONE_SPEC.md:74"
+      ]
+    },
+    "phone.canvas": {
+      "value": "360x760",
+      "measuredFrom": [
+        "src/components/Hero.jsx:213",
+        "CLONE_SPEC.md:74"
+      ]
+    },
+    "phone.island": {
+      "value": "88x25, radius 14, #000",
+      "measuredFrom": [
+        "src/components/Hero.jsx:270",
+        "CLONE_SPEC.md:75"
+      ]
+    },
+    "prompt.width": {
+      "value": 660,
+      "measuredFrom": [
+        "src/components/Hero.jsx:193",
+        "CLONE_SPEC.md:89"
+      ]
+    },
+    "prompt.transform": {
+      "value": "translate(0,224px) scale(.92)",
+      "measuredFrom": [
+        "src/components/Hero.jsx:193",
+        "CLONE_SPEC.md:89"
+      ]
+    },
+    "prompt.background": {
+      "value": "rgba(16,16,18,0.96)",
+      "measuredFrom": [
+        "src/components/Hero.jsx:194",
+        "CLONE_SPEC.md:89"
+      ]
+    },
+    "prompt.sendSize": {
+      "value": 30,
+      "measuredFrom": [
+        "src/components/Hero.jsx:199",
+        "CLONE_SPEC.md:89"
+      ]
+    },
+    "prompt.sendSize.phone": {
+      "value": 27,
+      "measuredFrom": [
+        "src/components/Hero.jsx:262",
+        "CLONE_SPEC.md:126"
+      ]
+    },
+    "caret": {
+      "value": "6x15 (hero), 6x14 (CSR)",
+      "measuredFrom": [
+        "src/components/Hero.jsx:119",
+        "src/components/ControlCenter.jsx:64",
+        "CLONE_SPEC.md:89"
+      ]
+    }
+  }
+}

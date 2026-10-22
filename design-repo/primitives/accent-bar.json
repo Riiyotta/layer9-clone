@@ -1,0 +1,39 @@
+{
+  "id": "accent-bar",
+  "kind": "primitive",
+  "purpose": "2px top accent bar filled with one of four gradients (BLINK, NEON, BOOST, WHITE).",
+  "evidence": "measured-live",
+  "props": {
+    "gradient": {
+      "type": "string",
+      "enum": [
+        "blink-line",
+        "neon-line",
+        "boost-line",
+        "white-line"
+      ],
+      "required": true
+    },
+    "heightPx": {
+      "type": "number",
+      "default": 2,
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "color.gradient.blink-line",
+    "color.gradient.neon-line",
+    "color.gradient.boost-line",
+    "color.gradient.white-line",
+    "component.platform.accentBar.height"
+  ],
+  "usedBy": [
+    "platform.stack",
+    "usecases.stage"
+  ],
+  "measuredFrom": [
+    "src/components/AgentPlatform.jsx:19",
+    "src/lib/tokens.js:20-21",
+    "CLONE_SPEC.md:17"
+  ]
+}

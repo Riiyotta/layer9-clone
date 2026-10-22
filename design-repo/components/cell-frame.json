@@ -1,0 +1,19 @@
+{
+  "id": "cell-frame",
+  "kind": "component",
+  "purpose": "Corner-bracket frame drawn behind every integrations grid cell: one rounded L mirrored four times, fill #2E2E2E, inset -1px, viewBox 112x111.",
+  "evidence": "measured-live",
+  "props": {},
+  "assetRole": "decorative-frame",
+  "tokensUsed": [
+    "color.solid.h2e2e2e",
+    "layout.canvas.integrations-cell-frame"
+  ],
+  "usedBy": [
+    "integrations.grid"
+  ],
+  "measuredFrom": [
+    "src/components/integrations/CellFrame.jsx:11-21",
+    "CLONE_SPEC.md:201"
+  ]
+}

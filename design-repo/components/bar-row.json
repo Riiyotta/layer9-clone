@@ -1,0 +1,33 @@
+{
+  "id": "bar-row",
+  "kind": "component",
+  "purpose": "Labelled horizontal bar with a count: bar fill is scaleX 0->1 over 500ms. Hero dashboard uses two lists (3 towns, 4 drivers).",
+  "evidence": "measured-live",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 3
+    },
+    "count": {
+      "type": "number",
+      "required": true
+    },
+    "max": {
+      "type": "number",
+      "required": false,
+      "description": "Bar scale denominator (clone constant BAR_MAX = 19)."
+    }
+  },
+  "tokensUsed": [
+    "color.accent.blink",
+    "color.alpha.white.a100"
+  ],
+  "usedBy": [
+    "hero.episode"
+  ],
+  "measuredFrom": [
+    "src/components/hero/panels.jsx:63-99",
+    "CLONE_SPEC.md:116"
+  ]
+}

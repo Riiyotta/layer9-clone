@@ -1,0 +1,35 @@
+{
+  "id": "consent-option-row",
+  "kind": "component",
+  "purpose": "Bordered preference row: checkbox, label, optional REQUIRED mono tag and a description.",
+  "evidence": "measured-live",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 2
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "maxWords": 16
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "component.consent.option.padding",
+    "component.consent.option.radius",
+    "color.alpha.white.a100"
+  ],
+  "usedBy": [
+    "overlay.cookie-banner"
+  ],
+  "measuredFrom": [
+    "src/components/CookieBanner.jsx:195-232",
+    "CLONE_SPEC.md:419"
+  ]
+}

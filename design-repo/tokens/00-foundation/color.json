@@ -1,0 +1,1498 @@
+{
+  "$description": "Foundation tokens: color. Every leaf has value + evidence + measuredFrom. Values come only from the clone source and CLONE_SPEC.md; nothing is invented.",
+  "$schemaNote": "A leaf is any object with a 'value' key.",
+  "color": {
+    "surface": {
+      "page": {
+        "value": "#090909",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "tailwind.config.js:8",
+          "src/index.css:24",
+          "CLONE_SPEC.md:30"
+        ]
+      },
+      "graphite": {
+        "value": "#191919",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:17",
+          "CLONE_SPEC.md:16"
+        ]
+      },
+      "tile": {
+        "value": "#1E1E1E",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:18",
+          "CLONE_SPEC.md:16"
+        ]
+      },
+      "dialog": {
+        "value": "#101112",
+        "note": "Card surface shared by the demo dialog, cookie banner card and preferences modal.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/DemoDialog.jsx:73",
+          "CLONE_SPEC.md:393"
+        ]
+      }
+    },
+    "neutral": {
+      "white": {
+        "value": "#FFFFFF",
+        "note": "Spelled #fff or #FFFFFF in source; same value.",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/lib/tokens.js:25",
+          "src/components/shared/Pill.jsx:20"
+        ]
+      },
+      "black": {
+        "value": "#000000",
+        "note": "Spelled #000 in source (phone dynamic island, closing-stack mask stop).",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:270",
+          "src/components/ClosingCTA.jsx:15"
+        ]
+      }
+    },
+    "accent": {
+      "neon": {
+        "value": "#2EEB85",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:7",
+          "CLONE_SPEC.md:13"
+        ]
+      },
+      "blink": {
+        "value": "#FF602E",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:8",
+          "CLONE_SPEC.md:13"
+        ]
+      },
+      "boost": {
+        "value": "#BE6CF3",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:9",
+          "CLONE_SPEC.md:13"
+        ]
+      },
+      "stop-orange": {
+        "value": "#FF5722",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:10",
+          "CLONE_SPEC.md:14"
+        ]
+      },
+      "fuchsia": {
+        "value": "#AB0052",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:11",
+          "CLONE_SPEC.md:14"
+        ]
+      },
+      "green": {
+        "value": "#1DE97B",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:12",
+          "CLONE_SPEC.md:14"
+        ]
+      },
+      "purple": {
+        "value": "#B14EF1",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:13",
+          "CLONE_SPEC.md:14"
+        ]
+      }
+    },
+    "gradient": {
+      "blink-line": {
+        "value": "linear-gradient(270deg, #FFFFFF 1.53%, #FF5722 21.8%, #AB0052 62.35%, rgba(148,0,151,0) 102.91%)",
+        "note": "2px top accent bar.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:22",
+          "CLONE_SPEC.md:17"
+        ]
+      },
+      "neon-line": {
+        "value": "linear-gradient(270deg, #FFFFFF 1.53%, #1DE97B 21.8%, #004549 62.35%, rgba(177,78,241,0) 102.91%)",
+        "note": "2px top accent bar.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:23",
+          "CLONE_SPEC.md:17"
+        ]
+      },
+      "boost-line": {
+        "value": "linear-gradient(270deg, #FFFFFF 1.53%, #B14EF1 21.8%, #950059 62.35%, rgba(172,7,175,0) 102.91%)",
+        "note": "2px top accent bar.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:24",
+          "CLONE_SPEC.md:17"
+        ]
+      },
+      "white-line": {
+        "value": "linear-gradient(270deg, #FFFFFF 1.53%, rgba(255,255,255,0.4) 21.8%, rgba(255,255,255,0) 62.35%, rgba(255,255,255,0) 102.91%)",
+        "note": "2px top accent bar.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:25",
+          "CLONE_SPEC.md:17"
+        ]
+      }
+    },
+    "status": {
+      "critical": {
+        "value": "#D52B3A",
+        "note": "Two critical risk dots on the hero map.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/hero/data.js:5",
+          "CLONE_SPEC.md:82"
+        ]
+      },
+      "critical-text": {
+        "value": "#FF8089",
+        "note": "Critical callout text; escalated KPI value.",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/data.js:6"
+        ]
+      },
+      "outage": {
+        "value": "#FF453A",
+        "note": "Outage hot colour in the NetOps map answer.",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/personas.js:111"
+        ]
+      },
+      "panel-border": {
+        "value": "#2A2B2E",
+        "note": "Hairline between hero laptop panels.",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/data.js:7"
+        ]
+      }
+    },
+    "solid": {
+      "h004549": {
+        "value": "#004549",
+        "note": "NEON_LINE stop / closing stack",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:195"
+        ]
+      },
+      "h06231a": {
+        "value": "#06231A",
+        "note": "closing stack chip gradient",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:196"
+        ]
+      },
+      "h07291e": {
+        "value": "#07291E",
+        "note": "closing stack chip gradient",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:193"
+        ]
+      },
+      "h09090b": {
+        "value": "#09090B",
+        "note": "map card base / scrim",
+        "usageCount": 8,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:8"
+        ]
+      },
+      "h0a0a0a": {
+        "value": "#0A0A0A",
+        "note": "chip mark fill",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/shared/Brand.jsx:32"
+        ]
+      },
+      "h0a0a0c": {
+        "value": "#0A0A0C",
+        "note": "risk-dot stroke",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/scene.jsx:84"
+        ]
+      },
+      "h0a0b0c": {
+        "value": "#0A0B0C",
+        "note": "chat question bubble surface",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:429"
+        ]
+      },
+      "h0b0b0c": {
+        "value": "#0B0B0C",
+        "note": "system / vendor tile well",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Integrations.jsx:103"
+        ]
+      },
+      "h0d0d0f": {
+        "value": "#0D0D0F",
+        "note": "device screen",
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:157"
+        ]
+      },
+      "h0f0f11": {
+        "value": "#0F0F11",
+        "note": "laptop notch",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:207"
+        ]
+      },
+      "h101013": {
+        "value": "#101013",
+        "note": "platform slab surface",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:171"
+        ]
+      },
+      "h111114": {
+        "value": "#111114",
+        "note": "platform card surface",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:114"
+        ]
+      },
+      "h111214": {
+        "value": "#111214",
+        "note": "CSR system tile / mobile row surface",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:185"
+        ]
+      },
+      "h141416": {
+        "value": "#141416",
+        "note": "hero dashboard + schedule panel surface",
+        "usageCount": 6,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:237"
+        ]
+      },
+      "h141616": {
+        "value": "#141616",
+        "note": "platform top block surface",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:56"
+        ]
+      },
+      "h151517": {
+        "value": "#151517",
+        "note": "laptop base gradient end",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:206"
+        ]
+      },
+      "h17171a": {
+        "value": "#17171A",
+        "note": "answer dashboard step dot fill",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:234"
+        ]
+      },
+      "h185c37": {
+        "value": "#185C37",
+        "note": "spreadsheet title bar",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:230"
+        ]
+      },
+      "h1a1a1c": {
+        "value": "#1A1A1C",
+        "note": "device bezel (laptop and phone)",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:156"
+        ]
+      },
+      "h1b1b1d": {
+        "value": "#1B1B1D",
+        "note": "spreadsheet grid surface",
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:241"
+        ]
+      },
+      "h1e8e3e": {
+        "value": "#1E8E3E",
+        "note": "email panel send accent",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:345"
+        ]
+      },
+      "h1f6a6a": {
+        "value": "#1F6A6A",
+        "note": "chip mark gradient mid",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/shared/Brand.jsx:26"
+        ]
+      },
+      "h202021": {
+        "value": "#202021",
+        "note": "spreadsheet header cell",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:237"
+        ]
+      },
+      "h202124": {
+        "value": "#202124",
+        "note": "email panel surface",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:278"
+        ]
+      },
+      "h21a366": {
+        "value": "#21A366",
+        "note": "spreadsheet accent green",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:214"
+        ]
+      },
+      "h220c38": {
+        "value": "#220C38",
+        "note": "closing stack gradient C",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:187"
+        ]
+      },
+      "h232326": {
+        "value": "#232326",
+        "note": "laptop base gradient start",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:206"
+        ]
+      },
+      "h232327": {
+        "value": "#232327",
+        "note": "system / vendor tile border",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Integrations.jsx:102"
+        ]
+      },
+      "h252526": {
+        "value": "#252526",
+        "note": "spreadsheet toolbar",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:222"
+        ]
+      },
+      "h2e0a1c": {
+        "value": "#2E0A1C",
+        "note": "closing stack gradient B",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:184"
+        ]
+      },
+      "h2e2e2e": {
+        "value": "#2E2E2E",
+        "note": "integrations cell bracket frame",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/integrations/CellFrame.jsx:16"
+        ]
+      },
+      "h331008": {
+        "value": "#331008",
+        "note": "closing stack gradient A",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:181"
+        ]
+      },
+      "h3a3a3e": {
+        "value": "#3A3A3E",
+        "note": "vendor tile border while category-matched",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Integrations.jsx:102"
+        ]
+      },
+      "h6b2fa3": {
+        "value": "#6B2FA3",
+        "note": "chip mark gradient end",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/shared/Brand.jsx:27"
+        ]
+      },
+      "h950059": {
+        "value": "#950059",
+        "note": "closing stack / BOOST_LINE stop",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/closing/StackArt.jsx:189"
+        ]
+      },
+      "h9aa0a6": {
+        "value": "#9AA0A6",
+        "note": "email panel dim text",
+        "usageCount": 4,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:221"
+        ]
+      },
+      "hbdc1c6": {
+        "value": "#BDC1C6",
+        "note": "email panel body text",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:281"
+        ]
+      },
+      "he8e8e8": {
+        "value": "#E8E8E8",
+        "note": "NMS / other filter pill accent",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/integrations/vendors.js:10"
+        ]
+      },
+      "he8eaed": {
+        "value": "#E8EAED",
+        "note": "email panel text",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:279"
+        ]
+      },
+      "hf6f7f6": {
+        "value": "#F6F7F6",
+        "note": "CSR app mark / favicon tile",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:117"
+        ]
+      }
+    },
+    "alpha": {
+      "rgb-12-12-14": {
+        "a880": {
+          "value": "rgba(12,12,14,0.88)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:147"
+          ]
+        },
+        "a920": {
+          "value": "rgba(12,12,14,0.92)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:144"
+          ]
+        }
+      },
+      "rgb-12-13-14": {
+        "a980": {
+          "value": "rgba(12,13,14,0.98)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:90"
+          ]
+        }
+      },
+      "rgb-148-0-151": {
+        "a000": {
+          "value": "rgba(148,0,151,0)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/lib/tokens.js:22"
+          ]
+        }
+      },
+      "rgb-16-16-18": {
+        "a960": {
+          "value": "rgba(16,16,18,0.96)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:194"
+          ]
+        }
+      },
+      "rgb-17-17-17": {
+        "a140": {
+          "value": "rgba(17,17,17,0.14)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:17"
+          ]
+        }
+      },
+      "rgb-172-7-175": {
+        "a000": {
+          "value": "rgba(172,7,175,0)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/lib/tokens.js:24"
+          ]
+        }
+      },
+      "rgb-177-78-241": {
+        "a000": {
+          "value": "rgba(177,78,241,0)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/lib/tokens.js:23"
+          ]
+        }
+      },
+      "rgb-22-22-24": {
+        "a970": {
+          "value": "rgba(22,22,24,0.97)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:90"
+          ]
+        }
+      },
+      "rgb-9-9-11": {
+        "a800": {
+          "value": "rgba(9,9,11,0.8)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:331"
+          ]
+        }
+      },
+      "rgb-9-9-9": {
+        "a840": {
+          "value": "rgba(9,9,9,0.84)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:370"
+          ]
+        }
+      },
+      "black": {
+        "a120": {
+          "value": "rgba(0,0,0,0.12)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:136"
+          ]
+        },
+        "a160": {
+          "value": "rgba(0,0,0,0.16)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:243"
+          ]
+        },
+        "a280": {
+          "value": "rgba(0,0,0,0.28)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:57"
+          ]
+        },
+        "a320": {
+          "value": "rgba(0,0,0,0.32)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:248"
+          ]
+        },
+        "a350": {
+          "value": "rgba(0,0,0,0.35)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:91"
+          ]
+        },
+        "a500": {
+          "value": "rgba(0,0,0,0.5)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:345"
+          ]
+        },
+        "a550": {
+          "value": "rgba(0,0,0,0.55)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:20"
+          ]
+        },
+        "a600": {
+          "value": "rgba(0,0,0,0.6)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:206"
+          ]
+        },
+        "a620": {
+          "value": "rgba(0,0,0,0.62)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/CookieBanner.jsx:142"
+          ]
+        },
+        "a700": {
+          "value": "rgba(0,0,0,0.7)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:156"
+          ]
+        }
+      },
+      "blink": {
+        "a060": {
+          "value": "rgba(255,96,46,0.06)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/pages/LegalPage.jsx:38"
+          ]
+        },
+        "a250": {
+          "value": "rgba(255,96,46,0.25)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:184"
+          ]
+        },
+        "a350": {
+          "value": "rgba(255,96,46,0.35)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/pages/LegalPage.jsx:36"
+          ]
+        },
+        "a900": {
+          "value": "rgba(255,96,46,0.9)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/hero/panels.jsx:256"
+          ]
+        }
+      },
+      "boost": {
+        "a055": {
+          "value": "rgba(190,108,243,0.055)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:74"
+          ]
+        }
+      },
+      "coral": {
+        "a900": {
+          "value": "rgba(255,120,96,0.9)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/DemoDialog.jsx:222"
+          ]
+        }
+      },
+      "neon": {
+        "a012": {
+          "value": "rgba(46,235,133,0.012)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:135"
+          ]
+        },
+        "a025": {
+          "value": "rgba(46,235,133,0.025)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:74"
+          ]
+        },
+        "a035": {
+          "value": "rgba(46,235,133,0.035)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:135"
+          ]
+        },
+        "a045": {
+          "value": "rgba(46,235,133,0.045)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:269"
+          ]
+        },
+        "a060": {
+          "value": "rgba(46,235,133,0.06)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:503"
+          ]
+        },
+        "a065": {
+          "value": "rgba(46,235,133,0.065)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:308"
+          ]
+        },
+        "a070": {
+          "value": "rgba(46,235,133,0.07)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:505"
+          ]
+        },
+        "a180": {
+          "value": "rgba(46,235,133,0.18)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:202"
+          ]
+        },
+        "a280": {
+          "value": "rgba(46,235,133,0.28)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:307"
+          ]
+        },
+        "a300": {
+          "value": "rgba(46,235,133,0.3)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:504"
+          ]
+        },
+        "a320": {
+          "value": "rgba(46,235,133,0.32)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:202"
+          ]
+        },
+        "a400": {
+          "value": "rgba(46,235,133,0.4)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:173"
+          ]
+        },
+        "a780": {
+          "value": "rgba(46,235,133,0.78)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:151"
+          ]
+        }
+      },
+      "white": {
+        "a000": {
+          "value": "rgba(255,255,255,0)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/lib/tokens.js:25"
+          ]
+        },
+        "a008": {
+          "value": "rgba(255,255,255,0.008)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:135"
+          ]
+        },
+        "a012": {
+          "value": "rgba(255,255,255,0.012)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:98"
+          ]
+        },
+        "a014": {
+          "value": "rgba(255,255,255,0.014)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:165"
+          ]
+        },
+        "a018": {
+          "value": "rgba(255,255,255,0.018)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:112"
+          ]
+        },
+        "a020": {
+          "value": "rgba(255,255,255,0.02)",
+          "usageCount": 7,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:236"
+          ]
+        },
+        "a025": {
+          "value": "rgba(255,255,255,0.025)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/CookieBanner.jsx:205"
+          ]
+        },
+        "a030": {
+          "value": "rgba(255,255,255,0.03)",
+          "usageCount": 6,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:87"
+          ]
+        },
+        "a035": {
+          "value": "rgba(255,255,255,0.035)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:57"
+          ]
+        },
+        "a040": {
+          "value": "rgba(255,255,255,0.04)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:20"
+          ]
+        },
+        "a050": {
+          "value": "rgba(255,255,255,0.05)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:20"
+          ]
+        },
+        "a060": {
+          "value": "rgba(255,255,255,0.06)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:114"
+          ]
+        },
+        "a070": {
+          "value": "rgba(255,255,255,0.07)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:206"
+          ]
+        },
+        "a080": {
+          "value": "rgba(255,255,255,0.08)",
+          "usageCount": 6,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/hero/panels.jsx:79"
+          ]
+        },
+        "a085": {
+          "value": "rgba(255,255,255,0.085)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:254"
+          ]
+        },
+        "a090": {
+          "value": "rgba(255,255,255,0.09)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Hero.jsx:20"
+          ]
+        },
+        "a100": {
+          "value": "rgba(255,255,255,0.1)",
+          "usageCount": 6,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:409"
+          ]
+        },
+        "a120": {
+          "value": "rgba(255,255,255,0.12)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:55"
+          ]
+        },
+        "a130": {
+          "value": "rgba(255,255,255,0.13)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/styles/sections.css:88"
+          ]
+        },
+        "a140": {
+          "value": "rgba(255,255,255,0.14)",
+          "usageCount": 8,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:86"
+          ]
+        },
+        "a160": {
+          "value": "rgba(255,255,255,0.16)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:345"
+          ]
+        },
+        "a200": {
+          "value": "rgba(255,255,255,0.2)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/hero/panels.jsx:356"
+          ]
+        },
+        "a240": {
+          "value": "rgba(255,255,255,0.24)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:132"
+          ]
+        },
+        "a250": {
+          "value": "rgba(255,255,255,0.25)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/CookieBanner.jsx:37"
+          ]
+        },
+        "a260": {
+          "value": "rgba(255,255,255,0.26)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:174"
+          ]
+        },
+        "a280": {
+          "value": "rgba(255,255,255,0.28)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:139"
+          ]
+        },
+        "a300": {
+          "value": "rgba(255,255,255,0.3)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:340"
+          ]
+        },
+        "a320": {
+          "value": "rgba(255,255,255,0.32)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/UseCases.jsx:119"
+          ]
+        },
+        "a340": {
+          "value": "rgba(255,255,255,0.34)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:271"
+          ]
+        },
+        "a350": {
+          "value": "rgba(255,255,255,0.35)",
+          "usageCount": 5,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/hero/panels.jsx:173"
+          ]
+        },
+        "a360": {
+          "value": "rgba(255,255,255,0.36)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:138"
+          ]
+        },
+        "a380": {
+          "value": "rgba(255,255,255,0.38)",
+          "usageCount": 5,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:159"
+          ]
+        },
+        "a400": {
+          "value": "rgba(255,255,255,0.4)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/hero/panels.jsx:129"
+          ]
+        },
+        "a420": {
+          "value": "rgba(255,255,255,0.42)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:105"
+          ]
+        },
+        "a450": {
+          "value": "rgba(255,255,255,0.45)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:124"
+          ]
+        },
+        "a500": {
+          "value": "rgba(255,255,255,0.5)",
+          "usageCount": 5,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/Footer.jsx:23"
+          ]
+        },
+        "a520": {
+          "value": "rgba(255,255,255,0.52)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:95"
+          ]
+        },
+        "a550": {
+          "value": "rgba(255,255,255,0.55)",
+          "usageCount": 10,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/CookieBanner.jsx:226"
+          ]
+        },
+        "a560": {
+          "value": "rgba(255,255,255,0.56)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:87"
+          ]
+        },
+        "a580": {
+          "value": "rgba(255,255,255,0.58)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:162"
+          ]
+        },
+        "a600": {
+          "value": "rgba(255,255,255,0.6)",
+          "usageCount": 9,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:109"
+          ]
+        },
+        "a650": {
+          "value": "rgba(255,255,255,0.65)",
+          "usageCount": 5,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:108"
+          ]
+        },
+        "a680": {
+          "value": "rgba(255,255,255,0.68)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:158"
+          ]
+        },
+        "a700": {
+          "value": "rgba(255,255,255,0.7)",
+          "usageCount": 9,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:66"
+          ]
+        },
+        "a720": {
+          "value": "rgba(255,255,255,0.72)",
+          "usageCount": 3,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:278"
+          ]
+        },
+        "a750": {
+          "value": "rgba(255,255,255,0.75)",
+          "usageCount": 7,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:109"
+          ]
+        },
+        "a760": {
+          "value": "rgba(255,255,255,0.76)",
+          "usageCount": 2,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:182"
+          ]
+        },
+        "a780": {
+          "value": "rgba(255,255,255,0.78)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:82"
+          ]
+        },
+        "a800": {
+          "value": "rgba(255,255,255,0.8)",
+          "usageCount": 9,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:416"
+          ]
+        },
+        "a850": {
+          "value": "rgba(255,255,255,0.85)",
+          "usageCount": 7,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/DemoDialog.jsx:21"
+          ]
+        },
+        "a880": {
+          "value": "rgba(255,255,255,0.88)",
+          "usageCount": 6,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:186"
+          ]
+        },
+        "a900": {
+          "value": "rgba(255,255,255,0.9)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/CookieBanner.jsx:165"
+          ]
+        },
+        "a920": {
+          "value": "rgba(255,255,255,0.92)",
+          "usageCount": 4,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/ControlCenter.jsx:508"
+          ]
+        },
+        "a940": {
+          "value": "rgba(255,255,255,0.94)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/usecases/AnswerDash.jsx:158"
+          ]
+        },
+        "a950": {
+          "value": "rgba(255,255,255,0.95)",
+          "usageCount": 5,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/AgentPlatform.jsx:128"
+          ]
+        }
+      },
+      "xl-green": {
+        "a160": {
+          "value": "rgba(33,163,102,0.16)",
+          "usageCount": 1,
+          "evidence": "clone-source",
+          "measuredFrom": [
+            "src/components/hero/panels.jsx:266"
+          ]
+        }
+      }
+    },
+    "misc": {
+      "selection": {
+        "value": "#2EEB8559",
+        "note": "Text selection background (neon at ~35% alpha).",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/index.css:37",
+          "CLONE_SPEC.md:32"
+        ]
+      }
+    },
+    "accentAlphaSuffix": {
+      "s0b": {
+        "value": "0b",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}0b); alpha ~= 0.043.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:276"
+        ]
+      },
+      "s0d": {
+        "value": "0d",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}0d); alpha ~= 0.051.",
+        "usageCount": 4,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:390"
+        ]
+      },
+      "s12": {
+        "value": "12",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}12); alpha ~= 0.071.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:154"
+        ]
+      },
+      "s14": {
+        "value": "14",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}14); alpha ~= 0.078.",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ClosingCTA.jsx:16"
+        ]
+      },
+      "s1a": {
+        "value": "1a",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}1a); alpha ~= 0.102.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:355"
+        ]
+      },
+      "s26": {
+        "value": "26",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}26); alpha ~= 0.149.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ClosingCTA.jsx:16"
+        ]
+      },
+      "s28": {
+        "value": "28",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}28); alpha ~= 0.157.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:133"
+        ]
+      },
+      "s2e": {
+        "value": "2e",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}2e); alpha ~= 0.180.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:276"
+        ]
+      },
+      "s3d": {
+        "value": "3d",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}3d); alpha ~= 0.239.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:153"
+        ]
+      },
+      "s44": {
+        "value": "44",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}44); alpha ~= 0.267.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:265"
+        ]
+      },
+      "s55": {
+        "value": "55",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}55); alpha ~= 0.333.",
+        "usageCount": 4,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:389"
+        ]
+      },
+      "s66": {
+        "value": "66",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}66); alpha ~= 0.400.",
+        "usageCount": 7,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:236"
+        ]
+      },
+      "s77": {
+        "value": "77",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}77); alpha ~= 0.467.",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:117"
+        ]
+      },
+      "s88": {
+        "value": "88",
+        "note": "Two-hex-digit alpha suffix appended to an accent colour (template literal ${accent}88); alpha ~= 0.533.",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:218"
+        ]
+      }
+    }
+  }
+}

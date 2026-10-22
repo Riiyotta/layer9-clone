@@ -1,0 +1,64 @@
+{
+  "id": "security-quadrant",
+  "kind": "component",
+  "purpose": "One cell of the 2x2 security matrix: icon box + index, h3, paragraph (max 46ch) and a mono proof line.",
+  "evidence": "measured-live",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxWords": 5
+    },
+    "body": {
+      "type": "string",
+      "required": true,
+      "maxWords": 26
+    },
+    "proof": {
+      "type": "string",
+      "required": true,
+      "maxWords": 12
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "stroke-icon"
+      ],
+      "required": true
+    },
+    "index": {
+      "type": "string",
+      "description": "Auto zero-padded 01..04.",
+      "required": false,
+      "pattern": "^0[1-4]$"
+    }
+  },
+  "states": [
+    "default",
+    "hover (pointer:fine only): bg white 1.8%, icon border/fill brighten, 220ms ease"
+  ],
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.phone",
+      "change": "padding 26px 24px, min-height auto, single column, right border removed",
+      "measuredFrom": [
+        "src/styles/sections.css:315"
+      ]
+    }
+  ],
+  "tokensUsed": [
+    "component.security.quadrant.minHeight",
+    "component.security.h3.fontSize",
+    "component.security.body.fontSize",
+    "component.security.proof.fontSize",
+    "spacing.security-quadrant-pad",
+    "color.alpha.white.a750"
+  ],
+  "usedBy": [
+    "security.matrix"
+  ],
+  "measuredFrom": [
+    "src/components/Security.jsx:80",
+    "CLONE_SPEC.md:327"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "$description": "Foundation tokens: icon-size. Every leaf has value + evidence + measuredFrom. Values come only from the clone source and CLONE_SPEC.md; nothing is invented.",
+  "$schemaNote": "A leaf is any object with a 'value' key.",
+  "iconSize": {
+    "system-tile-icon": {
+      "value": 26,
+      "note": "24-unit viewBox stroke icon, stroke width 1.6.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:162",
+        "CLONE_SPEC.md:139"
+      ]
+    },
+    "platform-card-icon": {
+      "value": 26,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:124",
+        "CLONE_SPEC.md:301"
+      ]
+    },
+    "security-icon": {
+      "value": 18,
+      "note": "Inside a 36px icon box.",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Security.jsx:6"
+      ]
+    },
+    "security-icon-box": {
+      "value": 36,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:262-271",
+        "CLONE_SPEC.md:328"
+      ]
+    },
+    "hub-chip": {
+      "value": 88,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:177",
+        "CLONE_SPEC.md:141"
+      ]
+    },
+    "platform-slab-mark": {
+      "value": 54,
+      "note": "42px at <=760px.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:180",
+        "CLONE_SPEC.md:303"
+      ]
+    },
+    "platform-slab-mark-phone": {
+      "value": 42,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:222"
+      ]
+    },
+    "hero-plus": {
+      "value": 13,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:197"
+      ]
+    },
+    "hero-send-arrow": {
+      "value": 12,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:138"
+      ]
+    }
+  }
+}

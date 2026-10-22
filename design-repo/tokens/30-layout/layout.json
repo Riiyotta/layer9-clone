@@ -1,0 +1,368 @@
+{
+  "$description": "Layout tokens: max widths, scaled canvases, grids and the measured section boxes. Section boxes are measurements of the LIVE original, kept as a reference for spacing; they are not a pixel contract for new pages.",
+  "layout": {
+    "maxWidth": {
+      "section-header": {
+        "value": 980,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/shared/SectionHeader.jsx:5",
+          "CLONE_SPEC.md:37"
+        ]
+      },
+      "usecases-stage": {
+        "value": 1380,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:105",
+          "CLONE_SPEC.md:135"
+        ]
+      },
+      "integrations": {
+        "value": 1440,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/Integrations.jsx:20",
+          "CLONE_SPEC.md:47"
+        ]
+      },
+      "csr-frame": {
+        "value": 1216,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:86",
+          "CLONE_SPEC.md:238"
+        ]
+      },
+      "platform-stack": {
+        "value": 1120,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:44",
+          "CLONE_SPEC.md:296"
+        ]
+      },
+      "security-matrix": {
+        "value": 940,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:237",
+          "CLONE_SPEC.md:326"
+        ]
+      },
+      "footer": {
+        "value": 1560,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/Footer.jsx:15",
+          "CLONE_SPEC.md:377"
+        ]
+      },
+      "lede": {
+        "value": 800,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:52",
+          "CLONE_SPEC.md:20"
+        ]
+      },
+      "legal-article": {
+        "value": 760,
+        "note": "DERIVED: legal pages are not measured against the original.",
+        "evidenceLevel": "derived",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/pages/LegalPage.jsx:24"
+        ]
+      },
+      "closing-text": {
+        "value": 980,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/ClosingCTA.jsx:71",
+          "CLONE_SPEC.md:350"
+        ]
+      },
+      "closing-stage-phone": {
+        "value": 420,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:332",
+          "CLONE_SPEC.md:351"
+        ]
+      }
+    },
+    "canvas": {
+      "hero-laptop": {
+        "value": {
+          "w": 1160,
+          "h": 725,
+          "scaledBy": "host width / 1160 via ResizeObserver"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/Hero.jsx:30",
+          "CLONE_SPEC.md:71"
+        ]
+      },
+      "hero-phone": {
+        "value": {
+          "w": 360,
+          "h": 760
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/Hero.jsx:213",
+          "CLONE_SPEC.md:74"
+        ]
+      },
+      "usecases": {
+        "value": {
+          "w": 1080,
+          "h": 678,
+          "scaledBy": "min(w/1080, h/678)"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:33",
+          "CLONE_SPEC.md:135"
+        ]
+      },
+      "csr": {
+        "value": {
+          "w": 1080,
+          "h": 542,
+          "scaledBy": "w/1080"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:51",
+          "CLONE_SPEC.md:240"
+        ]
+      },
+      "closing-stack": {
+        "value": {
+          "w": 572,
+          "h": 687
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:328",
+          "CLONE_SPEC.md:351"
+        ]
+      },
+      "platform-connectors": {
+        "value": {
+          "w": 1120,
+          "h": 26
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/platform/Connectors.jsx:12",
+          "CLONE_SPEC.md:299"
+        ]
+      },
+      "integrations-cell-frame": {
+        "value": {
+          "viewBox": "112x111",
+          "inset": "-1px"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/integrations/CellFrame.jsx:14",
+          "CLONE_SPEC.md:201"
+        ]
+      }
+    },
+    "grid": {
+      "integrations-desktop": {
+        "value": {
+          "columns": 9,
+          "rows": 5
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:49",
+          "CLONE_SPEC.md:200"
+        ]
+      },
+      "integrations-phone": {
+        "value": {
+          "columns": 5,
+          "rows": 9
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:54",
+          "CLONE_SPEC.md:200"
+        ]
+      },
+      "security-desktop": {
+        "value": {
+          "columns": 2,
+          "rows": 2
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:236",
+          "CLONE_SPEC.md:326"
+        ]
+      },
+      "security-phone": {
+        "value": {
+          "columns": 1,
+          "rows": 4
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:312",
+          "CLONE_SPEC.md:343"
+        ]
+      },
+      "platform-cards": {
+        "value": {
+          "desktop": "3 cards in a row",
+          "phone": "stacked column"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/styles/sections.css:207",
+          "CLONE_SPEC.md:300"
+        ]
+      },
+      "usecases-systems": {
+        "value": {
+          "tiles": 9,
+          "tileSize": 80,
+          "gap": 40
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:12",
+          "CLONE_SPEC.md:139"
+        ]
+      }
+    },
+    "sectionBox@1280": {
+      "hero": {
+        "value": {
+          "y": 0,
+          "h": 1218
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:45",
+          "recon/text-roles-1280.json:3"
+        ]
+      },
+      "usecases": {
+        "value": {
+          "y": 1218,
+          "h": 1247
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:46"
+        ]
+      },
+      "integrations": {
+        "value": {
+          "y": 2466,
+          "h": 1209
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:47"
+        ]
+      },
+      "csr": {
+        "value": {
+          "y": 3674,
+          "h": 1081
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:48"
+        ]
+      },
+      "platform": {
+        "value": {
+          "y": 4755,
+          "h": 771
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:49"
+        ]
+      },
+      "security": {
+        "value": {
+          "y": 5526,
+          "h": 953
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:50"
+        ]
+      },
+      "closing": {
+        "value": {
+          "y": 6479,
+          "h": 800,
+          "note": "100vh tall"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:51"
+        ]
+      },
+      "footer": {
+        "value": {
+          "y": 7279,
+          "h": 56
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:52"
+        ]
+      },
+      "documentHeight": {
+        "value": 7335,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "CLONE_SPEC.md:55"
+        ]
+      }
+    },
+    "sectionBox@390": {
+      "hero": {
+        "value": {
+          "y": 0,
+          "h": 1295
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "recon/layout-390.json:5",
+          "CLONE_SPEC.md:45"
+        ]
+      },
+      "usecases": {
+        "value": {
+          "y": 1295,
+          "h": 1103
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "recon/layout-390.json:19"
+        ]
+      },
+      "documentHeight": {
+        "value": 7999,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "recon/layout-390.json:2"
+        ]
+      }
+    }
+  }
+}

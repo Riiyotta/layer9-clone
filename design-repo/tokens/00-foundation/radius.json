@@ -1,0 +1,196 @@
+{
+  "$description": "Foundation tokens: radius. Every leaf has value + evidence + measuredFrom. Values come only from the clone source and CLONE_SPEC.md; nothing is invented.",
+  "$schemaNote": "A leaf is any object with a 'value' key.",
+  "radius": {
+    "r0": {
+      "value": 0,
+      "usageCount": 3,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:13"
+      ]
+    },
+    "r1": {
+      "value": 1,
+      "usageCount": 1,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:206"
+      ]
+    },
+    "r3": {
+      "value": 3,
+      "usageCount": 5,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/hero/panels.jsx:79"
+      ]
+    },
+    "r4": {
+      "value": 4,
+      "usageCount": 3,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/hero/panels.jsx:307"
+      ]
+    },
+    "r5": {
+      "value": 5,
+      "usageCount": 1,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:147"
+      ]
+    },
+    "r6": {
+      "value": 6,
+      "usageCount": 6,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:483"
+      ]
+    },
+    "r7": {
+      "value": 7,
+      "usageCount": 1,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:117"
+      ]
+    },
+    "r8": {
+      "value": 8,
+      "usageCount": 7,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:144"
+      ]
+    },
+    "r9": {
+      "value": 9,
+      "usageCount": 5,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/ControlCenter.jsx:273"
+      ]
+    },
+    "r10": {
+      "value": 10,
+      "usageCount": 3,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:112"
+      ]
+    },
+    "r11": {
+      "value": 11,
+      "usageCount": 5,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:204"
+      ]
+    },
+    "r12": {
+      "value": 12,
+      "usageCount": 4,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:54"
+      ]
+    },
+    "r14": {
+      "value": 14,
+      "usageCount": 7,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:168"
+      ]
+    },
+    "r15": {
+      "value": 15,
+      "usageCount": 1,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:134"
+      ]
+    },
+    "r16": {
+      "value": 16,
+      "usageCount": 5,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:38"
+      ],
+      "note": "Dialog card / consent card / security matrix radius."
+    },
+    "r18": {
+      "value": 18,
+      "usageCount": 2,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/hero/panels.jsx:35"
+      ]
+    },
+    "r44": {
+      "value": 44,
+      "usageCount": 1,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:217"
+      ]
+    },
+    "r54": {
+      "value": 54,
+      "usageCount": 1,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Hero.jsx:216"
+      ]
+    },
+    "r999": {
+      "value": 999,
+      "usageCount": 10,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:85",
+        "CLONE_SPEC.md:67"
+      ],
+      "note": "Pill radius (CTA pills, consent buttons, filter pills, chips)."
+    },
+    "r12pct": {
+      "value": "12%",
+      "usageCount": 2,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:101"
+      ],
+      "note": "System / vendor tile radius (percent of tile size)."
+    },
+    "r50pct": {
+      "value": "50%",
+      "usageCount": 15,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:68"
+      ]
+    },
+    "rmix_laptop_bezel": {
+      "value": "16px 16px 0 0",
+      "note": "Laptop bezel top corners.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:156",
+        "CLONE_SPEC.md:70"
+      ]
+    },
+    "rmix_laptop_base": {
+      "value": "0 0 18px 18px",
+      "note": "Laptop base.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:206",
+        "CLONE_SPEC.md:72"
+      ]
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "map-callout",
+  "kind": "component",
+  "purpose": "Mono label callout on the hero map: large (accent border, 10.5px) or small (hairline border, 8.5px). Visible during the reveal..dash phases only.",
+  "evidence": "measured-live",
+  "props": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "maxWords": 10
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "large",
+        "small"
+      ],
+      "required": true
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "elevated",
+        "critical"
+      ],
+      "default": "elevated",
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "color.accent.blink",
+    "color.status.critical",
+    "color.status.critical-text",
+    "radius.r8",
+    "radius.r5"
+  ],
+  "usedBy": [
+    "hero.episode"
+  ],
+  "measuredFrom": [
+    "src/components/Hero.jsx:143",
+    "src/components/Hero.jsx:146",
+    "CLONE_SPEC.md:83"
+  ]
+}

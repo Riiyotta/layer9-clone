@@ -1,0 +1,45 @@
+{
+  "id": "status-dot",
+  "kind": "primitive",
+  "purpose": "Small solid circle used as a state marker (persona accent dot, platform title dot, schedule and badge dots).",
+  "evidence": "measured-live",
+  "props": {
+    "sizePx": {
+      "type": "number",
+      "enum": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "required": true
+    },
+    "color": {
+      "type": "string",
+      "description": "Accent colour token.",
+      "required": true
+    },
+    "glow": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "color.accent.neon",
+    "color.accent.blink",
+    "radius.r50pct"
+  ],
+  "usedBy": [
+    "usecases.stage",
+    "platform.stack",
+    "hero.episode"
+  ],
+  "measuredFrom": [
+    "src/components/UseCases.jsx:203",
+    "src/components/AgentPlatform.jsx:68",
+    "src/components/hero/panels.jsx:102"
+  ]
+}

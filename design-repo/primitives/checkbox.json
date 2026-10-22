@@ -1,0 +1,38 @@
+{
+  "id": "checkbox",
+  "kind": "primitive",
+  "purpose": "Native checkbox with accentColor white (required consent checkbox and the preference toggles).",
+  "evidence": "measured-live",
+  "props": {
+    "name": {
+      "type": "string",
+      "enum": [
+        "privacyPolicy",
+        "analytics",
+        "essential"
+      ],
+      "required": true
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "color.neutral.white"
+  ],
+  "usedBy": [
+    "overlay.demo-dialog",
+    "overlay.cookie-banner"
+  ],
+  "measuredFrom": [
+    "src/components/DemoDialog.jsx:184",
+    "src/components/CookieBanner.jsx:215"
+  ]
+}

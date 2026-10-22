@@ -1,0 +1,42 @@
+{
+  "id": "device-frame",
+  "kind": "component",
+  "purpose": "Laptop (bezel, screen, base, notch) or phone (bezel, island, status bar) frame hosting the hero episode canvas.",
+  "evidence": "measured-live",
+  "props": {
+    "device": {
+      "type": "string",
+      "enum": [
+        "laptop",
+        "phone"
+      ],
+      "required": true
+    }
+  },
+  "assetRole": "illustration-scene",
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.phone",
+      "change": "laptop hidden, phone shown (CSS) and phone mounted (JS matchMedia)",
+      "measuredFrom": [
+        "src/styles/sections.css:11"
+      ]
+    }
+  ],
+  "tokensUsed": [
+    "component.device.laptop.width",
+    "component.device.phone.width",
+    "elevation.laptop-bezel",
+    "elevation.laptop-base",
+    "layout.canvas.hero-laptop",
+    "layout.canvas.hero-phone"
+  ],
+  "usedBy": [
+    "hero.episode"
+  ],
+  "measuredFrom": [
+    "src/components/Hero.jsx:152-210",
+    "src/components/Hero.jsx:212-275",
+    "CLONE_SPEC.md:69"
+  ]
+}

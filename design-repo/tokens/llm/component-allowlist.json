@@ -1,0 +1,101 @@
+{
+  "allowlistVersion": "1.0.0",
+  "$description": "Closed list of everything a generator may reference or set. Machine-checked by extraction/verify_all.py: every id must have a contract file and every contract file must be listed; the node/motion property lists must equal the schema; assetRoles must equal the schema enum and assets/asset-roles.json.",
+  "primitives": [
+    "pill",
+    "wordmark",
+    "chip-mark",
+    "monogram-tile",
+    "eyebrow",
+    "icon-box",
+    "status-dot",
+    "filter-pill",
+    "mono-label",
+    "progress-track",
+    "text-field",
+    "checkbox",
+    "consent-button",
+    "caret",
+    "text-link",
+    "accent-bar",
+    "stroke-icon",
+    "send-button",
+    "badge"
+  ],
+  "components": [
+    "section-header",
+    "cell-frame",
+    "kpi-card",
+    "bar-row",
+    "chip",
+    "persona-rail-button",
+    "prompt-card",
+    "security-quadrant",
+    "platform-card",
+    "footer-links",
+    "consent-actions",
+    "consent-option-row",
+    "device-frame",
+    "prompt-bar",
+    "map-basemap",
+    "map-callout",
+    "chat-bubble",
+    "system-tile",
+    "dashed-connector-strip",
+    "metric-foot",
+    "mobile-flow-row",
+    "dialog-card",
+    "answer-dashboard",
+    "hero-panel",
+    "legal-clause",
+    "isometric-stack-art"
+  ],
+  "sections": [
+    "hero.episode",
+    "usecases.stage",
+    "integrations.grid",
+    "csr.loop",
+    "platform.stack",
+    "security.matrix",
+    "closing.cta",
+    "chrome.footer",
+    "overlay.cookie-banner",
+    "overlay.demo-dialog",
+    "legal.header",
+    "legal.body"
+  ],
+  "pageProperties": [
+    "template",
+    "route",
+    "documentTitle",
+    "nodes"
+  ],
+  "nodeProperties": [
+    "type",
+    "content",
+    "motion"
+  ],
+  "motionProperties": [
+    "pattern",
+    "trigger",
+    "inViewAmount",
+    "once",
+    "loopPeriodMs",
+    "reducedMotionFallback"
+  ],
+  "assetRoles": [
+    "brand-wordmark",
+    "brand-chip-mark",
+    "vendor-logo-tile",
+    "map-basemap-tile",
+    "stroke-icon",
+    "illustration-scene",
+    "decorative-frame",
+    "form-submit-endpoint",
+    "legal-copy"
+  ],
+  "tokenOverrides": {
+    "allowed": [],
+    "note": "PageSpec has no token-override field; see tokens/llm/token-policy.json overrides."
+  }
+}

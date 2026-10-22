@@ -1,0 +1,68 @@
+{
+  "$description": "Component-scoped tokens: usecases. 'ref' leaves resolve into the foundation catalogue; literal leaves are component-specific values with citations.",
+  "usecases": {
+    "window.rect": {
+      "value": "left 40, top 254, 1000x408",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:21",
+        "CLONE_SPEC.md:143"
+      ]
+    },
+    "rail.width": {
+      "value": 248,
+      "measuredFrom": [
+        "src/components/UseCases.jsx:186",
+        "CLONE_SPEC.md:144"
+      ]
+    },
+    "promptColumn.width": {
+      "value": 322,
+      "measuredFrom": [
+        "src/components/UseCases.jsx:219",
+        "CLONE_SPEC.md:145"
+      ]
+    },
+    "card.radius": {
+      "value": 12,
+      "measuredFrom": [
+        "src/components/UseCases.jsx:235",
+        "CLONE_SPEC.md:145"
+      ]
+    },
+    "card.question.fontSize": {
+      "value": 20,
+      "measuredFrom": [
+        "src/components/UseCases.jsx:243",
+        "CLONE_SPEC.md:145"
+      ]
+    },
+    "card.hoverBorder": {
+      "value": "rgba(255,255,255,0.26)",
+      "measuredFrom": [
+        "src/styles/sections.css:26",
+        "CLONE_SPEC.md:161"
+      ]
+    },
+    "progress.height": {
+      "value": 2,
+      "measuredFrom": [
+        "src/components/UseCases.jsx:206",
+        "CLONE_SPEC.md:144"
+      ]
+    },
+    "mobile.pillar.minHeight": {
+      "value": 44,
+      "measuredFrom": [
+        "src/styles/sections.css:32",
+        "CLONE_SPEC.md:185"
+      ]
+    },
+    "mobile.dash.height": {
+      "value": 400,
+      "measuredFrom": [
+        "src/styles/sections.css:40",
+        "CLONE_SPEC.md:187"
+      ]
+    }
+  }
+}

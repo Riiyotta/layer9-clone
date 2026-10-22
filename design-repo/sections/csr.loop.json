@@ -1,0 +1,379 @@
+{
+  "id": "csr.loop",
+  "kind": "section",
+  "purpose": "Anchor #csr. Section header with a crossfading two-state title, then a 1216px app frame: a support-agent question types in, five systems tangle (manual path), snap onto a rail under an 'Acme orchestration' shell, each returns a finding, then an answer bubble appears. Loops forever once first seen. Mobile gets a five-row version.",
+  "evidence": "measured-live",
+  "constraints": {
+    "onePerPage": true,
+    "anchorId": "csr",
+    "requiredOverlays": [],
+    "allowedRoutes": [
+      "/"
+    ]
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "eyebrow",
+      "titleProblem",
+      "titleSolved",
+      "lede",
+      "frame",
+      "stateLabels",
+      "question",
+      "answer",
+      "systems",
+      "metrics",
+      "auditNote"
+    ],
+    "properties": {
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 8,
+        "cloneChars": 31,
+        "originalChars": 30,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:3479"
+        ]
+      },
+      "titleProblem": {
+        "type": "string",
+        "maxWords": 5,
+        "cloneChars": 23,
+        "originalChars": 23,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:3502"
+        ]
+      },
+      "titleSolved": {
+        "type": "string",
+        "maxWords": 5,
+        "cloneChars": 19
+      },
+      "lede": {
+        "type": "string",
+        "maxWords": 17,
+        "cloneChars": 80,
+        "originalChars": 83,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:3571"
+        ]
+      },
+      "frame": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "appName",
+          "caseLabel",
+          "ticketLabel"
+        ],
+        "properties": {
+          "appName": {
+            "type": "string",
+            "maxWords": 4,
+            "cloneChars": 22,
+            "originalChars": 22,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:3617"
+            ]
+          },
+          "caseLabel": {
+            "type": "string",
+            "maxWords": 7,
+            "cloneChars": 25,
+            "originalChars": 25,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:3640"
+            ]
+          },
+          "ticketLabel": {
+            "type": "string",
+            "maxWords": 5,
+            "cloneChars": 32,
+            "originalChars": 33,
+            "measuredFrom": [
+              "recon/text-roles-1280.json:3732"
+            ]
+          }
+        }
+      },
+      "stateLabels": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "request",
+          "manual",
+          "routing",
+          "answered"
+        ],
+        "properties": {
+          "request": {
+            "type": "string",
+            "maxWords": 3,
+            "cloneChars": 11
+          },
+          "manual": {
+            "type": "string",
+            "maxWords": 4,
+            "cloneChars": 15
+          },
+          "routing": {
+            "type": "string",
+            "maxWords": 4,
+            "cloneChars": 15
+          },
+          "answered": {
+            "type": "string",
+            "maxWords": 2,
+            "cloneChars": 8
+          }
+        }
+      },
+      "question": {
+        "type": "string",
+        "maxWords": 9,
+        "cloneChars": 35,
+        "description": "Typed at 14ms per char; original question is c35."
+      },
+      "answer": {
+        "type": "string",
+        "maxWords": 28,
+        "cloneChars": 117
+      },
+      "systems": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "stallTag",
+            "finding"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxWords": 3,
+              "cloneChars": 13
+            },
+            "stallTag": {
+              "type": "string",
+              "maxWords": 4,
+              "cloneChars": 15
+            },
+            "finding": {
+              "type": "string",
+              "maxWords": 5,
+              "cloneChars": 20
+            }
+          }
+        },
+        "minItems": 5,
+        "maxItems": 5
+      },
+      "metrics": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "value",
+            "label"
+          ],
+          "properties": {
+            "value": {
+              "type": "string",
+              "pattern": "^[0-9]+$"
+            },
+            "label": {
+              "type": "string",
+              "maxWords": 3,
+              "cloneChars": 18
+            }
+          }
+        },
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "auditNote": {
+        "type": "string",
+        "maxWords": 8,
+        "cloneChars": 36,
+        "originalChars": 36,
+        "measuredFrom": [
+          "recon/text-roles-1280.json:4008"
+        ]
+      }
+    }
+  },
+  "budgetBasis": {
+    "rule": "maxWords = clone word count + max(1, ceil(25%)). cloneChars is the clone's own character count; originalChars (where present) is the measured character count of the live original's text role (length only, no copy).",
+    "wordCount": "whitespace tokens containing at least one alphanumeric character"
+  },
+  "fixedInternals": [
+    {
+      "item": "Canvas choreography: node positions, tangle curves, rail X positions (470, 596, 722, 848, 974), shell, return path and 'A' badge",
+      "citations": [
+        "src/components/ControlCenter.jsx:16",
+        "src/components/ControlCenter.jsx:40",
+        "CLONE_SPEC.md:271"
+      ]
+    },
+    {
+      "item": "Mode/status literals: MANUAL PATH / COORDINATED BY ACME, 'Five tools, no shared picture' / 'One pass through every source', '✓ SENT — CHECKING BY HAND…' / '✓ HANDED TO ACME' / '✓ ANSWERED · FIRST TRY', 'Acme orchestration', timestamps, 'AGT' avatar",
+      "citations": [
+        "src/components/ControlCenter.jsx:115",
+        "src/components/ControlCenter.jsx:451",
+        "src/components/ControlCenter.jsx:218"
+      ]
+    }
+  ],
+  "motion": {
+    "allowedPatterns": [
+      "phase-loop"
+    ],
+    "primaryTrigger": {
+      "type": "useInView",
+      "inViewAmount": 0.15,
+      "once": true
+    },
+    "triggerNotes": "Starts once at >=15% in view (once), then loops forever with no further in-view gating.",
+    "loopPeriodMs": 8000,
+    "loopPeriodCodeMs": 7960,
+    "loopPeriodNote": "Measured cycle ~8.0s (state changes at 0, 0.81, 2.43, 5.06, 8.09s). Code timers: 35 chars x 14ms + 200 + 1600 + 750 + 1920 + 3000 = 7960ms.",
+    "phases": [
+      "type",
+      "tangle",
+      "rail",
+      "check",
+      "answer"
+    ],
+    "labelChangesPerCycle": 4,
+    "labelNote": "QA correction: the frame-state label changes 4 times per ~8.0s cycle (New request -> Working by hand -> Acme is routing -> Answered -> wrap).",
+    "easing": "motion.easing.ease",
+    "requiredReducedMotionFallback": "final-state-no-timers",
+    "reducedMotionDetail": "Question fully typed, system tiles on the rail with findings, answer shown, title shows the solved state; no timers; caret animation none.",
+    "scrollLinked": false,
+    "tokens": [
+      "motion.duration.csr.char-ms",
+      "motion.duration.csr.tangle",
+      "motion.duration.csr.rail",
+      "motion.duration.csr.check",
+      "motion.duration.csr.answer",
+      "motion.spring.snappy"
+    ],
+    "measuredFrom": [
+      "src/components/ControlCenter.jsx:76",
+      "src/components/ControlCenter.jsx:84-97",
+      "CLONE_SPEC.md:255",
+      "src/components/ControlCenter.jsx:104"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.ledes-wrap",
+      "from": "nowrap",
+      "to": "normal",
+      "change": "Lede white-space nowrap -> normal.",
+      "measuredFrom": [
+        "src/styles/sections.css:81"
+      ]
+    },
+    {
+      "breakpoint": "breakpoint.phone",
+      "from": "1080x542 canvas scaled by w/1080",
+      "to": "mobile rows",
+      "change": "Canvas stage hidden; mobile question box + 5 rows (40px) + answer; frame radius 18 -> 14; head stacks to a column; foot becomes three equal columns and the audit note is hidden.",
+      "measuredFrom": [
+        "src/styles/sections.css:180",
+        "src/styles/sections.css:192",
+        "CLONE_SPEC.md:283-289"
+      ]
+    }
+  ],
+  "components": [
+    "section-header",
+    "system-tile",
+    "chat-bubble",
+    "metric-foot",
+    "mobile-flow-row"
+  ],
+  "primitives": [
+    "caret",
+    "mono-label",
+    "eyebrow",
+    "status-dot"
+  ],
+  "assetRoles": [],
+  "notes": [
+    "The section title crossfades between titleProblem and titleSolved (500ms opacity; incoming moves translateY 10->0); each ends with a coloured period (BOOST then NEON) that is part of the component, not the copy."
+  ],
+  "example": {
+    "eyebrow": "03 · MEET ACME · THE CARE AGENT",
+    "titleProblem": "The queue keeps growing",
+    "titleSolved": "Solved on first ask",
+    "lede": "Five back-office systems queried at once, so every agent gives one clear answer.",
+    "frame": {
+      "appName": "Support desk workspace",
+      "caseLabel": "Open case · 88 Birch Road",
+      "ticketLabel": "Ticket AC-55210 · Home broadband"
+    },
+    "stateLabels": {
+      "request": "New request",
+      "manual": "Working by hand",
+      "routing": "Acme is routing",
+      "answered": "Answered"
+    },
+    "question": "Why does 88 Birch Rd keep dropping?",
+    "answer": "Light levels on the fiber drop are failing, so the line keeps resetting. A tech visits Thu 1–3pm; we will text ahead.",
+    "systems": [
+      {
+        "label": "BILLING",
+        "stallTag": "SESSION TIMEOUT",
+        "finding": "BALANCE $0"
+      },
+      {
+        "label": "OPTICAL LEVEL",
+        "stallTag": "ASK NOC",
+        "finding": "RX POWER · −27.4 dBm"
+      },
+      {
+        "label": "NMS",
+        "stallTag": "VPN REQUIRED",
+        "finding": "ALL GREEN"
+      },
+      {
+        "label": "SERVICE AREA",
+        "stallTag": "QUEUE: 9 MIN",
+        "finding": "ZONE QUIET"
+      },
+      {
+        "label": "CRM",
+        "stallTag": "COPY + PASTE",
+        "finding": "3 RECENT CALLS"
+      }
+    ],
+    "metrics": [
+      {
+        "value": "5",
+        "label": "sources queried"
+      },
+      {
+        "value": "1",
+        "label": "fault isolated"
+      },
+      {
+        "value": "0",
+        "label": "escalations needed"
+      }
+    ],
+    "auditNote": "Every lookup logged for later review"
+  },
+  "measuredFrom": [
+    "CLONE_SPEC.md:229",
+    "src/pages/Home.jsx:15",
+    "src/components/ControlCenter.jsx:74-557",
+    "src/components/ControlCenter.jsx:356"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "text-field",
+  "kind": "primitive",
+  "purpose": "Underline-only form field (input or select) with no box border; focus brightens the bottom border.",
+  "evidence": "measured-live",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "input",
+        "select"
+      ],
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "enum": [
+        "full_name",
+        "email",
+        "number_of_subscribers",
+        "coverage_areas",
+        "how_did_you_hear_about_us"
+      ],
+      "required": true
+    },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "maxWords": 5
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "component.dialog.field.padding",
+    "component.dialog.field.fontSize",
+    "component.dialog.field.placeholder",
+    "component.dialog.field.focusBorder",
+    "color.alpha.white.a100"
+  ],
+  "usedBy": [
+    "overlay.demo-dialog"
+  ],
+  "measuredFrom": [
+    "src/components/DemoDialog.jsx:7-19",
+    "src/styles/sections.css:346",
+    "CLONE_SPEC.md:395"
+  ]
+}

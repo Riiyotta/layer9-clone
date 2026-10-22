@@ -1,0 +1,47 @@
+{
+  "$description": "Semantic roles: border. Each role is a reference into the foundation catalogue (resolved in themes/dark.json).",
+  "border": {
+    "hairline": {
+      "ref": "color.alpha.white.a100",
+      "usage": "1px dividers and card borders (HAIRLINE).",
+      "measuredFrom": [
+        "src/lib/tokens.js:16"
+      ]
+    },
+    "ghost": {
+      "ref": "color.alpha.white.a250",
+      "usage": "Ghost pill and ghost consent button outline.",
+      "measuredFrom": [
+        "src/components/shared/Pill.jsx:26"
+      ]
+    },
+    "dialog": {
+      "ref": "color.alpha.white.a140",
+      "usage": "Dialog / consent card outline.",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:74"
+      ]
+    },
+    "tile": {
+      "ref": "color.solid.h232327",
+      "usage": "System / vendor tile border (4px).",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:102"
+      ]
+    },
+    "tile-match": {
+      "ref": "color.solid.h3a3a3e",
+      "usage": "Vendor tile border while its category is highlighted.",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:102"
+      ]
+    },
+    "panel": {
+      "ref": "color.status.panel-border",
+      "usage": "Hero laptop panel seams.",
+      "measuredFrom": [
+        "src/components/hero/data.js:7"
+      ]
+    }
+  }
+}

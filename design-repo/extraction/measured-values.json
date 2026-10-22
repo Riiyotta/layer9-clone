@@ -1,0 +1,4651 @@
+{
+  "ledgerVersion": "1.0.0",
+  "$description": "Citation ledger. Every path:line[-line] citation used anywhere in this repo has an entry here with the text expected at that range; verify_all.py resolves each one (range AND content) when the sibling source tree is present and WARNs-and-skips when it is not.",
+  "pathBase": "Citations are relative to the project root that holds design-repo/ as a sibling (src/, recon/, CLONE_SPEC.md, package.json). Not included in this package.",
+  "evidenceKinds": {
+    "measured-live-spec": "CLONE_SPEC.md: values Playwright-measured against the live original on 2026-10-22 (1280x800 and 390x844) or read from the original's client bundle.",
+    "measured-live-raw": "recon/*: raw measurement files (char counts, boxes, network list, scoped style blocks).",
+    "built-source": "src/, tailwind.config.js, package.json: the clone as built. Records what the clone does, which is not always what the live site does."
+  },
+  "measured": {
+    "capturedOn": "2026-10-22",
+    "viewports": [
+      "1280x800",
+      "390x844"
+    ],
+    "scope": "The single marketing route '/': tokens (spec section 0), all seven sections, footer, demo dialog, cookie banner, breakpoints.",
+    "templates": [
+      "home"
+    ]
+  },
+  "derived": [
+    {
+      "item": "Templates legal-prose and sections legal.header / legal.body",
+      "why": "The original serves privacy and terms as PDFs, so no HTML page exists to measure; the clone composes them from the home page's own tokens.",
+      "citations": [
+        "src/pages/LegalPage.jsx:6",
+        "src/lib/routes.js:1"
+      ]
+    },
+    {
+      "item": "Legal type styles (24px clause heading, 17/15px body) and legal spacing",
+      "why": "Chosen by the clone author for the derived page.",
+      "citations": [
+        "src/pages/LegalPage.jsx:53"
+      ]
+    },
+    {
+      "item": "Closing sweep loop period 5500ms",
+      "why": "Sum of two code constants (duration 2.1s + repeatDelay 3.4s); not separately measured.",
+      "citations": [
+        "src/components/closing/StackArt.jsx:44"
+      ]
+    },
+    {
+      "item": "Hero code loop period 21012ms and CSR code cycle 7960ms",
+      "why": "Sums of the code constants, recorded next to the QA-measured values.",
+      "citations": [
+        "src/components/hero/data.js:31",
+        "src/components/ControlCenter.jsx:43"
+      ]
+    },
+    {
+      "item": "Legal maxWords ceilings and legal array ceilings",
+      "why": "Derived from the two placeholder documents with a 25% allowance, relaxed to round numbers.",
+      "citations": [
+        "src/content/legal.js:4"
+      ]
+    },
+    {
+      "item": "Phone-composition values (callouts, dot sets, bottom-sheet geometry)",
+      "why": "The clone's data.js says they are not in the spec text and come from the reference bundle.",
+      "citations": [
+        "src/components/hero/data.js:62"
+      ]
+    }
+  ],
+  "qaCorrections": [
+    {
+      "id": "QA-1",
+      "topic": "hero typing speed",
+      "specSays": "26ms per char",
+      "qaConfirmed": "~27ms per char effective",
+      "appliedIn": [
+        "tokens/00-foundation/motion.json motion.duration.hero.char-ms-measured-qa",
+        "sections/hero.episode.json motion.typingMsPerChar"
+      ],
+      "note": "The clone's code constant CHAR_MS is 26 (setTimeout granularity makes the effective rate ~27).",
+      "citations": [
+        "CLONE_SPEC.md:97",
+        "src/components/hero/data.js:32"
+      ]
+    },
+    {
+      "id": "QA-2",
+      "topic": "hero loop period",
+      "specSays": "~21.0s",
+      "qaConfirmed": "~21.3s",
+      "appliedIn": [
+        "tokens/00-foundation/motion.json motion.duration.hero.loop-period-measured-qa-ms",
+        "sections/hero.episode.json motion.loopPeriodMs (21300)",
+        "schema node motion for hero.episode (loopPeriodMs const 21300)"
+      ],
+      "note": "Code constants sum to 21012ms; QA's measured period includes timer overhead.",
+      "citations": [
+        "CLONE_SPEC.md:109",
+        "src/components/hero/data.js:31"
+      ]
+    },
+    {
+      "id": "QA-3",
+      "topic": "pill glimmer easing",
+      "specSays": "EASE (cubic-bezier(0.4,0,0.2,1))",
+      "qaConfirmed": "linear",
+      "appliedIn": [
+        "tokens/20-component/pill.json pill.glimmer",
+        "primitives/pill.json motion.glimmer.easing",
+        "tokens/00-foundation/motion.json motion.duration.hero.pill-glimmer-easing-qa"
+      ],
+      "note": "DISAGREEMENT WITH THE CLONE: src/styles/sections.css still animates l9PillGlim with cubic-bezier(0.4,0,0.2,1). This repo follows QA (linear); the clone source was not changed (read-only).",
+      "citations": [
+        "CLONE_SPEC.md:130",
+        "src/styles/sections.css:18"
+      ]
+    },
+    {
+      "id": "QA-4",
+      "topic": "CSR frame-state label changes per cycle",
+      "specSays": "five timestamps listed (0, 0.81, 2.43, 5.06, 8.09s)",
+      "qaConfirmed": "the label really changes 4 times per ~8.0s cycle",
+      "appliedIn": [
+        "tokens/00-foundation/motion.json motion.duration.csr.label-changes-per-cycle",
+        "sections/csr.loop.json motion.labelChangesPerCycle"
+      ],
+      "note": "Labels: New request, Working by hand, Acme is routing, Answered (then wraps).",
+      "citations": [
+        "CLONE_SPEC.md:255",
+        "src/components/ControlCenter.jsx:107"
+      ]
+    }
+  ],
+  "sourceDiscrepancies": [
+    {
+      "id": "D-1",
+      "what": "Use-cases eyebrow length",
+      "specSays": "c19 (CLONE_SPEC section 3)",
+      "reconSays": "c17 (text-roles-1280.json, section 1 eyebrow)",
+      "decision": "Recon is the raw measurement; originalChars is 17. The clone's own eyebrow is longer (19 chars).",
+      "citations": [
+        "CLONE_SPEC.md:134",
+        "recon/text-roles-1280.json:1363"
+      ]
+    },
+    {
+      "id": "D-2",
+      "what": "Answer body kinds",
+      "specSays": "'Six body kinds' above a seven-item list",
+      "sourceSays": "seven kinds implemented (tiles, bars, rows, report, kpi, steps, map)",
+      "decision": "Source is authoritative; contracts model seven.",
+      "citations": [
+        "CLONE_SPEC.md:171",
+        "src/components/usecases/AnswerDash.jsx:241"
+      ]
+    },
+    {
+      "id": "D-3",
+      "what": "Pill glimmer easing",
+      "specSays": "EASE",
+      "qaSays": "linear",
+      "cloneSourceSays": "cubic-bezier(0.4,0,0.2,1)",
+      "decision": "Repo follows QA (see QA-3); the clone source is stale on this one detail.",
+      "citations": [
+        "CLONE_SPEC.md:130",
+        "src/styles/sections.css:18"
+      ]
+    },
+    {
+      "id": "D-4",
+      "what": "Duplicate section numeral",
+      "detail": "Integrations (default num '03') and CSR (hard-coded '03') both render '03'.",
+      "decision": "Recorded, not fixed (source is read-only). Surfaced as WARN by graph rule EYEBROW_NUMBER_UNIQUE.",
+      "citations": [
+        "src/components/Integrations.jsx:10",
+        "src/components/ControlCenter.jsx:359"
+      ]
+    },
+    {
+      "id": "D-5",
+      "what": "Hero prompt placeholder length",
+      "specSays": "c32",
+      "cloneSays": "c34",
+      "decision": "Clone comment already records the difference; originalChars stays 32 (recon).",
+      "citations": [
+        "src/components/hero/data.js:11",
+        "recon/text-roles-1280.json:1018"
+      ]
+    },
+    {
+      "id": "D-6",
+      "what": "CLONE_SPEC.md length",
+      "detail": "The task brief says 347 lines; the file on disk has 451 lines. Citations use the on-disk numbering.",
+      "citations": [
+        "CLONE_SPEC.md:1"
+      ]
+    },
+    {
+      "id": "D-7",
+      "what": "Map tiles were saved using the original site's API key",
+      "detail": "network-1280.txt shows the original requesting the tiles with a key= query parameter; the clone's local PNGs are copies of those responses.",
+      "decision": "Licensing concern recorded on asset role map-basemap-tile.",
+      "citations": [
+        "recon/network-1280.txt:6",
+        "src/components/hero/data.js:39"
+      ]
+    },
+    {
+      "id": "D-8",
+      "what": "Fonts load from an external stylesheet",
+      "detail": "src/index.css @imports Google Fonts at runtime (Inter Tight, Inter), i.e. one external request; the originals are licensed and not included.",
+      "citations": [
+        "src/index.css:3"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "item": "'From the field' testimonial carousel",
+      "status": "DELIBERATE SCOPE EXCLUSION: must not be recreated",
+      "detail": "The original's bundle contains a testimonial carousel (.l9-fld-tab, 6s interval, AnimatePresence fade 0.6s) that is not rendered on the live page; the clone deliberately does not build it. No section contract, template node or schema type exists for it, and none may be added.",
+      "citations": [
+        "CLONE_SPEC.md:57"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "citation": "CLONE_SPEC.md:30",
+      "expect": "body `#090909`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "tailwind.config.js:8",
+      "expect": "bg: '#090909'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/index.css:24",
+      "expect": "background: #090909",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:17",
+      "expect": "GRAPHITE = '#191919'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:16",
+      "expect": "| GRAPHITE / TILE |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:18",
+      "expect": "TILE = '#1E1E1E'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:73",
+      "expect": "background: '#101112'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:393",
+      "expect": "bg #101112, border rgba(255,255,255,.14), radius 16",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:25",
+      "expect": "'#FFFFFF'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:20",
+      "expect": "background: '#fff'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:270",
+      "expect": "background: '#000'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:15",
+      "expect": "transparent 0, #000 7%",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:7",
+      "expect": "NEON = '#2EEB85'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:13",
+      "expect": "| NEON / BLINK / BOOST |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:8",
+      "expect": "BLINK = '#FF602E'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:9",
+      "expect": "BOOST = '#BE6CF3'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:10",
+      "expect": "STOP_ORANGE = '#FF5722'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:14",
+      "expect": "| STOP_ORANGE / FUCHSIA / GREEN / PURPLE |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:11",
+      "expect": "FUCHSIA = '#AB0052'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:12",
+      "expect": "GREEN = '#1DE97B'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:13",
+      "expect": "PURPLE = '#B14EF1'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:17",
+      "expect": "| *_LINE (2px top accent bars)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:22",
+      "expect": "BLINK_LINE =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:23",
+      "expect": "NEON_LINE =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:24",
+      "expect": "BOOST_LINE =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:5",
+      "expect": "RED = '#D52B3A'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:82",
+      "expect": "2 `#D52B3A`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/data.js:6",
+      "expect": "RED_TEXT = '#FF8089'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/personas.js:111",
+      "expect": "hotColor: '#FF453A'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:7",
+      "expect": "PANEL_BORDER = '#2A2B2E'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:195",
+      "expect": "#004549",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:196",
+      "expect": "#06231A",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:193",
+      "expect": "#07291E",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:8",
+      "expect": "#09090b",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Brand.jsx:32",
+      "expect": "#0a0a0a",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/scene.jsx:84",
+      "expect": "#0a0a0c",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:429",
+      "expect": "#0A0B0C",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:103",
+      "expect": "#0b0b0c",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:157",
+      "expect": "#0d0d0f",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:207",
+      "expect": "#0f0f11",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:171",
+      "expect": "#101013",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:114",
+      "expect": "#111114",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:185",
+      "expect": "#111214",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:237",
+      "expect": "#141416",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:56",
+      "expect": "#141616",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:206",
+      "expect": "#151517",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:234",
+      "expect": "#17171a",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:230",
+      "expect": "#185C37",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:156",
+      "expect": "#1a1a1c",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:241",
+      "expect": "#1b1b1d",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:345",
+      "expect": "#1e8e3e",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Brand.jsx:26",
+      "expect": "#1f6a6a",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:237",
+      "expect": "#202021",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:278",
+      "expect": "#202124",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:214",
+      "expect": "#21A366",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:187",
+      "expect": "#220C38",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:102",
+      "expect": "#232327",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:222",
+      "expect": "#252526",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:184",
+      "expect": "#2E0A1C",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/integrations/CellFrame.jsx:16",
+      "expect": "#2E2E2E",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:181",
+      "expect": "#331008",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Brand.jsx:27",
+      "expect": "#6b2fa3",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:189",
+      "expect": "#950059",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:221",
+      "expect": "#9aa0a6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:281",
+      "expect": "#bdc1c6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/integrations/vendors.js:10",
+      "expect": "#E8E8E8",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:279",
+      "expect": "#e8eaed",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:117",
+      "expect": "#f6f7f6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:147",
+      "expect": "rgba(12,12,14,0.88)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:144",
+      "expect": "rgba(12,12,14,0.92)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:90",
+      "expect": "rgba(12,13,14,0.98)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:194",
+      "expect": "rgba(16,16,18,0.96)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:17",
+      "expect": "rgba(17,17,17,0.14)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:331",
+      "expect": "rgba(9,9,11,0.8)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:370",
+      "expect": "rgba(9,9,9,0.84)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:136",
+      "expect": "rgba(0,0,0,0.12)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:243",
+      "expect": "rgba(0, 0, 0, 0.16)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:57",
+      "expect": "rgba(0,0,0,0.28)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:248",
+      "expect": "rgba(0,0,0,0.32)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:91",
+      "expect": "rgba(0,0,0,0.35)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:345",
+      "expect": "rgba(0,0,0,0.5)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:20",
+      "expect": "rgba(0,0,0,0.55)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:142",
+      "expect": "rgba(0,0,0,0.62)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:38",
+      "expect": "rgba(255,96,46,0.06)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:184",
+      "expect": "rgba(255,96,46,0.25)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:36",
+      "expect": "rgba(255,96,46,0.35)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:256",
+      "expect": "rgba(255,96,46,0.9)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:74",
+      "expect": "rgba(190,108,243,0.055)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:222",
+      "expect": "rgba(255,120,96,0.9)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:135",
+      "expect": "rgba(46,235,133,0.012)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:269",
+      "expect": "rgba(46, 235, 133, 0.045)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:503",
+      "expect": "rgba(46,235,133,0.06)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:308",
+      "expect": "rgba(46, 235, 133, 0.065)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:505",
+      "expect": "rgba(46,235,133,0.07)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:202",
+      "expect": "rgba(46,235,133,0.18)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:307",
+      "expect": "rgba(46, 235, 133, 0.28)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:504",
+      "expect": "rgba(46,235,133,0.3)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:173",
+      "expect": "rgba(46,235,133,0.4)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:151",
+      "expect": "rgba(46,235,133,0.78)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:98",
+      "expect": "rgba(255,255,255,0.012)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:165",
+      "expect": "rgba(255,255,255,0.014)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:112",
+      "expect": "rgba(255,255,255,0.018)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:236",
+      "expect": "rgba(255,255,255,0.02)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:205",
+      "expect": "rgba(255,255,255,0.025)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:87",
+      "expect": "rgba(255,255,255,0.03)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:114",
+      "expect": "rgba(255,255,255,0.06)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:206",
+      "expect": "rgba(255,255,255,0.07)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:79",
+      "expect": "rgba(255,255,255,0.08)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:254",
+      "expect": "rgba(255, 255, 255, 0.085)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:409",
+      "expect": "rgba(255,255,255,0.1)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:55",
+      "expect": "rgba(255,255,255,0.12)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:88",
+      "expect": "rgba(255,255,255,0.13)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:86",
+      "expect": "rgba(255,255,255,0.14)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:356",
+      "expect": "rgba(255,255,255,0.2)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:132",
+      "expect": "rgba(255,255,255,0.24)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:37",
+      "expect": "rgba(255,255,255,0.25)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:174",
+      "expect": "rgba(255,255,255,0.26)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:139",
+      "expect": "rgba(255,255,255,0.28)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:340",
+      "expect": "rgba(255,255,255,0.3)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:119",
+      "expect": "rgba(255,255,255,0.32)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:271",
+      "expect": "rgba(255,255,255,0.34)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:173",
+      "expect": "rgba(255,255,255,0.35)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:138",
+      "expect": "rgba(255,255,255,0.36)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:159",
+      "expect": "rgba(255,255,255,0.38)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:129",
+      "expect": "rgba(255,255,255,0.4)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:105",
+      "expect": "rgba(255,255,255,0.42)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:124",
+      "expect": "rgba(255,255,255,0.45)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Footer.jsx:23",
+      "expect": "rgba(255,255,255,0.5)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:95",
+      "expect": "rgba(255,255,255,0.52)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:226",
+      "expect": "rgba(255,255,255,0.55)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:87",
+      "expect": "rgba(255,255,255,0.56)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:162",
+      "expect": "rgba(255,255,255,0.58)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:109",
+      "expect": "rgba(255,255,255,0.6)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:108",
+      "expect": "rgba(255,255,255,0.65)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:158",
+      "expect": "rgba(255,255,255,0.68)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:66",
+      "expect": "rgba(255,255,255,0.7)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:278",
+      "expect": "rgba(255,255,255,0.72)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:182",
+      "expect": "rgba(255,255,255,0.76)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:82",
+      "expect": "rgba(255,255,255,0.78)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:416",
+      "expect": "rgba(255,255,255,0.8)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:21",
+      "expect": "rgba(255,255,255,0.85)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:186",
+      "expect": "rgba(255,255,255,0.88)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:165",
+      "expect": "rgba(255,255,255,0.9)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:508",
+      "expect": "rgba(255,255,255,0.92)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:128",
+      "expect": "rgba(255,255,255,0.95)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:266",
+      "expect": "rgba(33,163,102,0.16)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/index.css:37",
+      "expect": "::selection { background: #2eeb8559",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:32",
+      "expect": "::selection{background:#2eeb8559}",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:276",
+      "expect": "${o}0b",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:390",
+      "expect": "${NEON}0d",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:154",
+      "expect": "${o}12",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:16",
+      "expect": "${PURPLE}14",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:355",
+      "expect": "${n}1a",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:133",
+      "expect": "${o}28",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:153",
+      "expect": "${o}3d",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:265",
+      "expect": "${o}44",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:389",
+      "expect": "${NEON}55",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:117",
+      "expect": "${o}77",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:218",
+      "expect": "${o}88",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/index.css:11",
+      "expect": "--font-head:",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:24",
+      "expect": "| HEAD / BODY |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/index.css:12",
+      "expect": "--font-body:",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/index.css:13",
+      "expect": "--font-mono:",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:23",
+      "expect": "| MONO |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:33-40",
+      "expect": "export const H1 =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:18",
+      "expect": "| H1 |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:41-48",
+      "expect": "export const H2 =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:19",
+      "expect": "| H2 |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:49-55",
+      "expect": "export const LEDE_STYLE =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:20",
+      "expect": "| LEDE |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:56-64",
+      "expect": "export const EYEBROW =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:21",
+      "expect": "| Eyebrow |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/index.css:21-29",
+      "expect": "body {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:53",
+      "expect": "fontFamily: HEAD, fontSize: 24",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:49",
+      "expect": "fontSize: 17, lineHeight: 1.6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:69",
+      "expect": "marginTop: 14, fontSize: 15, lineHeight: 1.6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:45",
+      "expect": "fontSize: 6.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:414",
+      "expect": "fontSize: 7.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:68",
+      "expect": "fontSize: 8",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:128",
+      "expect": "font-size: 8.25px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:148",
+      "expect": "fontSize: 8.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:221",
+      "expect": "fontSize: 9",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:255",
+      "expect": "fontSize: 9.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:222",
+      "expect": "fontSize: 10",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:403",
+      "expect": "fontSize: 10.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:240",
+      "expect": "fontSize: 11",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:80",
+      "expect": "fontSize: 11.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:183",
+      "expect": "fontSize: 12",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:141",
+      "expect": "fontSize: 12.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:151",
+      "expect": "fontSize: 13",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/index.css:35",
+      "expect": "font-size: 13.3333px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:506",
+      "expect": "fontSize: 13.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:35",
+      "expect": "fontSize: 14",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Footer.jsx:18",
+      "expect": "fontSize: 14.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:15",
+      "expect": "fontSize: 15",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:293",
+      "expect": "fontSize: 15.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:431",
+      "expect": "fontSize: 16",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:39",
+      "expect": "fontSize: 18",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:69",
+      "expect": "fontSize: 20",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:126",
+      "expect": "fontSize: 21",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:160",
+      "expect": "fontSize: 24",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:84",
+      "expect": "fontSize: 26",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:126",
+      "expect": "fontSize: 27",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:335",
+      "expect": "fontSize: 28",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:25",
+      "expect": "fontWeight: 400",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:115",
+      "expect": "font-weight: 550",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:334",
+      "expect": "fontWeight: 600",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:333",
+      "expect": "fontWeight: 700",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:337",
+      "expect": "lineHeight: 1",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:36",
+      "expect": "lineHeight: 1.05",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:110",
+      "expect": "lineHeight: 1.35",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:77",
+      "expect": "lineHeight: 1.4",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:507",
+      "expect": "lineHeight: 1.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:165",
+      "expect": "lineHeight: 1.55",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:336",
+      "expect": "lineHeight: 1.6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:149",
+      "expect": "line-height: 13",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:16",
+      "expect": "lineHeight: '17",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:60",
+      "expect": "lineHeight: '18.2",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:37",
+      "expect": "letterSpacing: '-0.02em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:45",
+      "expect": "letterSpacing: '-0.015em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:165",
+      "expect": "letterSpacing: '0.02em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:415",
+      "expect": "letterSpacing: '0.04em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:137",
+      "expect": "letterSpacing: '0.05em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:81",
+      "expect": "letterSpacing: '0.06em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:118",
+      "expect": "letterSpacing: '0.07em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:221",
+      "expect": "letterSpacing: '0.08em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:256",
+      "expect": "letterSpacing: '0.1em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:124",
+      "expect": "letter-spacing: 0.11em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:241",
+      "expect": "letterSpacing: '0.12em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:142",
+      "expect": "letterSpacing: '0.14em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:80",
+      "expect": "letterSpacing: '0.16em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:59",
+      "expect": "letterSpacing: '0.2em",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:13",
+      "expect": "borderRadius: 0",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:307",
+      "expect": "borderRadius: 4",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:483",
+      "expect": "borderRadius: 6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:273",
+      "expect": "borderRadius: 9",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:112",
+      "expect": "borderRadius: 10",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:204",
+      "expect": "borderRadius: 11",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:54",
+      "expect": "borderRadius: 12",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:168",
+      "expect": "borderRadius: 14",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:134",
+      "expect": "border-radius: 15",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:38",
+      "expect": "borderRadius: 16",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:35",
+      "expect": "borderRadius: '18",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:217",
+      "expect": "borderRadius: 44",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:216",
+      "expect": "borderRadius: 54",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:85",
+      "expect": "borderRadius: 999",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:101",
+      "expect": "borderRadius: '12%",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:68",
+      "expect": "borderRadius: '50%",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:67",
+      "expect": "Pill solid** 160x52 at x 468: padding 15px 36px, radius 999",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:70",
+      "expect": "Bezel: radius 16 16 0 0",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:72",
+      "expect": "radius 0 0 18 18",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:31",
+      "expect": "SECTION_PAD =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:22",
+      "expect": "| SECTION_PAD |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/shared/SectionHeader.jsx:7",
+      "expect": "marginTop: eyebrow ? 20",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:37",
+      "expect": "H2 with marginTop 20",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:53",
+      "expect": "margin: '24px auto 0'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:21",
+      "expect": "marginBottom: 52",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:194",
+      "expect": "Header (marginBottom 52)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:41",
+      "expect": "marginBottom: 44",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:197",
+      "expect": "gap 10, marginBottom 44",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:105",
+      "expect": "margin: '64px auto 0'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:135",
+      "expect": "`.l9uc-stage`: marginTop 64",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:30",
+      "expect": "margin-top:28px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:181",
+      "expect": "`.l9uc-mobile`, marginTop 28",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:44",
+      "expect": "margin: '52px auto 0'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:296",
+      "expect": "max 1120, marginTop 52",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:213",
+      "expect": "l9dp-stack{margin-top:32px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:87",
+      "expect": "margin: clamp(42px, 5vw, 64px) auto 0",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:238",
+      "expect": "marginTop `clamp(42px,5vw,64px)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:238",
+      "expect": "margin: clamp(44px, 5vw, 64px) auto 0",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:248",
+      "expect": "padding: clamp(28px, 3vw, 36px)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:327",
+      "expect": "padding `clamp(28px,3vw,36px)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:315",
+      "expect": "padding: 26px 24px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:343",
+      "expect": "quadrant padding 26 24",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:290",
+      "expect": "padding: '36px 24px 96px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:59",
+      "expect": "padding `36px 24px 96px`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:297",
+      "expect": "marginTop: 44",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:64",
+      "expect": "(marginTop 44)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:298",
+      "expect": "margin: '22px 0 0'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:65",
+      "expect": "margin 22 0 0",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:299",
+      "expect": "marginTop: 38",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:66",
+      "expect": "CTA row: marginTop 38",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:155",
+      "expect": "marginTop: 72",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:69",
+      "expect": "marginTop 72",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:215",
+      "expect": "marginTop: 52",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:74",
+      "expect": "Frame: marginTop 52",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:59",
+      "expect": "padding: '80px 24px 10px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:349",
+      "expect": "padding 80 24 10",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:121",
+      "expect": "marginTop: -64",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:353",
+      "expect": "CTA row: marginTop -64",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Footer.jsx:17",
+      "expect": "padding: '14px 24px 22px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:377",
+      "expect": "padding 14 24 22",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:340",
+      "expect": "padding: 13px 4px; margin: -13px -4px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:380",
+      "expect": "Hit areas use",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:24",
+      "expect": "padding: 'clamp(56px, 6vw, 96px)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:52",
+      "expect": "marginTop: 44",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:76",
+      "expect": "padding: '34px 34px 30px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:79",
+      "expect": "padding: '20px 22px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:415",
+      "expect": "padding 20 22",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:77",
+      "expect": "left: 20, bottom: 20",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:414",
+      "expect": "left 20, bottom 20",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:81",
+      "expect": "@media (max-width: 1080px) { .l9ctr-lede",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:425",
+      "expect": "`max-width:1080px`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:208",
+      "expect": "@media (max-width: 760px)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:426",
+      "expect": "`max-width:760px`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:11",
+      "expect": "@media (max-width: 720px){.l9h2-laptop",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:427",
+      "expect": "`max-width:720px`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:304",
+      "expect": "@media (hover: hover) and (pointer: fine)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:336",
+      "expect": "`(hover:hover) and (pointer:fine)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:12",
+      "expect": "@media (prefers-reduced-motion: reduce)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:429",
+      "expect": "`prefers-reduced-motion:reduce`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:40",
+      "expect": "matchMedia('(max-width: 720px)')",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:19",
+      "expect": "const PROMPT_SHADOW =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:21",
+      "expect": "const PROMPT_SHADOW_PHONE =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:135",
+      "expect": "glow ? '0 0 20px rgba(255,255,255,0.45)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:89",
+      "expect": "`0 0 20px rgba(255,255,255,.45)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:158",
+      "expect": "boxShadow: '0 10px 26px rgba(0,0,0,0.5)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:139",
+      "expect": "shadow `0 10px 26px rgba(0,0,0,.5)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:104",
+      "expect": "boxShadow: '0 10px 26px rgba(0,0,0,0.55)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:202",
+      "expect": "shadow `0 10px 26px rgba(0,0,0,.55)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:141",
+      "expect": "drop-shadow(0 8px 20px rgba(0,0,0,.6))",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:297",
+      "expect": "shadow `0 16px 36px rgba(0,0,0,.28)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:119",
+      "expect": "box-shadow: 0 0 0 4px color-mix",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:162",
+      "expect": "<svg width=\"26\" height=\"26\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:124",
+      "expect": "width=\"26\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:301",
+      "expect": "a 26px icon",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Security.jsx:6",
+      "expect": "width: 18",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:262-271",
+      "expect": ".l9-security-icon {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:328",
+      "expect": "36px icon box",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:177",
+      "expect": "<ChipMark size={88}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:180",
+      "expect": "<ChipMark size={54}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:303",
+      "expect": "a 54px Layer 9 mark SVG",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:222",
+      "expect": ".l9dp-mark,.l9dp-mark svg{width:42px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:197",
+      "expect": "<PlusIcon size={13}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:138",
+      "expect": "size === 30 ? 12 : 11",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:2",
+      "expect": "EASE = [0.4, 0, 0.2, 1]",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:3",
+      "expect": "EASE_CSS =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:11",
+      "expect": "| EASE |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:24",
+      "expect": "l9ucCount 7000ms linear",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:201",
+      "expect": "l9dpMarch 1.6s linear",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:3",
+      "expect": "l9h2Caret 0.9s step-end",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:92",
+      "expect": "ease: 'easeInOut'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:36",
+      "expect": "ease: 'easeInOut'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:4",
+      "expect": "heavySpring =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:12",
+      "expect": "heavySpring / snappySpring",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:5",
+      "expect": "snappySpring =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:26",
+      "expect": "type: 'spring', damping: 28",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:195",
+      "expect": "spring (damping 28)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:14",
+      "expect": "const chipSpring =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:362",
+      "expect": "{190, 14, mass 1}",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:15",
+      "expect": "const layerSpring =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:363",
+      "expect": "{210, 16}",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:16",
+      "expect": "const glowSpring =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:367",
+      "expect": "{120, 22}",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "package.json:12",
+      "expect": "\"framer-motion\": \"12.42.2\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "package.json:24",
+      "expect": "\"motion-dom\": \"12.42.2\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:32",
+      "expect": "CHAR_MS = 26",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:97",
+      "expect": "26ms per char",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/data.js:33",
+      "expect": "TYPE_HOLD_MS = 350",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:31",
+      "expect": "HOLD_MS = { reveal: 1600",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:98",
+      "expect": "| `reveal` |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:100",
+      "expect": "| `dash` |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:102",
+      "expect": "| `excel` |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:104",
+      "expect": "| `email` |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:106",
+      "expect": "| `sched` |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:107",
+      "expect": "| `reset` |",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/data.js:13",
+      "expect": "Five typed prompts",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:109",
+      "expect": "The full loop is about **21.0s**",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:180",
+      "expect": "transition: `transform 450ms",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:84",
+      "expect": "transform 450ms EASE",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:13",
+      "expect": "export function enter",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:5",
+      "expect": "l9h2Bad 1.8s",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/scene.jsx:81",
+      "expect": "transition: `opacity 350ms",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:88",
+      "expect": "delay: 700",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:83",
+      "expect": "delays 700, 1000 and 1150ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/data.js:93",
+      "expect": "delay: 1250",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/scene.jsx:46",
+      "expect": "transition: 'opacity 300ms'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:80",
+      "expect": "opacity 300ms) once the dash phase",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:18",
+      "expect": "l9PillGlim 3.4s",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:130",
+      "expect": "runs 3.4s EASE infinite",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:54",
+      "expect": "setTimeout(() => setActive(true), 1150)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:153",
+      "expect": "**1150ms after first in-view**",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:66",
+      "expect": "}, 7000)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:155",
+      "expect": "`setInterval` 7000ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:157",
+      "expect": "over 7000ms linear",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:155",
+      "expect": "delay: 0.05 * i",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:151",
+      "expect": "delay 0.05·i",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:123",
+      "expect": "draw(0.25 + 0.05 * i)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:152",
+      "expect": "pathLength 0→1 over 0.55s EASE",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:134",
+      "expect": "draw(0.85, 0.35)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:140",
+      "expect": "dur={`${2.4 + 0.5 * i}s`}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:154",
+      "expect": "Durations are 2.4, 2.9 and 3.4s",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:174",
+      "expect": "transition: 'filter 600ms'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:183",
+      "expect": "transition: 'opacity 500ms'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:143",
+      "expect": "goes to 1 over 500ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:198",
+      "expect": "transition: 'background 350ms'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:160",
+      "expect": "All transitions 350ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:237",
+      "expect": "transition: 'border-color 300ms ease, background 300ms ease'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:161",
+      "expect": "Transitions 300ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:232",
+      "expect": "duration: 0.28, ease: EASE, delay: 0.06 * i",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:162",
+      "expect": "over 0.28s EASE, delay 0.06i",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:63",
+      "expect": "...heavySpring, delay: 0.08 + 0.1 * n",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:169",
+      "expect": "at delay 0.08+0.1·n",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:257",
+      "expect": "duration: 0.25, delay: 0.85",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:170",
+      "expect": "fades out over 0.25s at a 0.85s delay",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:264",
+      "expect": "tw({ duration: 0.3, delay: 0.9 })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:220",
+      "expect": "Tile opacity 0→1 over 0.9s easeInOut",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:75",
+      "expect": "(v.col + v.row) * 0.045",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:222",
+      "expect": "**(col+row)×45ms**",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:34",
+      "expect": "duration: 0.6, delay: 0.15",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:196",
+      "expect": "opacity 0→.75 over 0.6s with a 0.15s delay",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:63",
+      "expect": "transition: 'color 300ms, border-color 300ms'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:224",
+      "expect": "bg rgba(255,255,255,.03), 300ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:109",
+      "expect": "transition: 'border-color 350ms'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:226",
+      "expect": "border #3a3a3e (350ms)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:123",
+      "expect": "transition: `opacity 425ms",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:88",
+      "expect": "active && !match ? 0.2 : 1",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:225",
+      "expect": "Non-matching tiles: opacity 0.2",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:87",
+      "expect": "setTyped((n) => n + 1), 14)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:249",
+      "expect": "**14ms per char**",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:88",
+      "expect": "setPhase('rail'), 1600)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:250",
+      "expect": "| `tangle` | 1600ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:89",
+      "expect": "setPhase('check'), 750)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:251",
+      "expect": "| `rail` | 750ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:43",
+      "expect": "CHECK_MS = TILE_STEP",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:252",
+      "expect": "**1920ms**",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:95",
+      "expect": "}, 3000)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:253",
+      "expect": "| `answer` | 3000ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:42",
+      "expect": "const TILE_STEP = 320",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:277",
+      "expect": "staggered **320ms per tile**",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:143",
+      "expect": "delay: tangle ? 0.13 * i : 0",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:265",
+      "expect": "staggered 130ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:255",
+      "expect": "Measured cycle: 8.0s",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:461",
+      "expect": "transitionDelay: answered ? '820ms'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:281",
+      "expect": "after **820ms**",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:191",
+      "expect": "pathLength: { duration: 0.9, ease: EASE }",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:279",
+      "expect": "pathLength over 0.9s EASE",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:165",
+      "expect": "delay: inView ? 0.1 : 0",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:309",
+      "expect": "slab: y 22→0 with heavySpring, delay 0.1s",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:107",
+      "expect": "0.6 + 0.22 * i",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:310",
+      "expect": "delay 0.6+0.22i",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:158",
+      "expect": "delayBase={0.9}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:311",
+      "expect": "delay 0.9+0.08i",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:50",
+      "expect": "delay: inView ? 1.4 : 0",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:312",
+      "expect": "y -18→0 with snappySpring, delay 1.4",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:97",
+      "expect": "delayBase={1.7}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:313",
+      "expect": "delay 1.7+0.08i",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:315",
+      "expect": "1.6s linear, infinite",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:252",
+      "expect": "transition: background-color 220ms ease",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:357",
+      "expect": "0→1 over 2.4s easeInOut",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:42",
+      "expect": "v >= 0.92",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:370",
+      "expect": "**Seated** (p ≥ 0.92)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:67",
+      "expect": "times: [0, 0.22, 1]",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:371",
+      "expect": "opacity [0, .3, 0] over 2.4s easeOut",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/closing/Rings.jsx:31",
+      "expect": "r: [10, 620]",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:372",
+      "expect": "expand from r 10→620",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:44",
+      "expect": "repeatDelay: 3.4",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:373",
+      "expect": "2.1s easeInOut",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:110",
+      "expect": "repeat: Infinity, ease: 'linear', duration: 0.8",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:369",
+      "expect": "0.8s linear, repeat while in view",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:336",
+      "expect": "transition: color 200ms",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:381",
+      "expect": "over 200ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:5",
+      "expect": "SEND_MS = 900",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:389",
+      "expect": "No open or close animation",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:279",
+      "expect": "useInView(sectionRef, { amount: 0.3 })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:93",
+      "expect": "amount:.3`, not once",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:44",
+      "expect": "useInView(sectionRef, { once: true, amount: 0.2 })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:150",
+      "expect": "`useInView once, amount .2`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:45",
+      "expect": "useInView(sectionRef, { amount: 0.3 })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:12",
+      "expect": "useInView(ref, { amount: 0.3 })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:219",
+      "expect": "Entrance repeats every time the grid is ≥30%",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:76",
+      "expect": "amount: 0.15, once: true",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:245",
+      "expect": "≥15% in view (`once`)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:26",
+      "expect": "useInView(ref, { amount: 0.35 })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:307",
+      "expect": "≥35% in view. Not once",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:20",
+      "expect": "useInView(ref, { amount: 0.45 })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:21",
+      "expect": "const anyInView = useInView(ref)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:41",
+      "expect": "The page has no scroll listeners and no scroll-linked transforms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/index.css:23",
+      "expect": "color: #fff;",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:14",
+      "expect": "DIM =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:15",
+      "expect": "export const LEDE =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:24",
+      "expect": "color: 'rgba(255,255,255,0.88)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:446",
+      "expect": "color: answered ? NEON : DIM",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:61",
+      "expect": "'rgba(255,255,255,0.03)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:305",
+      "expect": "background: rgba(255, 255, 255, 0.018)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:16",
+      "expect": "HAIRLINE =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:26",
+      "expect": "border: '1px solid rgba(255,255,255,0.25)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:74",
+      "expect": "border: '1px solid rgba(255,255,255,0.14)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:267",
+      "expect": "border: 1px solid rgba(46, 235, 133, 0.18)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:8",
+      "expect": "padding: '15px 36px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:11",
+      "expect": "fontSize: 17",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:12",
+      "expect": "lineHeight: 1.2",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:16",
+      "expect": "width:46%",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:1",
+      "expect": "The originals have no hover styles",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:157",
+      "expect": "width: 80, height: 80",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:99",
+      "expect": "width: '66%'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:110",
+      "expect": "padding: 6,",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:79",
+      "expect": "aspectRatio: '1 / 1', position: 'relative'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:200",
+      "expect": "Cells are aspect 1/1",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/integrations/Monogram.jsx:19",
+      "expect": "fontSize=\"17\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/integrations/Monogram.jsx:10",
+      "expect": "width: '66%', height: '66%'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:121",
+      "expect": "linear-gradient(to top, ${accentOf(v.cat)}, transparent)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:55",
+      "expect": "fontSize: 12,",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:198",
+      "expect": "MONO 12px, ls .12em",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:57",
+      "expect": "letterSpacing: '0.12em'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:50",
+      "expect": ".l9int-pill{padding:9px 18px}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:55",
+      "expect": ".l9int-pill{padding:12px 16px}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:59",
+      "expect": "'rgba(255,255,255,0.14)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:60",
+      "expect": "'rgba(255,255,255,0.6)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:69",
+      "expect": "maxWidth: 'min(92vw, 460px)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:391",
+      "expect": "`max-width:min(92vw,460px)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:344",
+      "expect": "dialog::backdrop { background: rgba(0,0,0,0.62)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:392",
+      "expect": "`::backdrop`: rgba(0,0,0,.62)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:75",
+      "expect": "borderRadius: 16",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:12",
+      "expect": "borderBottom: `1px solid ${HAIRLINE}`",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:396",
+      "expect": "bottom 1px HAIRLINE",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:14",
+      "expect": "padding: '10px 2px 9px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:345",
+      "expect": ".l9demo-field::placeholder",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:397",
+      "expect": "Placeholder: rgba(255,255,255,.38)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:346",
+      "expect": ".l9demo-field:focus",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:398",
+      "expect": "bottom border becomes rgba(255,255,255,.7)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:202",
+      "expect": "padding: '13px 30px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:407",
+      "expect": "padding 13 30, radius 999",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:394",
+      "expect": "head font 27px/1.2",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:408",
+      "expect": "rgba(255,120,96,.9)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:148",
+      "expect": "width: 'min(92vw, 480px)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:419",
+      "expect": "card `min(92vw,480px)`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:417",
+      "expect": "Buttons: padding 10 22",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:202",
+      "expect": "padding: '13px 15px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:416",
+      "expect": "Mono 10.5px label",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:81",
+      "expect": "fontSize: 13.5, lineHeight: 1.5",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:237",
+      "expect": "max-width: 940px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:326",
+      "expect": "max 940",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:241",
+      "expect": "border-radius: 16px;",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:312",
+      "expect": "grid-template-columns: 1fr; border-radius: 14px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:247",
+      "expect": "min-height: 236px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:282",
+      "expect": "font-size: 18px;",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:330",
+      "expect": "h3: head font 18px/500/1.25",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:290",
+      "expect": "font-size: 15px;",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:331",
+      "expect": "p: 15px/1.55 LEDE",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:288",
+      "expect": "max-width: 46ch",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:299",
+      "expect": "font-size: 10.5px;",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:332",
+      "expect": "Proof line: mono 10.5px",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:273-279",
+      "expect": ".l9-security-index {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:329",
+      "expect": "Index: mono 10px",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:207",
+      "expect": ".l9dp-row{display:flex;gap:12px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:300",
+      "expect": "**`.l9dp-row`**: flex, gap 12",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:209",
+      "expect": "flex-direction:column;gap:10px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:319",
+      "expect": "column with gap 10",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:20",
+      "expect": "height: 2, background",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:298",
+      "expect": "mono 11.5px, ls .06em",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/platform/Connectors.jsx:28",
+      "expect": "strokeDasharray=\"4.07 4.07\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:299",
+      "expect": "`stroke-dasharray 4.07 4.07`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/platform/Connectors.jsx:27",
+      "expect": "strokeWidth={0.814947}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/platform/Connectors.jsx:26",
+      "expect": "strokeOpacity={0.25}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:71",
+      "expect": "bg #0d0d0f, aspect 1160/725",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:158",
+      "expect": "width: 1160, height: 725",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:213",
+      "expect": "const VB = '0 0 360 760'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:75",
+      "expect": "Dynamic island 88x25, radius 14",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:193",
+      "expect": "width: 660",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:199",
+      "expect": "<SendButton size={30}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:262",
+      "expect": "<SendButton size={27}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:126",
+      "expect": "a 27px send button",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:119",
+      "expect": "width: phone ? 5 : 6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:64",
+      "expect": "width: 6,",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:86",
+      "expect": "max-width: 1216px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:89",
+      "expect": "border-radius: 18px;",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:175",
+      "expect": ".l9ctr-frame { border-radius: 14px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:285",
+      "expect": "The frame is radius 14",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:109",
+      "expect": "min-height: 60px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:239",
+      "expect": "Head: 60px",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:162",
+      "expect": "min-height: 56px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:241",
+      "expect": "Foot: 56px",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:120",
+      "expect": "aspect-ratio: 1080 / 542",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:240",
+      "expect": "aspect 1080/542",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:271",
+      "expect": "width: routed ? 116 : 18",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:272",
+      "expect": "cards 116x62",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:280",
+      "expect": "background: '#101112'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:428",
+      "expect": "borderRadius: '14px 14px 14px 4px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:261",
+      "expect": "Radius 14 14 14 4",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:502",
+      "expect": "borderRadius: '14px 14px 4px 14px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:327",
+      "expect": "width: 44,",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:275",
+      "expect": "\"9\" badge 44x44",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:21",
+      "expect": "const WIN = { left: 40, top: 254, width: 1000, height: 408 }",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:186",
+      "expect": "width: 248, flex: 'none'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:144",
+      "expect": "Left rail, 248px wide",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:219",
+      "expect": "flex: '0 0 322px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:145",
+      "expect": "Prompt column, 322px",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:235",
+      "expect": "padding: '12px 16px', borderRadius: 12",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:243",
+      "expect": "fontSize: 20, lineHeight: 1.25",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:26",
+      "expect": ".l9uc-card:hover{border-color:rgba(255,255,255,0.26)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:32",
+      "expect": "min-height:44px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:185",
+      "expect": "Pillars are min-height 44",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:40",
+      "expect": ".l9uc-m-dash{margin-top:10px;height:400px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:187",
+      "expect": "Dash: height 400",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/shared/SectionHeader.jsx:5",
+      "expect": "maxWidth: 980",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:20",
+      "expect": "maxWidth: 1440",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:47",
+      "expect": "maxWidth 1440",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Footer.jsx:15",
+      "expect": "maxWidth: 1560",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:52",
+      "expect": "maxWidth: 800",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:71",
+      "expect": "maxWidth: 980",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:350",
+      "expect": "Text block, max 980",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:332",
+      "expect": "width:100%;max-width:420px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:351",
+      "expect": "max 420, height auto",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:30",
+      "expect": "setScale(entry.contentRect.width / 1160)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:33",
+      "expect": "Math.min(width / 1080, height / 678)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:51",
+      "expect": "entry.contentRect.width / 1080",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:328",
+      "expect": "aspect-ratio:572/687",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/platform/Connectors.jsx:12",
+      "expect": "viewBox=\"0 0 1120 26\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/integrations/CellFrame.jsx:14",
+      "expect": "viewBox=\"0 0 112 111\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:201",
+      "expect": "viewBox 112x111, fill #2E2E2E",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:49",
+      "expect": "repeat(9,1fr)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:54",
+      "expect": "repeat(5,1fr)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:236",
+      "expect": "repeat(2, minmax(0, 1fr))",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:12",
+      "expect": "const C0 =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:45",
+      "expect": "| 0 | `main > section` hero",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:3",
+      "expect": "\"sec\": 0,",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "CLONE_SPEC.md:46",
+      "expect": "| 1 | `section#use-cases`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:48",
+      "expect": "| 3 | `section#csr",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:49",
+      "expect": "| 4 | `section` agent platform",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:50",
+      "expect": "| 5 | `section#security`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:51",
+      "expect": "| 6 | `div` closing CTA",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:52",
+      "expect": "| 7 | `footer`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:55",
+      "expect": "Document height: 7335",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "recon/layout-390.json:5",
+      "expect": "\"i\": 0,",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/layout-390.json:19",
+      "expect": "\"id\": \"use-cases\"",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/layout-390.json:2",
+      "expect": "\"docH\": 7999",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/index.css:14",
+      "expect": "color-scheme: dark",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Pill.jsx:17",
+      "expect": "export default function Pill",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Brand.jsx:4",
+      "expect": "export function Wordmark",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/hero.css:2",
+      "expect": ".l9h2-logo { height: clamp(32px, 2.3vw, 40px)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/Brand.jsx:19",
+      "expect": "export function ChipMark",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/integrations/Monogram.jsx:5",
+      "expect": "export default function Monogram",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/integrations/Monogram.jsx:3",
+      "expect": "Neutral placeholder logo",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:72",
+      "expect": "textTransform: 'none'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:203",
+      "expect": "width: 8, height: 8, borderRadius: '50%'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:102",
+      "expect": "const dot5 =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:48",
+      "expect": "className=\"l9int-pill\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:20",
+      "expect": "const label = { fontFamily: MONO, fontSize: 11",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:208",
+      "expect": "className=\"l9uc-count\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:7-19",
+      "expect": "const field = {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:395",
+      "expect": "Fields share `.l9demo-field`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:184",
+      "expect": "accentColor: '#fff'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:215",
+      "expect": "accentColor: '#fff'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:36",
+      "expect": "const solid =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:172",
+      "expect": ".l9ctr-caret{animation:l9ctrCaret 0.9s step-end infinite;}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:337",
+      "expect": ".l9-footer-links a:hover",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:19",
+      "expect": "const accentBar =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/tokens.js:20-21",
+      "expect": "const line =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Security.jsx:11",
+      "expect": "strokeWidth: 1.6",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:130-141",
+      "expect": "function SendButton",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:114",
+      "expect": "GENERATING…",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:401",
+      "expect": ">NEW</span>",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:267",
+      "expect": "● LIVE ·",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/shared/SectionHeader.jsx:3-15",
+      "expect": "export default function SectionHeader",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:229",
+      "expect": ".l9sec-lede{white-space:nowrap;}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/integrations/CellFrame.jsx:11-21",
+      "expect": "export default function CellFrame",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:123",
+      "expect": "{KPIS.map((k, i)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:192",
+      "expect": "dash.stats.map",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:115",
+      "expect": "3 KPI cards use translateY 8px plus opacity over 380ms",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:63-99",
+      "expect": "function BarList",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:116",
+      "expect": "Two bar lists (`O`)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:77",
+      "expect": "className=\"l9dp-chip\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:219",
+      "expect": ".l9dp-chip{padding:5px 10px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:193",
+      "expect": "onClick={() => pickPersona(i)}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:31",
+      "expect": ".l9uc-m-rail{display:grid",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:229",
+      "expect": "className=\"l9uc-card\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:39",
+      "expect": ".l9uc-m-prompt{display:flex",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Security.jsx:80",
+      "expect": "className=\"l9-security-quadrant\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:104",
+      "expect": "className=\"l9dp-card\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:220",
+      "expect": ".l9dp-card{padding:14px 16px",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Footer.jsx:23-39",
+      "expect": "<span className=\"l9-footer-links\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:88-111",
+      "expect": "<div style={{ marginTop: 16, display: 'flex'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:179-189",
+      "expect": "<div style={{ marginTop: 24, display: 'flex'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:195-232",
+      "expect": "function Option(",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:152-210",
+      "expect": "function Laptop(",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:212-275",
+      "expect": "function Phone(",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:104",
+      "expect": "function PromptText",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/scene.jsx:6-53",
+      "expect": "export const MapLayer",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:23",
+      "expect": "const MapTiles = memo",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:143",
+      "expect": "const bigCallout =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:146",
+      "expect": "const smallCallout =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:266",
+      "expect": "className=\"l9ctr-system-tile\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/platform/Connectors.jsx:5-38",
+      "expect": "export default function Connectors",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:539-552",
+      "expect": "<div className=\"l9ctr-frame-foot\">",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:192",
+      "expect": ".l9ctr-frame-foot { grid-template-columns: repeat(3, 1fr)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:286",
+      "expect": "5 rows (`.l9ctr-mobile-row`, 40px)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:58",
+      "expect": "export default function AnswerDash",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:164",
+      "expect": "### Answer dashboard `k`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:171",
+      "expect": "Six body kinds:",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:184",
+      "expect": "export const DashPanel",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:218",
+      "expect": "export const SheetPanel",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:284",
+      "expect": "export const EmailPanel",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:371",
+      "expect": "export const SchedulePanel",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:51",
+      "expect": "{doc.sections.map((s, i)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:55",
+      "expect": "padStart(2, '0')",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:74",
+      "expect": "export default function StackArt",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/geometry.js:7",
+      "expect": "export function topFace",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:358",
+      "expect": "Layer offsets are springs on the transform of `p`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Hero.jsx:51-102",
+      "expect": "function useEpisode",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:82",
+      "expect": "const text = reduced",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:73",
+      "expect": "Below 720px the laptop is hidden and `.l9h2-phone` is shown instead",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/lib/tokens.js:35",
+      "expect": "fontSize: 'clamp(46px, 5.2vw, 92px)'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/Home.jsx:12",
+      "expect": "<Hero />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:277-308",
+      "expect": "export default function Hero",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:29",
+      "expect": "\"chars\": 37",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/hero/data.js:107",
+      "expect": "export const SUBSCRIBERS",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:234",
+      "expect": "retention-watch-1.xlsx",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:97",
+      "expect": "export const CALLOUTS_PHONE",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:63",
+      "expect": "export const AMBIENT_PHONE",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:49",
+      "expect": "const rand = lcg(41)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:78",
+      "expect": "export const RISK_DOTS =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:81",
+      "expect": "2. Ambient dots: seeded LCG with seed 41",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/data.js:36",
+      "expect": "export const MAP_ZOOM = 12",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/panels.jsx:136",
+      "expect": "RISK BY TOWN · TOP 3",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:265",
+      "expect": ">7:14</div>",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:6",
+      "expect": "\"chars\": 19",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:52",
+      "expect": "\"chars\": 10",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:75",
+      "expect": "\"chars\": 12",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:1018",
+      "expect": "\"chars\": 32",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:63-66",
+      "expect": "const id = setInterval",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:49",
+      "expect": "const shown = seen || reduced",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:29",
+      "expect": ".l9uc-stage{display:none}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:181-188",
+      "expect": "### ≤720px (`.l9uc-mobile`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:132",
+      "expect": "## 3. Use cases",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/pages/Home.jsx:13",
+      "expect": "<UseCases />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:41-309",
+      "expect": "export default function UseCases",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:89",
+      "expect": "id=\"use-cases\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:1386",
+      "expect": "\"chars\": 44",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/usecases/personas.js:107",
+      "expect": "kind: 'map'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:289",
+      "expect": "function MapBody",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:13",
+      "expect": "const tileX =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:17",
+      "expect": "const connector =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:140",
+      "expect": "Bezier connectors run from each tile to a central chip",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:258",
+      "expect": "FETCHING…",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:277",
+      "expect": ">INSIGHT</span>",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:1363",
+      "expect": "\"chars\": 17",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:1409",
+      "expect": "\"chars\": 73",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "CLONE_SPEC.md:190",
+      "expect": "## 4. Integrations",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/pages/Home.jsx:14",
+      "expect": "<Integrations />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:10-140",
+      "expect": "export default function Integrations",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:2191",
+      "expect": "\"chars\": 33",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/integrations/vendors.js:4",
+      "expect": "export const CATEGORIES",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:199",
+      "expect": "Category accents: fiber BLINK",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/integrations/vendors.js:77",
+      "expect": "export const VENDORS = ROWS.flatMap",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:2168",
+      "expect": "\"chars\": 17",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:2214",
+      "expect": "\"chars\": 74",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:3456",
+      "expect": "\"chars\": 111",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:84-97",
+      "expect": "if (reduced || !inView) return",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:104",
+      "expect": "const questionText = reduced",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:180",
+      "expect": ".l9ctr-stage { display: none; }",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:283-289",
+      "expect": "### ≤720px (`.l9ctr-mobile`)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:229",
+      "expect": "## 5. CSR / control center",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/pages/Home.jsx:15",
+      "expect": "<ControlCenter />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:74-557",
+      "expect": "export default function ControlCenter",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:356",
+      "expect": "id=\"csr\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:16",
+      "expect": "const NODES = [",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:40",
+      "expect": "const RETURN_PATH",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:271",
+      "expect": "railX = 470, 596, 722, 848, 974",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:115",
+      "expect": "COORDINATED BY ACME",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:451",
+      "expect": "✓ ANSWERED · FIRST TRY",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:218",
+      "expect": "Acme orchestration",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:3479",
+      "expect": "\"chars\": 30",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:3502",
+      "expect": "\"chars\": 23",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:3571",
+      "expect": "\"chars\": 83",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:3617",
+      "expect": "\"chars\": 22",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:3640",
+      "expect": "\"chars\": 25",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:3732",
+      "expect": "\"chars\": 33",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4008",
+      "expect": "\"chars\": 36",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:34",
+      "expect": "y: inView || reduced ? 0 : 14",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:203",
+      "expect": "@media (prefers-reduced-motion: reduce){.l9dp-march",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:206",
+      "expect": "@media (max-width: 1080px){.l9dp-lede{white-space:normal;}}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:317-319",
+      "expect": "### ≤760px",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "CLONE_SPEC.md:291",
+      "expect": "## 6. Agent platform",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/pages/Home.jsx:16",
+      "expect": "<AgentPlatform />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:24-195",
+      "expect": "export default function AgentPlatform",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4054",
+      "expect": "\"chars\": 30",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:24",
+      "expect": "export default function AgentPlatform({ num = '04' })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/AgentPlatform.jsx:38",
+      "expect": "eyebrow={`${num} · ${EYEBROW_LABEL}`}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4031",
+      "expect": "\"chars\": 19",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4077",
+      "expect": "\"chars\": 83",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4100",
+      "expect": "\"chars\": 19",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4192",
+      "expect": "\"chars\": 24",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4215",
+      "expect": "\"chars\": 41",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "CLONE_SPEC.md:321",
+      "expect": "## 7. Security",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/styles/sections.css:322-324",
+      "expect": "transition: none !important",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/styles/sections.css:230",
+      "expect": "@media (max-width: 1080px){.l9sec-lede{white-space:normal;}}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/Home.jsx:17",
+      "expect": "<Security />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Security.jsx:65-96",
+      "expect": "export default function Security",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Security.jsx:67",
+      "expect": "id=\"security\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Security.jsx:85",
+      "expect": "padStart(2, '0')",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4238",
+      "expect": "\"chars\": 13",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4261",
+      "expect": "\"chars\": 26",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4284",
+      "expect": "\"chars\": 82",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4353",
+      "expect": "\"chars\": 106",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4376",
+      "expect": "\"chars\": 48",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:24",
+      "expect": "const p = useMotionValue(reduced ? 1 : 0)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:28-32",
+      "expect": "if (reduced) {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:345",
+      "expect": "## 8. Closing CTA",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/pages/Home.jsx:18",
+      "expect": "<ClosingCTA />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:18-133",
+      "expect": "export default function ClosingCTA",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4491",
+      "expect": "\"chars\": 29",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:19",
+      "expect": "const LAYERS = [",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/closing/StackArt.jsx:28",
+      "expect": "const LINE_X =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:53",
+      "expect": "height: '100vh'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4468",
+      "expect": "\"chars\": 7",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4514",
+      "expect": "\"chars\": 67",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4537",
+      "expect": "\"chars\": 12",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "CLONE_SPEC.md:375",
+      "expect": "## 9. Footer",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/Footer.jsx:12",
+      "expect": "flexWrap: 'wrap'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Footer.jsx:13",
+      "expect": "gap: '6px 24px'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/App.jsx:19",
+      "expect": "<Footer />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Footer.jsx:6-42",
+      "expect": "export default function Footer",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Footer.jsx:27",
+      "expect": "onClick={openCookiePreferences}",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:11",
+      "expect": "export function openCookiePreferences",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/text-roles-1280.json:4560",
+      "expect": "\"chars\": 31",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "CLONE_SPEC.md:411",
+      "expect": "## 11. Cookie banner and preferences",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:69",
+      "expect": "const showBanner = hydrated && consent === null && !prefsOpen",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:48",
+      "expect": "navigator.globalPrivacyControl",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:418",
+      "expect": "At 1280 the banner is 420x162; at 390 it is 350x225",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/App.jsx:21",
+      "expect": "<CookieBanner />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:41-118",
+      "expect": "export default function CookieBanner",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:5",
+      "expect": "const STORAGE_KEY = 'acme.consent-v1'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:7",
+      "expect": "const ACCEPT =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:413",
+      "expect": "Banner shows when there is no stored consent",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:54",
+      "expect": "window.location.hash === '#cookies'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:49",
+      "expect": "c = REJECT",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:384",
+      "expect": "## 10. Demo dialog",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:30",
+      "expect": "closest?.('a[href=\"#demo\"]')",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/App.jsx:20",
+      "expect": "<DemoDialog />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:23-235",
+      "expect": "export default function DemoDialog",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:133",
+      "expect": "name=\"full_name\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:146",
+      "expect": "name=\"number_of_subscribers\"",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:405",
+      "expect": "hidden honeypot `website`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:151",
+      "expect": "<option value=\"under-1000\">",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:409",
+      "expect": "POST `/api/submit-form/`",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:4",
+      "expect": "No network: submit simulates a 900ms send",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:25-47",
+      "expect": "<header style={{ textAlign: 'center'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:10",
+      "expect": "document.title =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:6",
+      "expect": "The reference serves its legal docs as PDFs",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/routes.js:1",
+      "expect": "PRIVACY_PATH",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/App.jsx:10",
+      "expect": "[PRIVACY_PATH]",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:45",
+      "expect": "PLACEHOLDER TEXT — REPLACE WITH YOUR COUNSEL-REVIEWED POLICY",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:24-80",
+      "expect": "<article style={{ maxWidth: 760",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/content/legal.js:4",
+      "expect": "export const privacy =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/content/legal.js:60",
+      "expect": "export const terms =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:78",
+      "expect": "Questions? Write to",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/Home.jsx:11-19",
+      "expect": "<main>",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/App.jsx:15",
+      "expect": "const Page = PAGES[currentPath()] ?? Home",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/App.jsx:18-21",
+      "expect": "<Page />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:39",
+      "expect": "## 1. Page structure and section boxes",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/App.jsx:11",
+      "expect": "[TERMS_PATH]: () => <LegalPage doc={terms} />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/lib/routes.js:2",
+      "expect": "TERMS_PATH = '/terms-of-service/'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/App.jsx:17-22",
+      "expect": "<>",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:8-83",
+      "expect": "export default function LegalPage",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:25",
+      "expect": "<header style={{ textAlign: 'center'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:386",
+      "expect": "**Opens** from a document-level click handler",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:59",
+      "expect": "window.addEventListener(OPEN_EVENT, open)",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:10",
+      "expect": "export default function Integrations({ num = '03' })",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:359",
+      "expect": "eyebrow=\"03 · MEET ACME",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/App.jsx:9-12",
+      "expect": "const PAGES = {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:295",
+      "expect": "<Wordmark />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:19",
+      "expect": "<Wordmark />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Integrations.jsx:128",
+      "expect": "<Monogram letters={v.mono} />",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:435",
+      "expect": "**Third-party brand logos** (integrations grid, 45 cells)",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/hero/data.js:39",
+      "expect": "export const tileSrc =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:39",
+      "expect": "src={`/assets/map/",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/scene.jsx:49",
+      "expect": "© CARTO © OpenStreetMap",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "recon/network-1280.txt:6",
+      "expect": "a.basemaps.cartocdn.com/dark_all/12/1000/1687@2x.png",
+      "evidence": "measured-live-raw"
+    },
+    {
+      "citation": "src/components/usecases/systems.jsx:2",
+      "expect": "export const SYSTEMS",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/platform/content.jsx:21",
+      "expect": "export const CARDS",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Security.jsx:5",
+      "expect": "const ICON =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:152",
+      "expect": "function Laptop(",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:447",
+      "expect": "All icons, the stack illustration and the cell frames are inline SVG",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/integrations/CellFrame.jsx:11",
+      "expect": "export default function CellFrame",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:52",
+      "expect": "await new Promise((r) => setTimeout(r, SEND_MS))",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/content/legal.js:1",
+      "expect": "Generic placeholder copy for a fictional company",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:107",
+      "expect": "const stateLabel = answered",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:134",
+      "expect": "Header: eyebrow c19 · H2 c44",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/usecases/AnswerDash.jsx:241",
+      "expect": "dash.kind === 'map'",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:11",
+      "expect": "PLACEHOLDER =",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:1",
+      "expect": "Source: https://layer9.com/",
+      "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/index.css:3",
+      "expect": "@import url('https://fonts.googleapis.com",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/hero/data.js:62",
+      "expect": "Phone composition (360x760 space). Not in the spec text",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "CLONE_SPEC.md:57",
+      "expect": "From the field",
+      "evidence": "measured-live-spec"
+    }
+  ]
+}

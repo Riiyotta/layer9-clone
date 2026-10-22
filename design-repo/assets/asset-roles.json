@@ -1,0 +1,209 @@
+{
+  "assetRoleVersion": "1.0.0",
+  "$description": "Closed assetRole enum, built from real JSX usage sites. Every media field in a PageSpec names one of these roles; the schema enum, the allowlist and this file must list the same ids (verified by verify_all.py).",
+  "generationPolicyEnum": [
+    "may-generate-new",
+    "must-reuse-exact",
+    "must-not-fabricate",
+    "must-not-reuse-live-endpoint"
+  ],
+  "policyMeaning": {
+    "may-generate-new": "A generator may draw/create new original assets for this role.",
+    "must-reuse-exact": "A generator must use the existing asset unchanged; no regeneration or variation.",
+    "must-not-fabricate": "A generator must not invent content for this role (real marks, legal text); use the neutral placeholder only.",
+    "must-not-reuse-live-endpoint": "A generator must never point this role at the original company's live endpoint."
+  },
+  "sourceIsRealSite": true,
+  "globalProhibitions": [
+    "The source is a real, live commercial site. Never reproduce its real logos, real vendor or customer marks, real people's photos, real proprietary marketing copy, or its SVG artwork.",
+    "The licensed typefaces of the original (head: KMR Apparat Book, body: ABC Diatype) are not included and must not be added; the clone uses Inter Tight (head, weight 350) and Inter (body) as free stand-ins.",
+    "Do not use this repo to reintroduce the original's content: all copy here is the clone's own placeholder text."
+  ],
+  "fontNote": "Fonts are loaded at runtime from Google Fonts by src/index.css; this is an external request. See extraction notes.",
+  "pinnedPolicies": {
+    "brand-wordmark": "must-reuse-exact",
+    "brand-chip-mark": "must-reuse-exact",
+    "vendor-logo-tile": "must-not-fabricate",
+    "map-basemap-tile": "must-reuse-exact",
+    "form-submit-endpoint": "must-not-reuse-live-endpoint",
+    "legal-copy": "must-not-fabricate"
+  },
+  "roles": {
+    "brand-wordmark": {
+      "id": "brand-wordmark",
+      "description": "The inline-SVG 'Acme OS' wordmark (text 'Acme' + inverted 'OS' box) used as the hero logo and the legal-page logo. It is a PLACEHOLDER brand.",
+      "generationPolicy": "must-reuse-exact",
+      "pinned": true,
+      "usageSites": [
+        "src/components/shared/Brand.jsx:4",
+        "src/components/Hero.jsx:295",
+        "src/pages/LegalPage.jsx:19"
+      ],
+      "schemaFields": [
+        "hero.episode.content.logo",
+        "legal.header.content.logo"
+      ],
+      "licensing": "Reuse the placeholder wordmark exactly. The original company's wordmark/lockup is a real trademark: never draw, trace, recreate or approximate it, and never generate a new logo for the original company. A human replaces the placeholder with the client's own licensed asset.",
+      "forbidden": [
+        "Reproducing or imitating the original company's logo, lockup or mark",
+        "Generating a new brand mark that resembles any real company's mark"
+      ]
+    },
+    "brand-chip-mark": {
+      "id": "brand-chip-mark",
+      "description": "Square notched chip glyph with a gradient edge and a centred letter 'A' (hub chip in use-cases, slab mark in the platform stack). PLACEHOLDER for the original's licensed mark.",
+      "generationPolicy": "must-reuse-exact",
+      "pinned": true,
+      "usageSites": [
+        "src/components/shared/Brand.jsx:19",
+        "src/components/UseCases.jsx:177",
+        "src/components/AgentPlatform.jsx:180"
+      ],
+      "schemaFields": [
+        "usecases.stage.content.hubMark",
+        "platform.stack.content.slab.mark"
+      ],
+      "licensing": "Reuse the placeholder chip mark exactly. Do not reproduce the original's mark (it is an inline SVG on the live site).",
+      "forbidden": [
+        "Reproducing the original's mark or its SVG paths"
+      ]
+    },
+    "vendor-logo-tile": {
+      "id": "vendor-logo-tile",
+      "description": "Tile in the integrations grid. The clone renders a NEUTRAL white two-letter MONOGRAM on a dark tile; the original shows 45 real third-party vendor logos.",
+      "generationPolicy": "must-not-fabricate",
+      "pinned": true,
+      "usageSites": [
+        "src/components/integrations/Monogram.jsx:3",
+        "src/components/Integrations.jsx:128",
+        "CLONE_SPEC.md:435"
+      ],
+      "schemaFields": [
+        "integrations.grid.content.vendors[].tile"
+      ],
+      "licensing": "Monogram tiles only (two uppercase letters, vendor name fictional). The 45 original logos are third-party trademarks and are not reproduced. Never fabricate, recreate or approximate a real vendor's or customer's logo, name or brand colours, and never fetch favicons or logos from a real vendor (the original falls back to favicon services).",
+      "forbidden": [
+        "Any real vendor or customer logo, wordmark, name or brand colour",
+        "Hot-linking or fetching logos/favicons from third parties",
+        "Inventing a logo that looks like a real vendor's"
+      ]
+    },
+    "map-basemap-tile": {
+      "id": "map-basemap-tile",
+      "description": "256px dark basemap tiles (zoom 12) at /assets/map/{y}_{i}.png: 35 local PNGs, used as a 7x5 grid in the hero laptop, 3x4 on the phone and 3x3 in the use-cases map answer.",
+      "generationPolicy": "must-reuse-exact",
+      "pinned": true,
+      "usageSites": [
+        "src/components/hero/data.js:39",
+        "src/components/usecases/AnswerDash.jsx:39",
+        "src/components/hero/scene.jsx:49",
+        "recon/network-1280.txt:6"
+      ],
+      "schemaFields": [
+        "hero.episode.content.episode.mapBasemap"
+      ],
+      "licensing": "Third-party tiles (CARTO dark basemap on OpenStreetMap data). Reuse the local tiles exactly; never hot-link to the tile servers at runtime. The credit '© CARTO © OpenStreetMap' must stay visible. LICENSING CONCERN: CARTO's free basemap tier is intended for non-commercial use; the local tiles were saved from requests the ORIGINAL site made using the ORIGINAL site's API key, so before any commercial or public deployment obtain your own CARTO plan (or another tile source) and re-fetch tiles under your own credentials. OpenStreetMap data additionally requires attribution (ODbL).",
+      "forbidden": [
+        "Hot-linking tile servers or reusing the original site's tile API key",
+        "Removing or hiding the attribution",
+        "Using the tiles in a commercial deployment on the free tier"
+      ],
+      "requiredAttribution": "© CARTO © OpenStreetMap"
+    },
+    "stroke-icon": {
+      "id": "stroke-icon",
+      "description": "24-unit viewBox stroke icons (no fill, stroke 1.6, round caps) for the nine connected systems, three platform cards and four security quadrants.",
+      "generationPolicy": "may-generate-new",
+      "pinned": false,
+      "usageSites": [
+        "src/components/usecases/systems.jsx:2",
+        "src/components/platform/content.jsx:21",
+        "src/components/Security.jsx:5"
+      ],
+      "schemaFields": [
+        "usecases.stage.content.systems[].icon",
+        "platform.stack.content.cards[].icon",
+        "security.matrix.content.quadrants[].icon"
+      ],
+      "licensing": "Original drawings are fine and new ones may be generated in the same style. Do NOT copy the original site's icon SVG paths or any third-party icon set that is not licensed for this use.",
+      "forbidden": [
+        "Copying the original site's icon path data",
+        "Pasting icons from unlicensed sets"
+      ]
+    },
+    "illustration-scene": {
+      "id": "illustration-scene",
+      "description": "Hero device scene (laptop/phone frames, map overlays, dashboard / spreadsheet / email / schedule panels) and the closing isometric layer-stack drawing. All are original drawings built in code.",
+      "generationPolicy": "may-generate-new",
+      "pinned": false,
+      "usageSites": [
+        "src/components/Hero.jsx:152",
+        "src/components/closing/StackArt.jsx:74",
+        "CLONE_SPEC.md:447"
+      ],
+      "schemaFields": [
+        "hero.episode.content.episode.scene",
+        "closing.cta.content.illustration"
+      ],
+      "licensing": "May be redrawn or generated anew as ORIGINAL artwork. Do not trace or reuse the original's closing-stack SVG (ids l9ncsx-*), and do not put real product logos (spreadsheet, mail client, any app) in the panels: the clone's spreadsheet and mail panels use generic chrome colours only.",
+      "forbidden": [
+        "Reproducing the original's SVG artwork",
+        "Adding real third-party product logos or screenshots to panels"
+      ]
+    },
+    "decorative-frame": {
+      "id": "decorative-frame",
+      "description": "Corner-bracket frame behind each integrations grid cell (own artwork drawn from one rounded L mirrored four times; viewBox 112x111).",
+      "generationPolicy": "may-generate-new",
+      "pinned": false,
+      "usageSites": [
+        "src/components/integrations/CellFrame.jsx:11"
+      ],
+      "schemaFields": [
+        "integrations.grid.content.cellFrame"
+      ],
+      "licensing": "Original artwork; may be regenerated. Do not reuse the original's bracket path data.",
+      "forbidden": [
+        "Copying the original's frame path data"
+      ]
+    },
+    "form-submit-endpoint": {
+      "id": "form-submit-endpoint",
+      "description": "Where the demo form sends data. The CLONE sends nothing (900ms simulated send). The ORIGINAL POSTs JSON to its own live endpoint, /api/submit-form/, with an x-l9-submission-id uuid header.",
+      "generationPolicy": "must-not-reuse-live-endpoint",
+      "pinned": true,
+      "usageSites": [
+        "src/components/DemoDialog.jsx:5",
+        "CLONE_SPEC.md:409",
+        "src/components/DemoDialog.jsx:52"
+      ],
+      "schemaFields": [
+        "overlay.demo-dialog.content.submit"
+      ],
+      "licensing": "COMPLIANCE-CRITICAL. A generated page must never POST to the original company's endpoint (or any endpoint it does not own) and must not copy its submission-id header scheme to impersonate it. Use the simulation, or wire the form to your own endpoint with a privacy notice and consent. Pinned in verify_all.py: this role must stay must-not-reuse-live-endpoint.",
+      "forbidden": [
+        "Any request to the original site's /api/submit-form/ or any live third-party endpoint",
+        "Submitting real visitor data anywhere without an owned, consented endpoint"
+      ],
+      "endpointPolicy": "simulate-only-until-owned-endpoint-configured"
+    },
+    "legal-copy": {
+      "id": "legal-copy",
+      "description": "The prose of the privacy and terms pages. In the clone it is PLACEHOLDER text for a fictional company, flagged on the page itself.",
+      "generationPolicy": "must-not-fabricate",
+      "pinned": true,
+      "usageSites": [
+        "src/content/legal.js:1",
+        "src/pages/LegalPage.jsx:45"
+      ],
+      "schemaFields": [
+        "legal.body.content.copy"
+      ],
+      "licensing": "Legal text carries real legal weight. Do not generate or present text as a binding policy; keep the placeholder notice until counsel-reviewed text replaces it. Do not copy the original company's legal documents (they are served as PDFs and are its proprietary text).",
+      "forbidden": [
+        "Presenting generated text as a real privacy policy or terms of service",
+        "Reproducing the original company's legal documents"
+      ]
+    }
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "$description": "Foundation tokens: spacing. Every leaf has value + evidence + measuredFrom. Values come only from the clone source and CLONE_SPEC.md; nothing is invented.",
+  "$schemaNote": "A leaf is any object with a 'value' key.",
+  "spacing": {
+    "section-pad": {
+      "value": "clamp(84px, 8.5vw, 148px) 24px",
+      "note": "108.8px vertical at 1280, 84px at 390.",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/lib/tokens.js:31",
+        "CLONE_SPEC.md:22"
+      ]
+    },
+    "section-gutter-x": {
+      "value": 24,
+      "note": "Horizontal page gutter; also hero and closing padding-x.",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/lib/tokens.js:31"
+      ]
+    },
+    "header-eyebrow-to-title": {
+      "value": 20,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/shared/SectionHeader.jsx:7",
+        "CLONE_SPEC.md:37"
+      ]
+    },
+    "header-title-to-lede": {
+      "value": 24,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/lib/tokens.js:53",
+        "CLONE_SPEC.md:20"
+      ]
+    },
+    "integrations-header-bottom": {
+      "value": 52,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:21",
+        "CLONE_SPEC.md:194"
+      ]
+    },
+    "integrations-filter-bottom": {
+      "value": 44,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:41",
+        "CLONE_SPEC.md:197"
+      ]
+    },
+    "integrations-filter-gap": {
+      "value": 10,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/components/Integrations.jsx:41"
+      ]
+    },
+    "usecases-stage-top": {
+      "value": 64,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/UseCases.jsx:105",
+        "CLONE_SPEC.md:135"
+      ]
+    },
+    "usecases-mobile-top": {
+      "value": 28,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:30",
+        "CLONE_SPEC.md:181"
+      ]
+    },
+    "platform-stack-top": {
+      "value": 52,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/AgentPlatform.jsx:44",
+        "CLONE_SPEC.md:296"
+      ]
+    },
+    "platform-stack-top-phone": {
+      "value": 32,
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:213"
+      ]
+    },
+    "csr-frame-top": {
+      "value": "clamp(42px, 5vw, 64px)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:87",
+        "CLONE_SPEC.md:238"
+      ]
+    },
+    "security-matrix-top": {
+      "value": "clamp(44px, 5vw, 64px)",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/styles/sections.css:238"
+      ]
+    },
+    "security-quadrant-pad": {
+      "value": "clamp(28px, 3vw, 36px)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:248",
+        "CLONE_SPEC.md:327"
+      ]
+    },
+    "security-quadrant-pad-phone": {
+      "value": "26px 24px",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:315",
+        "CLONE_SPEC.md:343"
+      ]
+    },
+    "hero-padding": {
+      "value": "36px 24px 96px",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:290",
+        "CLONE_SPEC.md:59"
+      ]
+    },
+    "hero-logo-to-eyebrow": {
+      "value": 44,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:297",
+        "CLONE_SPEC.md:64"
+      ]
+    },
+    "hero-eyebrow-to-h1": {
+      "value": 22,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:298",
+        "CLONE_SPEC.md:65"
+      ]
+    },
+    "hero-h1-to-cta": {
+      "value": 38,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:299",
+        "CLONE_SPEC.md:66"
+      ]
+    },
+    "hero-cta-gap": {
+      "value": 14,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:299",
+        "CLONE_SPEC.md:66"
+      ]
+    },
+    "hero-laptop-top": {
+      "value": 72,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:155",
+        "CLONE_SPEC.md:69"
+      ]
+    },
+    "hero-phone-top": {
+      "value": 52,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Hero.jsx:215",
+        "CLONE_SPEC.md:74"
+      ]
+    },
+    "closing-padding": {
+      "value": "80px 24px 10px",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/ClosingCTA.jsx:59",
+        "CLONE_SPEC.md:349"
+      ]
+    },
+    "closing-cta-overlap": {
+      "value": -64,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/ClosingCTA.jsx:121",
+        "CLONE_SPEC.md:353"
+      ]
+    },
+    "footer-padding": {
+      "value": "14px 24px 22px",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/Footer.jsx:17",
+        "CLONE_SPEC.md:377"
+      ]
+    },
+    "footer-hit-area": {
+      "value": "13px 4px (negative margin -13px -4px)",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/styles/sections.css:340",
+        "CLONE_SPEC.md:380"
+      ]
+    },
+    "legal-article-pad": {
+      "value": "clamp(56px, 6vw, 96px) 0 clamp(84px, 8.5vw, 148px)",
+      "evidenceLevel": "derived",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/pages/LegalPage.jsx:24"
+      ]
+    },
+    "legal-clause-gap": {
+      "value": 44,
+      "evidenceLevel": "derived",
+      "evidence": "clone-source",
+      "measuredFrom": [
+        "src/pages/LegalPage.jsx:52"
+      ]
+    },
+    "dialog-card-pad": {
+      "value": "34px 34px 30px",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/DemoDialog.jsx:76",
+        "CLONE_SPEC.md:393"
+      ]
+    },
+    "cookie-card-pad": {
+      "value": "20px 22px",
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:79",
+        "CLONE_SPEC.md:415"
+      ]
+    },
+    "cookie-offset": {
+      "value": 20,
+      "evidence": "measured-live",
+      "measuredFrom": [
+        "src/components/CookieBanner.jsx:77",
+        "CLONE_SPEC.md:414"
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "consent-button",
+  "kind": "primitive",
+  "purpose": "Pill-shaped consent action: solid (white), ghost (outline) or an underlined text link.",
+  "evidence": "measured-live",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "solid",
+        "ghost",
+        "link"
+      ],
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 5
+    }
+  },
+  "tokensUsed": [
+    "component.consent.button.padding",
+    "component.consent.button.fontSize",
+    "color.alpha.white.a250",
+    "color.alpha.white.a880",
+    "color.alpha.white.a600"
+  ],
+  "usedBy": [
+    "overlay.cookie-banner"
+  ],
+  "measuredFrom": [
+    "src/components/CookieBanner.jsx:36",
+    "src/components/CookieBanner.jsx:37",
+    "CLONE_SPEC.md:417"
+  ]
+}

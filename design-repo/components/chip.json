@@ -1,0 +1,36 @@
+{
+  "id": "chip",
+  "kind": "component",
+  "purpose": "Mono pill chip with a hairline border and faint fill (platform top-block tags).",
+  "evidence": "measured-live",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxWords": 4
+    }
+  },
+  "responsive": [
+    {
+      "breakpoint": "breakpoint.platform-stack",
+      "change": "chips centre, padding 5px 10px, font 10.5px",
+      "measuredFrom": [
+        "src/styles/sections.css:219"
+      ]
+    }
+  ],
+  "tokensUsed": [
+    "radius.r999",
+    "color.alpha.white.a140",
+    "color.alpha.white.a030",
+    "typography.fontSize.px11_5",
+    "component.platform.chip.fontSize"
+  ],
+  "usedBy": [
+    "platform.stack"
+  ],
+  "measuredFrom": [
+    "src/components/AgentPlatform.jsx:77",
+    "CLONE_SPEC.md:298"
+  ]
+}

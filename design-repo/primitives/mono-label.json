@@ -1,0 +1,50 @@
+{
+  "id": "mono-label",
+  "kind": "primitive",
+  "purpose": "Mono, letter-spaced caption used for dialog labels, panel titles and canvas captions.",
+  "evidence": "measured-live",
+  "props": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "maxWords": 12
+    },
+    "sizePx": {
+      "type": "number",
+      "description": "Measured sizes 7.5-13px.",
+      "required": true
+    },
+    "trackingEm": {
+      "type": "number",
+      "description": "Letter spacing in em (0.05-0.2).",
+      "required": true
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "dim",
+        "primary",
+        "accent"
+      ],
+      "default": "dim",
+      "required": false
+    }
+  },
+  "tokensUsed": [
+    "typography.fontFamily.mono",
+    "color.alpha.white.a550",
+    "typography.letterSpacing.p0_12",
+    "typography.letterSpacing.p0_16"
+  ],
+  "usedBy": [
+    "overlay.demo-dialog",
+    "overlay.cookie-banner",
+    "csr.loop",
+    "usecases.stage",
+    "hero.episode"
+  ],
+  "measuredFrom": [
+    "src/components/DemoDialog.jsx:20",
+    "CLONE_SPEC.md:394"
+  ]
+}

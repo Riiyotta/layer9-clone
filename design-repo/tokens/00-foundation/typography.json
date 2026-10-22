@@ -1,0 +1,726 @@
+{
+  "$description": "Foundation tokens: typography. Every leaf has value + evidence + measuredFrom. Values come only from the clone source and CLONE_SPEC.md; nothing is invented.",
+  "$schemaNote": "A leaf is any object with a 'value' key.",
+  "typography": {
+    "fontFamily": {
+      "head": {
+        "value": "'Inter Tight', 'Inter', system-ui, sans-serif",
+        "note": "Free stand-in (loaded from Google Fonts). The original licensed head face is NOT included and must not be reintroduced.",
+        "cssVariable": "--font-head",
+        "weightUsed": 350,
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/index.css:11",
+          "CLONE_SPEC.md:24"
+        ]
+      },
+      "body": {
+        "value": "'Inter', system-ui, sans-serif",
+        "note": "Free stand-in. The original licensed body face is NOT included and must not be reintroduced.",
+        "cssVariable": "--font-body",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/index.css:12",
+          "CLONE_SPEC.md:24"
+        ]
+      },
+      "mono": {
+        "value": "ui-monospace, SFMono-Regular, Menlo, monospace",
+        "cssVariable": "--font-mono",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/index.css:13",
+          "CLONE_SPEC.md:23"
+        ]
+      }
+    },
+    "typeStyle": {
+      "h1": {
+        "value": {
+          "fontFamily": "fontFamily.head",
+          "fontSize": "clamp(46px, 5.2vw, 92px)",
+          "lineHeight": 1.05,
+          "letterSpacing": "-0.02em",
+          "fontWeight": 350
+        },
+        "note": "Measured 66.56px at 1280 and 46px at 390.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:33-40",
+          "CLONE_SPEC.md:18"
+        ]
+      },
+      "h2": {
+        "value": {
+          "fontFamily": "fontFamily.head",
+          "fontSize": "clamp(36px, 3.9vw, 66px)",
+          "lineHeight": 1.05,
+          "letterSpacing": "-0.015em",
+          "fontWeight": 350
+        },
+        "note": "Measured 49.92px at 1280 and 36px at 390.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:41-48",
+          "CLONE_SPEC.md:19"
+        ]
+      },
+      "lede": {
+        "value": {
+          "fontFamily": "fontFamily.body",
+          "fontSize": "clamp(17px, 1.4vw, 23px)",
+          "lineHeight": 1.4,
+          "maxWidth": 800,
+          "marginTop": 24
+        },
+        "note": "Measured 17.92px at 1280.",
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:49-55",
+          "CLONE_SPEC.md:20"
+        ]
+      },
+      "eyebrow": {
+        "value": {
+          "fontFamily": "fontFamily.mono",
+          "fontSize": 13,
+          "letterSpacing": "0.2em",
+          "lineHeight": "18.2px",
+          "textTransform": "uppercase",
+          "color": "alpha.white.a550"
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/lib/tokens.js:56-64",
+          "CLONE_SPEC.md:21"
+        ]
+      },
+      "body-base": {
+        "value": {
+          "fontFamily": "fontFamily.body",
+          "fontSize": 14,
+          "lineHeight": 1.4
+        },
+        "evidence": "measured-live",
+        "measuredFrom": [
+          "src/index.css:21-29",
+          "CLONE_SPEC.md:30"
+        ]
+      },
+      "legal-clause-heading": {
+        "value": {
+          "fontFamily": "fontFamily.head",
+          "fontSize": 24,
+          "lineHeight": 1.25,
+          "letterSpacing": "-0.01em",
+          "fontWeight": 350
+        },
+        "note": "DERIVED page (legal-prose): not measured against the original.",
+        "evidenceLevel": "derived",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/pages/LegalPage.jsx:53"
+        ]
+      },
+      "legal-intro": {
+        "value": {
+          "fontFamily": "fontFamily.body",
+          "fontSize": 17,
+          "lineHeight": 1.6
+        },
+        "evidenceLevel": "derived",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/pages/LegalPage.jsx:49"
+        ]
+      },
+      "legal-body": {
+        "value": {
+          "fontFamily": "fontFamily.body",
+          "fontSize": 15,
+          "lineHeight": 1.6
+        },
+        "evidenceLevel": "derived",
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/pages/LegalPage.jsx:69"
+        ]
+      }
+    },
+    "fontSize": {
+      "px6_5": {
+        "value": 6.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:45"
+        ]
+      },
+      "px7_5": {
+        "value": 7.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 7,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:414"
+        ]
+      },
+      "px8": {
+        "value": 8,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 17,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:68"
+        ]
+      },
+      "px8_25": {
+        "value": 8.25,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:128"
+        ]
+      },
+      "px8_5": {
+        "value": 8.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 17,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:148"
+        ]
+      },
+      "px9": {
+        "value": 9,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 12,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/CookieBanner.jsx:221"
+        ]
+      },
+      "px9_5": {
+        "value": 9.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 12,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:255"
+        ]
+      },
+      "px10": {
+        "value": 10,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 11,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:222"
+        ]
+      },
+      "px10_5": {
+        "value": 10.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 13,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:403"
+        ]
+      },
+      "px11": {
+        "value": 11,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 10,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:240"
+        ]
+      },
+      "px11_5": {
+        "value": 11.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 8,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:80"
+        ]
+      },
+      "px12": {
+        "value": 12,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 5,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:183"
+        ]
+      },
+      "px12_5": {
+        "value": 12.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 8,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:141"
+        ]
+      },
+      "px13": {
+        "value": 13,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 9,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:151"
+        ]
+      },
+      "px13_3333": {
+        "value": 13.3333,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/index.css:35"
+        ]
+      },
+      "px13_5": {
+        "value": 13.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 4,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:506"
+        ]
+      },
+      "px14": {
+        "value": 14,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 6,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/CookieBanner.jsx:35"
+        ]
+      },
+      "px14_5": {
+        "value": 14.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Footer.jsx:18"
+        ]
+      },
+      "px15": {
+        "value": 15,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 8,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/DemoDialog.jsx:15"
+        ]
+      },
+      "px15_5": {
+        "value": 15.5,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:293"
+        ]
+      },
+      "px16": {
+        "value": 16,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:431"
+        ]
+      },
+      "px17": {
+        "value": 17,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 7,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:186"
+        ]
+      },
+      "px18": {
+        "value": 18,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/CookieBanner.jsx:39"
+        ]
+      },
+      "px20": {
+        "value": 20,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:69"
+        ]
+      },
+      "px21": {
+        "value": 21,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:126"
+        ]
+      },
+      "px24": {
+        "value": 24,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/CookieBanner.jsx:160"
+        ]
+      },
+      "px26": {
+        "value": 26,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/DemoDialog.jsx:84"
+        ]
+      },
+      "px27": {
+        "value": 27,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/DemoDialog.jsx:126"
+        ]
+      },
+      "px28": {
+        "value": 28,
+        "note": "CSS px; for sizes <= 11 the host is a scaled canvas (hero 1160x725, use-cases 1080x678, CSR 1080x542) so rendered size = value x canvas scale.",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:335"
+        ]
+      }
+    },
+    "fontWeight": {
+      "w350": {
+        "value": 350,
+        "usageCount": 10,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/CookieBanner.jsx:160",
+          "CLONE_SPEC.md:18"
+        ],
+        "note": "Head weight (variable Inter Tight at 350 stands in for the licensed head face)."
+      },
+      "w400": {
+        "value": 400,
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/shared/Pill.jsx:25"
+        ]
+      },
+      "w500": {
+        "value": 500,
+        "usageCount": 15,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:69"
+        ]
+      },
+      "w550": {
+        "value": 550,
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:115"
+        ]
+      },
+      "w600": {
+        "value": 600,
+        "usageCount": 7,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:334"
+        ]
+      },
+      "w650": {
+        "value": 650,
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:117"
+        ]
+      },
+      "w700": {
+        "value": 700,
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:333"
+        ]
+      }
+    },
+    "lineHeight": {
+      "l1": {
+        "value": 1,
+        "usageCount": 11,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:337"
+        ]
+      },
+      "l1_05": {
+        "value": 1.05,
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/lib/tokens.js:36"
+        ]
+      },
+      "l1_2": {
+        "value": 1.2,
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/CookieBanner.jsx:35"
+        ]
+      },
+      "l1_25": {
+        "value": 1.25,
+        "usageCount": 7,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/CookieBanner.jsx:160"
+        ]
+      },
+      "l1_3": {
+        "value": 1.3,
+        "usageCount": 4,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:293"
+        ]
+      },
+      "l1_35": {
+        "value": 1.35,
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/Hero.jsx:110"
+        ]
+      },
+      "l1_4": {
+        "value": 1.4,
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ClosingCTA.jsx:77"
+        ]
+      },
+      "l1_45": {
+        "value": 1.45,
+        "usageCount": 7,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:151"
+        ]
+      },
+      "l1_5": {
+        "value": 1.5,
+        "usageCount": 5,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:507"
+        ]
+      },
+      "l1_55": {
+        "value": 1.55,
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:165"
+        ]
+      },
+      "l1_6": {
+        "value": 1.6,
+        "usageCount": 4,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:336"
+        ]
+      },
+      "l13": {
+        "value": 13,
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:149"
+        ]
+      },
+      "l17": {
+        "value": 17,
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/DemoDialog.jsx:16"
+        ]
+      },
+      "l18_2": {
+        "value": 18.2,
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/lib/tokens.js:60"
+        ]
+      }
+    },
+    "letterSpacing": {
+      "n0_02": {
+        "value": "-0.02em",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/lib/tokens.js:37"
+        ]
+      },
+      "n0_015": {
+        "value": "-0.015em",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/lib/tokens.js:45"
+        ]
+      },
+      "n0_01": {
+        "value": "-0.01em",
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/hero/panels.jsx:126"
+        ]
+      },
+      "p0_02": {
+        "value": "0.02em",
+        "usageCount": 2,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/UseCases.jsx:165"
+        ]
+      },
+      "p0_025": {
+        "value": "0.025em",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:128"
+        ]
+      },
+      "p0_04": {
+        "value": "0.04em",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:415"
+        ]
+      },
+      "p0_05": {
+        "value": "0.05em",
+        "usageCount": 3,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:137"
+        ]
+      },
+      "p0_06": {
+        "value": "0.06em",
+        "usageCount": 9,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:81"
+        ]
+      },
+      "p0_07": {
+        "value": "0.07em",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/usecases/AnswerDash.jsx:118"
+        ]
+      },
+      "p0_08": {
+        "value": "0.08em",
+        "usageCount": 12,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/DemoDialog.jsx:221"
+        ]
+      },
+      "p0_1": {
+        "value": "0.1em",
+        "usageCount": 14,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:256"
+        ]
+      },
+      "p0_11": {
+        "value": "0.11em",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/styles/sections.css:124"
+        ]
+      },
+      "p0_12": {
+        "value": "0.12em",
+        "usageCount": 13,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/ControlCenter.jsx:241"
+        ]
+      },
+      "p0_14": {
+        "value": "0.14em",
+        "usageCount": 10,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:142"
+        ]
+      },
+      "p0_16": {
+        "value": "0.16em",
+        "usageCount": 4,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/CookieBanner.jsx:80"
+        ]
+      },
+      "p0_18": {
+        "value": "0.18em",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/components/AgentPlatform.jsx:183"
+        ]
+      },
+      "p0_2": {
+        "value": "0.2em",
+        "usageCount": 1,
+        "evidence": "clone-source",
+        "measuredFrom": [
+          "src/lib/tokens.js:59"
+        ]
+      }
+    }
+  }
+}

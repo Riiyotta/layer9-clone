@@ -1,0 +1,33 @@
+{
+  "id": "prompt-bar",
+  "kind": "component",
+  "purpose": "Floating chat prompt bar: plus icon, typed text with caret, send button. Fixed at translate(0,224px) scale(.92) in the laptop canvas; pinned to the bottom of the phone screen.",
+  "evidence": "measured-live",
+  "props": {
+    "placeholder": {
+      "type": "string",
+      "required": true,
+      "maxWords": 8
+    },
+    "text": {
+      "type": "string",
+      "description": "Typed text (animated).",
+      "required": false,
+      "maxWords": 14
+    }
+  },
+  "tokensUsed": [
+    "component.device.prompt.width",
+    "component.device.prompt.background",
+    "elevation.prompt-bar",
+    "elevation.prompt-bar-phone"
+  ],
+  "usedBy": [
+    "hero.episode"
+  ],
+  "measuredFrom": [
+    "src/components/Hero.jsx:193",
+    "src/components/Hero.jsx:104",
+    "CLONE_SPEC.md:89"
+  ]
+}
