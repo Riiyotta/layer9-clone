@@ -1,6 +1,20 @@
 {
   "id": "hero.episode",
   "kind": "section",
+  "source": {
+    "sourceId": "Hero",
+    "citation": "src/components/Hero.jsx:277",
+    "mountedAt": "src/pages/Home.jsx:12",
+    "domSelectors": [
+      "main > :nth-child(1)"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "hero.episode",
+    "category": "HERO"
+  },
+  "retrievalEligible": true,
   "purpose": "First section of the home page: centred logo, eyebrow, H1, two CTA pills, then a laptop (phone at <=720px) whose screen replays a looping five-prompt typing episode (prompt -> map reveal -> dashboard -> spreadsheet -> email -> schedule). No navbar: the logo is the only chrome and scrolls away.",
   "evidence": "measured-live",
   "constraints": {

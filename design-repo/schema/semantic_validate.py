@@ -7,6 +7,8 @@ Everything JSON Schema cannot express lives here:
   * route restrictions (a section's constraints.allowedRoutes) and route<->template binding;
   * section constraints from sections/*.json (onePerPage, mustBeFirst, mustPrecedeFooter,
     mustFollowFooter, mustFollowContent, requiredOverlays);
+  * retrievalEligible: utility overlays (cookie banner, demo dialog) are pinned to false (PINNED_RETRIEVAL_INELIGIBLE),
+    independent of the registry; an explicit true on such a node is rejected;
   * motion: pattern must be one the section allows, reducedMotionFallback must be the
     one the section requires;
   * per-instance maxWords on every text-bearing content field (walks the section's
@@ -25,6 +27,12 @@ import re
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Utility overlays are never retrieval/RAG material (a consent banner and a booking dialog are
+# interaction chrome, not page content). This pin is deliberately NOT read from the registry, the
+# contracts or the allowlist: flipping any of those to "eligible" must not be able to weaken it.
+# extraction/verify_all.py keeps its own copy and fails if the two differ.
+PINNED_RETRIEVAL_INELIGIBLE = frozenset(["overlay.cookie-banner", "overlay.demo-dialog"])
 
 
 def _load(rel):
@@ -204,18 +212,28 @@ def r_cookies_requires_banner(ctx):
     return []
 
 
-def r_eyebrow_unique(ctx):
+def eyebrow_duplicates(nodes):
+    """Return {numeral: [section ids]} for every two-digit eyebrow numeral used by more than one node."""
     seen = {}
-    msgs = []
-    for n in ctx["nodes"]:
+    for n in nodes:
         ey = n.get("content", {}).get("eyebrow")
         if isinstance(ey, str):
             m = re.match(r"^(\d{2})\s*·", ey)
             if m:
                 seen.setdefault(m.group(1), []).append(n.get("type"))
-    for num, owners in seen.items():
-        if len(owners) > 1:
-            msgs.append(f"eyebrow numeral {num} is used by {owners}; section numbers should be unique")
+    return dict((k, v) for k, v in seen.items() if len(v) > 1)
+
+
+def r_eyebrow_unique(ctx):
+    """A repeated numeral warns, unless it is a DELIBERATELY acknowledged duplicate recorded in the
+    rule's own acknowledgedDuplicates (numeral + the exact set of sections, with evidence). Any other
+    repeat, or an acknowledged numeral that spreads to a third section, still warns."""
+    acked = [(a["numeral"], sorted(a["sections"])) for a in ctx.get("rule", {}).get("acknowledgedDuplicates", [])]
+    msgs = []
+    for num, owners in eyebrow_duplicates(ctx["nodes"]).items():
+        if (num, sorted(owners)) in acked:
+            continue
+        msgs.append(f"eyebrow numeral {num} is used by {owners}; section numbers should be unique")
     return msgs
 
 
@@ -317,6 +335,12 @@ def validate_semantic(spec, repo=None):
         for ov in cons.get("requiredOverlays", []):
             if ov not in types:
                 errors.append(f"node[{i}] {t} requires {ov} on the page")
+        # retrieval eligibility: pinned utility overlays can never be eligible (absent == the pinned default, false)
+        if t in PINNED_RETRIEVAL_INELIGIBLE:
+            if n.get("retrievalEligible", False) is not False:
+                errors.append(f"node[{i}] {t} retrievalEligible must be false: utility overlays are pinned as never retrieval-eligible")
+            if sec.get("retrievalEligible") is not False:
+                errors.append(f"node[{i}] {t} section contract says retrievalEligible {sec.get('retrievalEligible')!r} but it is PINNED to false")
         # motion
         m = n.get("motion")
         smot = sec["motion"]
@@ -355,6 +379,7 @@ def validate_semantic(spec, repo=None):
             continue
         if any(e["template"] == tid for e in rule.get("exceptions", [])):
             continue
+        ctx["rule"] = rule
         for msg in fn(ctx):
             line = f"[{rid}] {msg}"
             (errors if rule["severity"] == "error" else warnings).append(line)

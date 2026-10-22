@@ -167,10 +167,12 @@
       "id": "D-4",
       "what": "Duplicate section numeral",
       "detail": "Integrations (default num '03') and CSR (hard-coded '03') both render '03'.",
-      "decision": "Recorded, not fixed (source is read-only). Surfaced as WARN by graph rule EYEBROW_NUMBER_UNIQUE.",
+      "decision": "Acknowledged, not fixed and not silenced. The built page renders 02,03,03,04,05 (verified in the rendered DOM at 1440px) and no evidence about the original's numerals exists (recon holds only character counts), so the example keeps the duplicate. Graph rule EYEBROW_NUMBER_UNIQUE carries an explicit acknowledgedDuplicates entry (numeral 03, sections integrations.grid + csr.loop); the validator skips only that exact pair, and verify_all.py fails if the entry goes stale or any other numeral repeats.",
       "citations": [
         "src/components/Integrations.jsx:10",
-        "src/components/ControlCenter.jsx:359"
+        "src/components/ControlCenter.jsx:359",
+        "src/pages/Home.jsx:14",
+        "src/pages/Home.jsx:15"
       ]
     },
     {
@@ -4646,6 +4648,153 @@
       "citation": "CLONE_SPEC.md:57",
       "expect": "From the field",
       "evidence": "measured-live-spec"
+    },
+    {
+      "citation": "src/components/ClosingCTA.jsx:18",
+      "expect": "export default function ClosingCTA() {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/ControlCenter.jsx:74",
+      "expect": "export default function ControlCenter() {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/CookieBanner.jsx:41",
+      "expect": "export default function CookieBanner() {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/DemoDialog.jsx:23",
+      "expect": "export default function DemoDialog() {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Footer.jsx:6",
+      "expect": "export default function Footer() {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Hero.jsx:277",
+      "expect": "export default function Hero() {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/Security.jsx:65",
+      "expect": "export default function Security() {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/components/UseCases.jsx:41",
+      "expect": "export default function UseCases() {",
+      "evidence": "built-source"
+    },
+    {
+      "citation": "src/pages/LegalPage.jsx:8",
+      "expect": "export default function LegalPage({ doc }) {",
+      "evidence": "built-source"
     }
-  ]
+  ],
+  "sectionHeights": {
+    "capturedOn": "2026-10-22",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "method": "Built clone (vite build + vite preview), headless Chromium via Playwright, networkidle + 1200ms settle, cookie consent unset. Section height = union span (min top to max bottom) of the elements matched by source.domSelectors in that section contract; overlays are position:fixed and not in flow (null). pageHeightPx = document.documentElement.scrollHeight.",
+    "measuredBy": "extraction/measure_sections.mjs",
+    "routes": {
+      "/": {
+        "pageHeightPx": 7885,
+        "sections": {
+          "hero.episode": {
+            "heightPx": 1296,
+            "topPx": 0,
+            "elements": 1
+          },
+          "usecases.stage": {
+            "heightPx": 1383,
+            "topPx": 1296,
+            "elements": 1
+          },
+          "integrations.grid": {
+            "heightPx": 1334,
+            "topPx": 2679,
+            "elements": 1
+          },
+          "csr.loop": {
+            "heightPx": 1118,
+            "topPx": 4014,
+            "elements": 1
+          },
+          "platform.stack": {
+            "heightPx": 808,
+            "topPx": 5132,
+            "elements": 1
+          },
+          "security.matrix": {
+            "heightPx": 990,
+            "topPx": 5939,
+            "elements": 1
+          },
+          "closing.cta": {
+            "heightPx": 900,
+            "topPx": 6929,
+            "elements": 1
+          },
+          "chrome.footer": {
+            "heightPx": 56,
+            "topPx": 7829,
+            "elements": 1
+          },
+          "overlay.demo-dialog": null,
+          "overlay.cookie-banner": null
+        }
+      },
+      "/privacy-policy/": {
+        "pageHeightPx": 1835,
+        "sections": {
+          "legal.header": {
+            "heightPx": 232,
+            "topPx": 156,
+            "elements": 1
+          },
+          "legal.body": {
+            "heightPx": 1228,
+            "topPx": 428,
+            "elements": 9
+          },
+          "chrome.footer": {
+            "heightPx": 56,
+            "topPx": 1778,
+            "elements": 1
+          },
+          "overlay.demo-dialog": null,
+          "overlay.cookie-banner": null
+        }
+      },
+      "/terms-of-service/": {
+        "pageHeightPx": 1787,
+        "sections": {
+          "legal.header": {
+            "heightPx": 232,
+            "topPx": 156,
+            "elements": 1
+          },
+          "legal.body": {
+            "heightPx": 1180,
+            "topPx": 428,
+            "elements": 9
+          },
+          "chrome.footer": {
+            "heightPx": 56,
+            "topPx": 1730,
+            "elements": 1
+          },
+          "overlay.demo-dialog": null,
+          "overlay.cookie-banner": null
+        }
+      }
+    }
+  }
 }

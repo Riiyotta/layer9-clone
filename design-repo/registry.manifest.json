@@ -1,10 +1,10 @@
 {
   "repositoryId": "acme-landing-design-repo",
-  "repositoryVersion": "1.0.0",
-  "pageSpecVersion": "1.0.0",
+  "repositoryVersion": "1.1.0",
+  "pageSpecVersion": "1.1.0",
   "status": "design-review-pending",
   "productionApproved": false,
-  "allowlistVersion": "1.0.0",
+  "allowlistVersion": "1.1.0",
   "defaultTheme": "dark",
   "schemaValidatedThemes": [
     "dark"
@@ -37,6 +37,7 @@
     "schema/pagespec.schema.json",
     "schema/example.pagespec.json",
     "schema/example.legal-prose.pagespec.json",
+    "schema/section-contract.schema.json",
     "schema/semantic_validate.py",
     "schema/tests/adversarial_test.py",
     "tokens/llm/token-catalog.json",
@@ -45,7 +46,9 @@
     "assets/asset-roles.json",
     "extraction/measured-values.json",
     "extraction/verify_all.py",
-    "extraction/prove_drift.py"
+    "extraction/prove_drift.py",
+    "extraction/quality-gate.json",
+    "extraction/measure_sections.mjs"
   ],
   "sourceProject": {
     "description": "A Vite + React 18 + Tailwind v3 + framer-motion landing-page CLONE of a real, live commercial marketing site (an AI operations platform for ISPs), built as a deliberate PLACEHOLDER clone under a fictional 'Acme' brand.",

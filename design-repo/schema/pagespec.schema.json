@@ -182,6 +182,11 @@
         },
         "motion": {
           "$ref": "#/definitions/motion"
+        },
+        "retrievalEligible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether this node's content may be indexed or retrieved as page content. Defaults to true. Utility overlays (overlay.cookie-banner, overlay.demo-dialog) are locked to false by this schema AND pinned independently in schema/semantic_validate.py and extraction/verify_all.py."
         }
       },
       "allOf": [
@@ -2523,6 +2528,9 @@
                     "const": "not-applicable-static"
                   }
                 }
+              },
+              "retrievalEligible": {
+                "const": false
               }
             }
           }
@@ -2781,6 +2789,9 @@
                     "const": "not-applicable-static"
                   }
                 }
+              },
+              "retrievalEligible": {
+                "const": false
               }
             }
           }

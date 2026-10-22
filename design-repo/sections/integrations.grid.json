@@ -1,6 +1,20 @@
 {
   "id": "integrations.grid",
   "kind": "section",
+  "source": {
+    "sourceId": "Integrations",
+    "citation": "src/components/Integrations.jsx:10",
+    "mountedAt": "src/pages/Home.jsx:14",
+    "domSelectors": [
+      "main > :nth-child(3)"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "integrations.grid",
+    "category": "FEATURE"
+  },
+  "retrievalEligible": true,
   "purpose": "Eyebrow + H2 + lede, eight category filter pills and a 9x5 grid (5x9 on phone) of 45 monogram tiles with corner-bracket cell frames; hover or click on a pill or tile highlights its category. Tiles appear in a diagonal wave. Logos are NEUTRAL MONOGRAMS standing in for real vendor logos.",
   "evidence": "measured-live",
   "constraints": {

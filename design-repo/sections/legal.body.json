@@ -1,6 +1,20 @@
 {
   "id": "legal.body",
   "kind": "section",
+  "source": {
+    "sourceId": "LegalPage (intro, clauses, contact line)",
+    "citation": "src/pages/LegalPage.jsx:8",
+    "mountedAt": "src/App.jsx:10",
+    "domSelectors": [
+      "main article > header ~ *"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "legal.body",
+    "category": "LEGAL"
+  },
+  "retrievalEligible": true,
   "purpose": "DERIVED. 760px article: intro paragraph, then numbered clauses (mono 01.. index + 24px head heading + paragraphs/bullet lists in the lede colour) and a closing hairline contact line with a mailto link. All text is placeholder legal copy for a fictional company and must be replaced with counsel-reviewed text.",
   "evidence": "derived",
   "constraints": {

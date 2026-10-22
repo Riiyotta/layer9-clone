@@ -1,6 +1,20 @@
 {
   "id": "closing.cta",
   "kind": "section",
+  "source": {
+    "sourceId": "ClosingCTA",
+    "citation": "src/components/ClosingCTA.jsx:18",
+    "mountedAt": "src/pages/Home.jsx:18",
+    "domSelectors": [
+      "main > :nth-child(7)"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "closing.cta",
+    "category": "CTA"
+  },
+  "retrievalEligible": true,
   "purpose": "Full-viewport (100vh) closing block: eyebrow, H2, lede, an isometric layer-stack illustration whose layers drop and seat, and a single solid pill overlapping the art. Progress p is driven by useInView (NOT scroll position): 0->1 over 2.4s when >=45% in view, back to 0 over 0.9s when it leaves. When seated (p >= 0.92) a flash, three rings and diagonal sweeps fire.",
   "evidence": "measured-live",
   "constraints": {

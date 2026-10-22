@@ -1,6 +1,20 @@
 {
   "id": "csr.loop",
   "kind": "section",
+  "source": {
+    "sourceId": "ControlCenter",
+    "citation": "src/components/ControlCenter.jsx:74",
+    "mountedAt": "src/pages/Home.jsx:15",
+    "domSelectors": [
+      "main > :nth-child(4)"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "csr.loop",
+    "category": "FEATURE"
+  },
+  "retrievalEligible": true,
   "purpose": "Anchor #csr. Section header with a crossfading two-state title, then a 1216px app frame: a support-agent question types in, five systems tangle (manual path), snap onto a rail under an 'Acme orchestration' shell, each returns a finding, then an answer bubble appears. Loops forever once first seen. Mobile gets a five-row version.",
   "evidence": "measured-live",
   "constraints": {

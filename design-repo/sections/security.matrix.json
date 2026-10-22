@@ -1,6 +1,20 @@
 {
   "id": "security.matrix",
   "kind": "section",
+  "source": {
+    "sourceId": "Security",
+    "citation": "src/components/Security.jsx:65",
+    "mountedAt": "src/pages/Home.jsx:17",
+    "domSelectors": [
+      "main > :nth-child(6)"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "security.matrix",
+    "category": "FEATURE"
+  },
+  "retrievalEligible": true,
   "purpose": "Anchor #security. Server-rendered static section: header and a 940px bordered 2x2 matrix of four quadrants (icon box, index, title, body, mono proof line). Only motion is a hover wash (pointer:fine devices). Single column at <=720px.",
   "evidence": "measured-live",
   "constraints": {

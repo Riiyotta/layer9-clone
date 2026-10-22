@@ -233,6 +233,149 @@ def m_scroll(r):
     jdump(p, d)
 
 
+# ---- retrieval eligibility / provenance vs taxonomy / eyebrow acknowledgement / height gate
+def _edit(r, rel, fn):
+    p = os.path.join(r, rel)
+    d = jload(p)
+    fn(d)
+    jdump(p, d)
+
+
+def m_cookie_contract_eligible(r):
+    _edit(r, "sections/overlay.cookie-banner.json", lambda d: d.__setitem__("retrievalEligible", True))
+
+
+def m_dialog_contract_eligible(r):
+    _edit(r, "sections/overlay.demo-dialog.json", lambda d: d.__setitem__("retrievalEligible", True))
+
+
+def m_allow_retrieval(r):
+    _edit(r, "tokens/llm/component-allowlist.json", lambda d: d["retrievalIneligibleSections"].remove("overlay.cookie-banner"))
+
+
+def m_schema_lock(r):
+    def f(d):
+        for a in d["definitions"]["node"]["allOf"]:
+            if a["if"]["properties"]["type"]["const"] == "overlay.demo-dialog":
+                a["then"]["properties"].pop("retrievalEligible")
+    _edit(r, "schema/pagespec.schema.json", f)
+
+
+def m_example_overlay_eligible(r):
+    def f(d):
+        for n in d["nodes"]:
+            if n["type"] == "overlay.cookie-banner":
+                n["retrievalEligible"] = True
+    _edit(r, "schema/example.pagespec.json", f)
+
+
+def m_hero_ineligible(r):
+    _edit(r, "sections/hero.episode.json", lambda d: d.__setitem__("retrievalEligible", False))
+
+
+def m_source_missing(r):
+    _edit(r, "sections/closing.cta.json", lambda d: d.pop("source"))
+
+
+def m_source_extra(r):
+    _edit(r, "sections/closing.cta.json", lambda d: d["source"].__setitem__("figmaNode", "1:2"))
+
+
+def m_semantic_id(r):
+    _edit(r, "sections/closing.cta.json", lambda d: d["semantic"].__setitem__("semanticId", "closing.main"))
+
+
+def m_semantic_category(r):
+    _edit(r, "sections/closing.cta.json", lambda d: d["semantic"].__setitem__("category", "WRAPPER"))
+
+
+def m_source_conflated(r):
+    _edit(r, "sections/closing.cta.json", lambda d: d["source"].__setitem__("sourceId", d["id"]))
+
+
+def m_ack_removed(r):
+    def f(d):
+        for x in d["rules"]:
+            if x["id"] == "EYEBROW_NUMBER_UNIQUE":
+                x["acknowledgedDuplicates"] = []
+    _edit(r, "compatibility/graph.json", f)
+
+
+def m_ack_stale(r):
+    def f(d):
+        for n in d["nodes"]:
+            if n["type"] == "csr.loop":
+                n["content"]["eyebrow"] = "06 · MEET ACME · THE CARE AGENT"
+    _edit(r, "schema/example.pagespec.json", f)
+
+
+def m_ack_new_dup(r):
+    def f(d):
+        for n in d["nodes"]:
+            if n["type"] == "platform.stack":
+                n["content"]["eyebrow"] = "03 · BUILD ON ACME"
+    _edit(r, "schema/example.pagespec.json", f)
+
+
+def _set_height(r, route, sid, px, page):
+    def f(d):
+        d["sectionHeights"]["routes"][route]["sections"][sid]["heightPx"] = px
+        d["sectionHeights"]["routes"][route]["pageHeightPx"] = page
+    _edit(r, "extraction/measured-values.json", f)
+
+
+_WL = {"gate": "height-fail", "route": "/", "section": "hero.episode", "allowedUpToPx": 4000,
+       "justification": "Reviewed: this scratch fixture is a deliberately long single-scene hero that cannot be split into sections.",
+       "reviewedBy": "drift test", "reviewedOn": "2026-10-22"}
+
+
+def m_hero_2000(r):
+    _set_height(r, "/", "hero.episode", 2000, 9000)
+
+
+def m_hero_3500(r):
+    _set_height(r, "/", "hero.episode", 3500, 12000)
+
+
+def m_hero_3500_whitelisted(r):
+    _set_height(r, "/", "hero.episode", 3500, 12000)
+    _edit(r, "extraction/quality-gate.json", lambda d: d["whitelist"].append(dict(_WL)))
+
+
+def m_hero_3500_bad_whitelist(r):
+    _set_height(r, "/", "hero.episode", 3500, 12000)
+    e = dict(_WL)
+    e["justification"] = ""
+    _edit(r, "extraction/quality-gate.json", lambda d: d["whitelist"].append(e))
+
+
+def m_hero_over_cap(r):
+    _set_height(r, "/", "hero.episode", 3500, 12000)
+    e = dict(_WL)
+    e["allowedUpToPx"] = 3200
+    _edit(r, "extraction/quality-gate.json", lambda d: d["whitelist"].append(e))
+
+
+def m_stale_whitelist(r):
+    _edit(r, "extraction/quality-gate.json", lambda d: d["whitelist"].append(dict(_WL)))
+
+
+def m_legal_unwhitelisted(r):
+    _edit(r, "extraction/quality-gate.json", lambda d: d.__setitem__("whitelist", []))
+
+
+def m_height_missing(r):
+    _edit(r, "extraction/measured-values.json", lambda d: d["sectionHeights"]["routes"]["/"]["sections"].pop("security.matrix"))
+
+
+def m_height_record_gone(r):
+    _edit(r, "extraction/measured-values.json", lambda d: d.pop("sectionHeights"))
+
+
+def m_majority(r):
+    _set_height(r, "/", "integrations.grid", 9000, 6551 + 9000)
+
+
 CASES = [
     # (name, mutation, expected substring, needs_source)
     ("phantom allowlist entry (component with no contract file)", m_phantom, "phantom entry", False),
@@ -256,7 +399,33 @@ CASES = [
     ("example overflows maxWords", m_example_overflow, "maxWords", False),
     ("schema assetRole enum gains an invented role", m_schema_enum, "assetRole enum", False),
     ("section claims scroll-linked motion", m_scroll, "scrollLinked", False),
+    # ---- added in 1.1.0 (mode "warn" = must exit 0 AND print the expected WARN line; "pass" = exit 0 and message)
+    ("retrieval: cookie-banner CONTRACT flipped to retrievalEligible true", m_cookie_contract_eligible, "independent pin", False, "fail"),
+    ("retrieval: demo-dialog CONTRACT flipped to retrievalEligible true", m_dialog_contract_eligible, "independent pin", False, "fail"),
+    ("retrieval: allowlist retrievalIneligibleSections weakened", m_allow_retrieval, "pinned set", False, "fail"),
+    ("retrieval: PageSpec schema lock removed for the demo dialog", m_schema_lock, "locks retrievalEligible", False, "fail"),
+    ("retrieval: example overlay node says retrievalEligible true", m_example_overlay_eligible, "schema error", False, "fail"),
+    ("retrieval: ordinary section flipped to ineligible (pin says eligible)", m_hero_ineligible, "independent pin", False, "fail"),
+    ("provenance: section contract loses its source block", m_source_missing, "contract schema", False, "fail"),
+    ("provenance: extra field smuggled into source (closed object)", m_source_extra, "dditional", False, "fail"),
+    ("taxonomy: semantic.semanticId differs from the contract id", m_semantic_id, "semanticId", False, "fail"),
+    ("taxonomy: semantic.category outside the closed set", m_semantic_category, "category", False, "fail"),
+    ("provenance/taxonomy conflated: sourceId set equal to the semantic id", m_source_conflated, "provenance and taxonomy", False, "fail"),
+    ("eyebrow: acknowledgement removed while the example still duplicates 03", m_ack_removed, "no acknowledgement", False, "fail"),
+    ("eyebrow: acknowledgement goes stale (example no longer duplicates)", m_ack_stale, "stale acknowledgement", False, "fail"),
+    ("eyebrow: a second, unacknowledged duplicate numeral", m_ack_new_dup, "no acknowledgement", False, "fail"),
+    ("height: HERO measured 2000px (above 1800) is a WARN, not a failure", m_hero_2000, "above the 1800px warning line", False, "warn"),
+    ("height: HERO measured 3500px (above 3000) with no whitelist fails", m_hero_3500, "whole-page wrapper", False, "fail"),
+    ("height: HERO 3500px with a reviewed whitelist entry passes, as a WARN", m_hero_3500_whitelisted, "covered by a reviewed whitelist entry", False, "warn"),
+    ("height: whitelist entry with an empty justification fails", m_hero_3500_bad_whitelist, "justification missing", False, "fail"),
+    ("height: whitelisted HERO above its own cap fails", m_hero_over_cap, "exceeds even its whitelisted cap", False, "fail"),
+    ("height: stale whitelist entry fails", m_stale_whitelist, "stale", False, "fail"),
+    ("height: legal.body majority without its reviewed whitelist entry is a WARN", m_legal_unwhitelisted, "one section is the majority of the page", False, "warn"),
+    ("height: one section holding most of a page (integrations.grid 58%) is a WARN", m_majority, "integrations.grid holds", False, "warn"),
+    ("height: an in-flow section lacks a measured height", m_height_missing, "no measured height", False, "fail"),
+    ("height: the sectionHeights record is deleted", m_height_record_gone, "no sectionHeights", False, "fail"),
 ]
+
 
 
 def main(argv=None):
@@ -293,7 +462,9 @@ def main(argv=None):
     failed += 0 if ok else 1
 
     n = 0
-    for name, fn, want, needs_src in CASES:
+    for case in CASES:
+        name, fn, want, needs_src = case[:4]
+        mode = case[4] if len(case) > 4 else "fail"
         if needs_src and not source:
             print("SKIP  %s (needs source tree)" % name)
             continue
@@ -303,8 +474,11 @@ def main(argv=None):
         fn(dst)
         rc, out = run_verify(dst, source)
         hit = want.lower() in out.lower()
-        ok = rc == 1 and hit
-        print("%s  %s -> exit %d, expected message %r %s" % ("PASS" if ok else "FAIL", name, rc, want, "found" if hit else "MISSING"))
+        if mode == "warn":
+            ok = rc == 0 and hit and "WARN [" in out and want in "".join(l for l in out.splitlines(True) if l.startswith("WARN"))
+        else:
+            ok = rc == 1 and hit
+        print("%s  %s -> exit %d, expected %s %r %s" % ("PASS" if ok else "FAIL", name, rc, "WARN (exit 0)" if mode == "warn" else "FAIL message", want, "found" if hit else "MISSING"))
         if not ok:
             failed += 1
             print(out[-1500:])

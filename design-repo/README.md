@@ -37,7 +37,7 @@ This repo must not be used to reintroduce the original's content. Full guidance 
 | allowlist entries (primitives + components + sections) | 57 |
 | compatibility rules | 12 |
 | themes | 1 (dark only) |
-| distinct citations in the ledger | 885 |
+| distinct citations in the ledger | 894 |
 
 ```
 design-repo/
@@ -53,8 +53,9 @@ design-repo/
   templates/templates.json      page shapes + the 1:1 route map
   compatibility/graph.json      rhythm rules (severity error|warn, named exceptions)
   assets/asset-roles.json       closed assetRole enum + generation/licensing policy
-  schema/                       pagespec.schema.json (Draft-07), example(s), semantic_validate.py, tests/adversarial_test.py
-  extraction/                   measured-values.json (citation ledger), verify_all.py, prove_drift.py
+  schema/                       pagespec.schema.json (Draft-07), section-contract.schema.json, example(s), semantic_validate.py, tests/adversarial_test.py
+  extraction/                   measured-values.json (citation ledger + measured section heights), quality-gate.json (reviewed height-gate whitelist),
+                                verify_all.py, prove_drift.py, measure_sections.mjs (re-measures the built clone)
 ```
 
 ## Routes and templates
@@ -101,7 +102,25 @@ python3 extraction/prove_drift.py --scratch DIR # injects drift into a scratch c
 ```
 Python 3.9+ and `jsonschema` (Draft 7) only. With no sibling source tree the citation and pin checks degrade to WARN, not FAIL.
 
-Expected: the home example validates with 0 errors and **1 warning** (rule `EYEBROW_NUMBER_UNIQUE`: the clone's Integrations and CSR eyebrows both read "03").
+Expected (1.1.0): `verify_all.py` reports 0 FAIL and 0 WARN with the sibling source tree present, the adversarial suite passes all 148 checks, and `prove_drift.py` rejects all 45 injected cases (the height-gate WARN cases must exit 0 and print the WARN). The home example validates with 0 errors and 0 warnings.
+
+## Contract fields added in 1.1.0
+
+Every `sections/*.json` contract now separates three things (closed shape: `schema/section-contract.schema.json`, enforced by `verify_all.py` check O):
+
+- `source` = **provenance** `{sourceId, citation, mountedAt, domSelectors, inFlow}`: the source component or element that implements the section, its declaration line, the line that mounts it, and the CSS selectors that find it in the built page. This is how a contract is traced back to the DOM and the component. It is never a generator-facing id.
+- `semantic` = **taxonomy** `{semanticId, category}`: the stable id (must equal the contract id) and a closed category (`HERO`, `FEATURE`, `CTA`, `CHROME`, `LEGAL`, `OVERLAY`). `sourceId` may not equal `semanticId`.
+- `retrievalEligible` (boolean): `true` for page content, `false` for the two utility overlays (`overlay.cookie-banner`, `overlay.demo-dialog`). The value is **pinned in `verify_all.py` and `semantic_validate.py` independently of the registry**: flipping it in a contract, the allowlist (`retrievalIneligibleSections`) or the PageSpec schema fails. A PageSpec node may carry `retrievalEligible` (default `true`); on the two overlays the schema only admits `false`.
+
+## Whole-page-wrapper quality gate (check P)
+
+`extraction/measured-values.json` -> `sectionHeights` records each in-flow section's rendered height per route, measured on the built clone at 1440px by `extraction/measure_sections.mjs` (selectors come from `source.domSelectors`). `verify_all.py` then applies constants it owns: a `HERO`-category section above 1800px **warns**, above 3000px **fails** unless it has a reviewed entry in `extraction/quality-gate.json` (justification, reviewer, date, hard cap), and any section holding more than half of its page's height **warns** unless reviewed. Measured: `hero.episode` 1296px on `/` (page 7885px); the privacy page is 1835px and the terms page 1787px in total, and on both `legal.body` holds about two thirds (reviewed, because a legal page is one prose document). Stale or malformed whitelist entries fail.
+
+Not measured, and not claimed: **visual parity against the live site.** No live-site capture exists in this package, so there is no parity number; the section heights above describe the clone only.
+
+## Duplicate section numeral (D-4)
+
+The built page renders eyebrow numerals 02, 03, 03, 04, 05 (Integrations defaults to `03`, the CSR section hard-codes `03`). No evidence about the original's numerals exists (`recon/` stores only character counts), so the example is **not** edited to look tidier. The duplicate is recorded as an explicit `acknowledgedDuplicates` entry on graph rule `EYEBROW_NUMBER_UNIQUE`; the validator skips only that exact numeral + section pair, and `verify_all.py` (check Q) fails if the entry goes stale, is thinly evidenced, or any other numeral repeats. Fix it in the source after checking the live page, then delete the entry.
 
 ## Delivery packaging
 

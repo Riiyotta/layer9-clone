@@ -1,6 +1,20 @@
 {
   "id": "overlay.demo-dialog",
   "kind": "section",
+  "source": {
+    "sourceId": "DemoDialog",
+    "citation": "src/components/DemoDialog.jsx:23",
+    "mountedAt": "src/App.jsx:20",
+    "domSelectors": [
+      "dialog"
+    ],
+    "inFlow": false
+  },
+  "semantic": {
+    "semanticId": "overlay.demo-dialog",
+    "category": "OVERLAY"
+  },
+  "retrievalEligible": false,
   "purpose": "Native <dialog> opened by any a[href=\"#demo\"] click or a #demo hash on load. Card with mono label, title, intro and an underline-only form (name, email, subscriber-count select, coverage, source, hidden honeypot, required privacy checkbox, submit). The clone simulates a 900ms send then shows a success state; it does NOT submit anywhere. The original POSTs to a live endpoint, which must never be reused.",
   "evidence": "measured-live",
   "constraints": {

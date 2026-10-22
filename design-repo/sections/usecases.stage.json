@@ -1,6 +1,20 @@
 {
   "id": "usecases.stage",
   "kind": "section",
+  "source": {
+    "sourceId": "UseCases",
+    "citation": "src/components/UseCases.jsx:41",
+    "mountedAt": "src/pages/Home.jsx:13",
+    "domSelectors": [
+      "main > :nth-child(2)"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "usecases.stage",
+    "category": "FEATURE"
+  },
+  "retrievalEligible": true,
   "purpose": "Anchor #use-cases. Nine connected-system tiles feed a central chip over bezier connectors; below, a 1000x408 app window pairs a persona rail (3), a prompt column (3 cards) and a live answer dashboard. Autoplay advances the persona every 7s; click selects. At <=720px the stage becomes a mobile list.",
   "evidence": "measured-live",
   "constraints": {

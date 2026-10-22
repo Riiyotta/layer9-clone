@@ -1,6 +1,20 @@
 {
   "id": "legal.header",
   "kind": "section",
+  "source": {
+    "sourceId": "LegalPage (header element)",
+    "citation": "src/pages/LegalPage.jsx:25",
+    "mountedAt": "src/App.jsx:10",
+    "domSelectors": [
+      "main article > header"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "legal.header",
+    "category": "LEGAL"
+  },
+  "retrievalEligible": true,
   "purpose": "DERIVED. Top of a legal page: centred logo link home, mono eyebrow, an H2-scale document title, a mono 'Last updated' line and an orange-tinted placeholder-notice pill, closed by a hairline. Built in the home page's own system because the original serves its legal documents as PDFs.",
   "evidence": "derived",
   "constraints": {

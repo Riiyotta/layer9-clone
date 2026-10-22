@@ -136,11 +136,30 @@
       "severity": "warn",
       "appliesTo": "all",
       "exceptions": [],
-      "description": "Eyebrows that start with a two-digit section numeral ('NN · ') should not repeat a numeral. The clone's own copy trips this: Integrations (default num 03) and CSR (hard-coded 03) both read 03, so the bundled home example emits one WARN by design.",
-      "checkedAgainst": "bundled home example produces exactly this one warning",
+      "description": "Eyebrows that start with a two-digit section numeral ('NN · ') should not repeat a numeral. One duplicate is ACKNOWLEDGED, not silenced: the built clone really renders '03' twice (Integrations, whose num prop defaults to '03', and the CSR section, whose eyebrow is hard-coded '03'); see acknowledgedDuplicates. Any other repeat, or the acknowledged numeral appearing on a different set of sections, still warns.",
+      "checkedAgainst": "bundled home example: 0 warnings with the acknowledgement; removing it restores exactly one warning (adversarial suite); verify_all.py fails if the acknowledgement goes stale or the example duplicates anything else",
       "measuredFrom": [
         "src/components/Integrations.jsx:10",
         "src/components/ControlCenter.jsx:359"
+      ],
+      "acknowledgedDuplicates": [
+        {
+          "numeral": "03",
+          "sections": [
+            "integrations.grid",
+            "csr.loop"
+          ],
+          "status": "acknowledged-as-built-unverified-against-original",
+          "renderedEvidence": "Built clone at 1440px, / route, DOM order of main children: 02 HOW ACME WORKS, 03 CONNECTORS, 03 MEET ACME THE CARE AGENT, 04 BUILD ON ACME, 05 SAFETY. Home.jsx renders <Integrations /> with no num prop, so the default '03' applies; ControlCenter passes a literal '03'.",
+          "originalEvidence": "None either way. recon/text-roles-1280.json records only the character count of each original eyebrow (use-cases 17, integrations 17, CSR 30, platform 19, security 13), never its text, so the original's numerals cannot be read. The clone's eyebrow lengths differ from those counts for every section, so the clone's numbers are not a copy of the original's and cannot be used to infer them.",
+          "reason": "The source supports the duplicate as built and nothing supports a corrected number, so the example is NOT edited to 04: that would make the contract describe a page the clone does not render. The sequence 02,03,03,04,05 is recorded as a clone quirk. Resolve it by changing the source (Integrations num or the CSR literal) after checking the live page, then delete this acknowledgement; verify_all.py fails on a stale acknowledgement.",
+          "measuredFrom": [
+            "src/components/Integrations.jsx:10",
+            "src/components/ControlCenter.jsx:359",
+            "src/pages/Home.jsx:14",
+            "src/pages/Home.jsx:15"
+          ]
+        }
       ]
     },
     {

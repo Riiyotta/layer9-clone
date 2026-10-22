@@ -1,6 +1,20 @@
 {
   "id": "overlay.cookie-banner",
   "kind": "section",
+  "source": {
+    "sourceId": "CookieBanner",
+    "citation": "src/components/CookieBanner.jsx:41",
+    "mountedAt": "src/App.jsx:21",
+    "domSelectors": [
+      "[aria-label=\"Cookie consent\"]"
+    ],
+    "inFlow": false
+  },
+  "semantic": {
+    "semanticId": "overlay.cookie-banner",
+    "category": "OVERLAY"
+  },
+  "retrievalEligible": false,
   "purpose": "The only fixed element on the site. A 420px card (bottom-left, z 60) shown when no stored consent exists, plus a preferences modal (backdrop, essential + analytics rows, three buttons) opened by Customize, the footer Cookies button, or the #cookies hash. A Global Privacy Control signal auto-rejects and stores the rejection.",
   "evidence": "measured-live",
   "constraints": {

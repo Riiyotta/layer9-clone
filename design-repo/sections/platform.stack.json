@@ -1,6 +1,20 @@
 {
   "id": "platform.stack",
   "kind": "section",
+  "source": {
+    "sourceId": "AgentPlatform",
+    "citation": "src/components/AgentPlatform.jsx:24",
+    "mountedAt": "src/pages/Home.jsx:16",
+    "domSelectors": [
+      "main > :nth-child(5)"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "platform.stack",
+    "category": "FEATURE"
+  },
+  "retrievalEligible": true,
   "purpose": "Header, then a 1120px three-layer 'stack': a top block (neon dot, title, tag chips), dashed connectors, three capability cards, dashed connectors, and a bottom slab with the chip mark. Builds bottom-up on entering view and reverses on leaving; dashes march while in view.",
   "evidence": "measured-live",
   "constraints": {

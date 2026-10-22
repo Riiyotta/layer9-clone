@@ -1,0 +1,25 @@
+{
+  "$description": "Reviewed exceptions to the whole-page-wrapper quality gate in extraction/verify_all.py (check P). The thresholds themselves (HERO >1800px warns, HERO >3000px fails, one section holding more than half of a page's height warns) are constants in verify_all.py and cannot be loosened from this file. An entry here is the ONLY way to pass a gate that would otherwise fail or warn, and it must carry a justification, a reviewer and a date. verify_all.py fails on an entry that is malformed, names an unknown section or route, no longer triggers (stale), or whose cap (allowedUpToPx) is exceeded by the current measurement.",
+  "gates": {
+    "height-fail": "A HERO-category section measured above 3000px. Needs allowedUpToPx (a hard cap that still fails if exceeded).",
+    "majority": "One section holding more than 50% of its page's measured height (a whole-page wrapper in disguise)."
+  },
+  "whitelist": [
+    {
+      "gate": "majority",
+      "route": "/privacy-policy/",
+      "section": "legal.body",
+      "justification": "A legal page is one long prose document by design: legal.header is a short title block and legal.body is the clause list, so the body is expected to dominate (67% of 1835px measured at 1440px). It is a prose section of ordinary section height (1228px), not a single wrapper that swallows the page's other sections; the page has no other content sections to split from it.",
+      "reviewedBy": "design-repo extraction pass (automated review; human sign-off pending)",
+      "reviewedOn": "2026-10-22"
+    },
+    {
+      "gate": "majority",
+      "route": "/terms-of-service/",
+      "section": "legal.body",
+      "justification": "Same legal-prose template as the privacy page: the clause list is the page (66% of 1787px measured at 1440px, 1180px tall). Prose legal text is a single flowing section by nature and the template has no other content sections to split from it.",
+      "reviewedBy": "design-repo extraction pass (automated review; human sign-off pending)",
+      "reviewedOn": "2026-10-22"
+    }
+  ]
+}

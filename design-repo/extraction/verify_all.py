@@ -23,6 +23,16 @@ Checks, in order (each prints PASS / FAIL / WARN / SKIP; any FAIL exits 1):
   M  claims   every script/file named in a docstring, comment or doc exists in this folder
   N  misc     graph rule ids == validator RULES; section/component cross references; schema
               x-maxWords == section maxWords; evidence levels
+  O  contract every section contract validates against schema/section-contract.schema.json;
+              source (provenance) and semantic (taxonomy) are separate, consistent and closed;
+              retrievalEligible is compared against a PIN kept in this file (utility overlays
+              are never eligible), independent of the registry, contracts and allowlist
+  P  height   whole-page-wrapper gate on the heights recorded in extraction/measured-values.json
+              (sectionHeights, measured by extraction/measure_sections.mjs at 1440px): a
+              HERO-category section above 1800px warns, above 3000px fails unless in the reviewed
+              extraction/quality-gate.json whitelist; one section holding over half a page warns
+  Q  eyebrow  an acknowledged duplicate section numeral (graph rule EYEBROW_NUMBER_UNIQUE) must be
+              live, evidenced and exact; any other repeated numeral in an example is flagged
 
 The drift-proof harness is extraction/prove_drift.py (it injects bad data into a scratch copy
 and confirms this script fails each time).
@@ -48,6 +58,16 @@ PINNED_POLICIES = {
     "brand-wordmark": "must-reuse-exact",
     "brand-chip-mark": "must-reuse-exact",
 }
+# Utility overlays are never retrieval-eligible. Deliberately NOT read from the registry, the section
+# contracts or the allowlist, so flipping any of those cannot weaken it (semantic_validate.py keeps its
+# own copy; check O fails if the two differ).
+PINNED_RETRIEVAL_INELIGIBLE = frozenset(["overlay.cookie-banner", "overlay.demo-dialog"])
+# Whole-page-wrapper gate thresholds (px, measured at 1440px). Constants, not data: the whitelist file
+# can excuse a section, never move these.
+HERO_WARN_PX = 1800
+HERO_FAIL_PX = 3000
+MAJORITY_SHARE = 0.5
+GATE_VIEWPORT_WIDTH = 1440
 CIT_RE = re.compile(r"^([A-Za-z0-9_./\- ]+\.(?:js|jsx|css|json|md|txt|html)):(\d+)(?:-(\d+))?$")
 TEXT_EXT = (".json", ".md", ".py", ".sh", ".txt", ".csv", ".js", ".css", ".html")
 
@@ -809,8 +829,228 @@ def check_n_misc(c):
         c.add("PASS", "N", "graph rule ids == validator RULES (%d); schema x-maxWords == contract maxWords for %d sections; cross references resolve; no navbar/mustFollowNav" % (len(ids), len(R["sections"])))
 
 
+# ----------------------------------------------------------------------------- section contracts (check O)
+def check_section_contracts(contracts, allow, contract_schema, pagespec_schema, sv_pin):
+    """Pure function: return a list of error strings. contracts: {id: contract dict}."""
+    from jsonschema import Draft7Validator
+    errs = []
+    v = Draft7Validator(contract_schema)
+    cats = allow.get("sectionCategories", [])
+    if sorted(cats) != sorted(contract_schema["properties"]["semantic"]["properties"]["category"]["enum"]):
+        errs.append("allowlist.sectionCategories %s != section-contract schema category enum" % cats)
+    if set(allow.get("retrievalIneligibleSections", [])) != set(PINNED_RETRIEVAL_INELIGIBLE):
+        errs.append("allowlist.retrievalIneligibleSections %s != the pinned set %s" % (sorted(allow.get("retrievalIneligibleSections", [])), sorted(PINNED_RETRIEVAL_INELIGIBLE)))
+    if set(sv_pin) != set(PINNED_RETRIEVAL_INELIGIBLE):
+        errs.append("semantic_validate.PINNED_RETRIEVAL_INELIGIBLE %s != verify_all pin %s" % (sorted(sv_pin), sorted(PINNED_RETRIEVAL_INELIGIBLE)))
+    # the PageSpec schema must lock the pinned overlays to false, and only them
+    locked = set()
+    for a in pagespec_schema["definitions"]["node"]["allOf"]:
+        r = a["then"]["properties"].get("retrievalEligible")
+        if r is not None:
+            if r != {"const": False}:
+                errs.append("pagespec schema: retrievalEligible rule for %s is %r, expected {'const': False}" % (a["if"]["properties"]["type"]["const"], r))
+            locked.add(a["if"]["properties"]["type"]["const"])
+    if locked != set(PINNED_RETRIEVAL_INELIGIBLE):
+        errs.append("pagespec schema locks retrievalEligible=false on %s but the pin is %s" % (sorted(locked), sorted(PINNED_RETRIEVAL_INELIGIBLE)))
+    if "retrievalEligible" not in pagespec_schema["definitions"]["node"]["properties"]:
+        errs.append("pagespec schema node has no retrievalEligible property")
+    for sid, c in sorted(contracts.items()):
+        for e in sorted(v.iter_errors(c), key=lambda e: list(map(str, e.absolute_path))):
+            errs.append("%s: contract schema: %s: %s" % (sid, "/".join(str(x) for x in e.absolute_path) or "(root)", e.message[:140]))
+        sem = c.get("semantic", {})
+        src = c.get("source", {})
+        if sem.get("semanticId") != c.get("id"):
+            errs.append("%s: semantic.semanticId %r != contract id" % (sid, sem.get("semanticId")))
+        if sem.get("category") not in cats:
+            errs.append("%s: semantic.category %r is not in the closed category set %s" % (sid, sem.get("category"), cats))
+        if src.get("sourceId") == c.get("id") or src.get("sourceId") == sem.get("semanticId"):
+            errs.append("%s: source.sourceId equals the semantic id; provenance and taxonomy must stay separate fields" % sid)
+        want = sid not in PINNED_RETRIEVAL_INELIGIBLE
+        if c.get("retrievalEligible") is not want:
+            errs.append("%s: retrievalEligible is %r but the independent pin requires %r" % (sid, c.get("retrievalEligible"), want))
+        if sem.get("category") == "OVERLAY" and c.get("retrievalEligible") is not False:
+            errs.append("%s: an OVERLAY-category section must be retrievalEligible false" % sid)
+        if (sem.get("category") == "OVERLAY") != (src.get("inFlow") is False):
+            errs.append("%s: inFlow %r disagrees with category %r (overlays are fixed, everything else is in flow)" % (sid, src.get("inFlow"), sem.get("category")))
+    for pid in PINNED_RETRIEVAL_INELIGIBLE:
+        if pid not in contracts:
+            errs.append("pinned retrieval-ineligible section %s has no contract" % pid)
+    return errs
+
+
+def check_o_contracts(c):
+    sys.path.insert(0, c.p("schema"))
+    import importlib
+    sv = importlib.import_module("semantic_validate")
+    contracts = {}
+    for fn in sorted(os.listdir(c.p("sections"))):
+        if fn.endswith(".json"):
+            d = jload(c.p("sections/" + fn))
+            contracts[d["id"]] = d
+    errs = check_section_contracts(contracts, jload(c.p("tokens/llm/component-allowlist.json")), jload(c.p("schema/section-contract.schema.json")),
+                                   jload(c.p("schema/pagespec.schema.json")), sv.PINNED_RETRIEVAL_INELIGIBLE)
+    for e in errs:
+        c.add("FAIL", "O", e)
+    if not errs:
+        c.add("PASS", "O", "%d section contracts: closed source{sourceId,citation,mountedAt,domSelectors,inFlow} and semantic{semanticId,category} kept separate; retrievalEligible matches the independent pin (%s ineligible, %d eligible); schema locks the pinned overlays to false" % (len(contracts), ", ".join(sorted(PINNED_RETRIEVAL_INELIGIBLE)), len(contracts) - len(PINNED_RETRIEVAL_INELIGIBLE)))
+
+
+# ----------------------------------------------------------------------------- height gate (check P)
+def evaluate_height_gate(contracts, templates, sheights, gate):
+    """Pure function: return (fails, warns, notes). sheights is measured-values.json['sectionHeights'];
+    gate is extraction/quality-gate.json."""
+    fails, warns, notes = [], [], []
+    if not isinstance(sheights, dict) or "routes" not in sheights:
+        return ["measured-values.json has no sectionHeights.routes (run extraction/measure_sections.mjs --write)"], warns, notes
+    if sheights.get("viewport", {}).get("width") != GATE_VIEWPORT_WIDTH:
+        fails.append("sectionHeights were not measured at %dpx wide (viewport %r)" % (GATE_VIEWPORT_WIDTH, sheights.get("viewport")))
+    route_paths = [r["path"] for r in templates["routes"]]
+    sections_known = set(contracts)
+    # whitelist well-formedness
+    wl = {}
+    for i, e in enumerate(gate.get("whitelist", [])):
+        tag = "quality-gate whitelist[%d]" % i
+        if e.get("gate") not in ("height-fail", "majority"):
+            fails.append("%s: gate %r is not height-fail|majority" % (tag, e.get("gate")))
+            continue
+        if e.get("section") not in sections_known:
+            fails.append("%s: unknown section %r" % (tag, e.get("section")))
+        if e.get("route") not in route_paths:
+            fails.append("%s: unknown route %r" % (tag, e.get("route")))
+        if len(str(e.get("justification", "")).strip()) < 60:
+            fails.append("%s (%s %s %s): justification missing or shorter than 60 characters" % (tag, e.get("gate"), e.get("section"), e.get("route")))
+        if not str(e.get("reviewedBy", "")).strip() or not re.match(r"^\d{4}-\d{2}-\d{2}$", str(e.get("reviewedOn", ""))):
+            fails.append("%s: needs reviewedBy and an ISO reviewedOn date" % tag)
+        if e["gate"] == "height-fail" and not isinstance(e.get("allowedUpToPx"), int):
+            fails.append("%s: a height-fail entry needs an integer allowedUpToPx cap" % tag)
+        wl[(e.get("gate"), e.get("section"), e.get("route"))] = {"entry": e, "used": False}
+    for r in templates["routes"]:
+        rec = sheights["routes"].get(r["path"])
+        if rec is None:
+            fails.append("sectionHeights has no record for route %s" % r["path"])
+            continue
+        page_h = rec.get("pageHeightPx")
+        if not isinstance(page_h, int) or page_h <= 0:
+            fails.append("%s: pageHeightPx missing or not a positive integer" % r["path"])
+            continue
+        total = 0
+        for n in templates["templates"][r["template"]]["nodes"]:
+            sid = n["section"]
+            con = contracts.get(sid)
+            if con is None:
+                fails.append("%s: node %s has no contract" % (r["path"], sid))
+                continue
+            if con["source"]["inFlow"] is False:
+                continue
+            sec = rec["sections"].get(sid)
+            h = sec.get("heightPx") if isinstance(sec, dict) else None
+            if not isinstance(h, int) or h <= 0:
+                fails.append("%s: no measured height for in-flow section %s" % (r["path"], sid))
+                continue
+            total += h
+            cat = con["semantic"]["category"]
+            if cat == "HERO":
+                if h > HERO_FAIL_PX:
+                    k = ("height-fail", sid, r["path"])
+                    if k in wl and h <= wl[k]["entry"].get("allowedUpToPx", -1):
+                        wl[k]["used"] = True
+                        warns.append("%s %s (HERO) is %dpx, above the %dpx failure line, but is covered by a reviewed whitelist entry (cap %spx)" % (r["path"], sid, h, HERO_FAIL_PX, wl[k]["entry"].get("allowedUpToPx")))
+                    elif k in wl:
+                        wl[k]["used"] = True
+                        fails.append("%s %s (HERO) is %dpx: exceeds even its whitelisted cap of %spx" % (r["path"], sid, h, wl[k]["entry"].get("allowedUpToPx")))
+                    else:
+                        fails.append("%s %s (HERO) is %dpx, above %dpx: a whole-page wrapper. Split it into real sections, or add a reviewed entry to extraction/quality-gate.json" % (r["path"], sid, h, HERO_FAIL_PX))
+                elif h > HERO_WARN_PX:
+                    warns.append("%s %s (HERO) is %dpx, above the %dpx warning line: check it is not wrapping the page" % (r["path"], sid, h, HERO_WARN_PX))
+            share = h / float(page_h)
+            if share > MAJORITY_SHARE:
+                k = ("majority", sid, r["path"])
+                if k in wl:
+                    wl[k]["used"] = True
+                    notes.append("%s %s holds %.0f%% of the page (%d of %dpx): reviewed whitelist entry" % (r["path"], sid, share * 100, h, page_h))
+                else:
+                    warns.append("%s %s holds %.0f%% of the page (%d of %dpx): one section is the majority of the page" % (r["path"], sid, share * 100, h, page_h))
+        if total > page_h + 2:
+            fails.append("%s: section heights sum to %dpx, more than the page's %dpx (the measurement is not credible)" % (r["path"], total, page_h))
+    for k, v in wl.items():
+        if not v["used"]:
+            fails.append("quality-gate whitelist entry %s is stale: that gate does not trigger now, remove it" % (k,))
+    return fails, warns, notes
+
+
+def check_p_height(c):
+    ledger = jload(c.p("extraction/measured-values.json"))
+    gate = jload(c.p("extraction/quality-gate.json"))
+    templates = jload(c.p("templates/templates.json"))
+    contracts = {}
+    for fn in sorted(os.listdir(c.p("sections"))):
+        if fn.endswith(".json"):
+            d = jload(c.p("sections/" + fn))
+            contracts[d["id"]] = d
+    fails, warns, notes = evaluate_height_gate(contracts, templates, ledger.get("sectionHeights"), gate)
+    for m in fails:
+        c.add("FAIL", "P", m)
+    for m in warns:
+        c.add("WARN", "P", m)
+    if not fails:
+        heroes = []
+        for rp, rec in ledger["sectionHeights"]["routes"].items():
+            for sid, s in rec["sections"].items():
+                if contracts.get(sid, {}).get("semantic", {}).get("category") == "HERO" and s:
+                    heroes.append("%s %s %dpx" % (rp, sid, s["heightPx"]))
+        c.add("PASS", "P", "height gate at %dpx wide: HERO sections %s (warn >%d, fail >%d); no unreviewed section holds >%d%% of a page%s" % (
+            GATE_VIEWPORT_WIDTH, "; ".join(heroes) or "none", HERO_WARN_PX, HERO_FAIL_PX, int(MAJORITY_SHARE * 100),
+            ("; reviewed exceptions: " + " | ".join(notes)) if notes else ""))
+
+
+# ----------------------------------------------------------------------------- eyebrow acknowledgement (check Q)
+def check_eyebrow_acks(rule, example_specs, section_ids, eyebrow_duplicates):
+    """Pure function: return a list of error strings. example_specs: list of PageSpec dicts."""
+    errs = []
+    acks = rule.get("acknowledgedDuplicates", [])
+    live = set()
+    for spec in example_specs:
+        for num, owners in eyebrow_duplicates(spec["nodes"]).items():
+            live.add((num, tuple(sorted(owners))))
+    for i, a in enumerate(acks):
+        tag = "EYEBROW_NUMBER_UNIQUE.acknowledgedDuplicates[%d]" % i
+        if not re.match(r"^\d{2}$", str(a.get("numeral", ""))):
+            errs.append("%s: numeral %r is not two digits" % (tag, a.get("numeral")))
+        for s in a.get("sections", []):
+            if s not in section_ids:
+                errs.append("%s: unknown section %s" % (tag, s))
+        if len(a.get("sections", [])) < 2:
+            errs.append("%s: a duplicate needs at least two sections" % tag)
+        for f in ("reason", "renderedEvidence", "originalEvidence"):
+            if len(str(a.get(f, "")).strip()) < 40:
+                errs.append("%s: %s is missing or too thin to be evidence" % (tag, f))
+        if not a.get("measuredFrom"):
+            errs.append("%s: no measuredFrom citations" % tag)
+        if (a.get("numeral"), tuple(sorted(a.get("sections", [])))) not in live:
+            errs.append("%s: stale acknowledgement (numeral %s on %s is not duplicated by any example); remove it" % (tag, a.get("numeral"), a.get("sections")))
+    acked = set((a.get("numeral"), tuple(sorted(a.get("sections", [])))) for a in acks)
+    for k in sorted(live - acked):
+        errs.append("example repeats eyebrow numeral %s on %s with no acknowledgement" % (k[0], list(k[1])))
+    return errs
+
+
+def check_q_eyebrow(c):
+    sys.path.insert(0, c.p("schema"))
+    import importlib
+    sv = importlib.import_module("semantic_validate")
+    graph = jload(c.p("compatibility/graph.json"))
+    rule = [r for r in graph["rules"] if r["id"] == "EYEBROW_NUMBER_UNIQUE"][0]
+    specs = [jload(c.p("schema/" + f)) for f in sorted(os.listdir(c.p("schema"))) if f.startswith("example") and f.endswith(".pagespec.json")]
+    sec_ids = set(jload(c.p("sections/" + fn))["id"] for fn in os.listdir(c.p("sections")) if fn.endswith(".json"))
+    errs = check_eyebrow_acks(rule, specs, sec_ids, sv.eyebrow_duplicates)
+    for e in errs:
+        c.add("FAIL", "Q", e)
+    if not errs:
+        c.add("PASS", "Q", "eyebrow numerals: %s acknowledged on purpose (rendered as built, no evidence about the original), live in the example, and nothing else repeats" % ", ".join("%s on %s" % (a["numeral"], "+".join(a["sections"])) for a in rule.get("acknowledgedDuplicates", [])))
+
+
 CHECKS = [check_a_schema, check_b_parity, check_c_version, check_d_citations, check_e_counts, check_f_routes, check_g_words, check_h_entry, check_i_paths,
-          check_j_assets, check_k_tokens, check_l_pin, check_m_claims, check_n_misc]
+          check_j_assets, check_k_tokens, check_l_pin, check_m_claims, check_n_misc, check_o_contracts, check_p_height, check_q_eyebrow]
 
 
 def run(repo, source):

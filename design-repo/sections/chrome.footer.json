@@ -1,6 +1,20 @@
 {
   "id": "chrome.footer",
   "kind": "section",
+  "source": {
+    "sourceId": "Footer",
+    "citation": "src/components/Footer.jsx:6",
+    "mountedAt": "src/App.jsx:19",
+    "domSelectors": [
+      "body footer"
+    ],
+    "inFlow": true
+  },
+  "semantic": {
+    "semanticId": "chrome.footer",
+    "category": "CHROME"
+  },
+  "retrievalEligible": true,
   "purpose": "Global footer rendered after every page's main content: copyright text on the left, two route links and a 'Cookies' button on the right (separated by ' · '). Not part of the page body; rendered once by App.jsx for every route.",
   "evidence": "measured-live",
   "constraints": {

@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Section contract (sections/*.json)",
+  "description": "Closed shape of one section contract. It separates three things that used to be conflated: PROVENANCE (source: where the section comes from in the built clone, traceable to a component file, a mount line and a DOM selector), TAXONOMY (semantic: the stable id a generator uses and the closed category it is filed under) and RETRIEVAL ELIGIBILITY (retrievalEligible). source and semantic are closed objects: a field not listed here is rejected. Machine-checked by extraction/verify_all.py (check O); the semanticId must equal the contract id, the categories must equal tokens/llm/component-allowlist.json sectionCategories, and retrievalEligible is compared against a pin kept independently of this file.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "kind", "source", "semantic", "retrievalEligible", "purpose", "evidence", "constraints", "content", "budgetBasis", "motion", "responsive", "components", "primitives", "assetRoles", "example", "measuredFrom"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z]+\\.[a-z-]+$" },
+    "kind": { "const": "section" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "citation", "mountedAt", "domSelectors", "inFlow"],
+      "properties": {
+        "sourceId": { "type": "string", "minLength": 1, "description": "Name of the thing in the source project that implements this section (the component or page element). Provenance only: never used as a generator-facing id." },
+        "citation": { "type": "string", "pattern": "^[A-Za-z0-9_./\\-]+\\.(js|jsx|css):[0-9]+(-[0-9]+)?$", "description": "path:line of the declaration, resolved and content-checked against the source by verify_all.py through the ledger." },
+        "mountedAt": { "type": "string", "pattern": "^[A-Za-z0-9_./\\-]+\\.(js|jsx):[0-9]+(-[0-9]+)?$", "description": "path:line where the source mounts it (the route / App composition)." },
+        "domSelectors": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 }, "description": "CSS selectors locating the rendered section in the built page; extraction/measure_sections.mjs measures the union span of the matches." },
+        "inFlow": { "type": "boolean", "description": "false for position:fixed overlays, which have no height in the page flow and are never height-gated." }
+      }
+    },
+    "semantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["semanticId", "category"],
+      "properties": {
+        "semanticId": { "type": "string", "pattern": "^[a-z]+\\.[a-z-]+$", "description": "Must equal the contract id." },
+        "category": { "enum": ["HERO", "FEATURE", "CTA", "CHROME", "LEGAL", "OVERLAY"], "description": "Closed taxonomy. HERO sections are subject to the whole-page-wrapper height gate in verify_all.py (check P)." }
+      }
+    },
+    "retrievalEligible": { "type": "boolean", "description": "true for page content. false for utility overlays (overlay.cookie-banner, overlay.demo-dialog), pinned independently of this file." },
+    "purpose": { "type": "string" },
+    "evidence": { "enum": ["measured-live", "derived"] },
+    "constraints": { "type": "object" },
+    "content": { "type": "object" },
+    "budgetBasis": { "type": "object" },
+    "fixedInternals": { "type": "array" },
+    "motion": { "type": "object" },
+    "responsive": { "type": "array" },
+    "components": { "type": "array", "items": { "type": "string" } },
+    "primitives": { "type": "array", "items": { "type": "string" } },
+    "assetRoles": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "example": { "type": "object" },
+    "measuredFrom": { "type": "array", "items": { "type": "string" } }
+  }
+}

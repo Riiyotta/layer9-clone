@@ -1302,7 +1302,8 @@
         "pattern": "none",
         "trigger": "none",
         "reducedMotionFallback": "not-applicable-static"
-      }
+      },
+      "retrievalEligible": false
     },
     {
       "type": "overlay.cookie-banner",
@@ -1338,7 +1339,8 @@
         "pattern": "none",
         "trigger": "none",
         "reducedMotionFallback": "not-applicable-static"
-      }
+      },
+      "retrievalEligible": false
     }
   ]
 }

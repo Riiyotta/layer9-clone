@@ -1,6 +1,6 @@
 {
-  "allowlistVersion": "1.0.0",
-  "$description": "Closed list of everything a generator may reference or set. Machine-checked by extraction/verify_all.py: every id must have a contract file and every contract file must be listed; the node/motion property lists must equal the schema; assetRoles must equal the schema enum and assets/asset-roles.json.",
+  "allowlistVersion": "1.1.0",
+  "$description": "Closed list of everything a generator may reference or set. Machine-checked by extraction/verify_all.py: every id must have a contract file and every contract file must be listed; the node/motion property lists must equal the schema; assetRoles must equal the schema enum and assets/asset-roles.json. sectionCategories is the closed enum for each section contract's semantic.category (equals schema/section-contract.schema.json). retrievalIneligibleSections lists the utility overlays that are never retrieval-eligible; it must equal the pin kept independently in verify_all.py and semantic_validate.py.",
   "primitives": [
     "pill",
     "wordmark",
@@ -64,6 +64,18 @@
     "legal.header",
     "legal.body"
   ],
+  "sectionCategories": [
+    "HERO",
+    "FEATURE",
+    "CTA",
+    "CHROME",
+    "LEGAL",
+    "OVERLAY"
+  ],
+  "retrievalIneligibleSections": [
+    "overlay.cookie-banner",
+    "overlay.demo-dialog"
+  ],
   "pageProperties": [
     "template",
     "route",
@@ -73,7 +85,8 @@
   "nodeProperties": [
     "type",
     "content",
-    "motion"
+    "motion",
+    "retrievalEligible"
   ],
   "motionProperties": [
     "pattern",
